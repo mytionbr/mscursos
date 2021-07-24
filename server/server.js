@@ -1,6 +1,7 @@
-import app from './app'
-import config from './config/config'
-import pool from './database/pool'
+import app from './app.js'
+import config from './config/config.js'
+import pool from './database/pool.js'
+
 
 pool
     .connect(config.dbDetails)
@@ -12,7 +13,7 @@ pool
         })
     })
     .catch((err)=>{
-        console.log(err.message)
+        console.log(`Error: ${err.message}`)
     })
 
 app.get('/', (req,res)=>{

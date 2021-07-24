@@ -1,5 +1,5 @@
 /*
-    CREATE DATABASE WHERE  NOT EXISTS dbadminschool WITH ENCODING 'UTF8';
+    CREATE DATABASE dbadminschool WITH ENCODING 'UTF8';
 */
 CREATE TABLE IF NOT EXISTS aluno(
     aluno_id serial PRIMARY KEY,
