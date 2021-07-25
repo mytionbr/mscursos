@@ -1,6 +1,6 @@
 import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
-
+import extend from 'lodash/extend.js'
 
 export const register = async (req,res) => {
     
@@ -68,9 +68,9 @@ export const read =  async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        let aluno = req.body
+        let aluno = req.profile
+        aluno = extend(aluno, req.body)
       
-
         const { rows } = await pool.query(
             'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',
             [aluno.nome, aluno.email, aluno.data_nascimento, aluno.senha, aluno.aluno_id])
