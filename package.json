@@ -2,11 +2,11 @@
   "name": "escola_admin",
   "version": "1.0.0",
   "description": "",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon --watch backend --exec node --experimental-modules server/server.js"
+    "start": "nodemon --watch backend --exec node --experimental-modules server/server.js"
   },
   "keywords": [],
   "author": "",

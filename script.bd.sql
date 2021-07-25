@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS aluno(
     email VARCHAR (255) NOT NULL,
     data_nascimento date NOT NULL,
     senha VARCHAR (255) NOT NULL,
+    CONSTRAINT email_unique UNIQUE (email)
 );
 
 CREATE TABLE IF NOT EXISTS professor(
@@ -14,7 +15,8 @@ CREATE TABLE IF NOT EXISTS professor(
     nome VARCHAR (255) NOT NULL,
     email VARCHAR (255) NOT NULL,
     data_nascimento date NOT NULL,
-    senha VARCHAR (255) NOT NULL
+    senha VARCHAR (255) NOT NULL,
+    CONSTRAINT email_unique UNIQUE (email)
 );
 
 CREATE TABLE IF NOT EXISTS curso (
@@ -22,6 +24,7 @@ CREATE TABLE IF NOT EXISTS curso (
     nome VARCHAR (255) NOT NULL,
     descricao TEXT NOT NULL,
     professor_id INT,
+    CONSTRAINT nome UNIQUE (nome),
     FOREIGN KEY (professor_id)
         REFERENCES professor
 );
