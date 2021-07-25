@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS aluno(
     aluno_id serial PRIMARY KEY,
     nome VARCHAR (255) NOT NULL,
     email VARCHAR (255) NOT NULL,
-    data_nascimento date NOT NULL
+    data_nascimento date NOT NULL,
+    senha VARCHAR (255) NOT NULL,
 );
 
 CREATE TABLE IF NOT EXISTS professor(
