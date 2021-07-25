@@ -1,5 +1,5 @@
 import express from 'express'
-import { register, listAlunos, findById, read, update } from '../controllers/aluno.controller.js'
+import { register, listAlunos, findById, read, update, remove } from '../controllers/aluno.controller.js'
 
 const router = express.Router()
 
@@ -10,6 +10,7 @@ router.route('/')
 router.route('/:alunoId')
     .get( read )
     .put( update )
+    .delete( remove )
 
 router.param('alunoId', findById)
 

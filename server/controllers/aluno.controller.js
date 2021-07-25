@@ -2,6 +2,7 @@ import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
 
+
 export const register = async (req,res) => {
     
     try{
@@ -80,6 +81,25 @@ export const update = async (req, res) => {
         alunoUpdate.senha = undefined
 
         res.status(200).json(alunoUpdate)
+
+    } catch (err) {
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
+
+export const remove = async (req, res) =>{
+    try {
+        let aluno = req.profile
+        const { rows } = await pool.query(
+            'DELETE FROM aluno WHERE aluno_id = $1 RETURNING *;',
+            [aluno.aluno_id])
+        
+        aluno = rows[0]
+        aluno.senha = undefined
+
+        res.status(200).json({message: 'Aluno Deletado', aluno: aluno})
 
     } catch (err) {
         res.status(400).json({
