@@ -25,10 +25,10 @@ export const register = async (req,res) => {
         }
     }
 
-export const listAlunos = (async (req,res) => {
+export const listAlunos = async (req,res) => {
     try {
         const { rows } = await pool.query(
-            'SELECT aluno_id, nome, email, data_nascimento FROM aluno'
+            'SELECT aluno_id, nome, email, data_nascimento FROM aluno ORDER BY aluno_id'
         )
 
         const listAlunos = rows
@@ -37,9 +37,9 @@ export const listAlunos = (async (req,res) => {
     } catch (err){
         res.status(500).json({message: err.message})
     }
-})
+}
 
-export const findById = (async (req,res, next, id) => {
+export const findById = async (req,res, next, id) => {
     try{
         const { rows } = await pool.query(
             'SELECT * FROM aluno WHERE aluno_id = $1',
@@ -59,9 +59,31 @@ export const findById = (async (req,res, next, id) => {
                 message: 'Não foi possível recuperar o aluno'
             })
         }
-})
+}
 
-export const read = ( async (req, res) => {
+export const read =  async (req, res) => {
         req.profile.senha = undefined
         return res.json(req.profile)        
-})
+}
+
+export const update = async (req, res) => {
+    try {
+        let aluno = req.body
+      
+
+        const { rows } = await pool.query(
+            'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',
+            [aluno.nome, aluno.email, aluno.data_nascimento, aluno.senha, aluno.aluno_id])
+        
+        let alunoUpdate = rows[0]
+
+        alunoUpdate.senha = undefined
+
+        res.status(200).json(alunoUpdate)
+
+    } catch (err) {
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
