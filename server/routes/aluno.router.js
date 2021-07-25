@@ -1,8 +1,15 @@
 import express from 'express'
-import { create } from '../controllers/aluno.controller.js'
+import { register, listAlunos, findById, read } from '../controllers/aluno.controller.js'
 
 const router = express.Router()
 
-router.post('/', create)
+router.route('/')
+    .get( listAlunos )
+    .post( register )
+
+router.route('/:alunoId')
+    .get( read )
+
+router.param('alunoId', findById)
 
 export default router

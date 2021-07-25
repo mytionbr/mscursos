@@ -24,3 +24,44 @@ export const register = async (req,res) => {
             res.status(409).json({message: err.message})
         }
     }
+
+export const listAlunos = (async (req,res) => {
+    try {
+        const { rows } = await pool.query(
+            'SELECT aluno_id, nome, email, data_nascimento FROM aluno'
+        )
+
+        const listAlunos = rows
+
+        res.status(200).json(listAlunos)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
+
+export const findById = (async (req,res, next, id) => {
+    try{
+        const { rows } = await pool.query(
+            'SELECT * FROM aluno WHERE aluno_id = $1',
+            [id])
+        
+        let aluno = rows[0]
+
+        if (!aluno){
+            return res.status(400).json({
+                message: "Aluno não encontrado" 
+            })}
+        
+        req.profile = aluno
+        next()
+        } catch (err) {
+            return res.status(400).json({
+                message: 'Não foi possível recuperar o aluno'
+            })
+        }
+})
+
+export const read = ( async (req, res) => {
+        req.profile.senha = undefined
+        return res.json(req.profile)        
+})
