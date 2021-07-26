@@ -44,7 +44,7 @@ export const findById = async (req,res, next, id) =>{
         const professor = rows[0]
        
         if(!professor){
-            return res.status(401).json({message: 'professor não encontrado'})
+            return res.status(400).json({message: 'professor não encontrado'})
         }
 
         req.profile = professor

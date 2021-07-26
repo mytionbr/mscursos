@@ -12,7 +12,7 @@ export const create = async (req,res) => {
         const createdAula = rows[0]
 
         if (!createdAula) {
-            return res.status(401).json({message: 'Erro ao criar a aula'})
+            return res.status(400).json({message: 'Erro ao criar a aula'})
         }
 
         res.status(201).json(createdAula)
@@ -46,7 +46,7 @@ export const findById = async (req, res, next, id) => {
         const aula = rows[0]
         
         if(!aula){
-            return res.status(401).json('Aula não encontrada')
+            return res.status(400).json('Aula não encontrada')
         }
 
         req.profile = aula

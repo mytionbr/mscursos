@@ -12,8 +12,12 @@ router.route('/:id')
     .put( update )
     .delete( remove )
 
-router.route('/:id/matriculas/aluno/:idAluno')
+router.route('/:id/matriculas/')
     .post( enroll )
+
+router.route('/:id/matriculas/:idAluno')
+    .post( enroll )
+    .get()
 
 router.param('id', findById)
 

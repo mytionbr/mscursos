@@ -12,7 +12,7 @@ export const create = async (req,res) => {
         const cursoCreated = rows[0]
 
         if(!cursoCreated) {
-            return res.status(401).json({message: 'Erro ao criar o curso'})
+            return res.status(400).json({message: 'Erro ao criar o curso'})
         }
 
         res.status(201).json(cursoCreated)        
@@ -44,7 +44,7 @@ export const findById = async (req,res, next, id) => {
         const curso = rows[0]
 
         if (!curso){
-            return res.status(401).json({message: 'curso não encontrado'})
+            return res.status(400).json({message: 'curso não encontrado'})
         }
 
         req.profile = curso
@@ -101,13 +101,25 @@ export const enroll = async (req,res) => {
     try {
         const curso = req.profile
         const idAluno = req.params['idAluno']
-        console.log(idAluno)
+        
         const { rows } = await pool.query(
-            'INSERT INTO curso_aluno (curso_id, aluno_id) VALUES ($1, $2) RETURNING *;',
-            [curso.curso_id, idAluno])
+            `
+            INSERT INTO curso_aluno (curso_id, aluno_id)
+            SELECT $1, $2
+            WHERE  NOT EXISTS (
+               SELECT 1 FROM curso_aluno
+               WHERE (curso_id, aluno_id) = ($3, $4)) RETURNING *;
+            `,
+            [curso.curso_id,idAluno,curso.curso_id,idAluno])
 
         const matricula = rows[0]
         
+        if(!matricula){
+            return res.status(400).json({
+                message: 'A matricula já existe',
+            })
+        }
+
         res.status(200).json({
             message: 'matricula realizada com sucesso',
             matricula: matricula
@@ -116,4 +128,8 @@ export const enroll = async (req,res) => {
     } catch (err) {
         res.status(400).json({message: err.message})
     }
+}
+
+export const getMatricula = async (req,res) => {
+   
 }
