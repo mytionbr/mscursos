@@ -1,7 +1,6 @@
 import pool from "../database/pool.js";
 import extend from "lodash/extend.js";
 
-
 export const create = async (req,res) => {
     try {
         const { nome, descricao, curso_id } = req.body
@@ -86,8 +85,6 @@ export const remove = async (req, res) => {
         const { rows } = pool.query(
             'DELETE FROM aula WHERE aula_id = $1 RETURNING *;',
             [aula.aula_id])
-
-        
 
         res.status(200).json({
             message: 'Aula deletada com sucesso',

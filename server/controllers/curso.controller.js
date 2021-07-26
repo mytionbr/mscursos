@@ -96,3 +96,24 @@ export const remove = async (req, res) =>{
         res.status(400).json({message: err.message})
     }
 }
+
+export const enroll = async (req,res) => {
+    try {
+        const curso = req.profile
+        const idAluno = req.params['idAluno']
+        console.log(idAluno)
+        const { rows } = await pool.query(
+            'INSERT INTO curso_aluno (curso_id, aluno_id) VALUES ($1, $2) RETURNING *;',
+            [curso.curso_id, idAluno])
+
+        const matricula = rows[0]
+        
+        res.status(200).json({
+            message: 'matricula realizada com sucesso',
+            matricula: matricula
+        })
+
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
