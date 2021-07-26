@@ -71,10 +71,12 @@ export const update = async (req, res) => {
     try {
         let aluno = req.profile
         aluno = extend(aluno, req.body)
-      
+        
+        aluno.senha = bcrypt.hashSync(aluno.senha,8)
+
         const { rows } = await pool.query(
             'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',
-            [aluno.nome, aluno.email, aluno.data_nascimento, aluno.senha, aluno.aluno_id])
+            [aluno.nome, aluno.email, aluno.dataNascimento, aluno.senha, aluno.aluno_id])
         
         let updatedAluno = rows[0]
 
