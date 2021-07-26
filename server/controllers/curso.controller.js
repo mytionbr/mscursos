@@ -183,3 +183,19 @@ export const getAluno = async (req,res) => {
     }
  }
 
+export const getAulas = async (req,res) => {
+    try {
+        const curso = req.profile
+        
+        const { rows } = await pool.query(
+            'SELECT * FROM aula WHERE curso_id = $1',
+            [curso.curso_id]
+        )
+     
+        const aulas = rows
+ 
+         res.status(200).json(aulas)
+    } catch (err) {
+        res.status(400).json({message:err.message})
+   }
+}
