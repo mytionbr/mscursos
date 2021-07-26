@@ -1,5 +1,5 @@
 import express from 'express'
-import { create, enroll, findById, list, read, remove, update } from '../controllers/curso.controller.js'
+import { create, enroll, findById, getAluno, list, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
 
 const router = express.Router()
 
@@ -13,11 +13,13 @@ router.route('/:id')
     .delete( remove )
 
 router.route('/:id/matriculas/')
-    .post( enroll )
+    .get( listMatriculas )
 
-router.route('/:id/matriculas/:idAluno')
+router.route('/:id/matriculas/:alunoId')
     .post( enroll )
-    .get()
+    .get( getAluno )
+    .delete( unenroll )
+
 
 router.param('id', findById)
 

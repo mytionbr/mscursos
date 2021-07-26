@@ -100,7 +100,7 @@ export const remove = async (req, res) =>{
 export const enroll = async (req,res) => {
     try {
         const curso = req.profile
-        const idAluno = req.params['idAluno']
+        const aluno_id = req.params['alunoId']
         
         const { rows } = await pool.query(
             `
@@ -110,7 +110,7 @@ export const enroll = async (req,res) => {
                SELECT 1 FROM curso_aluno
                WHERE (curso_id, aluno_id) = ($3, $4)) RETURNING *;
             `,
-            [curso.curso_id,idAluno,curso.curso_id,idAluno])
+            [curso.curso_id,aluno_id,curso.curso_id,aluno_id])
 
         const matricula = rows[0]
         
@@ -130,6 +130,56 @@ export const enroll = async (req,res) => {
     }
 }
 
-export const getMatricula = async (req,res) => {
-   
+export const listMatriculas = async (req,res) => {
+   try {
+        const curso = req.profile
+        const { rows } = await pool.query(
+            'SELECT * FROM curso_aluno WHERE curso_id = $1',
+            [curso.curso_id]
+        )
+    
+        const listMatriculas = rows
+
+        res.status(200).json(listMatriculas)
+    
+   } catch (err) {
+        res.status(400).json({message:err.message})
+   }
 }
+
+export const getAluno = async (req,res) => {
+    try {
+         const curso = req.profile
+         const aluno_id = req.params['alunoId']
+
+         const { rows } = await pool.query(
+             'SELECT * FROM curso_aluno WHERE curso_id = $1 AND aluno_id = $2',
+             [curso.curso_id, aluno_id]
+         )
+     
+         const matricula = rows
+ 
+         res.status(200).json(matricula)
+     
+    } catch (err) {
+         res.status(400).json({message:err.message})
+    }
+ }
+
+ export const unenroll = async (req,res) => {
+    try {
+         const curso = req.profile
+         const aluno_id = req.params['alunoId']
+
+         const { rows } = await pool.query(
+             'DELETE FROM curso_aluno WHERE curso_id = $1 AND aluno_id = $2',
+             [curso.curso_id, aluno_id]
+         )
+ 
+         res.status(200).json({message: 'Aluno desmatriculado com sucesso'})
+     
+    } catch (err) {
+         res.status(400).json({message:err.message})
+    }
+ }
+
