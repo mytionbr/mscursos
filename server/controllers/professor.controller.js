@@ -81,3 +81,23 @@ export const update = async (req,res) => {
         res.status(400).json({message: err.message})
     }
 } 
+
+export const remove = async (req, res) => {
+    try {
+        let professor = req.profile 
+        console.log(professor)
+        const { rows } = await pool.query(
+            'DELETE FROM professor WHERE professor_id = $1 RETURNING *;',
+            [professor.professor_id]
+        )
+
+        professor = rows[0]
+        professor.senha = undefined
+
+        res.status(200).json({message: 'professor excluído com sucesso',professor: professor})
+    } catch (err) {
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
