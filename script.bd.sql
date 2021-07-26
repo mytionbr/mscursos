@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS curso_aluno (
 
 CREATE TABLE IF NOT EXISTS nota (
     nota_id serial PRIMARY KEY,
-    valor INT NOT NULL,
+    valor FLOAT NOT NULL,
     aprovado BOOLEAN NOT NULL,
     curso_id INT NOT NULL,
     aluno_id INT NOT NULL,

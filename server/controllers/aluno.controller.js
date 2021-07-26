@@ -17,10 +17,10 @@ export const register = async (req,res) => {
             [nome, email, dataNascimento, senhaDefault]
         )   
 
-        let alunoCreated = rows[0]
-        alunoCreated.senha = undefined
+        let createdAluno = rows[0]
+        createdAluno.senha = undefined
 
-        res.status(200).json(alunoCreated)
+        res.status(201).json(createdAluno)
         } catch (err){
             res.status(409).json({message: err.message})
         }
