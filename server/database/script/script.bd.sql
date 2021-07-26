@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS aula (
     descricao VARCHAR (255) NOT NULL,
     curso_id INT NOT NULL,
     FOREIGN KEY (curso_id)
-        REFERENCES aula
+        REFERENCES curso
 );
 
 CREATE TABLE IF NOT EXISTS curso_aluno (
