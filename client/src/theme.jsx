@@ -4,16 +4,16 @@ import { createTheme } from '@material-ui/core/styles'
 const theme = createTheme({
     palette: {
         primary:{
-            light: '#8eacbb',
-            main: '#607d8b',
-            dark: '#34515e',
-            contrastText: '#fff'
+            light: '#F1EFF6',
+            main: '#FFF',
+            dark: '#506198',
+            contrastText: '#000',
         },
         secondary: {
             light: '#e7ff8c',
             main: '#b2ff59',
             dark: '#7ecb20',
-            contrastText: '#000',
+            contrastText: '#FFF',
         },
         openTitle: blueGrey['400'],
         protectedTitle: lightGreen['400'],
