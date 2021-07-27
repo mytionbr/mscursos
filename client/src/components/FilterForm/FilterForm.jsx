@@ -6,7 +6,7 @@ function FilterForm() {
     const classes = useStyles()
     
     return (
-        <Paper elevation={2} className={classes.paper}>
+        <Paper elevation={2} className={classes.paper} position="static">
             <form className={classes.form} autoComplete="off" noValidate>
                 <Typography variant="h6">
                     Filtre por um curso
@@ -15,12 +15,14 @@ function FilterForm() {
                     name="nome"
                     variant="outlined"
                     label="Nome"
+                    color="secondary"
                     fullWidth    
                 />
                 <TextField 
                     name="categoria"
                     variant="outlined"
                     label="Categoria"
+                    color="secondary"
                     fullWidth    
                 />
                 <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth>Filtrar</Button>

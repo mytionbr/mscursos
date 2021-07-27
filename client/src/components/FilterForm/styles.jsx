@@ -6,7 +6,13 @@ export default makeStyles((theme) =>({
    },
    paper:{
        padding: theme.spacing(2),
-
+        position: '-webkit-sticky',
+        position: 'sticky',
+        top: 20,
+        bottom: 20, 
+        paddingTop: '40px',
+        paddingBottom: '40px',
+        zIndex: 5,
    },
    form:{
        display: 'flex',
