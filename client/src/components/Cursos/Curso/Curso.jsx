@@ -1,16 +1,19 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import CodeIcon from "@material-ui/icons/Code";
+import { Link } from "react-router-dom";
 
 function Curso() {
   const classes = useStyles();
 
   const Picture = () => {
     return (
-      <div className={classes.picture}>
-        <CodeIcon className={classes.pictureItem} />
-      </div>
+     <Box>
+         <Link className={classes.picture} to="/">
+            <CodeIcon className={classes.pictureItem} />
+         </Link>
+      </Box>
     );
   };
 
