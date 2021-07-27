@@ -8,7 +8,7 @@ import  Home  from './screens/Home'
 const MainRouter = () => {
     return(
         <div>
-            <Box width="100vw" height="100vh" bgcolor="primary.light">
+            <Box width="100vw" height="100%" bgcolor="primary.light">
                 <Menu />
                 <Switch> 
                     <Route exact path="/" component={Home}/>

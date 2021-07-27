@@ -1,4 +1,3 @@
-import { blueGrey, lightGreen } from '@material-ui/core/colors'
 import { createTheme } from '@material-ui/core/styles'
 
 const theme = createTheme({
@@ -11,12 +10,10 @@ const theme = createTheme({
         },
         secondary: {
             light: '#e7ff8c',
-            main: '#b2ff59',
+            main: '#506198',
             dark: '#7ecb20',
             contrastText: '#FFF',
         },
-        openTitle: blueGrey['400'],
-        protectedTitle: lightGreen['400'],
         type: 'light'
     }
 })
