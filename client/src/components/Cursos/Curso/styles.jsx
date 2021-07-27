@@ -11,10 +11,6 @@ export default makeStyles((theme) =>({
        fontSize: '5rem',
        color:theme.palette.primary.dark, 
    },
-   pictureLink:{
-    height : '100%',
-    width: '100%',
-    },
    card:{
     maxWidth: '20rem',
     margin:'10px 0',
