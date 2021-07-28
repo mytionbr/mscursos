@@ -4,7 +4,7 @@ import useStyles from "./styles";
 import CodeIcon from "@material-ui/icons/Code";
 import { Link } from "react-router-dom";
 
-function Curso() {
+function Curso({curso}) {
   const classes = useStyles();
 
   const Picture = () => {
@@ -23,11 +23,10 @@ function Curso() {
         <CardMedia title={"Programação Linear"} children={<Picture />} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Java
+            {curso.nome}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {curso.descricao}
           </Typography>
           <CardActions  >
             <Button size="small" color="secondary" >

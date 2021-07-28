@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import Curso from './Curso/Curso'
 import useStyles from './styles'
 import Pagination from '@material-ui/lab/Pagination';
-function Cursos() {
-    const [state, setState] = useState([{},{},{},{},{},{},{},{},])
+function Cursos({cursos}) {
+    const [state, setState] = useState(cursos)
     const classes = useStyles()
 
     return (
         <div className={classes.row}> 
-            {state.map((item,index )=>
-                    <Curso />
+            {state.map((curso)=>
+                    <Curso curso={curso} />
             )}    
 
             <Pagination className={classes.pagination} count={10} color="secondary" />       

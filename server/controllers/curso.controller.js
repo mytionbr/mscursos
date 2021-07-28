@@ -23,6 +23,7 @@ export const create = async (req,res) => {
 
 export const list = async (req,res) => {
     try {
+        console.log('oiiii')
         const { rows } = await pool.query(
             'SELECT curso_id, nome, descricao, professor_id FROM curso')
 
