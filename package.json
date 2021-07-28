@@ -2,8 +2,8 @@
   "name": "mscursos",
   "version": "1.0.0",
   "description": "Plataforma para cursos genericos",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --watch server --exec node --experimental-modules server/server.js",

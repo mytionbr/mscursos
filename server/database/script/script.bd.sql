@@ -19,14 +19,22 @@ CREATE TABLE IF NOT EXISTS professor(
     CONSTRAINT email_unique UNIQUE (email)
 );
 
+CREATE TABLE IF NOT EXISTS categoria (
+    categoria_id serial PRIMARY KEY,
+    nome VARCHAR (255) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS curso (
     curso_id serial PRIMARY KEY,
     nome VARCHAR (255) NOT NULL,
     descricao TEXT NOT NULL,
     professor_id INT,
+    categoria_id INT,
     CONSTRAINT nome UNIQUE (nome),
     FOREIGN KEY (professor_id)
-        REFERENCES professor
+        REFERENCES professor,
+    FOREIGN KEY (categoria_id)
+        REFERENCES categoria,
 );
 
 CREATE TABLE IF NOT EXISTS aula (
