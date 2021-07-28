@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --watch server --exec node --experimental-modules server/server.js",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate -m server/database/migrations/"
   },
   "keywords": [],
   "author": "Matheus Sousa de Jesus",
