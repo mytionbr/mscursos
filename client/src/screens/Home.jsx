@@ -10,8 +10,6 @@ const Home = () => {
     const cursoList = useSelector((state) => state.cursoList)
     const { loading, error, cursos } = cursoList
     
-    console.log(loading, error, cursos )
-
     useEffect(()=>{
         dispatch(listCursos())
     },[dispatch])

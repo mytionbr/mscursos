@@ -1,15 +1,16 @@
 {
-  "name": "escola_admin",
+  "name": "mscursos",
   "version": "1.0.0",
-  "description": "",
+  "description": "Plataforma para cursos genericos",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch server --exec node --experimental-modules server/server.js"
+    "start": "nodemon --watch server --exec node --experimental-modules server/server.js",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matheus Sousa de Jesus",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -21,6 +22,7 @@
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "node-pg-migrate": "^5.10.0",
     "nodemon": "^2.0.12",
     "pg": "^8.6.0",
     "pg-format": "^1.0.4"

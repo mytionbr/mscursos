@@ -1,6 +1,4 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
-
-export const fetchCursos = () => API.get('/api/cursos')
+export const fetchCursos = () => axios.get('/api/cursos')
 

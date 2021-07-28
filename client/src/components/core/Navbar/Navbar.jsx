@@ -13,7 +13,7 @@ const Navbar = () => {
               <Link to="/" className={classes.brand}>
                <MenuBookIcon className={classes.brandIcon}/>
                 <Typography variant="h4">
-                 Escola Admin
+                 MScursos
                 </Typography>
               </Link>
               <div className={classes.nav} >

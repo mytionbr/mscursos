@@ -12,7 +12,7 @@ export default makeStyles((theme) =>({
        color:theme.palette.primary.dark, 
    },
    card:{
-    maxWidth: '20rem',
+    width: '20rem',
     margin:'10px 0',
    }
 }))
