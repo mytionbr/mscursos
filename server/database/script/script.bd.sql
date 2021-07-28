@@ -75,3 +75,19 @@ ALTER TABLE nota ADD CONSTRAINT nota_aluno_id_fkey
 
 ALTER TABLE aula ADD CONSTRAINT aula_curso_id_fkey 
     FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+INSERT INTO aluno(nome, email, data_nascimento, senha) 
+	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+
+INSERT INTO professor(nome, email, data_nascimento, senha) 
+	VALUES ('pedro', 'pedro@examplo.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+
+
+INSERT INTO categoria(nome) 
+	VALUES ('Programação'),
+		   ('Frontend'),
+		   ('Ux e desing'),
+		   ('Gestão'),
+		   ('Linguas'),
+		   ('Data Science');

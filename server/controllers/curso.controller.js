@@ -3,11 +3,11 @@ import pool from "../database/pool.js"
 
 export const create = async (req,res) => {
     try {
-        const {nome, descricao, professorId, categoriaId} = req.body
+        const {nome, descricao, professor_id, categoria_id} = req.body
 
         const { rows } = await pool.query(
             'INSERT INTO curso (nome, descricao, professor_id,categoria_id) VALUES ($1, $2, $3, $4)  RETURNING *;',
-            [nome, descricao, professorId,categoriaId])
+            [nome, descricao, professor_id,categoria_id])
         
         const cursoCreated = rows[0]
 
@@ -82,8 +82,8 @@ export const update = async (req,res) => {
 export const remove = async (req, res) =>{
     try {
         const curso = req.profile
-
-        const { rows } = await pool.query(
+       
+        await pool.query(
             'DELETE FROM curso WHERE curso_id = $1 RETURNING *;',
             [curso.curso_id]
         )
@@ -171,7 +171,7 @@ export const getAluno = async (req,res) => {
          const curso = req.profile
          const aluno_id = req.params['alunoId']
 
-         const { rows } = await pool.query(
+        await pool.query(
              'DELETE FROM curso_aluno WHERE curso_id = $1 AND aluno_id = $2',
              [curso.curso_id, aluno_id]
          )
@@ -198,4 +198,24 @@ export const getAulas = async (req,res) => {
     } catch (err) {
         res.status(400).json({message:err.message})
    }
+}
+
+export const findCursoByCategoriaId = async (req, res) =>{
+    try {
+        const categoria_id  = req.params['categoriaId']
+        const { rows } = await pool.query(
+            'SELECT * FROM curso WHERE categoria_id = $1 ORDER BY nome',
+            [categoria_id])
+        
+        const cursos = rows
+        
+        if(!cursos){
+           return res.status(400).json({message: 'Não há cursos dessa categoria'})
+        }
+        
+        res.status(200).json(cursos)
+
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
 }
