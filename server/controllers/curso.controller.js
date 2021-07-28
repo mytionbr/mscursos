@@ -3,11 +3,11 @@ import pool from "../database/pool.js"
 
 export const create = async (req,res) => {
     try {
-        const {nome, descricao, professorId} = req.body
+        const {nome, descricao, professorId, categoriaId} = req.body
 
         const { rows } = await pool.query(
-            'INSERT INTO curso (nome, descricao, professor_id) VALUES ($1, $2, $3)  RETURNING *;',
-            [nome, descricao, professorId])
+            'INSERT INTO curso (nome, descricao, professor_id,categoria_id) VALUES ($1, $2, $3, $4)  RETURNING *;',
+            [nome, descricao, professorId,categoriaId])
         
         const cursoCreated = rows[0]
 
@@ -24,7 +24,7 @@ export const create = async (req,res) => {
 export const list = async (req,res) => {
     try {
         const { rows } = await pool.query(
-            'SELECT curso_id, nome, descricao, professor_id FROM curso')
+            'SELECT curso_id, nome, descricao, professor_id, categoria_id FROM curso')
 
         const cursosList = rows
         
@@ -66,8 +66,8 @@ export const update = async (req,res) => {
         curso = extend(curso, req.body)
        
         const { rows } = await pool.query(
-            'UPDATE curso SET nome = $1, descricao = $2, professor_id = $3 WHERE curso_id = $4 RETURNING *;',
-            [curso.nome, curso.descricao, curso.professor_id, curso.curso_id]
+            'UPDATE curso SET nome = $1, descricao = $2, professor_id = $3, categoria_id = $4 WHERE curso_id = $5 RETURNING *;',
+            [curso.nome, curso.descricao, curso.professor_id, curso.categoria_id, curso.curso_id]
         )
 
         const updatedCurso = rows[0]
