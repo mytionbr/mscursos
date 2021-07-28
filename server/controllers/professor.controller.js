@@ -5,13 +5,13 @@ import dataFormat from "../utils/dataFormat.js";
 
 export const register = async (req,res) =>{
     try {
-        const {nome, email, dataNascimento} = req.body
+        const {nome, email, data_nascimento} = req.body
 
-        const senhaDefault =  bcrypt.hashSync(dataNascimento.replace('-',''),8)
+        const senhaDefault = bcrypt.hashSync(data_nascimento.replace('-',''),8)
         
         const { rows } = await pool.query(
             'INSERT INTO professor (nome, email, data_nascimento, senha) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nome, email, dataNascimento, senhaDefault])
+            [nome, email, data_nascimento, senhaDefault])
  
         let professorCreated = rows[0]
         professorCreated.senha = undefined
@@ -48,7 +48,7 @@ export const findById = async (req,res, next, id) =>{
             return res.status(400).json({message: 'professor não encontrado'})
         }
 
-        professor.dataNascimento = dataFormat(professor.data_nascimento)
+        professor.data_nascimento = dataFormat(professor.data_nascimento)
         professor.data_nascimento = undefined
 
         req.profile = professor
@@ -73,7 +73,7 @@ export const update = async (req,res) => {
     
         const { rows } = await pool.query(
             'UPDATE professor SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE professor_id = $5 RETURNING *;',
-            [professor.nome, professor.email, professor.dataNascimento, professor.senha, professor.professor_id]) 
+            [professor.nome, professor.email, professor.data_nascimento, professor.senha, professor.professor_id]) 
               
         let updatedProfessor = rows[0]
        

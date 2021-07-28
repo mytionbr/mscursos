@@ -1,21 +1,21 @@
 import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
-import { alunoResponseSuccess } from '../responses/aluno.response.js'
+import { alunoResponseSuccess } from '../custom/responses/aluno.response.js'
 
 
 export const register = async (req,res) => {
     
     try{
-        const { nome, email, dataNascimento } = req.body
+        const { nome, email, data_nascimento } = req.body
         
         /*O sistema vai definir como senha default a data de nascimento do 
             aluno em formato americano: ex 2000-02-05 as 20000205 */
-        const senhaDefault =  bcrypt.hashSync(dataNascimento.replace('-',''),8)
+        const senhaDefault =  bcrypt.hashSync(data_nascimento.replace('-',''),8)
 
         const{ rows } = await pool.query(
             'INSERT INTO aluno(nome, email, data_nascimento, senha) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nome, email, dataNascimento, senhaDefault]
+            [nome, email, data_nascimento, senhaDefault]
         )   
 
         let createdAluno = rows[0]
@@ -77,7 +77,7 @@ export const update = async (req, res) => {
 
         const { rows } = await pool.query(
             'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',
-            [aluno.nome, aluno.email, aluno.dataNascimento, aluno.senha, aluno.aluno_id])
+            [aluno.nome, aluno.email, aluno.data_nascimento, aluno.senha, aluno.aluno_id])
         
         let updatedAluno = rows[0]
 
