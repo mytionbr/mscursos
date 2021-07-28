@@ -9,8 +9,8 @@ const App = () => {
   
     return (
         <Router>
-            <CssBaseline />
             <ThemeProvider theme={theme}>
+                <CssBaseline />
                 <MainRouter/>
             </ThemeProvider>
         </Router>

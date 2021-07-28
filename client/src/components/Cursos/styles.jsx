@@ -6,5 +6,8 @@ export default makeStyles((theme) =>({
        flexWrap: 'wrap',
        justifyContent: 'space-between',
        alignItems: 'center',
+   },
+   pagination:{
+       margin: 'auto',
    }
 }))

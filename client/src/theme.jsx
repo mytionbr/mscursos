@@ -14,8 +14,10 @@ const theme = createTheme({
             dark: '#7ecb20',
             contrastText: '#FFF',
         },
-        
-        type: 'light'
+        background: {
+            default: "#F1EFF6"
+        }
+       
     }
 })
 
