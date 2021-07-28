@@ -1,7 +1,7 @@
 import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
-import dataFormat from '../utils/dataFormat.js'
+import { alunoResponseSuccess } from '../responses/aluno.response.js'
 
 
 export const register = async (req,res) => {
@@ -19,10 +19,10 @@ export const register = async (req,res) => {
         )   
 
         let createdAluno = rows[0]
-        createdAluno.senha = undefined
-
-        res.status(201).json(createdAluno)
-        } catch (err){
+        
+        alunoResponseSuccess(res,createdAluno)
+        
+    } catch (err){
             res.status(409).json({message: err.message})
         }
     }
@@ -53,9 +53,7 @@ export const findById = async (req,res, next, id) => {
             return res.status(400).json({
                 message: "Aluno não encontrado" 
             })}
-        
-        aluno.dataNascimento = dataFormat(aluno.data_nascimento)
-        aluno.data_nascimento = undefined
+       
         req.profile = aluno
         next()
         } catch (err) {
@@ -66,8 +64,8 @@ export const findById = async (req,res, next, id) => {
 }
 
 export const read =  async (req, res) => {
-        req.profile.senha = undefined
-        return res.json(req.profile)        
+        const aluno = req.profile
+        alunoResponseSuccess(res,aluno)  
 }
 
 export const update = async (req, res) => {
@@ -83,9 +81,7 @@ export const update = async (req, res) => {
         
         let updatedAluno = rows[0]
 
-        updatedAluno.senha = undefined
-
-        res.status(200).json(updatedAluno)
+        alunoResponseSuccess(res,updatedAluno)
 
     } catch (err) {
         res.status(400).json({
@@ -102,9 +98,7 @@ export const remove = async (req, res) =>{
             [aluno.aluno_id])
         
         aluno = rows[0]
-        aluno.senha = undefined
-
-        res.status(200).json({message: 'Aluno Deletado', aluno: aluno})
+        alunoResponseSuccess(res,aluno)
 
     } catch (err) {
         res.status(400).json({
