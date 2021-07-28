@@ -1,7 +1,8 @@
 import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
-import dataFormat from "../utils/dataFormat.js";
+import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
+
 
 export const register = async (req,res) =>{
     try {
@@ -14,9 +15,8 @@ export const register = async (req,res) =>{
             [nome, email, data_nascimento, senhaDefault])
  
         let professorCreated = rows[0]
-        professorCreated.senha = undefined
         
-        res.status(201).json(professorCreated)
+        usuarioResponseSuccess(res,professorCreated)
 
         } catch (err) {
             res.status(409).json({message: err.message})
@@ -48,9 +48,6 @@ export const findById = async (req,res, next, id) =>{
             return res.status(400).json({message: 'professor não encontrado'})
         }
 
-        professor.data_nascimento = dataFormat(professor.data_nascimento)
-        professor.data_nascimento = undefined
-
         req.profile = professor
         next() 
     } catch (err) {
@@ -60,8 +57,7 @@ export const findById = async (req,res, next, id) =>{
 
 export const read = async (req,res) => {
     let professor = req.profile
-    professor.senha = undefined
-    res.status(200).json(professor)
+    usuarioResponseSuccess(res,professor)
 }
 
 export const update = async (req,res) => {
@@ -77,9 +73,7 @@ export const update = async (req,res) => {
               
         let updatedProfessor = rows[0]
        
-        updatedProfessor.senha = undefined
-
-        res.status(200).json(updatedProfessor)
+        usuarioResponseSuccess(res,updatedProfessor)
         
     } catch (err) {
         res.status(400).json({message: err.message})
@@ -96,9 +90,7 @@ export const remove = async (req, res) => {
         )
 
         professor = rows[0]
-        professor.senha = undefined
-
-        res.status(200).json({message: 'professor excluído com sucesso',professor: professor})
+        usuarioResponseSuccess(res,professor)
     } catch (err) {
         res.status(400).json({
             message: err.message
