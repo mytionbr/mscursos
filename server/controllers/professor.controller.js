@@ -1,6 +1,7 @@
 import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
+import dataFormat from "../utils/dataFormat.js";
 
 export const register = async (req,res) =>{
     try {
@@ -46,6 +47,9 @@ export const findById = async (req,res, next, id) =>{
         if(!professor){
             return res.status(400).json({message: 'professor não encontrado'})
         }
+
+        professor.dataNascimento = dataFormat(professor.data_nascimento)
+        professor.data_nascimento = undefined
 
         req.profile = professor
         next() 

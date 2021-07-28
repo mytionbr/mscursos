@@ -1,6 +1,7 @@
 import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
+import dataFormat from '../utils/dataFormat.js'
 
 
 export const register = async (req,res) => {
@@ -53,6 +54,8 @@ export const findById = async (req,res, next, id) => {
                 message: "Aluno não encontrado" 
             })}
         
+        aluno.dataNascimento = dataFormat(aluno.data_nascimento)
+        aluno.data_nascimento = undefined
         req.profile = aluno
         next()
         } catch (err) {
@@ -71,7 +74,7 @@ export const update = async (req, res) => {
     try {
         let aluno = req.profile
         aluno = extend(aluno, req.body)
-        
+       
         aluno.senha = bcrypt.hashSync(aluno.senha,8)
 
         const { rows } = await pool.query(
