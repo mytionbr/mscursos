@@ -7,13 +7,16 @@ function Cursos({cursos}) {
     const classes = useStyles()
 
     return (
+        <>
         <div className={classes.row}> 
             {state.map((curso)=>
                     <Curso curso={curso} />
             )}    
-
+        </div>
+        <div className={classes.row}>
             <Pagination className={classes.pagination} count={10} color="secondary" />       
         </div>
+        </>
     )
 }
 

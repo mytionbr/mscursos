@@ -257,11 +257,15 @@ export const findCursosByCategoriaGroup = async (req, res) => {
                 queryString += ' AND'
             }
 
+            queryString += ' categoria_id IN ('
+
             if(typeof queryObject.group  === "object"){
-                queryString += queryObject.group.map(q => ` categoria_id = $${index += 1}`).join('AND')
+                queryString += queryObject.group.map(q => `$${index += 1}`).join(',')
             } else {
-                queryString += ` categoria_id = $${index + 1}`
+                queryString += `$${index + 1}`
             }
+
+            queryString += ')'
 
             if(typeof queryObject.group === "string" ){
                 values.push(queryObject.group)
