@@ -1,5 +1,5 @@
 import { Button, Paper, TextField, Typography } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCategoria } from '../../actions/categoriaActions'
 import useStyles from './styles'
@@ -15,10 +15,39 @@ function FilterForm() {
     const categoriaList = useSelector((state) => state.categoriaList)
     const { loading, error, categorias } = categoriaList
     
+    const [ nome, setNome ] = useState('')
+    const [ categoriasTags, setCategoriasTags ] = useState([])
+
     useEffect(()=>{
         dispatch(listCategoria())
     },[dispatch])
 
+    
+   
+
+    const handlerInput = (e) =>{
+        const { value } = e.target 
+
+        setNome(value)
+    }
+
+    const handlerInputCategorias = (event,newValue) => {
+        if(typeof newValue === 'string'){
+            setCategoriasTags({categoria: newValue,})
+        } else if (newValue && newValue.inputValue){
+            setCategoriasTags({
+                categoria: newValue.inputValue,
+            })
+        } else {
+            setCategoriasTags(newValue)
+        }
+       
+    }
+
+    const handlerClear = ()=>{
+        setNome('')
+        setCategoriasTags([])
+    }
 
 
     const Categorias = () => {
@@ -27,12 +56,13 @@ function FilterForm() {
             <Autocomplete
             multiple
             limitTags={2}
+            value={categoriasTags}
             fullWidth
             options={categorias}
             getOptionLabel={(option) => option.nome}
-            defaultValue={[]}
+            defaultValue={categoriasTags}
             renderInput={(params) => (
-              <TextField {...params} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
+              <TextField {...params}  onChange={handlerInputCategorias} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
             )}
           />
         )
@@ -40,7 +70,7 @@ function FilterForm() {
 
     return (
         <Paper elevation={2} className={classes.paper} position="static">
-            <form className={classes.form} autoComplete="off" noValidate>
+            <div className={classes.form} autoComplete="off" noValidate>
                 <Typography variant="h6">
                     Filtre por um curso
                 </Typography>
@@ -49,7 +79,9 @@ function FilterForm() {
                     variant="outlined"
                     label="Nome"
                     color="secondary"
-                    fullWidth    
+                    fullWidth
+                    onChange={handlerInput}  
+                    value={nome}  
                 />
                {loading 
                     ? <LoadingBox />
@@ -59,9 +91,9 @@ function FilterForm() {
                 }
                    
               
-                <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth>Filtrar</Button>
-                <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth>Limpar</Button>
-            </form>
+                <Button type="submit" className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth>Filtrar</Button>
+                <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth onClick={handlerClear}>Limpar</Button>
+            </div>
         </Paper>
     )
 }

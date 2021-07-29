@@ -18,7 +18,7 @@ const Home = () => {
 
     return (
         <div>
-            <Container>
+            <Container >
                 <h1>Conheça os nossos cursos</h1>
                 <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
                     <Grid item xs={12} sm={7}>
