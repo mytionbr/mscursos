@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listCategoria } from '../../actions/categoriaActions'
 import useStyles from './styles'
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import LoadingBox from '../core/LoadingBox/LoadingBox'
+import MessageBox from '../core/MessageBox/MessageBox'
 
 
 function FilterForm() {
@@ -16,6 +18,7 @@ function FilterForm() {
     useEffect(()=>{
         dispatch(listCategoria())
     },[dispatch])
+
 
 
     const Categorias = () => {
@@ -49,9 +52,9 @@ function FilterForm() {
                     fullWidth    
                 />
                {loading 
-                    ? ('carregando')
+                    ? <LoadingBox />
                     : error 
-                    ? ({error})
+                    ? <MessageBox type="error">{error.message}</MessageBox>
                     : <Categorias />
                 }
                    
