@@ -6,6 +6,7 @@ import useStyles from './styles'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LoadingBox from '../core/LoadingBox/LoadingBox'
 import MessageBox from '../core/MessageBox/MessageBox'
+import { filterCursos } from '../../actions/cursoActions'
 
 
 function FilterForm() {
@@ -14,7 +15,9 @@ function FilterForm() {
     const dispatch = useDispatch()
     const categoriaList = useSelector((state) => state.categoriaList)
     const { loading, error, categorias } = categoriaList
-    
+ 
+   
+
     const [ nome, setNome ] = useState('')
     const [ categoriasTags, setCategoriasTags ] = useState([])
 
@@ -22,7 +25,6 @@ function FilterForm() {
         dispatch(listCategoria())
     },[dispatch])
 
-    
    
 
     const handlerInput = (e) =>{
@@ -47,6 +49,14 @@ function FilterForm() {
     const handlerClear = ()=>{
         setNome('')
         setCategoriasTags([])
+    }
+
+    const handlerSubmit = ()=>{
+        dispatch(filterCursos({
+            nome: nome || '',
+            categorias: categoriasTags || []
+        }))
+        console.log(nome,categoriasTags)
     }
 
 
@@ -91,7 +101,7 @@ function FilterForm() {
                 }
                    
               
-                <Button type="submit" className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth>Filtrar</Button>
+                <Button type="submit" className={classes.button} variant="outlined" color="secundary" size="large" type="large" onClick={handlerSubmit} fullWidth>Filtrar</Button>
                 <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth onClick={handlerClear}>Limpar</Button>
             </div>
         </Paper>

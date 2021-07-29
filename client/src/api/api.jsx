@@ -4,3 +4,5 @@ export const fetchCursos = () => axios.get('/api/cursos')
 
 export const fetchCategorias = () => axios.get('/api/categorias')
 
+export const findCursosByParams = (query) => axios.get('/api/cursos/filtro' + query)
+

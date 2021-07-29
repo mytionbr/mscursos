@@ -235,7 +235,12 @@ export const findCursosByCategoriaGroup = async (req, res) => {
 
 
         if(queryObject.group.length === 0 && queryObject.nome.length === 0 ){
-            return res.status(400).json({message: 'Parametros invalidos'})
+            const { rows } = await pool.query(
+                'SELECT * FROM curso ORDER BY nome')
+            
+            const cursos = rows
+                           
+            return  res.status(200).json(cursos)
         }
 
         let queryString = "SELECT * FROM curso WHERE"
@@ -274,7 +279,7 @@ export const findCursosByCategoriaGroup = async (req, res) => {
         
         const cursos = rows
 
-        res.json(cursos)
+        res.status(200).json(cursos)
     } catch (err) {
         res.status(400).json({message: err.message})
     }

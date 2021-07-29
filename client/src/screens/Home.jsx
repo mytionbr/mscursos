@@ -3,17 +3,20 @@ import Cursos from "../components/Cursos/Cursos"
 import FilterForm from "../components/FilterForm/FilterForm"
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from "react"
-import { listCursos } from "../actions/cursoActions"
+import { filterCursos, listCursos } from "../actions/cursoActions"
 import LoadingBox from '../components/core/LoadingBox/LoadingBox'
 import MessageBox from '../components/core/MessageBox/MessageBox'
 
 const Home = () => {
     const dispatch = useDispatch()
-    const cursoList = useSelector((state) => state.cursoList)
-    const { loading, error, cursos } = cursoList
+    const cursoFilter = useSelector((state) => state.cursoFilter)
+    const { loading, error, cursos } = cursoFilter
     
     useEffect(()=>{
-        dispatch(listCursos())
+        dispatch(filterCursos({
+            nome: '',
+            categorias: []
+        }))
     },[dispatch])
 
     return (
