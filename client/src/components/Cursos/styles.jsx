@@ -9,5 +9,6 @@ export default makeStyles((theme) =>({
    },
    pagination:{
        margin: 'auto',
+       marginTop:'0.5rem',
    }
 }))

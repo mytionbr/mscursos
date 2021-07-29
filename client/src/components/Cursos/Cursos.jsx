@@ -14,7 +14,7 @@ function Cursos({cursos}) {
             )}    
         </div>
         <div className={classes.row}>
-            <Pagination className={classes.pagination} count={10} color="secondary" />       
+            <Pagination className={classes.pagination} count={Math.ceil(cursos.length / 10)} color="secondary" />       
         </div>
         </>
     )
