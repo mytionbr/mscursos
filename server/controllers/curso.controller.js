@@ -272,9 +272,9 @@ export const findCursosByCategoriaGroup = async (req, res) => {
             queryString,
             values)
         
-        const resultado = rows
+        const cursos = rows
 
-        res.json(resultado)
+        res.json(cursos)
     } catch (err) {
         res.status(400).json({message: err.message})
     }

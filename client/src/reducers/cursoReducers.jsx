@@ -1,4 +1,4 @@
-import { CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from "../constants/cursosConstants";
+import { CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from "../constants/cursoConstants";
 
 
 export const cursoListReducer = (

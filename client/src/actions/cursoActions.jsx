@@ -1,6 +1,5 @@
-import axios from 'axios'
 import {fetchCursos} from '../api/api'
-import { CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursosConstants'
+import { CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
 
 export const listCursos = () => async (dispatch) => {
     dispatch({
@@ -14,3 +13,4 @@ export const listCursos = () => async (dispatch) => {
         dispatch({ type: CURSO_LIST_FAIL, payload: error.message })
     }
 }
+
