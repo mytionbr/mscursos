@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCategoria } from '../../actions/categoriaActions'
 import useStyles from './styles'
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 function FilterForm() {
     const classes = useStyles()
@@ -17,13 +19,19 @@ function FilterForm() {
 
 
     const Categorias = () => {
-        console.log(categorias)
+        
         return (
-            <div>
-            {categorias.map((c =>
-                <p>{c.nome}</p>
-            ))}
-            </div>
+            <Autocomplete
+            multiple
+            limitTags={2}
+            fullWidth
+            options={categorias}
+            getOptionLabel={(option) => option.nome}
+            defaultValue={[]}
+            renderInput={(params) => (
+              <TextField {...params} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
+            )}
+          />
         )
     }
 

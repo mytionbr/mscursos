@@ -21,7 +21,7 @@ export default makeStyles((theme) =>({
        '& > *':{
          margin: '0.5rem 0'
         }
-   }
+   },
 
    
 }))
