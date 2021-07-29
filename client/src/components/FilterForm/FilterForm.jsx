@@ -56,13 +56,13 @@ function FilterForm() {
             <Autocomplete
             multiple
             limitTags={2}
-            value={categoriasTags}
             fullWidth
             options={categorias}
             getOptionLabel={(option) => option.nome}
-            defaultValue={categoriasTags}
+            onChange={handlerInputCategorias}
+            value={categoriasTags}
             renderInput={(params) => (
-              <TextField {...params}  onChange={handlerInputCategorias} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
+              <TextField {...params} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
             )}
           />
         )
@@ -70,7 +70,7 @@ function FilterForm() {
 
     return (
         <Paper elevation={2} className={classes.paper} position="static">
-            <div className={classes.form} autoComplete="off" noValidate>
+            <div className={classes.form}>
                 <Typography variant="h6">
                     Filtre por um curso
                 </Typography>
