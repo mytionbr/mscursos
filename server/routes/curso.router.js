@@ -1,11 +1,18 @@
 import express from 'express'
-import { create, enroll, findById, findCursoByCategoriaId, getAluno, getAulas, list, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
+import { create, enroll, findById, findCursoByCategoriaId, findCursosByCategoriaGroup, getAluno, getAulas, list, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
 
 const router = express.Router()
 
 router.route('/')
     .post( create )
     .get( list )
+
+
+router.route('/filtro')
+    .get( findCursosByCategoriaGroup )
+
+router.route('/categorias/:categoriaId')
+    .get( findCursoByCategoriaId )
 
 router.route('/:id')
     .get( read )
@@ -23,8 +30,7 @@ router.route('/:id/matriculas/:alunoId')
 router.route('/:id/aulas')
     .get( getAulas )
 
-router.route('/categorias/:categoriaId')
-    .get( findCursoByCategoriaId )
+
 
 router.param('id', findById)
 

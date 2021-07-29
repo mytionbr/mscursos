@@ -219,3 +219,48 @@ export const findCursoByCategoriaId = async (req, res) =>{
         res.status(400).json({message: err.message})
     }
 }
+
+export const findCursosByCategoriaGroup = async (req, res) => {
+    try {
+        
+        let queryObject = {
+            group: [],
+            nome: ""
+        }
+
+        let values = []
+
+        queryObject.group = req.query.categoria || []
+        queryObject.nome = req.query.nome || []
+
+        let queryString = "SELECT * FROM curso WHERE"
+
+        if(queryObject.nome) {
+            queryString += " nome = $1"
+            values.push(queryObject.nome)
+        }
+
+        if(queryObject.group.length != 0) {
+            let index = values.length
+
+            if(typeof queryObject.group  === "object"){
+                queryString += ','
+                queryString += queryObject.group.map(q => ` categoria_id = $${index += 1}`).join(',')
+            } else {
+                queryString += `, categoria = $${index + 1}`
+            }
+
+            typeof queryObject.group === "string" 
+                ? values.push(queryObject.group)
+                : values.push(...queryObject.group)
+        }
+        
+        queryString += ';'
+         
+
+
+        res.json({query: queryString,values: values})
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
