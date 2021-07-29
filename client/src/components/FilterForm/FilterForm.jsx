@@ -47,6 +47,10 @@ function FilterForm() {
     }
 
     const handlerClear = ()=>{
+        dispatch(filterCursos({
+            nome: '',
+            categorias: []
+        }))
         setNome('')
         setCategoriasTags([])
     }
