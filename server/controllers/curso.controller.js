@@ -222,7 +222,7 @@ export const findCursoByCategoriaId = async (req, res) =>{
 
 export const findCursosByCategoriaGroup = async (req, res) => {
     try {
-        
+               
         let queryObject = {
             group: [],
             nome: ""
@@ -233,33 +233,48 @@ export const findCursosByCategoriaGroup = async (req, res) => {
         queryObject.group = req.query.categoria || []
         queryObject.nome = req.query.nome || []
 
+
+        if(queryObject.group.length === 0 && queryObject.nome.length === 0 ){
+            return res.status(400).json({message: 'Parametros invalidos'})
+        }
+
         let queryString = "SELECT * FROM curso WHERE"
 
-        if(queryObject.nome) {
-            queryString += " nome = $1"
+        if(queryObject.nome.length > 0) {
+            queryString += " nome iLIKE '%'||$1||'%' "
             values.push(queryObject.nome)
         }
 
         if(queryObject.group.length != 0) {
             let index = values.length
 
-            if(typeof queryObject.group  === "object"){
-                queryString += ','
-                queryString += queryObject.group.map(q => ` categoria_id = $${index += 1}`).join(',')
-            } else {
-                queryString += `, categoria = $${index + 1}`
+            if(index > 0){
+                queryString += ' AND'
             }
 
-            typeof queryObject.group === "string" 
-                ? values.push(queryObject.group)
-                : values.push(...queryObject.group)
+            if(typeof queryObject.group  === "object"){
+                queryString += queryObject.group.map(q => ` categoria_id = $${index += 1}`).join('AND')
+            } else {
+                queryString += ` categoria_id = $${index + 1}`
+            }
+
+            if(typeof queryObject.group === "string" ){
+                values.push(queryObject.group)
+            } else {
+                values.push(...queryObject.group)
+            }
+
         }
         
         queryString += ';'
-         
+        
+        const { rows } = await pool.query(
+            queryString,
+            values)
+        
+        const resultado = rows
 
-
-        res.json({query: queryString,values: values})
+        res.json(resultado)
     } catch (err) {
         res.status(400).json({message: err.message})
     }
