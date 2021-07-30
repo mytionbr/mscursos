@@ -1,15 +1,12 @@
 import express from 'express'
-import { create, enroll, findById, findCursoByCategoriaId, findCursosByCategoriaGroup, getAluno, getAulas, list, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
+import { create, enroll, findById, findCursoByCategoriaId, findCursos, getAluno, getAulas, list, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
 
 const router = express.Router()
 
 router.route('/')
     .post( create )
     .get( list )
-
-
-router.route('/filtro')
-    .get( findCursosByCategoriaGroup )
+    .get( findCursos )
 
 router.route('/categorias/:categoriaId')
     .get( findCursoByCategoriaId )

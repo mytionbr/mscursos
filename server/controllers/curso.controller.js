@@ -220,12 +220,13 @@ export const findCursoByCategoriaId = async (req, res) =>{
     }
 }
 
-export const findCursosByCategoriaGroup = async (req, res) => {
+export const findCursos = async (req, res) => {
     try {
                
         let queryObject = {
             group: [],
-            nome: ""
+            nome: "",
+            values: []
         }
 
         let values = []
@@ -260,7 +261,7 @@ export const findCursosByCategoriaGroup = async (req, res) => {
             queryString += ' categoria_id IN ('
 
             if(typeof queryObject.group  === "object"){
-                queryString += queryObject.group.map(q => `$${index += 1}`).join(',')
+                queryString += queryObject.group.map(() => `$${index += 1}`).join(',')
             } else {
                 queryString += `$${index + 1}`
             }
