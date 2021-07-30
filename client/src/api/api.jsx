@@ -1,8 +1,15 @@
 import axios from 'axios'
 
-export const fetchCursos = () => axios.get('/api/cursos')
+const fetchCursos = () => axios.get('/api/cursos')
 
-export const fetchCategorias = () => axios.get('/api/categorias')
+const fetchCategorias = () => axios.get('/api/categorias')
 
-export const findCursosByParams = (query) => axios.get('/api/cursos/filtro' + query)
+const findCursos = (query) => axios.get('/api/cursos/' + query)
 
+const Api = {
+    fetchCursos,
+    fetchCategorias,
+    findCursos
+}
+
+export default Api

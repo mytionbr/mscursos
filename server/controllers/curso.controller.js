@@ -220,7 +220,7 @@ export const findCursoByCategoriaId = async (req, res) =>{
     }
 }
 
-export const findCursos = async (req, res) => {
+export const find = async (req, res) => {
     try {
                
         let queryObject = {

@@ -1,12 +1,12 @@
-import {fetchCursos, findCursosByParams} from '../api/api'
-import { CURSO_FILTER_REQUEST, CURSO_FILTER_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
+import Api from '../api/api'
+import { CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
 
 export const listCursos = () => async (dispatch) => {
     dispatch({
         type: CURSO_LIST_REQUEST,
     })
     try {
-        const { data } = await fetchCursos()
+        const { data } = await Api.fetchCursos()
 
         dispatch({ type: CURSO_LIST_SUCCESS, payload: data})
     } catch (error) {
@@ -14,8 +14,8 @@ export const listCursos = () => async (dispatch) => {
     }
 }
 
-export const filterCursos = (query) => async (dispatch) => {
-    dispatch({type: CURSO_FILTER_REQUEST, payload: query})
+export const findCursos = (query) => async (dispatch) => {
+    dispatch({type: CURSO_FIND_REQUEST, payload: query})
     try {
         console.log(query)
         const { nome, categorias } = query
@@ -31,8 +31,8 @@ export const filterCursos = (query) => async (dispatch) => {
             }).join('&')
         }
         console.log(queryString)
-        const { data } = await findCursosByParams(queryString)
-        dispatch({type: CURSO_FILTER_SUCCESS, payload: data})
+        const { data } = await Api.findCursos(queryString)
+        dispatch({type: CURSO_FIND_SUCCESS, payload: data})
     } catch (error){
         dispatch({
             type: CURSO_LIST_FAIL,

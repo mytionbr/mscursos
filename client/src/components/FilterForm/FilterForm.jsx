@@ -6,7 +6,7 @@ import useStyles from './styles'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LoadingBox from '../core/LoadingBox/LoadingBox'
 import MessageBox from '../core/MessageBox/MessageBox'
-import { filterCursos } from '../../actions/cursoActions'
+import { findCursos } from '../../actions/cursoActions'
 
 
 function FilterForm() {
@@ -47,7 +47,7 @@ function FilterForm() {
     }
 
     const handlerClear = ()=>{
-        dispatch(filterCursos({
+        dispatch(findCursos({
             nome: '',
             categorias: []
         }))
@@ -56,7 +56,7 @@ function FilterForm() {
     }
 
     const handlerSubmit = ()=>{
-        dispatch(filterCursos({
+        dispatch(findCursos({
             nome: nome || '',
             categorias: categoriasTags || []
         }))
