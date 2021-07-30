@@ -28,7 +28,7 @@ const Home = () => {
                         {loading ? (
                             <LoadingBox />
                         ): error ? (
-                            <MessageBox type="error">{error.message}</MessageBox>
+                            <MessageBox type="error">{error}</MessageBox>
                         ) : (
                             <Cursos cursos={cursos} />
                         )}

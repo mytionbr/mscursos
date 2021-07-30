@@ -1,5 +1,5 @@
 import Api from '../api/api'
-import { CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
+import { CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
 
 export const listCursos = () => async (dispatch) => {
     dispatch({
@@ -35,7 +35,7 @@ export const findCursos = (query) => async (dispatch) => {
         dispatch({type: CURSO_FIND_SUCCESS, payload: data})
     } catch (error){
         dispatch({
-            type: CURSO_LIST_FAIL,
+            type: CURSO_FIND_FAIL,
             payload: error.message
         })
     }

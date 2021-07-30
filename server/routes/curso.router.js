@@ -7,7 +7,7 @@ router.route('/')
     .post( create )
     .get( find )
    
-
+    
 router.route('/categorias/:categoriaId')
     .get( findCursoByCategoriaId )
 
