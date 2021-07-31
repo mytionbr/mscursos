@@ -7,6 +7,7 @@ import cursoRouter from './routes/curso.router.js'
 import notaRouter from './routes/nota.router.js'
 import aulaRouter from './routes/aula.router.js'
 import categoriaRouter from './routes/categoria.router.js'
+import authRouter from './routes/auth.router.js'
 
 const app = express()
 
@@ -20,5 +21,6 @@ app.use('/api/cursos', cursoRouter)
 app.use('/api/notas', notaRouter)
 app.use('/api/aulas', aulaRouter)
 app.use('/api/categorias', categoriaRouter)
+app.use('/api/auth', authRouter)
 
 export default app
