@@ -235,6 +235,7 @@ export const find = async (req, res) => {
                 this.order = '',
                 this.query = 'SELECT * FROM curso'
                 this.condicional = ''
+                this.pages = 0
             }
 
                 selectWithOrder(){
@@ -295,7 +296,8 @@ export const find = async (req, res) => {
                         cursos: result,
                         page: this.page,
                         limit: this.limit,
-                        total: this.total
+                        totalItems: this.total,
+                        totalPages: Math.ceil(Number(this.total / this.limit))
                     }
                 }
             }
