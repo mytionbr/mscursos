@@ -251,8 +251,6 @@ export const find = async (req, res) => {
                 }
 
                 count(){
-                    console.log( ` SELECT COUNT(*) FROM CURSO ${this.condicional} `)
-                    console.log(this.values)
                     if(this.condicional.length > 0){
                         return ` SELECT COUNT(*) FROM CURSO ${this.condicional} `
                     }

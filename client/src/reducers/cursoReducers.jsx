@@ -18,14 +18,14 @@ export const cursoListReducer = (
 }
 
 export const cursoFindReducer = (
-    state = { loading: true, cursos:[] },
+    state = { loading: true, data:[] },
     action
 ) => {
     switch (action.type){
         case CURSO_FIND_REQUEST:
             return { loading: true }
         case CURSO_FIND_SUCCESS:
-            return { loading: false, cursos: action.payload }
+            return { loading: false, data: action.payload }
         case CURSO_FIND_FAIL:
             return { loading: false, error: action.payload }
         default:

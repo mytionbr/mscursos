@@ -10,8 +10,10 @@ import MessageBox from '../components/core/MessageBox/MessageBox'
 const Home = () => {
     const dispatch = useDispatch()
     const cursoFind = useSelector((state) => state.cursoFind)
-    const { loading, error, cursos } = cursoFind
+    const { loading, error, data } = cursoFind
     
+    console.log(loading, error, data)
+
     useEffect(()=>{
         dispatch(findCursos({
             nome: '',
@@ -29,9 +31,15 @@ const Home = () => {
                             <LoadingBox />
                         ): error ? (
                             <MessageBox type="error">{error}</MessageBox>
-                        ) : (
-                            <Cursos cursos={cursos} />
-                        )}
+                        ) : 
+                            data ? 
+                        (
+                            <Cursos data={data} />
+                        ) :
+                        (
+                            <LoadingBox />
+                        )
+                        }
                         
                     </Grid>
                     <Grid item xs={12} sm={4}> 

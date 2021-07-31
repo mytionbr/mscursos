@@ -15,23 +15,23 @@ export const listCursos = () => async (dispatch) => {
 }
 
 export const findCursos = (query) => async (dispatch) => {
-    dispatch({type: CURSO_FIND_REQUEST, payload: query})
+    dispatch({type: CURSO_FIND_REQUEST})
     try {
-        console.log(query)
-        const { nome, categorias } = query
+       
+        const { nome, categorias, pagination } = query
         let queryString = "?"
         if (nome) {
             queryString += `nome=${nome}&`
         }
-        console.log(queryString)
-
+        
         if (categorias.length > 0) {
             queryString += categorias.map(c => {
                 return `categoria=${c.categoria_id}`
             }).join('&')
         }
-        console.log(queryString)
+        
         const { data } = await Api.findCursos(queryString)
+        
         dispatch({type: CURSO_FIND_SUCCESS, payload: data})
     } catch (error){
         dispatch({
