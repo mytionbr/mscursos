@@ -82,14 +82,11 @@ export const remove = async (req, res) => {
     try {
         let aula = req.profile
 
-        const { rows } = pool.query(
-            'DELETE FROM aula WHERE aula_id = $1 RETURNING *;',
+        await pool.query(
+            'DELETE FROM aula WHERE aula_id = $1',
             [aula.aula_id])
 
-        res.status(200).json({
-            message: 'Aula deletada com sucesso',
-            aula: aula
-        })
+        res.status(204).json()
 
     } catch (err) {
         res.status(400).json({message: err.message})

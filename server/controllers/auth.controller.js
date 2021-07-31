@@ -65,7 +65,7 @@ export const signinAluno = async (req,res) =>{
     }
 }
 
-export const isAuthProfessor = (req, res, next) => {
+export const isAuth = (req, res, next) => {
     const authorization = req.headers.authorization
     if (authorization){
         const token = authorization.slice(7, authorization.length)
@@ -76,13 +76,26 @@ export const isAuthProfessor = (req, res, next) => {
                 if (err) {
                     res.status(401).json({message: 'Token invalido'})
                 } else {
-                    req.user = decode
+                    
+                    req.auth = decode
                     next()
                 }
             }
-
         )
     } else {
         res.status(401).json({message: 'Sem token'})
     }
+}
+
+export const hasAuthorization = (req, res, next) =>{
+
+    const authorized = req.profile && req.auth && req.profile._id === req.auth._id
+
+
+    if(!authorized){
+        return res.status(403).json({
+            message: "Usuário não está autorizado"
+        })
+    }
+    next()
 }

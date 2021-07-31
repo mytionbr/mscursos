@@ -39,6 +39,7 @@ export const list = async (req,res) =>{
 
 export const findById = async (req,res, next, id) =>{
     try {
+       
         const { rows } = await pool.query(
             'SELECT * FROM professor WHERE professor_id = $1 ',
             [id])
@@ -48,7 +49,7 @@ export const findById = async (req,res, next, id) =>{
         if(!professor){
             return res.status(400).json({message: 'professor não encontrado'})
         }
-
+        professor._id = professor.professor_id
         req.profile = professor
         next() 
     } catch (err) {
@@ -57,6 +58,7 @@ export const findById = async (req,res, next, id) =>{
 }
 
 export const read = async (req,res) => {
+    
     let professor = req.profile
     usuarioResponseSuccess(res,professor)
 }

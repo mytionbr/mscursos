@@ -53,7 +53,7 @@ export const findById = async (req,res, next, id) => {
             return res.status(400).json({
                 message: "Aluno não encontrado" 
             })}
-       
+        aluno._id = aluno.aluno_id
         req.profile = aluno
         next()
         } catch (err) {
