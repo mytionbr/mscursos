@@ -12,7 +12,6 @@ const Home = () => {
     const cursoFind = useSelector((state) => state.cursoFind)
     const { loading, error, data } = cursoFind
     
-    console.log(loading, error, data)
 
     useEffect(()=>{
         dispatch(findCursos({

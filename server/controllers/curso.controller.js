@@ -236,6 +236,7 @@ export const find = async (req, res) => {
                 this.query = 'SELECT * FROM curso'
                 this.condicional = ''
                 this.pages = 0
+                this.params = []           
             }
 
                 selectWithOrder(){
@@ -285,6 +286,7 @@ export const find = async (req, res) => {
 
                 }
 
+
                 build (){
                         return this.query + this.condicional
                 }
@@ -296,7 +298,8 @@ export const find = async (req, res) => {
                         limit: Number(this.limit),
                         totalItems: Number(this.total),
                         totalPages: Math.ceil(Number(this.total / this.limit)),
-                        order: this.order
+                        order: this.order,
+                        params: this.params
                     }
                 }
             }
@@ -309,8 +312,9 @@ export const find = async (req, res) => {
         queryBuild.limit = req.query.limit || 10
         queryBuild.page = req.query.page || 1
         queryBuild.order = req.query.order || 'nome'
+        queryBuild.params = req.query
         
-        
+        console.log(queryBuild.group,queryBuild.page)
 
         if(queryBuild.group.length === 0 && queryBuild.nome.length === 0 ){
             const totalCursos = await pool.query(queryBuild.count())
@@ -374,6 +378,7 @@ export const find = async (req, res) => {
 
         
         const result = queryBuild.result(rows)
+        
 
         res.status(200).json(result)
     } catch (err) {

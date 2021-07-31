@@ -5,8 +5,6 @@ import Pagination from '@material-ui/lab/Pagination';
 import { useDispatch } from 'react-redux';
 import { findCursos } from '../../actions/cursoActions';
 function Cursos({data}) {
-   
-    console.log(data)
 
     const [state, setState] = useState(data.cursos)
     const classes = useStyles()
@@ -15,9 +13,9 @@ function Cursos({data}) {
 
     const handlerPagination = (event,value) => {
         dispatch(findCursos({
-            nome: data.cursos[0].nome,
-            categorias:  data.cursos[0].categorias,
-            page: value
+            nome: data.params.nome || '',
+            categorias: data.params.categoria || [],
+            pagination: value
         }))
     }
 

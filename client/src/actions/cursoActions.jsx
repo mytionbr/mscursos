@@ -19,16 +19,24 @@ export const findCursos = (query) => async (dispatch) => {
     try {
        
         const { nome, categorias, pagination } = query
+        console.log(nome, categorias, pagination)
         let queryString = "?"
+        
         if (nome) {
             queryString += `nome=${nome}&`
         }
         
-        if (categorias.length > 0) {
+        if (categorias) {
             queryString += categorias.map(c => {
-                return `categoria=${c.categoria_id}`
+                return `categoria=${c.categoria_id || c}`
             }).join('&')
         }
+
+        if(pagination ){
+            queryString += `&page=${pagination}`
+        }
+
+        console.log(queryString)      
         
         const { data } = await Api.findCursos(queryString)
         
