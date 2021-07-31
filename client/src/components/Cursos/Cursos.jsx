@@ -4,11 +4,12 @@ import useStyles from './styles'
 import Pagination from '@material-ui/lab/Pagination';
 import { useDispatch } from 'react-redux';
 import { findCursos } from '../../actions/cursoActions';
+import MessageBox from '../core/MessageBox/MessageBox';
 function Cursos({data}) {
 
     const [state, setState] = useState(data.cursos)
     const classes = useStyles()
-
+    console.log(state)
     const dispatch = useDispatch()
 
     const handlerPagination = (event,value) => {
@@ -22,9 +23,18 @@ function Cursos({data}) {
     return (
         <>
         <div className={classes.row}> 
-            {state.map((curso)=>
-                    <Curso curso={curso} />
-            )}    
+            {
+                state.length > 0 
+                ? (
+                    state.map((curso)=>
+                        <Curso curso={curso} />
+                )   
+                ) :
+                (
+                    <MessageBox type="info">Nenhum curso encontrado</MessageBox>
+                )
+            }
+           
         </div>
         <div className={classes.row}>
             <Pagination 

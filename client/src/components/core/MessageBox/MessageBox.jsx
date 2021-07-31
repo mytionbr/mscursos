@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 
 function MessageBox(props) {
     return (
-        <div>
+        <div style={{width:'100%'}}>
          <Alert severity={props.type}>
             {props.children}     
         </Alert>   

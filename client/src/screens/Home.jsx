@@ -11,7 +11,6 @@ const Home = () => {
     const dispatch = useDispatch()
     const cursoFind = useSelector((state) => state.cursoFind)
     const { loading, error, data } = cursoFind
-    
 
     useEffect(()=>{
         dispatch(findCursos({
@@ -31,12 +30,12 @@ const Home = () => {
                         ): error ? (
                             <MessageBox type="error">{error}</MessageBox>
                         ) : 
-                            data ? 
+                            data.cursos ? 
                         (
                             <Cursos data={data} />
                         ) :
                         (
-                            <LoadingBox />
+                            <MessageBox type="error">{error}</MessageBox>
                         )
                         }
                         
