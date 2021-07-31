@@ -294,10 +294,11 @@ export const find = async (req, res) => {
                 result (result){
                     return {
                         cursos: result,
-                        page: this.page,
-                        limit: this.limit,
-                        totalItems: this.total,
-                        totalPages: Math.ceil(Number(this.total / this.limit))
+                        page: Number(this.page),
+                        limit: Number(this.limit),
+                        totalItems: Number(this.total),
+                        totalPages: Math.ceil(Number(this.total / this.limit)),
+                        order: this.order
                     }
                 }
             }
