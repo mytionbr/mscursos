@@ -223,68 +223,158 @@ export const findCursoByCategoriaId = async (req, res) =>{
 export const find = async (req, res) => {
     try {
                
-        let queryObject = {
-            group: [],
-            nome: "",
-            values: []
-        }
+        class QueryBuild {
 
-        let values = []
+            constructor(){
+                this.group = [],
+                this.nome = [],
+                this.limit = 10,
+                this.page = 1,
+                this.total = 0,
+                this.values = [],
+                this.order = '',
+                this.query = 'SELECT * FROM curso'
+                this.condicional = ''
+            }
 
-        queryObject.group = req.query.categoria || []
-        queryObject.nome = req.query.nome || []
+                selectWithOrder(){
+                    return `
+                        SELECT * FROM CURSO ORDER BY ${this.order} 
+                        ${this.pagination()} 
+                    `
+                }
 
+                withWhere(){
+                    this.isCondicional = true
+                    this.condicional += ' WHERE '
+                }
 
-        if(queryObject.group.length === 0 && queryObject.nome.length === 0 ){
-            const { rows } = await pool.query(
-                'SELECT * FROM curso ORDER BY nome')
+                count(){
+                    console.log( ` SELECT COUNT(*) FROM CURSO ${this.condicional} `)
+                    console.log(this.values)
+                    if(this.condicional.length > 0){
+                        return ` SELECT COUNT(*) FROM CURSO ${this.condicional} `
+                    }
+                    return 'SELECT COUNT(*) FROM CURSO'
+                    
+                }
+
+                withNome(){
+                    this.condicional += " nome iLIKE '%'||$1||'%' "
+                }
+
+                withAnd(){
+                    this.condicional += ' AND '
+                }
+
+                withCategorias (values) {
+                    this.condicional += ` categoria_id IN (${values}) `
+                }
+
+                withPagination () {
+                    this.condicional += this.pagination()
+                }
+
+                 
+                pagination (){
+                    if(this.page > 1){
+                        return `LIMIT ${this.limit} OFFSET ${(this.page - 1) * this.limit };`
+                    }
+                    else {
+                        return `LIMIT ${this.limit} ;`
+                    }
+
+                }
+
+                build (){
+                        return this.query + this.condicional
+                }
+
+                result (result){
+                    return {
+                        cursos: result,
+                        page: this.page,
+                        limit: this.limit,
+                        total: this.total
+                    }
+                }
+            }
+                
+
+        let queryBuild = new QueryBuild()
+
+        queryBuild.group = req.query.categoria || []
+        queryBuild.nome = req.query.nome || []
+        queryBuild.limit = req.query.limit || 10
+        queryBuild.page = req.query.page || 1
+        queryBuild.order = req.query.order || 'nome'
+        
+        
+
+        if(queryBuild.group.length === 0 && queryBuild.nome.length === 0 ){
+            const totalCursos = await pool.query(queryBuild.count())
+        
+            queryBuild.total = Number(totalCursos.rows[0].count)
             
-            const cursos = rows
+            const { rows } = await pool.query(
+                queryBuild.selectWithOrder())
+
+                const result = queryBuild.result(rows) 
                            
-            return  res.status(200).json(cursos)
+            return  res.status(200).json(result)
+        } else {
+            queryBuild.withWhere()
         }
 
-        let queryString = "SELECT * FROM curso WHERE"
 
-        if(queryObject.nome.length > 0) {
-            queryString += " nome iLIKE '%'||$1||'%' "
-            values.push(queryObject.nome)
+        if(queryBuild.nome.length > 0) {
+            
+
+            queryBuild.withNome()
+            queryBuild.values.push(queryBuild.nome)
         }
 
-        if(queryObject.group.length != 0) {
-            let index = values.length
+        if(queryBuild.group.length != 0) {
+            let index = queryBuild.values.length
 
             if(index > 0){
-                queryString += ' AND'
+                queryBuild.withAnd()
             }
 
-            queryString += ' categoria_id IN ('
-
-            if(typeof queryObject.group  === "object"){
-                queryString += queryObject.group.map(() => `$${index += 1}`).join(',')
+            if(typeof queryBuild.group  === "object"){
+                let categoriasIndex = queryBuild.group.map(() => `$${index += 1}`).join(',')
+                queryBuild.withCategorias(categoriasIndex)
             } else {
-                queryString += `$${index + 1}`
+                queryBuild.withCategorias(`$${index + 1}`)
             }
 
-            queryString += ')'
 
-            if(typeof queryObject.group === "string" ){
-                values.push(queryObject.group)
+            if(typeof queryBuild.group === "string" ){
+                queryBuild.values.push(queryBuild.group)
             } else {
-                values.push(...queryObject.group)
+                queryBuild.values.push(...queryBuild.group)
             }
 
         }
         
-        queryString += ';'
+        const totalCursos = await pool.query(
+            queryBuild.count(),
+            queryBuild.values
+        )
+        queryBuild.total = Number(totalCursos.rows[0].count)
+        
+        queryBuild.withPagination()
+    
         
         const { rows } = await pool.query(
-            queryString,
-            values)
-        
-        const cursos = rows
+            queryBuild.build(),
+            queryBuild.values)
 
-        res.status(200).json(cursos)
+
+        
+        const result = queryBuild.result(rows)
+
+        res.status(200).json(result)
     } catch (err) {
         res.status(400).json({message: err.message})
     }
