@@ -6,8 +6,9 @@ import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 
 export const register = async (req,res) =>{
     try {
+      
         const {nome, email, data_nascimento} = req.body
-
+       
         const senhaDefault = bcrypt.hashSync(data_nascimento.replace('-',''),8)
         
         const { rows } = await pool.query(

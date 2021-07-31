@@ -2,6 +2,8 @@ import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import { generateToken } from "../utils/generateToken.js";
 import { usuarioResponseSuccess } from "../custom/responses/usuario.response.js";
+import jwt from 'jsonwebtoken'
+import config from "../config/config.js";
 
 export const signinProfessor = async (req, res) =>{
     try {
@@ -60,5 +62,27 @@ export const signinAluno = async (req,res) =>{
         return res.status(401).json({
             message: 'Não foi possível realizar o login'
         })
+    }
+}
+
+export const isAuthProfessor = (req, res, next) => {
+    const authorization = req.headers.authorization
+    if (authorization){
+        const token = authorization.slice(7, authorization.length)
+        jwt.verify(
+            token,
+            config.JWT_SECRET,
+            (err,decode) =>{
+                if (err) {
+                    res.status(401).json({message: 'Token invalido'})
+                } else {
+                    req.user = decode
+                    next()
+                }
+            }
+
+        )
+    } else {
+        res.status(401).json({message: 'Sem token'})
     }
 }
