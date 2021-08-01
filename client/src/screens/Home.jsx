@@ -20,7 +20,6 @@ const Home = () => {
     },[dispatch])
 
     return (
-        <div>
             <Container >
                 <h1>Conheça os nossos cursos</h1>
                 <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
@@ -44,9 +43,7 @@ const Home = () => {
                         <FilterForm />
                     </Grid>
                 </Grid>
-               
             </Container>
-        </div>
     )
 }
 

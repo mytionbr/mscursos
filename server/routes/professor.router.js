@@ -10,8 +10,8 @@ router.route('/')
 
 router.route('/:id')
     .get(isAuth,hasAuthorization,read)
-    .put(isAuth,update)
-    .delete(isAuth,remove)
+    .put(isAuth,hasAuthorization,update)
+    .delete(isAuth,hasAuthorization,remove)
 
 router.param('id', findById)
 

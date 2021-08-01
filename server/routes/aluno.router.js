@@ -1,5 +1,6 @@
 import express from 'express'
 import { register, list, findById, read, update, remove } from '../controllers/aluno.controller.js'
+import { hasAuthorization, isAuth } from '../controllers/auth.controller.js'
 
 const router = express.Router()
 
@@ -8,9 +9,9 @@ router.route('/')
     .post( register )
 
 router.route('/:id')
-    .get( read )
-    .put( update )
-    .delete( remove )
+    .get(isAuth,hasAuthorization, read )
+    .put(isAuth,hasAuthorization, update )
+    .delete(isAuth,hasAuthorization, remove )
 
 router.param('id', findById)
 
