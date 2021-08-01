@@ -7,8 +7,9 @@ export const signin = (email, password) => async (dispatch) => {
        
         const { data } = await Api.signinAluno(email, password)
         dispatch({type: ALUNO_SIGNIN_SUCCESS, payload: data})
+        localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
-        console.log(error.response.data.error)
+        
         dispatch({
             type: ALUNO_SIGNIN_FAIL,
             payload: error.response.data.error || error.response.data.message

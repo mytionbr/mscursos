@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import { alunoSigninReducer } from './reducers/alunoReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
 import { cursoFindReducer, cursoListReducer } from './reducers/cursoReducers';
+import { professorSigninReducer } from './reducers/professorReducers';
 
 const initialState = {}
 
@@ -10,7 +11,8 @@ const reducer = combineReducers({
     cursoList: cursoListReducer,
     categoriaList: categoriaListReducer,
     cursoFind: cursoFindReducer,
-    alunoSignin: alunoSigninReducer
+    alunoSignin: alunoSigninReducer,
+    professorSignin: professorSigninReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
