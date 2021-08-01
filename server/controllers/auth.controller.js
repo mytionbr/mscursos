@@ -25,11 +25,11 @@ export const signinProfessor = async (req, res) =>{
                 }
             }   
             
-            res.status(401).json({message:'Email ou senha invalidos'})
+            res.status(401).json({error:'Email ou senha invalidos'})
         
     } catch (err) {
         return res.status(401).json({
-            message: 'Não foi possível realizar o login'
+            error: 'Não foi possível realizar o login'
         })
     }
 }
@@ -41,6 +41,7 @@ export const signinAluno = async (req,res) =>{
             'SELECT * FROM aluno WHERE email = $1',
             [req.body.email])
         
+    
        
         const aluno = rows[0]
        
@@ -57,10 +58,10 @@ export const signinAluno = async (req,res) =>{
             }
         }
 
-        res.status(401).json({message:'Email ou senha invalidos'})  
+        res.status(401).json({error:'Email ou senha invalidos'})  
     } catch (err){
         return res.status(401).json({
-            message: 'Não foi possível realizar o login'
+            error: 'Não foi possível realizar o login'
         })
     }
 }

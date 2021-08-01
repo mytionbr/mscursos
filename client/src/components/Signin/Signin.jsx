@@ -9,7 +9,7 @@ import React from "react";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './styles'
 
-function Signin() {
+function Signin({setEmail, setPassword, handleSubmit}) {
     const classes = useStyles()
   return (
     <Paper className={classes.paper}>
@@ -17,7 +17,7 @@ function Signin() {
         <LockOutlinedIcon />
       </Avatar>
       <Typography variant="h5">Login</Typography>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -29,17 +29,21 @@ function Signin() {
           autoComplete="email"
           autoFocus
           color={"secondary"}
+          type="email"
+          onChange={(e)=> setEmail(e.target.value)}
         />
         <TextField
           variant="outlined"
           margin="normal"
           required
           fullWidth
-          id="senha"
+          id="password"
           label="Senha"
-          name="senha"
-          autoComplete="senha"
+          name="password"
+          type="password"
+          autoComplete="password"
           color={"secondary"}
+          onChange={(e)=> setPassword(e.target.value)}
         />
         <Button
           type="submit"
