@@ -3,11 +3,11 @@ import {
   Container
 } from "@material-ui/core";
 import useStyles from "./styles";
-import Signin from "../../components/Signin/Signin";
+import Signin from "../../../components/Signin/Signin";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../../actions/professorActions";
-import LoadingBox from "../../components/core/LoadingBox/LoadingBox";
-import MessageBox from "../../components/core/MessageBox/MessageBox";
+import { signin } from "../../../actions/professorActions";
+import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
+import MessageBox from "../../../components/core/MessageBox/MessageBox";
 
 function SigninProfessor() {
   const classes = useStyles();

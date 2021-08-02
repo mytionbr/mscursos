@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {Container, Grid, Typography } from '@material-ui/core'
-import LoadingBox from '../../components/core/LoadingBox/LoadingBox'
-import MessageBox from '../../components/core/MessageBox/MessageBox'
+import LoadingBox from '../../../components/core/LoadingBox/LoadingBox'
+import MessageBox from '../../../components/core/MessageBox/MessageBox'
 
 import useStyles from './styles'
-import {ReactComponent as Illustration} from '../../assets/undraw_book.svg';
-import Signin from '../../components/Signin/Signin';
+import {ReactComponent as Illustration} from '../../../assets/undraw_book.svg';
+import Signin from '../../../components/Signin/Signin';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../../actions/alunoActions';
+import { signin } from '../../../actions/alunoActions';
 
 function SigninAluno(props) {
     const classes = useStyles()
