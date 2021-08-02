@@ -19,7 +19,7 @@ function TotalAlunos(props) {
                         gutterBottom
                         variant="h3"
                     >
-                        Minhas Aulas
+                        Meus Alunos
                     </Typography>
                     <Typography
                         color="textPrimary"

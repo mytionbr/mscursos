@@ -55,7 +55,12 @@ function Dashboard() {
                             xl={3}
                             xs={12}
                         >
-                            <ActionCardResource />
+                            <ActionCardResource 
+                                resource={{
+                                    name: 'Novo Curso',
+                                    description: 'Crie um novo curso'
+                                }} 
+                            />
                         </Grid>
 
                         <Grid
@@ -65,7 +70,12 @@ function Dashboard() {
                             xl={3}
                             xs={12}
                         >
-                            <ActionCardResource />
+                              <ActionCardResource 
+                                resource={{
+                                    name: 'Nova Aula',
+                                    description: 'Crie um nova aula'
+                                }} 
+                            />
                         </Grid>
                         <Grid
                             item
@@ -74,9 +84,13 @@ function Dashboard() {
                             xl={3}
                             xs={12}
                         >
-                            <ActionCardResource />
+                              <ActionCardResource 
+                                resource={{
+                                    name: 'De notas',
+                                    description: 'Avalie seus alunos'
+                                }} 
+                            />
                         </Grid>
-
 
                     </Grid>
               </Container>
