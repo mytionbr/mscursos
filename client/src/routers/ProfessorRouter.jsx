@@ -6,10 +6,10 @@ import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfesso
 const MainRouter = () => {
     return(
         <div>
-                <Switch> 
-                    <Route  path={['/professor','/professor/signin']} component={SigninProfessor}/>
-                    <Route exact path={'/professor/dashboard'} component={Dashboard}/>
-                </Switch>
+            <Switch> 
+                <Route  path={['/professor','/professor/signin']} component={SigninProfessor}/>
+                <Route exact path={'/professor/dashboard'} component={Dashboard}/>
+            </Switch>
         </div>
     )
 }
