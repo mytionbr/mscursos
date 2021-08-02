@@ -6,6 +6,7 @@ import ClassIcon from '@material-ui/icons/Class';
 import PeopleIcon from '@material-ui/icons/People';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@material-ui/core';
+import Navitem from './Navitem';
 
 
 const user = {
@@ -88,7 +89,7 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                 <List>
                     {
                         items.map((item)=>(
-                            <NavItem
+                            <Navitem
                                 href={item.href}
                                 key={item.title}
                                 title={item.title}
