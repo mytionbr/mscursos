@@ -1,17 +1,43 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import CodeIcon from "@material-ui/icons/Code";
+import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "@material-ui/icons/";
 import { Link } from "react-router-dom";
 
 function Curso({curso}) {
   const classes = useStyles();
 
   const Picture = () => {
+    let Icon
+
+    switch (curso.categoria_id) {
+      case 1:
+          Icon = (props) => <Code {...props}/>
+        break;
+      case 2:
+          Icon = (props) => <DeveloperMode  {...props}/>
+        break;
+      case 3:
+          Icon = (props) => <FilterBAndW  {...props}/>
+        break;
+      case 4:
+          Icon = (props) => <PieChart  {...props}/>
+        break;
+      case 5:
+          Icon = (props) => <Translate  {...props}/>
+        break;
+      case 6:
+          Icon = (props) => <AllInclusive  {...props}/>
+        break;
+      default:
+          Icon = (props) => <Code {...props}/>
+        break;
+    }
+    console.log(Icon)
     return (
      <Box>
          <Link className={classes.picture} to="/">
-            <CodeIcon className={classes.pictureItem} />
+            <Icon className={classes.pictureItem} />
          </Link>
       </Box>
     );
