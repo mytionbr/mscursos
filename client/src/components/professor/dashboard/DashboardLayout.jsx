@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { experimentalStyled } from '@material-ui/core'
 import { Outlet } from 'react-router-dom'
+import DashboardNavbar from './DashboardNavbar'
 
 const DashboardLayoutRoot = experimentalStyled('div')(
     ({ theme }) => ({
