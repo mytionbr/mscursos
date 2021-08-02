@@ -16,7 +16,7 @@ function SigninAluno(props) {
     const [password, setPassword] = useState('')
 
     const alunoSignin = useSelector((state) => state.alunoSignin)
-    const { userInfo, loading, error } = alunoSignin
+    const { alunoInfo, loading, error } = alunoSignin
 
     const dispatch = useDispatch()
     
@@ -26,10 +26,10 @@ function SigninAluno(props) {
     }
 
     useEffect(() => {
-        if(userInfo) {
+        if(alunoInfo) {
             alert('Seja bem vindo')
         }
-    }, [userInfo])
+    }, [alunoInfo])
 
     return (
         <Container>

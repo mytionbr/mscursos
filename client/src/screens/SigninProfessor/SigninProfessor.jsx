@@ -16,7 +16,7 @@ function SigninProfessor() {
   const [password, setPassword] = useState('')
 
   const professorSignin = useSelector((state) => state.professorSignin)
-  const { userInfo, loading, error } = professorSignin
+  const { professorInfo, loading, error } = professorSignin
 
   const dispatch = useDispatch()
 
@@ -26,10 +26,10 @@ function SigninProfessor() {
   }
 
   useEffect(() => {
-    if(userInfo){
+    if(professorInfo){
       alert('Seja bem vindo')
     }
-  }, [userInfo])
+  }, [professorInfo])
 
   return (
     <Container className={classes.container} component="main" maxWidth="xs">

@@ -9,7 +9,7 @@ export const professorSigninReducer = (
         case PROFESSOR_SIGNIN_REQUEST:
             return { loading: true }
         case PROFESSOR_SIGNIN_SUCCESS:
-            return { loading: false, userInfo: action.payload }
+            return { loading: false, professorInfo: action.payload }
         case PROFESSOR_SIGNIN_FAIL:
             return { loading: false, error: action.payload }
         default: 

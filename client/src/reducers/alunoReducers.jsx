@@ -9,7 +9,7 @@ export const alunoSigninReducer = (
         case ALUNO_SIGNIN_REQUEST:
             return { loading: true }
         case ALUNO_SIGNIN_SUCCESS:
-            return { loading: false, userInfo: action.payload }
+            return { loading: false, alunoInfo: action.payload }
         case ALUNO_SIGNIN_FAIL:
             return { loading: false, error: action.payload }
         default:

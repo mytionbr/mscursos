@@ -1,23 +1,13 @@
-
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Navbar from './components/core/Navbar/Navbar'
-import  Home  from './screens/Home'
-import SigninProfessor from './screens/SigninProfessor/SigninProfessor'
-import SigninAluno from './screens/SigninAluno/SigninAluno'
-
+import AlunoRouter from './routers/AlunoRouter'
+import ProfessorRouter from './routers/ProfessorRouter'
 const MainRouter = () => {
     return(
-        <div>
-            <div>
-                <Navbar />
-                <Switch> 
-                    <Route exact path="/" component={Home}/>
-                    <Route exact path="/aluno/signin" component={SigninAluno}/>
-                    <Route exact path="/professor/signin" component={SigninProfessor}/>
-                </Switch>
-            </div>
-        </div>
+            <Switch> 
+                <Route path="/professor" component={ProfessorRouter}/>
+                <Route  path={['/','/aluno']} component={AlunoRouter}/>
+            </Switch>
     )
 }
 

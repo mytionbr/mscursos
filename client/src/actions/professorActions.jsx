@@ -7,7 +7,7 @@ export const signin = (email, password) => async (dispatch) => {
         const { data } = await Api.signinProfessor(email,password)
 
         dispatch({type: PROFESSOR_SIGNIN_SUCCESS, payload: data})
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        localStorage.setItem('professorInfo', JSON.stringify(data))
     } catch (error) {
         dispatch({
             type: PROFESSOR_SIGNIN_FAIL,
