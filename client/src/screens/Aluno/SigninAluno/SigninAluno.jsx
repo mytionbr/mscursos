@@ -39,7 +39,7 @@ function SigninAluno(props) {
                     {error && <MessageBox type="error">{error}</MessageBox>}
                     <Signin setEmail={setEmail} setPassword={setPassword} handleSubmit={handleSubmit} />
                 </Grid>
-                <Grid item xs={8} sm={8}>
+                <Grid item xs={8} sm={7}>
                    <div className={classes.presentationContainer}> 
                         <Typography  className={classes.presentation} variant="h4">
                             Estude na hora e no lugar que quiser

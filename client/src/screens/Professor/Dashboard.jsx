@@ -73,7 +73,7 @@ function Dashboard() {
                               <ActionCardResource 
                                 resource={{
                                     name: 'Nova Aula',
-                                    description: 'Crie um nova aula'
+                                    description: 'Prepare uma nova aula'
                                 }} 
                             />
                         </Grid>
