@@ -14,10 +14,17 @@ function DashboardNavbar({onMobileNavOpen, ...rest}) {
         >
             <Toolbar
                   style={{
-                    backgroundColor: '#506198'
+                    backgroundColor: '#506198',
+                    color:'#fff'
                 }}
             >
-                <Link to='/'>
+                <Link to='/'
+                    style={{
+                        color:'#fff',
+                        textDecoration:'none',
+                        fontSize:'2rem'
+                    }}
+                >
                     Mscursos
                 </Link>
                 <Box style={{flexGrow: 1}}/>

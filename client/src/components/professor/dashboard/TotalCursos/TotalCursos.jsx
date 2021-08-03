@@ -15,26 +15,28 @@ function TotalCursos(props) {
                     spacing={3}
                     style={{justifyContent: 'space-between'}}
                 >
-                    <Typography
-                        color="textSecondary"
-                        gutterBottom
-                        variant="h3"
-                    >
-                        Meus Cursos
-                    </Typography>
-                    <Typography
-                        color="textPrimary"
-                        variant="h3"
-                    >
-                        12
-                    </Typography>
+                    <Grid item>
+                        <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h4"
+                        >
+                            Meus Cursos
+                        </Typography>
+                        <Typography
+                            color="textPrimary"
+                            variant="h3"
+                        >
+                            12
+                        </Typography>
+                    </Grid>
                 
                     <Grid item>
                         <Avatar
                             style={{
                                 backgroundColor: blue[600],
-                                height: 56,
-                                width: 56
+                                height: '4rem',
+                                width: '4rem'   
                             }}
                         >
                             <CollectionsBookmarkIcon />

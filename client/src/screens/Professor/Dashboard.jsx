@@ -86,7 +86,7 @@ function Dashboard() {
                         >
                               <ActionCardResource 
                                 resource={{
-                                    name: 'De notas',
+                                    name: 'Nova nota',
                                     description: 'Avalie seus alunos'
                                 }} 
                             />

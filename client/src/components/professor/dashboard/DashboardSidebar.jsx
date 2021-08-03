@@ -5,6 +5,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ClassIcon from '@material-ui/icons/Class';
 import PeopleIcon from '@material-ui/icons/People';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@material-ui/core';
 import Navitem from './Navitem';
 
@@ -36,6 +38,16 @@ const items = [
         icon: ClassIcon,
         title: 'Notas'
     },
+    {
+        href: '/',
+        icon: PersonIcon,
+        title: 'Perfil'
+    },
+    {
+        href: '/',
+        icon: ExitToAppIcon,
+        title: 'Sair'
+    },
 ]
 
 function DashboardSidebar({onMobileClose, openMobile}) {
@@ -59,8 +71,7 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                px: 2,
-                py:4
+                padding:'2rem',
             }}>
                 <Avatar
                     component={Link}
@@ -68,9 +79,10 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                     style={{
                         cursor: 'pointer',
                         width: 64,
-                        height: 64
+                        height: 64,
+                        background:'#506198'
                     }}
-                    to="/app/"
+                    to="/professor/app/"
                 />
                 <Typography
                     color="textPrimary"
@@ -86,7 +98,7 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                 </Typography>
             </Box>
             <Divider />
-            <Box style={{p:2}}>
+            <Box style={{padding:'1rem'}}>
                 <List>
                     {
                         items.map((item)=>(

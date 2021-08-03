@@ -1,12 +1,11 @@
 import { Avatar, Box, Card, CardContent, Typography } from '@material-ui/core'
 import React from 'react'
-import GamepadIcon from '@material-ui/icons/Gamepad';
-import { indigo } from '@material-ui/core/colors';
+import AddIcon from '@material-ui/icons/Add';
 
 function ActionCardResource({resource, ...rest}) {
     return (
        <Card
-        sx={{
+        style={{
             display: 'flex',
             flexDirection: 'column',
             height: '100%'
@@ -15,20 +14,26 @@ function ActionCardResource({resource, ...rest}) {
        >
            <CardContent>
                 <Box
-                    sx={{
+                    style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        pb:3
+                        padding:'1rem'
                     }}
                 >
                     <Avatar
-                         sx={{
-                            backgroundColor: indigo[600],
-                            height: 56,
-                            width: 56
-                        }}                      
+                         style={{
+                            background: '#fff',
+                            height: '10rem',
+                            width:'8rem',
+                        }}                 
                     >
-                        <GamepadIcon />
+                        <AddIcon
+                             style={{
+                                color:'#757575',
+                                height: '100%',
+                                width:'100%',
+                            }}   
+                        />
                     </Avatar>
                 </Box>
                 <Typography

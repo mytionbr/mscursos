@@ -26,24 +26,35 @@ function Navitem({href, icon: Icon, title, ...rest}) {
                     fontWeight: 'medium',
                     justifyContent: 'flex-start',
                     letterSpacing: 0,
-                    py: 1.25,
                     textTransform: 'none',
                     width: '100%',
                     ...(active && {
-                        color: 'primary.main'
+                        color: '#506198'
                     }),
                     '& svg':{
-                        mr:1
+                      
                     }
                 }}
                 to={href}
             >
                 {
                     Icon && (
-                        <Icon size="20"/>
+                        <Icon 
+                            
+                            style={{
+                                marginRight:'0.3rem',
+                                color:'#757575',
+                                fontSize: '1.6rem'
+                            }}
+                            />
                     )
                 }
-                <span>
+                <span
+                    style={{
+                        color:'#757575',
+                        fontSize: '1.2rem'
+                    }}
+                >
                     {title}
                 </span>
             </Button>
