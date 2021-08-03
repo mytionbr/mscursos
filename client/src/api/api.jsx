@@ -10,12 +10,17 @@ const signinAluno = (email, password) => axios.post('/api/auth/aluno/signin', {e
 
 const signinProfessor = (email, password) => axios.post('/api/auth/professor/signin', {email: email, senha: password })
 
+const findAssignmentsProfessor = (id,professorInfo) => axios.get(`/api/professores/${id}/atribuicoes`,{
+    headers: {Authorization: `Bearer ${professorInfo?.token}`}
+})
+
 const Api = {
     fetchCursos,
     fetchCategorias,
     findCursos,
     signinAluno,
-    signinProfessor
+    signinProfessor,
+    findAssignmentsProfessor
 }
 
 export default Api

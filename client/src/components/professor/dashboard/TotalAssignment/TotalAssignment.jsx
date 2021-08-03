@@ -4,8 +4,8 @@ import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import { green } from "@material-ui/core/colors";
 import Skeleton from "@material-ui/lab/Skeleton";
 function TotalAlunos(props) {
-  const { loading = false } = props;
-
+  const { loading = false, title, count,color,icon } = props;
+  
   return (
     <Card style={{ height: "100%" }} {...props}>
       <CardContent>
@@ -20,7 +20,7 @@ function TotalAlunos(props) {
               />
             ) : (
               <Typography color="textSecondary" gutterBottom variant="h4">
-                Meus Alunos
+                {title}
               </Typography>
             )}
             {loading ? (
@@ -32,7 +32,7 @@ function TotalAlunos(props) {
               />
             ) : (
               <Typography color="textPrimary" variant="h3">
-                12
+                  {count}
               </Typography>
             )}
           </Grid>
@@ -48,12 +48,12 @@ function TotalAlunos(props) {
             ) : (
               <Avatar
                 style={{
-                  backgroundColor: green[600],
+                  backgroundColor: {color},
                   height: "4rem",
                   width: "4rem",
                 }}
               >
-                <PeopleOutlineIcon />
+               {icon}
               </Avatar>
             )}
           </Grid>
