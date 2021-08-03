@@ -100,3 +100,38 @@ export const remove = async (req, res) => {
         })
     }
 }
+
+export const findAssignments = async (req,res)=>{
+    try{
+        const professor = req.profile
+        
+        const { rows } = await pool.query(
+            `
+            (SELECT COUNT(*) FROM 
+                CURSO WHERE CURSO.PROFESSOR_ID = $1)
+                UNION ALL
+            (SELECT COUNT(*) FROM 
+                (CURSO_ALUNO INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID)
+                WHERE CURSO.PROFESSOR_ID = $1)
+                UNION ALL
+            (SELECT COUNT(*) FROM
+                (AULA INNER JOIN CURSO ON AULA.CURSO_ID = CURSO.CURSO_ID)
+                WHERE CURSO.PROFESSOR_ID = $1)
+            `,
+            [professor.professor_id]
+        )
+
+        const result = {
+            totalCursos: rows[0],
+            totalAlunos: rows[1],
+            totalAulas: rows[2]
+        }
+
+        res.status(200).json(result)
+
+    } catch (err){
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
