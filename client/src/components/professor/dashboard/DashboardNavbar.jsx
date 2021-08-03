@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 
-function DashboardNavbar({onMobileNavOpen, ...rest}) {
+function DashboardNavbar({onMobileNavOpen,handleSignout, ...rest}) {
     
     return (
         <AppBar
@@ -29,7 +29,9 @@ function DashboardNavbar({onMobileNavOpen, ...rest}) {
                 </Link>
                 <Box style={{flexGrow: 1}}/>
                 <Hidden mdDown>
-                   <IconButton color="inherit">
+                   <IconButton 
+                        color="inherit"
+                        onClick={handleSignout}>
                         <InputIcon />
                    </IconButton>
                 </Hidden>

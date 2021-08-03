@@ -17,41 +17,45 @@ const user = {
     name: 'Fulano'
 }
 
-const items = [
-    {
-        href: '/',
-        icon: DashboardIcon,
-        title: 'Dashboard'
-    },
-    {
-        href: '/',
-        icon: LibraryBooksIcon,
-        title: 'Cursos'
-    },
-    {
-        href: '/',
-        icon: PeopleIcon,
-        title: 'Alunos'
-    },
-    {
-        href: '/',
-        icon: ClassIcon,
-        title: 'Notas'
-    },
-    {
-        href: '/',
-        icon: PersonIcon,
-        title: 'Perfil'
-    },
-    {
-        href: '/',
-        icon: ExitToAppIcon,
-        title: 'Sair'
-    },
-]
 
-function DashboardSidebar({onMobileClose, openMobile}) {
+
+function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
     const location = useLocation()
+
+    const items = [
+        {
+            href: '/professor/app',
+            icon: DashboardIcon,
+            title: 'Dashboard'
+        },
+        {
+            href: '/professor/app',
+            icon: LibraryBooksIcon,
+            title: 'Cursos'
+        },
+        {
+            href: '/professor/app',
+            icon: PeopleIcon,
+            title: 'Alunos'
+        },
+        {
+            href: '/professor/app',
+            icon: ClassIcon,
+            title: 'Notas'
+        },
+        {
+            href: '/professor/app',
+            icon: PersonIcon,
+            title: 'Perfil'
+        },
+        {
+            href: '/professor/signout',
+            icon: ExitToAppIcon,
+            title: 'Sair',
+            action: handleSignout
+        },
+    ]
+
 
     useEffect(() =>{
         if (openMobile && onMobileClose) {
@@ -106,7 +110,8 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                                 href={item.href}
                                 key={item.title}
                                 title={item.title}
-                                icon={item.icon}/>
+                                icon={item.icon}
+                                action={item.action}/>
                         ))
                     }
                 </List>

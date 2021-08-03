@@ -2,7 +2,7 @@ import { Button, ListItem } from '@material-ui/core'
 import React from 'react'
 import { matchPath, NavLink, useLocation } from 'react-router-dom'
 
-function Navitem({href, icon: Icon, title, ...rest}) {
+function Navitem({href, icon: Icon, title,action, ...rest}) {
     const location = useLocation()
 
     const active = href ? !!matchPath({
@@ -36,6 +36,7 @@ function Navitem({href, icon: Icon, title, ...rest}) {
                     }
                 }}
                 to={href}
+                onClick={action}
             >
                 {
                     Icon && (
