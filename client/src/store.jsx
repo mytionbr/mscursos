@@ -5,7 +5,13 @@ import { categoriaListReducer } from './reducers/categoriaReducers';
 import { cursoFindReducer, cursoListReducer } from './reducers/cursoReducers';
 import { professorSigninReducer } from './reducers/professorReducers';
 
-const initialState = {}
+const initialState = {
+    professorSignin:{
+        professorInfo: localStorage.getItem('professorInfo')
+            ? JSON.parse(localStorage.getItem('professorInfo'))
+            : null
+    }
+}
 
 const reducer = combineReducers({
     cursoList: cursoListReducer,

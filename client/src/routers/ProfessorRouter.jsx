@@ -3,16 +3,17 @@ import { Route, Switch } from 'react-router-dom'
 import DashboardLayout from '../components/professor/dashboard/DashboardLayout/DashboardLayout'
 import Dashboard from '../screens/Professor/Dashboard'
 import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfessor'
+import ProfessorRoute from '../components/professor/ProfessorRoute'
 
-const MainRouter = () => {
+const ProfessorRouter = () => {
     const routes = ()=>{
         return (
                 <DashboardLayout>
                      <Switch>
-                     <Route  
-                    path={'/professor/app'} 
-                    component={ Dashboard}
-                />
+                        <ProfessorRoute 
+                            path={'/professor/app'} 
+                            component={ Dashboard}
+                        />
                      </Switch> 
                    </DashboardLayout>            
         )
@@ -28,4 +29,4 @@ const MainRouter = () => {
     )
 }
 
-export default MainRouter
+export default ProfessorRouter
