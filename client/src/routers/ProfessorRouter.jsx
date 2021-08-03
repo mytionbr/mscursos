@@ -5,19 +5,23 @@ import Dashboard from '../screens/Professor/Dashboard'
 import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfessor'
 
 const MainRouter = () => {
+    const routes = ()=>{
+        return (
+                <DashboardLayout>
+                     <Switch>
+                     <Route  
+                    path={'/professor/app'} 
+                    component={ Dashboard}
+                />
+                     </Switch> 
+                   </DashboardLayout>            
+        )
+    }
+    
     return(
         <div>
             <Switch> 
-
-                <DashboardLayout>
-                    <Switch> 
-                        <Route  
-                            path={'/professor/app'} 
-                            component={ Dashboard}
-                        />
-                        </Switch>
-                </DashboardLayout>
-               
+                <Route  path={'/professor/app'} component={routes}/>
                 <Route  path={['/professor','/professor/signin']} component={SigninProfessor}/>
             </Switch>
         </div>

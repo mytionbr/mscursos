@@ -13,15 +13,15 @@ function Navitem({href, icon: Icon, title, ...rest}) {
     return (
         <ListItem
             disableGutters
-            sx={{
+            style={{
                 display: 'flex',
-                py: 0
+                py: 0,
             }}
             {...rest}
         >  
             <Button
                 component={NavLink}
-                sx={{
+                style={{
                     color: 'text.secondary',
                     fontWeight: 'medium',
                     justifyContent: 'flex-start',

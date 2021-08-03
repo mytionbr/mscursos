@@ -6,14 +6,14 @@ import ClassIcon from '@material-ui/icons/Class';
 function TotalAulas(props) {
     return (
         <Card
-            sx={{height: '100%'}}
+            style={{height: '100%'}}
             {...props}
         >
             <CardContent>
                 <Grid
                     container
                     spacing={3}
-                    sx={{justifyContent: 'space-between'}}
+                    style={{justifyContent: 'space-between'}}
                 >
                     <Typography
                         color="textSecondary"
@@ -31,7 +31,7 @@ function TotalAulas(props) {
                 
                     <Grid item>
                         <Avatar
-                            sx={{
+                            style={{
                                 backgroundColor: red[600],
                                 height: 56,
                                 width: 56

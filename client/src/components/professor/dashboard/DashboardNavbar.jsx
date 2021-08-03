@@ -10,18 +10,23 @@ function DashboardNavbar({onMobileNavOpen, ...rest}) {
         <AppBar
             elevation={0}
             {...rest}
+           
         >
-            <Toolbar>
+            <Toolbar
+                  style={{
+                    backgroundColor: '#506198'
+                }}
+            >
                 <Link to='/'>
                     Mscursos
                 </Link>
-                <Box sx={{flexGrow: 1}}/>
-                <Hidden lgDown>
+                <Box style={{flexGrow: 1}}/>
+                <Hidden mdDown>
                    <IconButton color="inherit">
                         <InputIcon />
                    </IconButton>
                 </Hidden>
-                <Hidden lgUp>
+                <Hidden mdUp>
                     <IconButton 
                         color="inherit"
                         onClick={onMobileNavOpen}>

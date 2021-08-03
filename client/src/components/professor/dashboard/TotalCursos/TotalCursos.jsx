@@ -6,14 +6,14 @@ import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 function TotalCursos(props) {
     return (
         <Card
-            sx={{height: '100%'}}
+            style={{height: '100%'}}
             {...props}
         >
             <CardContent>
                 <Grid
                     container
                     spacing={3}
-                    sx={{justifyContent: 'space-between'}}
+                    style={{justifyContent: 'space-between'}}
                 >
                     <Typography
                         color="textSecondary"
@@ -31,7 +31,7 @@ function TotalCursos(props) {
                 
                     <Grid item>
                         <Avatar
-                            sx={{
+                            style={{
                                 backgroundColor: blue[600],
                                 height: 56,
                                 width: 56

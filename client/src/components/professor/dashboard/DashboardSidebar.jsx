@@ -49,22 +49,23 @@ function DashboardSidebar({onMobileClose, openMobile}) {
 
     const content = (
         <Box
-            sx={{
+            style={{
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%'
             }}
         >
-            <Box sx={{
+            <Box style={{
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                p: 2
+                px: 2,
+                py:4
             }}>
                 <Avatar
                     component={Link}
                     src={user.avatar}
-                    sx={{
+                    style={{
                         cursor: 'pointer',
                         width: 64,
                         height: 64
@@ -85,7 +86,7 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                 </Typography>
             </Box>
             <Divider />
-            <Box sx={{p:2}}>
+            <Box style={{p:2}}>
                 <List>
                     {
                         items.map((item)=>(
@@ -98,20 +99,20 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                     }
                 </List>
             </Box>
-            <Box sx={{flexGrow: 1}} />
+            <Box style={{flexGrow: 1}} />
         </Box>
     )
 
     return (
         <>
-            <Hidden lgUp>
+            <Hidden mdUp>
                 <Drawer
                     anchor="left"
                     onClose={onMobileClose}
                     open={openMobile}
                     variant="temporary"
                     PaperProps={{
-                        sx:{
+                        style:{
                             width: 256
                         }
                     }}
@@ -119,13 +120,13 @@ function DashboardSidebar({onMobileClose, openMobile}) {
                     {content}
                 </Drawer>
             </Hidden>
-            <Hidden lgDown>
+            <Hidden mdDown>
                 <Drawer
                     anchor="left"
                     open
                     variant="persistent"
                     PaperProps={{
-                        sx: {
+                        style: {
                             width: 256,
                             top: 64,
                             height: 'calc(100% - 64px)'
