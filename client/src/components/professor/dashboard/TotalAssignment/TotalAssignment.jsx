@@ -3,7 +3,7 @@ import React from "react";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import { green } from "@material-ui/core/colors";
 import Skeleton from "@material-ui/lab/Skeleton";
-function TotalAlunos(props) {
+function TotalAssignment(props) {
   const { loading = false, title, count,color,icon } = props;
   
   return (
@@ -63,4 +63,4 @@ function TotalAlunos(props) {
   );
 }
 
-export default TotalAlunos;
+export default TotalAssignment;
