@@ -9,18 +9,22 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@material-ui/core';
 import Navitem from './Navitem';
-
-
-const user = {
-    avatar: AccountBoxIcon,
-    office: 'Professor',
-    name: 'Fulano'
-}
-
-
+import { useSelector } from 'react-redux';
 
 function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
     const location = useLocation()
+
+    const professorSignin = useSelector((state) => state.professorSignin)
+    const {professorInfo} = professorSignin
+
+    console.log(professorInfo.nome)
+
+    const user = {
+        avatar: AccountBoxIcon,
+        office: 'Professor',
+        name: professorInfo.nome
+    }
+        
 
     const items = [
         {

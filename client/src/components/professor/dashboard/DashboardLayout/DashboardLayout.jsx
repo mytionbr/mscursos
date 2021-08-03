@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signout } from '../../../../actions/professorActions'
 import DashboardNavbar from '../DashboardNavbar'
 import DashboardSidebar from '../DashboardSidebar'
@@ -10,7 +10,10 @@ function DashboardLayout(props) {
     const classes = useStyles()
     const [isMobileNavOpen, setMobileNavOpen] = useState(false)
     
+  
+
     const dispatch = useDispatch()
+
     const handleSignout = () => {
         dispatch(signout())
     } 
