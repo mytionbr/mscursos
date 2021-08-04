@@ -1,6 +1,6 @@
 import { Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
-import PerfectScrollbar from 'perfect-scrollbar'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 function CursoListResults({cursos, ...rest}) {
     const [selectedCursoIds, setSelectedCursoIds] = useState([])

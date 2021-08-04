@@ -31,7 +31,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
             title: 'Dashboard'
         },
         {
-            href: '/professor/app',
+            href: '/professor/app/cursos',
             icon: LibraryBooksIcon,
             title: 'Cursos'
         },
