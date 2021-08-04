@@ -1,6 +1,7 @@
 import { Avatar, Card, CardContent, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { blue } from '@material-ui/core/colors'
+import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 
 function TotalCursos(props) {
     return (

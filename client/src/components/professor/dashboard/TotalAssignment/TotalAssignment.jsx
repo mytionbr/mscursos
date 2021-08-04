@@ -1,10 +1,8 @@
 import { Avatar, Card, CardContent, Grid, Typography } from "@material-ui/core";
 import React from "react";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import { green } from "@material-ui/core/colors";
 import Skeleton from "@material-ui/lab/Skeleton";
 function TotalAssignment(props) {
-  const { loading = false, title, count,color,icon } = props;
+  const { loading, title, count,color,icon } = props;
   
   return (
     <Card style={{ height: "100%" }} {...props}>
@@ -13,10 +11,9 @@ function TotalAssignment(props) {
           <Grid item>
             {loading ? (
               <Skeleton
-                animation="wave"
-                height={10}
-                width="80%"
-                style={{ marginBottom: 6 }}
+                animation="text"
+                height={20}
+                style={{ marginBottom: 6}}
               />
             ) : (
               <Typography color="textSecondary" gutterBottom variant="h4">
@@ -25,10 +22,9 @@ function TotalAssignment(props) {
             )}
             {loading ? (
               <Skeleton
-                animation="wave"
-                height={10}
-                width="80%"
-                style={{ marginBottom: 6 }}
+                animation="text"
+                height={30}
+                style={{ marginBottom: 6}}
               />
             ) : (
               <Typography color="textPrimary" variant="h3">
@@ -40,10 +36,10 @@ function TotalAssignment(props) {
           <Grid item>
             {loading ? (
               <Skeleton
-                animation="wave"
+                animation="rect"
                 variant="circle"
-                width={40}
-                height={40}
+                width={50}
+                height={50}
               />
             ) : (
               <Avatar

@@ -23,10 +23,11 @@ export const signout = () => (dispatch) => {
 }
 
 export const findAssignments = (id) => async (dispatch,getState) => {
-    dispatch({type: PROFESSOR_ASSIGNMENTS_REQUEST,payload:{id}})
+    dispatch({type: PROFESSOR_ASSIGNMENTS_REQUEST,payload:id})
     const { professorSignin: { professorInfo } } = getState()
     try {
        const { data } = await Api.findAssignmentsProfessor(id,professorInfo)
+       console.log(data)
        dispatch({type: PROFESSOR_ASSIGNMENTS_SUCCESS, payload: data})
     } catch (error) {
         dispatch({
