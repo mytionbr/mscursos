@@ -18,7 +18,6 @@ function Dashboard() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        
         if(!professorAssignments){
             dispatch(findAssignments(professorInfo.professor_id))
         }
@@ -61,6 +60,9 @@ function Dashboard() {
               <Container maxWidth={false}>
                     <Grid
                         container
+                        spacing={3}
+                    >
+                        <Grid  container
                         spacing={3}
                     >
                         <Grid
@@ -133,7 +135,7 @@ function Dashboard() {
                             />
                             )}
                         </Grid>
-
+                                </Grid>
                         <Grid
                             item
                             lg={4}

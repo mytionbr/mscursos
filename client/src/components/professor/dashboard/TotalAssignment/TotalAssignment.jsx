@@ -2,8 +2,8 @@ import { Avatar, Card, CardContent, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 function TotalAssignment(props) {
-  const { loading, title, count,color,icon } = props;
-  
+  const { loading = false, title, count,color,icon } = props;
+
   return (
     <Card style={{ height: "100%" }} {...props}>
       <CardContent>
@@ -11,7 +11,7 @@ function TotalAssignment(props) {
           <Grid item style={{minWidth: '60%'}}>
             {loading ? (
               <Skeleton
-                animation="rect"
+                animation="wave"
                 style={{ marginBottom: 6, height: '1rem', width: '100%'}}
               />
             ) : (
@@ -21,7 +21,7 @@ function TotalAssignment(props) {
             )}
             {loading ? (
               <Skeleton
-                animation="rect"
+                animation="wave"
                 style={{ marginBottom: 6, height: '1rem', width: '100%'}}
               />
             ) : (
@@ -34,7 +34,7 @@ function TotalAssignment(props) {
           <Grid item>
             {loading ? (
               <Skeleton
-                animation="rect"
+                animation="wave"
                 variant="circle"
                 width={50}
                 height={50}

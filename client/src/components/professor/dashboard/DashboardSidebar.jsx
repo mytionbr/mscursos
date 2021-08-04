@@ -83,7 +83,6 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
             }}>
                 <Avatar
                     component={Link}
-                    src={user.avatar}
                     style={{
                         cursor: 'pointer',
                         width: 64,
@@ -91,7 +90,9 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
                         background:'#506198'
                     }}
                     to="/professor/app/"
-                />
+                >
+                    {user.avatar}
+                </Avatar>
                 <Typography
                     color="textPrimary"
                     variant="h5"
