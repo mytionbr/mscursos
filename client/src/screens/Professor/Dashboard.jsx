@@ -127,11 +127,11 @@ function Dashboard() {
                                 </MessageBox>
                             ) : (
                              <TotalAssignment
-                                loading={items.alunos.loading} 
-                                title={items.alunos.title} 
-                                count={items.alunos.count}
-                                color={items.alunos.color}
-                                icon={items.alunos.icon}
+                                loading={items.aulas.loading} 
+                                title={items.aulas.title} 
+                                count={items.aulas.count}
+                                color={items.aulas.color}
+                                icon={items.aulas.icon}
                             />
                             )}
                         </Grid>

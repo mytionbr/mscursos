@@ -3,7 +3,7 @@ import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 function TotalAssignment(props) {
   const { loading, title, count,color,icon } = props;
-  
+  console.log(color)
   return (
     <Card style={{ height: "100%" }} {...props}>
       <CardContent>
@@ -44,7 +44,7 @@ function TotalAssignment(props) {
             ) : (
               <Avatar
                 style={{
-                  backgroundColor: {color},
+                  backgroundColor: color,
                   height: "4rem",
                   width: "4rem",
                 }}
