@@ -11,7 +11,9 @@ const ProfessorRouter = () => {
                 <DashboardLayout>
                      <Switch>
                         <ProfessorRoute 
-                            path={'/professor/app'} 
+                            path={[
+                                '/professor/app/dashboard',
+                                '/professor/app/']} 
                             component={ Dashboard}
                         />
                      </Switch> 

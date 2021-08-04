@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ClassIcon from '@material-ui/icons/Class';
 import PeopleIcon from '@material-ui/icons/People';
@@ -20,7 +19,6 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
     console.log(professorInfo.nome)
 
     const user = {
-        avatar: AccountBoxIcon,
         office: 'Professor',
         name: professorInfo.nome
     }
@@ -28,7 +26,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
 
     const items = [
         {
-            href: '/professor/app',
+            href: '/professor/app/dashboard',
             icon: DashboardIcon,
             title: 'Dashboard'
         },
@@ -65,7 +63,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
         if (openMobile && onMobileClose) {
             onMobileClose()
         }
-    }, [location.pathname])
+    }, [location.pathname, onMobileClose, openMobile])
 
     const content = (
         <Box
@@ -89,9 +87,14 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
                         height: 64,
                         background:'#506198'
                     }}
-                    to="/professor/app/"
+                    to="/professor/app/dashboard"
                 >
-                    {user.avatar}
+                    <PersonIcon
+                        style={{
+                            width: 64,
+                            height: 64,
+                        }}
+                    />
                 </Avatar>
                 <Typography
                     color="textPrimary"
