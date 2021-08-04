@@ -11,7 +11,7 @@ const ProfessorRouter = () => {
         return (
                 <DashboardLayout>
                      <Switch>
-                     <ProfessorRoute 
+                         <ProfessorRoute 
                             exact 
                             path={
                                 '/professor/app/cursos'} 
@@ -33,7 +33,7 @@ const ProfessorRouter = () => {
     return(
         <div>
             <Switch> 
-                <Route  path={'/professor/app'} component={routes}/>
+                <ProfessorRoute  path={'/professor/app'} component={routes}/>
                 <Route  path={['/professor','/professor/signin']} component={SigninProfessor}/>
             </Switch>
         </div>

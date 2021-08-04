@@ -6,12 +6,15 @@ function ProfessorRoute({component: Component, ...rest}) {
     const professorSignin = useSelector((state) => state.professorSignin)
     const { professorInfo } = professorSignin
 
+   
+
     return (
         <Route
             {...rest}
             render={(props) =>
-                professorInfo ? (
+                professorInfo  ? (
                     <Component {...props}></Component>
+                   
                 ) : (
                     <Redirect to="/professor/signin"/>
                 ) 

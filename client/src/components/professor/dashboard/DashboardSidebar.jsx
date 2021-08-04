@@ -16,7 +16,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
     const professorSignin = useSelector((state) => state.professorSignin)
     const {professorInfo} = professorSignin
 
-    console.log(professorInfo.nome)
+
 
     const user = {
         office: 'Professor',
