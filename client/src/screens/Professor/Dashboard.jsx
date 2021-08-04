@@ -18,11 +18,9 @@ function Dashboard() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        console.log(professorAsseg)
-        console.log('1',professorAssignments)
+        
         if(!professorAssignments){
             dispatch(findAssignments(professorInfo.professor_id))
-            console.log('2',professorAssignments)
         }
     },[dispatch, professorAssignments, professorInfo.professor_id])
 
