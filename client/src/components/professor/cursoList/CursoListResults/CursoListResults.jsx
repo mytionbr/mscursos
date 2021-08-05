@@ -71,7 +71,13 @@ function CursoListResults({cursos, ...rest}) {
                                     Descrição
                                 </TableCell>
                                 <TableCell>
+                                    categoria
+                                </TableCell>
+                                <TableCell>
                                     Aulas
+                                </TableCell>
+                                <TableCell>
+                                    Alunos
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -101,7 +107,13 @@ function CursoListResults({cursos, ...rest}) {
                                         {curso.descricao}
                                     </TableCell>
                                     <TableCell>
-                                        {curso.Aulas}
+                                        {curso.categoria_nome}
+                                    </TableCell>
+                                    <TableCell>
+                                        {curso.aulas}
+                                    </TableCell>
+                                    <TableCell>
+                                        {curso.alunos}
                                     </TableCell>
                                 </TableRow>
                             ))}

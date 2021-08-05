@@ -9,7 +9,7 @@ import ClassIcon from '@material-ui/icons/Class';
 import {useDispatch, useSelector} from 'react-redux'
 import { findAssignments } from '../../actions/professorActions'
 import MessageBox from '../../components/core/MessageBox/MessageBox'
-
+import { Helmet } from "react-helmet";
 function Dashboard() {
     const professorSignin = useSelector((state)=> state.professorSignin)
     const {professorInfo} = professorSignin
@@ -52,6 +52,9 @@ function Dashboard() {
     
     return (
         <>
+            <Helmet>
+                <title> Dashboard | mscursos </title>
+            </Helmet>
           <Box sx={{
               backgroundColor:'background.default',
               minHeight: '100%',

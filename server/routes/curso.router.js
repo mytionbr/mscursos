@@ -6,7 +6,9 @@ const router = express.Router()
 router.route('/')
     .post( create )
     .get( find )
-   
+
+    router.route('/professor/:professorId')
+    .get( findByProfessor )
     
 router.route('/categorias/:categoriaId')
     .get( findCursoByCategoriaId )
@@ -27,8 +29,7 @@ router.route('/:id/matriculas/:alunoId')
 router.route('/:id/aulas')
     .get( getAulas )
 
-router.route('/professor/:id')
-    .get( findByProfessor )
+
 
 router.param('id', findById)
 
