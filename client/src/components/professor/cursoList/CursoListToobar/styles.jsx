@@ -7,7 +7,7 @@ export default makeStyles((theme) =>({
   },
   buttonAddCurso:{
     color: theme.palette.primary.dark,
-    margin: '0 3rem',
+    margin: '0 1rem',
   }
    
 }))
