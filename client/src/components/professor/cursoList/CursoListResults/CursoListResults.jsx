@@ -1,6 +1,6 @@
 import { Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import PerfectScrollbar  from 'react-perfect-scrollbar'
 
 function CursoListResults({cursos, ...rest}) {
     const [selectedCursoIds, setSelectedCursoIds] = useState([])
@@ -48,8 +48,8 @@ function CursoListResults({cursos, ...rest}) {
 
     return (
         <Card {...rest}>
-            <PerfectScrollbar>
-                <Box style={{minWidth: 1050}}>
+            <PerfectScrollbar component="div">
+                <Box style={{minWidth: '1050px'}}>
                     <Table>
                         <TableHead>
                             <TableRow>
