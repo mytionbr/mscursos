@@ -4,22 +4,20 @@ import { Helmet } from "react-helmet";
 import CursoListToobar from "../../../components/professor/cursoList/CursoListToobar/CursoListToolbar";
 import CursoListResults from "../../../components/professor/cursoList/CursoListResults/CursoListResults";
 import { useDispatch, useSelector } from "react-redux";
-import { findCursos } from "../../../actions/cursoActions";
+import { findCursos, findCursosByProfessor } from "../../../actions/cursoActions";
 import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 
 function CursoList() {
   const dispatch = useDispatch();
-  const cursoFind = useSelector((state) => state.cursoFind);
-  const { loading, error, data } = cursoFind;
-  const cursos = data ? data.cursos : []
+  const cursoProfessor = useSelector((state) => state.cursoProfessor);
+  const { loading, error, data } = cursoProfessor;
+  const cursos = data ? data : []
 
+  console.log(data)
   useEffect(() => {
     dispatch(
-      findCursos({
-        nome: "",
-        categorias: [],
-      })
+      findCursosByProfessor()
     );
   }, [dispatch]);
 

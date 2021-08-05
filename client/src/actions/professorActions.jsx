@@ -27,7 +27,6 @@ export const findAssignments = (id) => async (dispatch,getState) => {
     const { professorSignin: { professorInfo } } = getState()
     try {
        const { data } = await Api.findAssignmentsProfessor(id,professorInfo)
-       console.log(data)
        dispatch({type: PROFESSOR_ASSIGNMENTS_SUCCESS, payload: data})
     } catch (error) {
         dispatch({

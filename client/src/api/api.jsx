@@ -14,13 +14,18 @@ const findAssignmentsProfessor = (id,professorInfo) => axios.get(`/api/professor
     headers: {Authorization: `Bearer ${professorInfo?.token}`}
 })
 
+const findCursosByProfessor = (professorInfo) => axios.get(`/api/cursos/professor/${professorInfo.professor_id}`,{
+    headers: {Authorization: `Bearer ${professorInfo?.token}`}
+})
+
 const Api = {
     fetchCursos,
     fetchCategorias,
     findCursos,
     signinAluno,
     signinProfessor,
-    findAssignmentsProfessor
+    findAssignmentsProfessor,
+    findCursosByProfessor
 }
 
 export default Api

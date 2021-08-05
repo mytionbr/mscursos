@@ -1,5 +1,5 @@
 import Api from '../api/api'
-import { CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS } from '../constants/cursoConstants'
+import { CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from '../constants/cursoConstants'
 
 export const listCursos = () => async (dispatch) => {
     dispatch({
@@ -46,5 +46,19 @@ export const findCursos = (query) => async (dispatch) => {
             type: CURSO_FIND_FAIL,
             payload: error.message
         })
+    }
+}
+
+export const findCursosByProfessor = () => async (dispatch, getState) => {
+    const {professorSignin: {professorInfo}} = getState()
+    dispatch({type:CURSO_PROFESSOR_REQUEST, payload: professorInfo.professor_id})
+    try{
+        const { data } = await Api.findCursosByProfessor(professorInfo)
+        console.log(data)
+        dispatch({type:CURSO_PROFESSOR_SUCCESS, payload: data})
+    } catch (error) {
+        dispatch({ 
+            type: CURSO_PROFESSOR_FAIL, 
+            payload: error.message })
     }
 }
