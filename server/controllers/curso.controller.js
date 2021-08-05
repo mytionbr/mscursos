@@ -389,10 +389,13 @@ export const findByProfessor = async (req, res) => {
         const professorId = req.params.professorId
 
         const { rows } = await pool.query(
-            `SELECT CURSO.*, CATEGORIA.NOME AS CATEGORIA_NOME, COUNT(AULA) AS AULAS FROM CURSO
+            `SELECT CURSO.*,
+            CATEGORIA.NOME AS CATEGORIA_NOME,
+            (SELECT COUNT (*) FROM CURSO_ALUNO WHERE CURSO.CURSO_ID = CURSO_ALUNO.CURSO_ID) as alunos, 
+            (SELECT COUNT (*) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas
+            FROM CURSO
             INNER JOIN PROFESSOR  ON CURSO.PROFESSOR_ID = PROFESSOR.PROFESSOR_ID
             INNER JOIN CATEGORIA ON CURSO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID
-            FULL JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID
             WHERE PROFESSOR.PROFESSOR_ID = $1 GROUP BY CURSO.CURSO_ID, CATEGORIA.CATEGORIA_ID`,
             [professorId])
         
