@@ -1,5 +1,5 @@
 import express from 'express'
-import { create, enroll, findById, findCursoByCategoriaId, find, getAluno, getAulas, listMatriculas, read, remove, unenroll, update } from '../controllers/curso.controller.js'
+import { create, enroll, findById, findCursoByCategoriaId, find, getAluno, getAulas, listMatriculas, read, remove, unenroll, update, findByProfessor } from '../controllers/curso.controller.js'
 
 const router = express.Router()
 
@@ -27,7 +27,8 @@ router.route('/:id/matriculas/:alunoId')
 router.route('/:id/aulas')
     .get( getAulas )
 
-
+router.route('/professor/:id')
+    .get( findByProfessor )
 
 router.param('id', findById)
 

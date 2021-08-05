@@ -383,3 +383,22 @@ export const find = async (req, res) => {
         res.status(400).json({message: err.message})
     }
 }
+
+export const findByProfessor = async (req, res) => {
+    try {
+        const professorId = req.params.id
+
+        const { rows } = await pool.query(
+            `SELECT * FROM 
+            (CURSO INNER JOIN PROFESSOR ON CURSO.PROFESSOR_ID = PROFESSOR.PROFESSOR_ID)
+            WHERE PROFESSOR.PROFESSOR_ID = $1`,
+            [professorId])
+        
+        const cursos = rows
+
+        res.status(200).json(cursos)
+        
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
