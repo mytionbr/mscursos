@@ -11,7 +11,7 @@ function CursoListResults({cursos, ...rest}) {
         let newSelectedCursosIds
 
         if (event.target.checked) {
-            newSelectedCursosIds = cursos.map((curso) => curso.id)
+            newSelectedCursosIds = cursos.map((curso) => curso.curso_id)
         } else {
             newSelectedCursosIds = []
         }
@@ -24,18 +24,17 @@ function CursoListResults({cursos, ...rest}) {
         let newSelectedCursosIds = []
 
         if (selectedIndex === -1){
-            newSelectedCursosIds = newSelectedCursosIds.concat(newSelectedCursosIds, id)
+            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds, id)
         } else if (selectedIndex === 0) {
             newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds.slice(1))
         } else if (selectedIndex === selectedCursoIds.length - 1){
-            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds.slide(0,-1))
+            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds.slice(0,-1))
         } else if (selectedCursoIds > 0 ){
             newSelectedCursosIds = newSelectedCursosIds.concat(
                 selectedCursoIds.slice(0, selectedIndex),
                 selectedCursoIds.slice(selectedIndex + 1)
             )
         }
-
         setSelectedCursoIds(newSelectedCursosIds)
     }
 
@@ -80,13 +79,13 @@ function CursoListResults({cursos, ...rest}) {
                             {cursos.slice(0,limit).map((curso) =>(
                                 <TableRow
                                     hover
-                                    key={curso.id}
-                                    selected={selectedCursoIds.indexOf(curso.id) !== -1}                                    
+                                    key={curso.curso_id}
+                                    selected={selectedCursoIds.indexOf(curso.curso_id) !== -1}                                    
                                 >
                                     <TableCell padding="checkbox">
                                         <Checkbox 
-                                            checked={selectedCursoIds.indexOf(curso.id) !== -1}
-                                            onChange={(event) => handleSelectOne(event,curso.id)}
+                                            checked={selectedCursoIds.indexOf(curso.curso_id) !== -1}
+                                            onChange={(event) => handleSelectOne(event,curso.curso_id)}
                                             value="true"
                                         /> 
                                     </TableCell>
