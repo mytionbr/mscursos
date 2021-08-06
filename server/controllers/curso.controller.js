@@ -4,7 +4,7 @@ import pool from "../database/pool.js"
 export const create = async (req,res) => {
     try {
         const {nome, descricao, professor_id, categoria_id} = req.body
-
+       
         const { rows } = await pool.query(
             'INSERT INTO curso (nome, descricao, professor_id,categoria_id) VALUES ($1, $2, $3, $4)  RETURNING *;',
             [nome, descricao, professor_id,categoria_id])
@@ -14,6 +14,7 @@ export const create = async (req,res) => {
         if(!cursoCreated) {
             return res.status(400).json({message: 'Erro ao criar o curso'})
         }
+       
 
         res.status(201).json(cursoCreated)        
     } catch (err) {

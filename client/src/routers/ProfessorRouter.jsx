@@ -5,18 +5,26 @@ import Dashboard from '../screens/Professor/Dashboard'
 import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfessor'
 import ProfessorRoute from '../components/professor/ProfessorRoute'
 import CursoList from '../screens/Professor/CursoList/CursoList'
+import CreateCurso from '../screens/Professor/CreateCurso/CreateCurso'
 
 const ProfessorRouter = () => {
     const routes = ()=>{
         return (
                 <DashboardLayout>
                      <Switch>
+                         
+                        <ProfessorRoute 
+                            path={'/professor/app/cursos/novo'} 
+                            component={ CreateCurso}
+                        />
+                         
                          <ProfessorRoute 
                             exact 
                             path={
                                 '/professor/app/cursos'} 
                             component={ CursoList}
                         />
+
 
                         <ProfessorRoute 
                             path={[

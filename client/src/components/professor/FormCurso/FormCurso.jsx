@@ -11,14 +11,18 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategoria } from "../../../actions/categoriaActions";
-import MessageBox from '../core/MessageBox/MessageBox';
-import LoadingBox from '../core/LoadingBox/LoadingBox';
+import MessageBox from '../../core/MessageBox/MessageBox';
+import LoadingBox from '../../core/LoadingBox/LoadingBox';
 
 import useStyles from "./styles";
 import { createCurso } from "../../../actions/cursoActions";
+import { useHistory } from 'react-router-dom'
+import { CURSO_CREATE_RESET } from "../../../constants/cursoConstants";
 
 function FormCurso(props) {
   const classes = useStyles();
+
+  const history = useHistory()
 
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
@@ -37,9 +41,10 @@ function FormCurso(props) {
 
   useEffect(()=>{
     if (success) {
-        props.history.push('/professor/app/cursos')
+        dispatch({type:CURSO_CREATE_RESET})
+        history.push('/professor/app/cursos')
     }
-  },[props.history, success])
+  },[dispatch, history, success])
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -62,7 +67,13 @@ function FormCurso(props) {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    dispatch(createCurso(nome,descricao, categoria))
+    dispatch(createCurso(
+        {
+            nome: nome,
+            descricao: descricao, 
+            categoria_id: categoria
+        }))
+    history.push('/professor/app/cursos')
   };
 
   return (
@@ -92,8 +103,8 @@ function FormCurso(props) {
         ) : errorCategorias ? (
           <MessageBox type="error">{errorCategorias}</MessageBox>
         ) : (
-          <FormControl className={classes.formControl}>
-            <InputLabel id="categorias">Age</InputLabel>
+          <FormControl  color="secondary" variant="filled" className={classes.formControl}>
+            <InputLabel id="categorias">Categoria</InputLabel>
             <Select
               labelId="categorias"
               id="categorias"
@@ -101,7 +112,7 @@ function FormCurso(props) {
               onChange={handlerChangeCategoria}
             >
               {categorias.map((item) => (
-                <MenuItem value={item.value}>{item.nome}</MenuItem>
+                <MenuItem value={item.categoria_id}>{item.nome}</MenuItem>
               ))}
             </Select>
           </FormControl>

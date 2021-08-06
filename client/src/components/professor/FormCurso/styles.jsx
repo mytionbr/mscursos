@@ -4,6 +4,7 @@ export default makeStyles((theme) =>({
   boxContainer:{
     display: 'flex',
     flexDirection: 'column',
+    padding:'1rem',
     '& > *':{
       margin: '0.5rem 0'
      }

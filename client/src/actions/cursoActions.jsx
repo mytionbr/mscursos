@@ -69,6 +69,8 @@ export const createCurso = (curso) => async (dispatch, getState) => {
         professorSignin: { professorInfo }
     } = getState()
     try {
+        curso.professor_id = professorInfo.professor_id
+       
         const { data } = await Api.createCurso(curso, professorInfo)
         dispatch({
             type: CURSO_CREATE_SUCCESS,

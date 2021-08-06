@@ -1,4 +1,4 @@
-import { CURSO_CREATE_FAIL, CURSO_CREATE_REQUEST, CURSO_CREATE_SUCCESS, CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from "../constants/cursoConstants";
+import { CURSO_CREATE_FAIL, CURSO_CREATE_REQUEST, CURSO_CREATE_RESET, CURSO_CREATE_SUCCESS, CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from "../constants/cursoConstants";
 
 
 export const cursoListReducer = (
@@ -60,6 +60,8 @@ export const cursoCreateReducer = (
             return { loading: false, success: true }
         case CURSO_CREATE_FAIL:
             return { loading: false, error: action.payload }
+        case CURSO_CREATE_RESET:
+            return {}
          default:
              return state   
     }

@@ -2,10 +2,11 @@ import { Box, Breadcrumbs, Button, Card, Link, Typography } from '@material-ui/c
 import React from 'react'
 import useStyles from './styles'
 import {Link as LinkRoute} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function CursoListToolbar(props) {
     const classes = useStyles()
-
+    const history = useHistory()
     return (
         <Box {...props}>
             <Box>
@@ -32,7 +33,9 @@ function CursoListToolbar(props) {
                 <Box>
                         <Button 
                             className={classes.buttonAddCurso}  
-                            variant="contained">
+                            variant="contained"
+                            onClick={()=> history.push('/professor/app/cursos/novo')}    
+                        >
                             Criar novo Curso
                         </Button>
                         <Button 

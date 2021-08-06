@@ -5,7 +5,7 @@ import {Link as LinkRoute} from 'react-router-dom'
 
 function ToolbarPage({btns,links,title,...rest}) {
     const classes = useStyles()
-
+    
     return (
         <Box {...rest}>
             <Box>
@@ -32,7 +32,8 @@ function ToolbarPage({btns,links,title,...rest}) {
                     {btns.map(btn=>
                          <Button 
                             className={classes.buttonAddCurso}  
-                            variant="contained">
+                            variant="contained"
+                            onClick={btn.action}>
                             {btn.name}
                         </Button>    
                     )}
