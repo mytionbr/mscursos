@@ -73,7 +73,11 @@ function CursoListResults(props) {
                             {curso.nome}
                           </Typography>
                         </TableCell>
-                        <TableCell>{curso.descricao}</TableCell>
+                        <TableCell>{
+                          curso.descricao.length > 20 
+                          ? curso.descricao.slice(0,20) + '...'
+                          : curso.descricao
+                        }</TableCell>
                         <TableCell>{curso.categoria_nome}</TableCell>
                         <TableCell>{curso.aulas}</TableCell>
                         <TableCell>{curso.alunos}</TableCell>
