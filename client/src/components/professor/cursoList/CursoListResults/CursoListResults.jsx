@@ -1,42 +1,12 @@
 import { Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import PerfectScrollbar  from 'react-perfect-scrollbar'
+import MenuButton from './MenuButton/MenuButton'
 
 function CursoListResults({cursos, ...rest}) {
-    const [selectedCursoIds, setSelectedCursoIds] = useState([])
     const [limit, setLimit] = useState(10)
     const [page,setPage] = useState(0)
     
-    const handleSelectAll = (event) => {
-        let newSelectedCursosIds
-
-        if (event.target.checked) {
-            newSelectedCursosIds = cursos.map((curso) => curso.curso_id)
-        } else {
-            newSelectedCursosIds = []
-        }
-
-        setSelectedCursoIds(newSelectedCursosIds)
-    }
-
-    const handleSelectOne = (event, id) =>{
-        const selectedIndex = selectedCursoIds.indexOf(id)
-        let newSelectedCursosIds = []
-
-        if (selectedIndex === -1){
-            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds, id)
-        } else if (selectedIndex === 0) {
-            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds.slice(1))
-        } else if (selectedIndex === selectedCursoIds.length - 1){
-            newSelectedCursosIds = newSelectedCursosIds.concat(selectedCursoIds.slice(0,-1))
-        } else if (selectedCursoIds > 0 ){
-            newSelectedCursosIds = newSelectedCursosIds.concat(
-                selectedCursoIds.slice(0, selectedIndex),
-                selectedCursoIds.slice(selectedIndex + 1)
-            )
-        }
-        setSelectedCursoIds(newSelectedCursosIds)
-    }
 
     const handleLimitChange = (event) =>{
         setLimit(event.target.value)
@@ -53,16 +23,8 @@ function CursoListResults({cursos, ...rest}) {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell padding="checkbox">
-                                    <Checkbox
-                                        checked={selectedCursoIds.length === cursos.length}
-                                        color="primary"
-                                        indeterminate={
-                                            selectedCursoIds.length > 0
-                                            && selectedCursoIds.length < cursos.length
-                                        }
-                                        onChange={handleSelectAll}
-                                    />
+                                <TableCell>
+                                    Id
                                 </TableCell>
                                 <TableCell>
                                     Nome
@@ -86,14 +48,9 @@ function CursoListResults({cursos, ...rest}) {
                                 <TableRow
                                     hover
                                     key={curso.curso_id}
-                                    selected={selectedCursoIds.indexOf(curso.curso_id) !== -1}                                    
                                 >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox 
-                                            checked={selectedCursoIds.indexOf(curso.curso_id) !== -1}
-                                            onChange={(event) => handleSelectOne(event,curso.curso_id)}
-                                            value="true"
-                                        /> 
+                                    <TableCell >
+                                        {curso.curso_id}
                                     </TableCell>
                                     <TableCell>
                                         <Typography
@@ -114,6 +71,14 @@ function CursoListResults({cursos, ...rest}) {
                                     </TableCell>
                                     <TableCell>
                                         {curso.alunos}
+                                    </TableCell>
+                                    <TableCell>
+                                        {curso.alunos}
+                                    </TableCell>
+                                    <TableCell>
+                                        <MenuButton 
+                                            id={curso.curso_id}
+                                        />
                                     </TableCell>
                                 </TableRow>
                             ))}

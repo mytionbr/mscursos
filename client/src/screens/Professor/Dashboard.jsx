@@ -11,6 +11,7 @@ import { findAssignments } from "../../actions/professorActions";
 import MessageBox from "../../components/core/MessageBox/MessageBox";
 import { Helmet } from "react-helmet";
 import { useHistory } from 'react-router-dom'
+
 function Dashboard() {
   const professorSignin = useSelector((state) => state.professorSignin);
   const { professorInfo } = professorSignin;
@@ -112,7 +113,7 @@ function Dashboard() {
                   name: "Novo Curso",
                   description: "Crie um novo curso",
                 }}
-                action={()=>history.push('/professor/app/cursos/novo')}
+                action={()=>history.push('/professor/app/cursos/novo ')}
               />
             </Grid>
 
