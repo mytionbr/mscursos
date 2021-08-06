@@ -15,6 +15,8 @@ import {
   CURSO_PROFESSOR_FAIL,
   CURSO_PROFESSOR_REQUEST,
   CURSO_PROFESSOR_SUCCESS,
+  CURSO_UPDATE_REQUEST,
+  CURSO_UPDATE_SUCCESS,
 } from "../constants/cursoConstants";
 
 export const listCursos = () => async (dispatch) => {
@@ -26,7 +28,9 @@ export const listCursos = () => async (dispatch) => {
 
     dispatch({ type: CURSO_LIST_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: CURSO_LIST_FAIL, payload: error.message });
+    dispatch({ 
+        type: CURSO_LIST_FAIL, 
+        payload: error.response.data.error || error.response.data.message });
   }
 };
 
@@ -59,7 +63,7 @@ export const findCursos = (params) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_FIND_FAIL,
-      payload: error.message,
+      payload: error.response.data.error || error.response.data.message
     });
   }
 };
@@ -98,7 +102,7 @@ export const findCursosByProfessor = (params) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_PROFESSOR_FAIL,
-      payload: error.message,
+      payload: error.response.data.error || error.response.data.message
     });
   }
 };
@@ -119,7 +123,7 @@ export const createCurso = (curso) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_CREATE_FAIL,
-      payload: error.message,
+      payload: error.response.data.error || error.response.data.message
     });
   }
 };
@@ -132,7 +136,23 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_DETAILS_FAIL,
-      payload: error.message,
+      payload: error.response.data.error || error.response.data.message
     });
   }
 };
+
+export const updateCurso = (curso) => async(dispatch, getState) => {
+    dispatch({type: CURSO_UPDATE_REQUEST, payload: curso})
+    const {
+        professorSignin: { professorInfo }
+    } = getState()
+    try {
+        const { data } = await Api.updateCurso(curso,professorInfo)
+        dispatch({type:CURSO_UPDATE_SUCCESS, payload: data})
+    } catch (error) {
+        dispatch({
+            type: CURSO_DETAILS_FAIL,
+            payload: error.response.data.error || error.response.data.message
+          });
+    }
+}

@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { alunoSigninReducer } from './reducers/alunoReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
-import { cursoCreateReducer, cursoDetailsReducer, cursoFindReducer, cursoListReducer, cursoProfessorReducer } from './reducers/cursoReducers';
+import { cursoCreateReducer, cursoDetailsReducer, cursoFindReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
 import { professorAssignmentsReducer, professorSigninReducer } from './reducers/professorReducers';
 
 const initialState = {
@@ -22,7 +22,8 @@ const reducer = combineReducers({
     professorAssignments: professorAssignmentsReducer,
     cursoProfessor:cursoProfessorReducer,
     cursoCreate:cursoCreateReducer,
-    cursoDetails:cursoDetailsReducer
+    cursoDetails:cursoDetailsReducer,
+    cursoUpdate: cursoUpdateReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

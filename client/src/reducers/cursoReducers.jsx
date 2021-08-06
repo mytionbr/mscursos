@@ -1,4 +1,4 @@
-import { CURSO_CREATE_FAIL, CURSO_CREATE_REQUEST, CURSO_CREATE_RESET, CURSO_CREATE_SUCCESS, CURSO_DETAILS_FAIL, CURSO_DETAILS_REQUEST, CURSO_DETAILS_RESET, CURSO_DETAILS_SUCCESS, CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from "../constants/cursoConstants";
+import { CURSO_CREATE_FAIL, CURSO_CREATE_REQUEST, CURSO_CREATE_RESET, CURSO_CREATE_SUCCESS, CURSO_DETAILS_FAIL, CURSO_DETAILS_REQUEST, CURSO_DETAILS_RESET, CURSO_DETAILS_SUCCESS, CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS, CURSO_UPDATE_FAIL, CURSO_UPDATE_REQUEST, CURSO_UPDATE_RESET, CURSO_UPDATE_SUCCESS } from "../constants/cursoConstants";
 
 
 export const cursoListReducer = (
@@ -75,10 +75,28 @@ export const cursoDetailsReducer = (
         case CURSO_DETAILS_REQUEST:
             return { loading: true }
         case CURSO_DETAILS_SUCCESS:
-            return { loading: false, sucess: action.payload }
+            return { loading: false, curso: action.payload }
         case CURSO_DETAILS_FAIL:
             return { loading: false, error: action.payload }
         case CURSO_DETAILS_RESET:
+            return {}
+         default:
+             return state   
+    }
+}
+
+export const cursoUpdateReducer = (
+    state = {},
+    action
+) => {
+    switch (action.type) {
+        case CURSO_UPDATE_REQUEST:
+            return { loading: true }
+        case CURSO_UPDATE_SUCCESS:
+            return { loading: false, sucess: true }
+        case CURSO_UPDATE_FAIL:
+            return { loading: false, error: action.payload }
+        case CURSO_UPDATE_RESET:
             return {}
          default:
              return state   

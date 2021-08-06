@@ -10,7 +10,9 @@ export const listCategoria = () => async (dispatch) => {
 
         dispatch({ type: CATEGORIA_LIST_SUCCESS, payload: data})
     } catch (error) {
-        dispatch({ type: CATEGORIA_LIST_FAIL, payload: error.message })
+        dispatch({ 
+            type: CATEGORIA_LIST_FAIL, 
+            payload: error.response.data.error || error.response.data.message })
     }
 }
 
