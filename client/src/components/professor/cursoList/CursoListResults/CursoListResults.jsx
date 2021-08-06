@@ -1,7 +1,7 @@
-import { Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core'
+import { Box, Card, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import PerfectScrollbar  from 'react-perfect-scrollbar'
-import MenuButton from './MenuButton/MenuButton'
+import MenuButton from '../MenuButton/MenuButton'
 
 function CursoListResults({cursos, ...rest}) {
     const [limit, setLimit] = useState(10)

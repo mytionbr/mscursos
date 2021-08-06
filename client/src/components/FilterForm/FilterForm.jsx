@@ -60,7 +60,6 @@ function FilterForm() {
             nome: nome || '',
             categorias: categoriasTags || []
         }))
-        console.log(nome,categoriasTags)
     }
 
 

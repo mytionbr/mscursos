@@ -7,14 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { findCursos, findCursosByProfessor } from "../../../actions/cursoActions";
 import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
+import ModalFilter from "../../../components/professor/cursoList/ModalFilter/ModalFilter";
 
 function CursoList() {
+  const [openModal, setOpenModal] = useState(false)
+
   const dispatch = useDispatch();
   const cursoProfessor = useSelector((state) => state.cursoProfessor);
   const { loading, error, data } = cursoProfessor;
   const cursos = data ? data : []
 
-  console.log(data)
+  const handleOpenModal = ()=>{
+    setOpenModal(!openModal)
+}
+
   useEffect(() => {
     dispatch(
       findCursosByProfessor()
@@ -46,6 +52,10 @@ function CursoList() {
           </Box>
         </Container>
       </Box>
+      <ModalFilter
+                openModal={openModal}
+                onModalClose={handleOpenModal}
+       />
     </>
   );
 }

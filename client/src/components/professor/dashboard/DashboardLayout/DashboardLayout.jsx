@@ -9,9 +9,7 @@ import useStyles from './styles'
 function DashboardLayout(props) {
     const classes = useStyles()
     const [isMobileNavOpen, setMobileNavOpen] = useState(false)
-    
   
-
     const dispatch = useDispatch()
 
     const handleSignout = () => {
