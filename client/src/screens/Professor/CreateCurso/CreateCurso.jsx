@@ -1,6 +1,7 @@
 import { Box } from '@material-ui/core'
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import FormCurso from '../../../components/professor/FormCurso/FormCurso'
 import ToolbarPage from '../../../components/professor/ToolbarPage/ToolbarPage'
 
 function CreateCurso() {
@@ -41,8 +42,7 @@ function CreateCurso() {
                 minHeight: "100%",
                 padding: "3rem 0",
             }}>
-                <ToolbarPage />
-
+                <FormCurso />
             </Box>
         </>
     )

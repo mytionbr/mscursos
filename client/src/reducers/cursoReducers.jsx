@@ -1,4 +1,4 @@
-import { CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from "../constants/cursoConstants";
+import { CURSO_CREATE_FAIL, CURSO_CREATE_REQUEST, CURSO_CREATE_SUCCESS, CURSO_FIND_FAIL, CURSO_FIND_REQUEST, CURSO_FIND_SUCCESS, CURSO_LIST_FAIL, CURSO_LIST_REQUEST, CURSO_LIST_SUCCESS, CURSO_PROFESSOR_FAIL, CURSO_PROFESSOR_REQUEST, CURSO_PROFESSOR_SUCCESS } from "../constants/cursoConstants";
 
 
 export const cursoListReducer = (
@@ -33,7 +33,6 @@ export const cursoFindReducer = (
     }
 }
 
-
 export const cursoProfessorReducer = (
     state = {loading: true},
     action
@@ -44,6 +43,22 @@ export const cursoProfessorReducer = (
         case CURSO_PROFESSOR_SUCCESS:
             return { loading: false, data: action.payload }
         case CURSO_PROFESSOR_FAIL:
+            return { loading: false, error: action.payload }
+         default:
+             return state   
+    }
+}
+
+export const cursoCreateReducer = (
+    state = {},
+    action
+) => {
+    switch (action.type) {
+        case CURSO_CREATE_REQUEST:
+            return { loading: true }
+        case CURSO_CREATE_SUCCESS:
+            return { loading: false, success: true }
+        case CURSO_CREATE_FAIL:
             return { loading: false, error: action.payload }
          default:
              return state   
