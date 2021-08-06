@@ -16,7 +16,7 @@ import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 
 import useStyles from "./styles";
-import { createCurso, detailsCurso } from "../../../../actions/cursoActions";
+import { createCurso, detailsCurso, updateCurso } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
 import {
   CURSO_UPDATE_RESET,
@@ -87,7 +87,8 @@ function UpdateFormCurso(props) {
   const handlerSubmit = (event) => {
     event.preventDefault();
     dispatch(
-      createCurso({
+      updateCurso({
+        curso_id: cursoId,
         nome: nome,
         descricao: descricao,
         categoria_id: categoria,

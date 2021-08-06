@@ -27,6 +27,13 @@ const createCurso = (curso,professorInfo) => axios.post(
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
     })
 
+const updateCurso = (curso,professorInfo) => axios.put(
+    `/api/cursos/${curso.curso_id}`,
+    curso,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
+    })
+
 const Api = {
     fetchCursos,
     fetchCategorias,
@@ -36,7 +43,8 @@ const Api = {
     findAssignmentsProfessor,
     findCursosByProfessor,
     createCurso,
-    findCursoById
+    findCursoById,
+    updateCurso
 }
 
 export default Api

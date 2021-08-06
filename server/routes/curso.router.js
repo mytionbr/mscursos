@@ -1,4 +1,5 @@
 import express from 'express'
+import { hasAuthorizationCurso, isAuth } from '../controllers/auth.controller.js'
 import { create, enroll, findById, findCursoByCategoriaId, find, getAluno, getAulas, listMatriculas, read, remove, unenroll, update, findByProfessor } from '../controllers/curso.controller.js'
 
 const router = express.Router()
@@ -15,8 +16,8 @@ router.route('/categorias/:categoriaId')
 
 router.route('/:id')
     .get( read )
-    .put( update )
-    .delete( remove )
+    .put( isAuth,hasAuthorizationCurso,update )
+    .delete(isAuth,hasAuthorizationCurso, remove )
 
 router.route('/:id/matriculas/')
     .get( listMatriculas )
@@ -28,8 +29,6 @@ router.route('/:id/matriculas/:alunoId')
 
 router.route('/:id/aulas')
     .get( getAulas )
-
-
 
 router.param('id', findById)
 
