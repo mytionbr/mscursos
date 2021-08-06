@@ -27,7 +27,10 @@ function CursoListResults(props) {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    dispatch(findCursosByProfessor());
+    dispatch(findCursosByProfessor({
+      nome: "",
+      categorias: [],
+    }));
   }, [dispatch]);
 
   const handleLimitChange = (event) => {
@@ -73,7 +76,6 @@ function CursoListResults(props) {
                         <TableCell>{curso.descricao}</TableCell>
                         <TableCell>{curso.categoria_nome}</TableCell>
                         <TableCell>{curso.aulas}</TableCell>
-                        <TableCell>{curso.alunos}</TableCell>
                         <TableCell>{curso.alunos}</TableCell>
                         <TableCell>
                           <MenuButton id={curso.curso_id} />

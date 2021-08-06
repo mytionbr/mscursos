@@ -21,8 +21,7 @@ function MenuButton({id}) {
     const handleDelete = (id) => {
         handleClose()
     }
-
-    
+   
 
     return (
     <div>
@@ -30,8 +29,13 @@ function MenuButton({id}) {
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        variant="secondary"
+        style={{
+          background: '#506198',
+          color:'#fff'
+        }}
       >
-        Open Menu
+        Opções
       </Button>
       <Menu
         id="simple-menu"
@@ -40,8 +44,18 @@ function MenuButton({id}) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleEdit}>Editar</MenuItem>
-        <MenuItem onClick={handleDelete}>Excluir</MenuItem>
+        <MenuItem 
+          onClick={handleEdit}
+          style={{
+            color:'#ff9800',
+            fontWeight:'600'
+          }}>Editar</MenuItem>
+        <MenuItem 
+          onClick={handleDelete}
+          style={{
+            color:'#e91e63',
+            fontWeight:'600'
+          }}>Excluir</MenuItem>
       </Menu>
     </div>
   );

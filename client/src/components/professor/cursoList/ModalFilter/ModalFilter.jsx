@@ -87,7 +87,7 @@ function ModalFilter({ onModalClose, openModal }) {
   return (
     <>
       <Drawer
-        anchor="left"
+        anchor="right"
         onClose={onModalClose}
         open={openModal}
         variant="temporary"
