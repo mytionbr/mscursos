@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Container } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import CursoListResults from "../../../components/professor/cursoList/CursoListResults/CursoListResults";
-import { useDispatch, useSelector } from "react-redux";
-
-import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
-import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import ModalFilter from "../../../components/professor/cursoList/ModalFilter/ModalFilter";
 import { useHistory } from "react-router";
 import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
