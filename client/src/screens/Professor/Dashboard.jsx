@@ -113,7 +113,7 @@ function Dashboard() {
                   name: "Novo Curso",
                   description: "Crie um novo curso",
                 }}
-                action={()=>history.push('/professor/app/cursos/novo ')}
+                action={() => history.push("/professor/app/cursos/novo")}
               />
             </Grid>
 

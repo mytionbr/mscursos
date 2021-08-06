@@ -15,7 +15,9 @@ export default makeStyles((theme) =>({
    },
    avatar: {
      backgroundColor: theme.palette.primary.dark,
-     color: '#fff'
+     '& > *':{
+      color: '#fff',
+     }
    }
 
    
