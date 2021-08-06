@@ -5,7 +5,7 @@ import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 
 function DashboardNavbar({onMobileNavOpen,handleSignout, ...rest}) {
-    
+   
     return (
         <AppBar
             elevation={0}

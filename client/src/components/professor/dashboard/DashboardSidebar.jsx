@@ -11,6 +11,8 @@ import Navitem from './Navitem';
 import { useSelector } from 'react-redux';
 
 function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
+    console.log(onMobileClose, openMobile)
+   
     const location = useLocation()
 
     const professorSignin = useSelector((state) => state.professorSignin)
@@ -63,7 +65,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
         if (openMobile && onMobileClose) {
             onMobileClose()
         }
-    }, [location.pathname, onMobileClose, openMobile])
+    }, [location.pathname])
 
     const content = (
         <Box
