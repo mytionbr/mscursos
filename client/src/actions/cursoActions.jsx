@@ -14,12 +14,12 @@ export const listCursos = () => async (dispatch) => {
     }
 }
 
-export const findCursos = (query) => async (dispatch) => {
+export const findCursos = (params) => async (dispatch) => {
     dispatch({type: CURSO_FIND_REQUEST})
     try {
        
-        const { nome, categorias, pagination } = query
-        console.log(nome, categorias, pagination)
+        const { nome, categorias, pagination } = params
+
         let queryString = "?"
         
         if (nome) {
@@ -34,9 +34,7 @@ export const findCursos = (query) => async (dispatch) => {
 
         if(pagination ){
             queryString += `&page=${pagination}`
-        }
-
-        console.log(queryString)      
+        } 
         
         const { data } = await Api.findCursos(queryString)
         
@@ -49,11 +47,25 @@ export const findCursos = (query) => async (dispatch) => {
     }
 }
 
-export const findCursosByProfessor = () => async (dispatch, getState) => {
+export const findCursosByProfessor = (params) => async (dispatch, getState) => {
     const {professorSignin: {professorInfo}} = getState()
     dispatch({type:CURSO_PROFESSOR_REQUEST, payload: professorInfo.professor_id})
     try{
-        const { data } = await Api.findCursosByProfessor(professorInfo)
+        const { nome, categorias } = params
+
+        let queryString = "?"
+        
+        if (nome) {
+            queryString += `nome=${nome}&`
+        }
+        
+        if (categorias) {
+            queryString += categorias.map(c => {
+                return `categoria=${c.categoria_id || c}`
+            }).join('&')
+        }
+        
+        const { data } = await Api.findCursosByProfessor(professorInfo,queryString)
         console.log(data)
         dispatch({type:CURSO_PROFESSOR_SUCCESS, payload: data})
     } catch (error) {

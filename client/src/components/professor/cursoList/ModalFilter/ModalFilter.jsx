@@ -3,7 +3,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategoria } from "../../../../actions/categoriaActions";
-import { findCursos } from "../../../../actions/cursoActions";
+import { findCursos, findCursosByProfessor } from "../../../../actions/cursoActions";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import useStyles from './styles'
@@ -43,7 +43,7 @@ function ModalFilter({ onModalClose, openModal }) {
 
   const handlerClear = () => {
     dispatch(
-      findCursos({
+      findCursosByProfessor({
         nome: "",
         categorias: [],
       })
@@ -54,7 +54,7 @@ function ModalFilter({ onModalClose, openModal }) {
 
   const handlerSubmit = () => {
     dispatch(
-      findCursos({
+      findCursosByProfessor({
         nome: nome || "",
         categorias: categoriasTags || [],
       })

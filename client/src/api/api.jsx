@@ -14,7 +14,7 @@ const findAssignmentsProfessor = (id,professorInfo) => axios.get(`/api/professor
     headers: {Authorization: `Bearer ${professorInfo?.token}`}
 })
 
-const findCursosByProfessor = (professorInfo) => axios.get(`/api/cursos/professor/${professorInfo.professor_id}`,{
+const findCursosByProfessor = (professorInfo,query) => axios.get(`/api/cursos/professor/${professorInfo.professor_id}${query}`,{
     headers: {Authorization: `Bearer ${professorInfo?.token}`}
 })
 
