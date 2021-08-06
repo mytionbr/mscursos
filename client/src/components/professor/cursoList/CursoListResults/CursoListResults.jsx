@@ -82,7 +82,7 @@ function CursoListResults({cursos, ...rest}) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {cursos.slice(0,limit).map((curso) =>(
+                            {cursos.slice(page * limit, page * limit + limit).map((curso) =>(
                                 <TableRow
                                     hover
                                     key={curso.curso_id}
