@@ -18,6 +18,8 @@ const findCursosByProfessor = (professorInfo,query) => axios.get(`/api/cursos/pr
     headers: {Authorization: `Bearer ${professorInfo?.token}`}
 })
 
+const findCursoById = (cursoId) => axios.get(`/api/cursos/${cursoId}`)
+
 const createCurso = (curso,professorInfo) => axios.post(
     `/api/cursos`,
     curso,
@@ -33,7 +35,8 @@ const Api = {
     signinProfessor,
     findAssignmentsProfessor,
     findCursosByProfessor,
-    createCurso
+    createCurso,
+    findCursoById
 }
 
 export default Api

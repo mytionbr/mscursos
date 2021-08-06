@@ -1,7 +1,7 @@
 import { Box, Container } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
-import FormCurso from "../../../components/professor/FormCurso/FormCurso";
+import CreateFormCurso from "../../../components/professor/FormCurso/CreateFormCurso/CreateFormCurso";
 import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
 import { useHistory } from 'react-router-dom'
 
@@ -46,7 +46,7 @@ function CreateCurso() {
         <Container maxWidth={false}>
           <ToolbarPage title={"Novo curso"} links={links} btns={btns} />
           <Box style={{ padding: "3rem 0" }}>
-            <FormCurso />
+            <CreateFormCurso />
           </Box>
         </Container>
       </Box>

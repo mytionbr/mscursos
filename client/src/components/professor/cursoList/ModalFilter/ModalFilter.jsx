@@ -3,7 +3,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategoria } from "../../../../actions/categoriaActions";
-import { findCursos, findCursosByProfessor } from "../../../../actions/cursoActions";
+import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import useStyles from './styles'

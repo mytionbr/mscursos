@@ -7,27 +7,28 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCategoria } from "../../../actions/categoriaActions";
-import MessageBox from '../../core/MessageBox/MessageBox';
-import LoadingBox from '../../core/LoadingBox/LoadingBox';
+import { listCategoria } from "../../../../actions/categoriaActions";
+import MessageBox from '../../../core/MessageBox/MessageBox';
+import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 
 import useStyles from "./styles";
-import { createCurso } from "../../../actions/cursoActions";
+import { createCurso, detailsCurso } from "../../../../actions/cursoActions";
 import { useHistory } from 'react-router-dom'
-import { CURSO_CREATE_RESET } from "../../../constants/cursoConstants";
+import { CURSO_CREATE_RESET } from "../../../../constants/cursoConstants";
 
-function FormCurso(props) {
+function UpdateFormCurso(props) {
   const classes = useStyles();
 
   const history = useHistory()
 
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
-  const cursoCreated = useSelector((state) => state.cursoCreate);
-  const { loading, error, success } = cursoCreated;
+  const cursoDetails = useSelector((state) => state.cursoDetails)
+  const { loading, error, data: curso } = cursoDetails
 
   const {
     categorias: categorias,
@@ -40,9 +41,17 @@ function FormCurso(props) {
   }, [dispatch]);
 
   useEffect(()=>{
-    if (success) {
-        dispatch({type:CURSO_CREATE_RESET})
-        history.push('/professor/app/cursos')
+    if (successUpdate) {
+        // dispatch({type:CURSO_CREATE_RESET})
+        // history.push('/professor/app/cursos')
+    } 
+    if (!data || curso.curso_id !== cursoId || successUpdate){
+      dispatch({type: CURSO_UPDATE_RESET})
+      dispatch(detailsCurso(cursoId))
+    } else {
+      setNome(curso.nome)
+      setCategoria(curso.categoria_id)
+      setDescricao(curso.descricao)
     }
   },[dispatch, history, success])
 
@@ -104,6 +113,9 @@ function FormCurso(props) {
           <MessageBox type="error">{errorCategorias}</MessageBox>
         ) : (
           <FormControl  color="secondary" variant="filled" className={classes.formControl}>
+            <Typography variant="h4">
+              ID: {curso.curso_id}
+            </Typography>
             <InputLabel id="categorias">Categoria</InputLabel>
             <Select
               labelId="categorias"
@@ -144,4 +156,4 @@ function FormCurso(props) {
   );
 }
 
-export default FormCurso;
+export default UpdateFormCurso;
