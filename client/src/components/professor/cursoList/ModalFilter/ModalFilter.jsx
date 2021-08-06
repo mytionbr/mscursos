@@ -50,6 +50,7 @@ function ModalFilter({ onModalClose, openModal }) {
     );
     setNome("");
     setCategoriasTags([]);
+    onModalClose()
   };
 
   const handlerSubmit = () => {
@@ -59,6 +60,7 @@ function ModalFilter({ onModalClose, openModal }) {
         categorias: categoriasTags || [],
       })
     );
+    onModalClose()
   };
 
   const Categorias = () => {
