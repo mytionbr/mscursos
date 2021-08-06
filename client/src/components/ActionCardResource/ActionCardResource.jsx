@@ -9,7 +9,9 @@ import {
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 
-function ActionCardResource({ resource, ...rest }) {
+function ActionCardResource({ resource, action, ...rest }) {
+  console.log(onclick)
+
   return (
     <Card
       style={{
@@ -17,9 +19,10 @@ function ActionCardResource({ resource, ...rest }) {
         flexDirection: "column",
         height: "100%",
       }}
+      onClick={action}
       {...rest}
     >
-      <CardActionArea>
+      <CardActionArea >
         <CardContent>
           <Box
             style={{
@@ -27,6 +30,7 @@ function ActionCardResource({ resource, ...rest }) {
               justifyContent: "center",
               padding: "1rem",
             }}
+           
           >
             <Avatar
               style={{
