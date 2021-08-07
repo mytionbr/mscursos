@@ -73,7 +73,6 @@ function CreateFormCurso(props) {
             descricao: descricao, 
             categoria_id: categoria
         }))
-    history.push('/professor/app/cursos')
   };
 
   return (

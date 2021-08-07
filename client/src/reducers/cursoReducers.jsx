@@ -61,6 +61,7 @@ export const cursoCreateReducer = (
         case CURSO_CREATE_FAIL:
             return { loading: false, error: action.payload }
         case CURSO_CREATE_RESET:
+            console.log('ola')
             return {}
          default:
              return state   
