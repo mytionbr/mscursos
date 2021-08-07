@@ -14,7 +14,6 @@ function CursoList() {
     setOpenModal(!openModal);
   };
 
- 
 
   const links = [
     {

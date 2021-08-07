@@ -56,10 +56,9 @@ function Dashboard() {
         <title> Dashboard | mscursos </title>
       </Helmet>
       <Box
-        sx={{
-          backgroundColor: "background.default",
+        style={{
           minHeight: "100%",
-          py: 3,
+          padding: '3rem 0',
         }}
       >
         <Container maxWidth={false}>

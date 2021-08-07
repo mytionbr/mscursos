@@ -2,8 +2,7 @@ import { Button, Menu, MenuItem } from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 
-
-function MenuButton({id}) {
+function MenuButton({id,handleOpenModal,setIdDelete}) {
     const history = useHistory()
     const [anchorEl, setAnchorEl] = useState(null)
     
@@ -20,8 +19,10 @@ function MenuButton({id}) {
         handleClose()
     }
 
-    const handleDelete = (id) => {
-        handleClose()
+    const handleDelete = () => {
+      setIdDelete(id)
+      handleOpenModal()  
+      handleClose()
     }
 
     return (

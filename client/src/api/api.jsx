@@ -34,6 +34,13 @@ const updateCurso = (curso,professorInfo) => axios.put(
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
     })
 
+const deleteCurso = (cursoId, professorInfo) => axios.delete(
+    `/api/cursos/${cursoId}`,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
+    }
+)
+
 const Api = {
     fetchCursos,
     fetchCategorias,
@@ -44,7 +51,8 @@ const Api = {
     findCursosByProfessor,
     createCurso,
     findCursoById,
-    updateCurso
+    updateCurso,
+    deleteCurso
 }
 
 export default Api

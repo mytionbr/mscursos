@@ -12,10 +12,15 @@ import {
 import React, { useEffect, useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useDispatch, useSelector } from "react-redux";
-import { findCursosByProfessor } from "../../../../actions/cursoActions";
+import {
+  deleteCurso,
+  findCursosByProfessor,
+} from "../../../../actions/cursoActions";
+import { CURSO_DELETE_RESET } from "../../../../constants/cursoConstants";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import MenuButton from "../MenuButton/MenuButton";
+import ModalDelete from "../ModalDelete/ModalDelete";
 
 function CursoListResults(props) {
   const dispatch = useDispatch();
@@ -23,14 +28,42 @@ function CursoListResults(props) {
   const { loading, error, data } = cursoProfessor;
   const cursos = data ? data : [];
 
+  const cursoDelete = useSelector((state) => state.cursoDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = cursoDelete;
+
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
+  const [open, setOpen] = useState(false);
+  const [idDelete, setIdDelete] = useState(null);
+
+  const handleOpenModal = (id) => {
+    setIdDelete(id);
+    setOpen(!open);
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteCurso(id));
+  };
+
   useEffect(() => {
-    dispatch(findCursosByProfessor({
-      nome: "",
-      categorias: [],
-    }));
+    if (successDelete) {
+      dispatch({ type: CURSO_DELETE_RESET });
+      setIdDelete(null);
+    }
+  }, [dispatch, successDelete]);
+
+  useEffect(() => {
+    dispatch(
+      findCursosByProfessor({
+        nome: "",
+        categorias: [],
+      })
+    );
   }, [dispatch]);
 
   const handleLimitChange = (event) => {
@@ -43,10 +76,12 @@ function CursoListResults(props) {
 
   return (
     <>
-      {loading ? (
+      {loading || loadingDelete ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox type="error">{error}</MessageBox>
+      ) : errorDelete ?(
+        <MessageBox type="error">{errorDelete}</MessageBox>
       ) : (
         <Card {...props}>
           <PerfectScrollbar component="div">
@@ -73,16 +108,20 @@ function CursoListResults(props) {
                             {curso.nome}
                           </Typography>
                         </TableCell>
-                        <TableCell>{
-                          curso.descricao.length > 20 
-                          ? curso.descricao.slice(0,20) + '...'
-                          : curso.descricao
-                        }</TableCell>
+                        <TableCell>
+                          {curso.descricao.length > 20
+                            ? curso.descricao.slice(0, 20) + "..."
+                            : curso.descricao}
+                        </TableCell>
                         <TableCell>{curso.categoria_nome}</TableCell>
                         <TableCell>{curso.aulas}</TableCell>
                         <TableCell>{curso.alunos}</TableCell>
                         <TableCell>
-                          <MenuButton id={curso.curso_id} />
+                          <MenuButton
+                            handleOpenModal={handleOpenModal}
+                            setIdDelete={setIdDelete}
+                            id={curso.curso_id}
+                          />
                         </TableCell>
                       </TableRow>
                     ))}
@@ -101,6 +140,13 @@ function CursoListResults(props) {
           />
         </Card>
       )}
+      <ModalDelete
+        handleDelete={handleDelete}
+        setIdDelete={setIdDelete}
+        idDelete={idDelete}
+        open={open}
+        handleOpenModal={handleOpenModal}
+      />
     </>
   );
 }
