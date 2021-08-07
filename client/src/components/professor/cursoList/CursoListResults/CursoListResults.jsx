@@ -41,12 +41,12 @@ function CursoListResults(props) {
   const [open, setOpen] = useState(false);
   const [idDelete, setIdDelete] = useState(null);
 
-  const handleOpenModal = (id) => {
-    setIdDelete(id);
+  const handleOpenModal = (id) => {    
     setOpen(!open);
   };
 
   const handleDelete = (id) => {
+    console.log(id)
     dispatch(deleteCurso(id));
   };
 
@@ -55,16 +55,13 @@ function CursoListResults(props) {
       dispatch({ type: CURSO_DELETE_RESET });
       setIdDelete(null);
     }
-  }, [dispatch, successDelete]);
-
-  useEffect(() => {
     dispatch(
       findCursosByProfessor({
         nome: "",
         categorias: [],
       })
     );
-  }, [dispatch]);
+  }, [dispatch, successDelete]);
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
