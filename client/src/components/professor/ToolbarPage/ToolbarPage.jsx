@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Button, Card, Link, Typography } from '@material-ui/core'
+import { Box, Breadcrumbs, Button, Typography } from '@material-ui/core'
 import React from 'react'
 import useStyles from './styles'
 import {Link as LinkRoute} from 'react-router-dom'
@@ -12,11 +12,9 @@ function ToolbarPage({btns,links,title,...rest}) {
                 <Breadcrumbs>
                 {
                     links.map(link=>
-                        <Link color="inherit">
-                            <LinkRoute to={link.href}> 
+                            <LinkRoute key={link.name} to={link.href}> 
                                 {link.name}
                             </LinkRoute>
-                        </Link>
                     )
                 }
                 </Breadcrumbs>
@@ -33,7 +31,8 @@ function ToolbarPage({btns,links,title,...rest}) {
                          <Button 
                             className={classes.buttonAddCurso}  
                             variant="contained"
-                            onClick={btn.action}>
+                            onClick={btn.action}
+                            key={btn.name}>
                             {btn.name}
                         </Button>    
                     )}

@@ -30,7 +30,7 @@ function CreateFormCurso(props) {
   const { loading, error, success } = cursoCreated;
 
   const {
-    categorias: categorias,
+    categorias,
     loading: loadingCategorias,
     error: errorCategorias,
   } = categoriaList;

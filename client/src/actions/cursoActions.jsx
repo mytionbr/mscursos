@@ -97,7 +97,6 @@ export const findCursosByProfessor = (params) => async (dispatch, getState) => {
       professorInfo,
       queryString
     );
-    console.log(data);
     dispatch({ type: CURSO_PROFESSOR_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -132,11 +131,12 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
   dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
   try {
     const { data } = await Api.findCursoById(cursoId);
+  
     dispatch({ type: CURSO_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: CURSO_DETAILS_FAIL,
-      payload: error.response.data.error || error.response.data.message
+      payload: error
     });
   }
 };
@@ -148,6 +148,7 @@ export const updateCurso = (curso) => async(dispatch, getState) => {
     } = getState()
     try {
         const { data } = await Api.updateCurso(curso,professorInfo)
+        console.log(data)
         dispatch({type:CURSO_UPDATE_SUCCESS, payload: data})
     } catch (error) {
         dispatch({

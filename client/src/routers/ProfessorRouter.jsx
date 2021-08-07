@@ -6,6 +6,7 @@ import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfesso
 import ProfessorRoute from '../components/professor/ProfessorRoute'
 import CursoList from '../screens/Professor/CursoList/CursoList'
 import CreateCurso from '../screens/Professor/CreateCurso/CreateCurso'
+import UpdateCurso from '../screens/Professor/UpdateCurso/UpdateCurso'
 
 const ProfessorRouter = () => {
     const routes = ()=>{
@@ -17,7 +18,10 @@ const ProfessorRouter = () => {
                             path={'/professor/app/cursos/novo'} 
                             component={ CreateCurso}
                         />
-                         
+                         <ProfessorRoute 
+                            path={'/professor/app/cursos/:cursoId'} 
+                            component={ UpdateCurso}
+                        />
                          <ProfessorRoute 
                             exact 
                             path={

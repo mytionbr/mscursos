@@ -1,8 +1,10 @@
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 
 function MenuButton({id}) {
+    const history = useHistory()
     const [anchorEl, setAnchorEl] = useState(null)
     
     const handleClick = (event) => {
@@ -13,15 +15,14 @@ function MenuButton({id}) {
         setAnchorEl(null);
     };
 
-    const handleEdit = (id) => {
-        
+    const handleEdit = () => {
+        history.push(`/professor/app/cursos/${id}`)
         handleClose()
     }
 
     const handleDelete = (id) => {
         handleClose()
     }
-   
 
     return (
     <div>
@@ -29,7 +30,7 @@ function MenuButton({id}) {
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        variant="secondary"
+        variant="contained"
         style={{
           background: '#506198',
           color:'#fff'

@@ -16,22 +16,21 @@ import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 
 import useStyles from "./styles";
-import { createCurso, detailsCurso, updateCurso } from "../../../../actions/cursoActions";
+import { detailsCurso, updateCurso } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
 import {
   CURSO_UPDATE_RESET,
 } from "../../../../constants/cursoConstants";
 
-function UpdateFormCurso(props) {
+function UpdateFormCurso({cursoId,...rest}) {
   const classes = useStyles();
-
-  const cursoId = props.match.params.id;
+  
   const history = useHistory();
 
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
   const cursoDetails = useSelector((state) => state.cursoDetails);
-  const { loading, error, data: curso } = cursoDetails;
+  const { loading, error,  curso } = cursoDetails;
 
   const cursoUpdate = useSelector((state) => state.cursoUpdate);
   const {
@@ -51,11 +50,12 @@ function UpdateFormCurso(props) {
   }, [dispatch]);
 
   useEffect(() => {
+  
     if (successUpdate) {
       dispatch({ type: CURSO_UPDATE_RESET });
       history.push("/professor/app/cursos");
     }
-    if (!curso || curso.curso_id !== cursoId || successUpdate) {
+    if (!curso || curso.curso_id !== Number(cursoId) || successUpdate) {
       dispatch({ type: CURSO_UPDATE_RESET });
       dispatch(detailsCurso(cursoId));
     } else {
@@ -98,13 +98,14 @@ function UpdateFormCurso(props) {
   };
 
   return (
-    <Card {...props}>
+    <Card {...rest}>
       {loading ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="error">{error}</MessageBox>
       ) : (
         <Box className={classes.boxContainer}>
+          <Typography variant="h6">CURSO ID: {cursoId}</Typography>
           <TextField
             name="nome"
             variant="outlined"
@@ -128,13 +129,13 @@ function UpdateFormCurso(props) {
             <LoadingBox />
           ) : errorCategorias ? (
             <MessageBox type="error">{errorCategorias}</MessageBox>
-          ) : (
+          ) : (          
             <FormControl
               color="secondary"
               variant="filled"
               className={classes.formControl}
             >
-              <Typography variant="h4">ID: {curso.curso_id}</Typography>
+             
               <InputLabel id="categorias">Categoria</InputLabel>
               <Select
                 labelId="categorias"
@@ -166,7 +167,9 @@ function UpdateFormCurso(props) {
             errorUpdate && <MessageBox type="error">{error}</MessageBox>
           )}
         </Box>
-      )}
+         
+      )
+      }
     </Card>
   );
 }
