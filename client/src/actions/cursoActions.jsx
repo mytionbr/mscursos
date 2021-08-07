@@ -152,7 +152,6 @@ export const updateCurso = (curso) => async(dispatch, getState) => {
     } = getState()
     try {
         const { data } = await Api.updateCurso(curso,professorInfo)
-        console.log(data)
         dispatch({type:CURSO_UPDATE_SUCCESS, payload: data})
     } catch (error) {
         dispatch({

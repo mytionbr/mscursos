@@ -94,7 +94,7 @@ export const cursoUpdateReducer = (
         case CURSO_UPDATE_REQUEST:
             return { loading: true }
         case CURSO_UPDATE_SUCCESS:
-            return { loading: false, sucess: true }
+            return { loading: false, success: true }
         case CURSO_UPDATE_FAIL:
             return { loading: false, error: action.payload }
         case CURSO_UPDATE_RESET:

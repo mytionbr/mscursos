@@ -50,7 +50,7 @@ function UpdateFormCurso({cursoId,...rest}) {
   }, [dispatch]);
 
   useEffect(() => {
-  
+    console.log(successUpdate)
     if (successUpdate) {
       dispatch({ type: CURSO_UPDATE_RESET });
       history.push("/professor/app/cursos");
@@ -94,7 +94,6 @@ function UpdateFormCurso({cursoId,...rest}) {
         categoria_id: categoria,
       })
     );
-    history.push("/professor/app/cursos");
   };
 
   return (
