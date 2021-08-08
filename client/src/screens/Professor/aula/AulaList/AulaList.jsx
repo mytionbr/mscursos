@@ -2,13 +2,13 @@ import { Box, Container, Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
-import AulaListResult from "../../../components/professor/aulaList/AulaListResult/AulaListResult";
-import CursosTabs from "../../../components/professor/aulaList/CursosTabs/CursosTabs";
-import FormAulaFilter from "../../../components/professor/aulaList/FormAulaFilter/FormAulaFilter";
-import ModalFilter from "../../../components/professor/ModalFilter/ModalFilter";
-import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
+import AulaListResult from "../../../../components/professor/aulaList/AulaListResult/AulaListResult";
+import CursosTabs from "../../../../components/professor/aulaList/CursosTabs/CursosTabs";
+import FormAulaFilter from "../../../../components/professor/aulaList/FormAulaFilter/FormAulaFilter";
+import ModalFilter from "../../../../components/professor/ModalFilter/ModalFilter";
+import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 
-function AlunoList() {
+function AulaList() {
   const history = useHistory();
   
   const [openModal, setOpenModal] = useState(false);
@@ -74,4 +74,4 @@ function AlunoList() {
   );
 }
 
-export default AlunoList;
+export default AulaList;

@@ -4,16 +4,27 @@ import DashboardLayout from '../components/professor/dashboard/DashboardLayout/D
 import Dashboard from '../screens/Professor/Dashboard'
 import SigninProfessor from '../screens/Professor/SigninProfessor/SigninProfessor'
 import ProfessorRoute from '../components/professor/ProfessorRoute'
-import CursoList from '../screens/Professor/CursoList/CursoList'
-import CreateCurso from '../screens/Professor/CreateCurso/CreateCurso'
-import UpdateCurso from '../screens/Professor/UpdateCurso/UpdateCurso'
+import CursoList from '../screens/Professor/curso/CursoList/CursoList'
+import CreateCurso from '../screens/Professor/curso/CreateCurso/CreateCurso'
+import UpdateCurso from '../screens/Professor/curso/UpdateCurso/UpdateCurso'
+import CreateAula from '../screens/Professor/aula/CreateAula/CreateAula'
+import UpdateAula from '../screens/Professor/aula/UpdateAula/UpdateAula'
+import AulaListResult from '../components/professor/aulaList/AulaListResult/AulaListResult'
+import AulaList from '../screens/Professor/aula/AulaList/AulaList'
 
 const ProfessorRouter = () => {
     const routes = ()=>{
         return (
                 <DashboardLayout>
                      <Switch>
-                         
+                        <ProfessorRoute 
+                            path={'/professor/app/aulas/novo'} 
+                            component={ CreateAula}
+                        />
+                        <ProfessorRoute 
+                            path={'/professor/app/aulas/:aulaId'} 
+                            component={ UpdateAula}
+                        />
                         <ProfessorRoute 
                             path={'/professor/app/cursos/novo'} 
                             component={ CreateCurso}
@@ -27,6 +38,12 @@ const ProfessorRouter = () => {
                             path={
                                 '/professor/app/cursos'} 
                             component={ CursoList}
+                        />
+                        <ProfessorRoute 
+                            exact 
+                            path={
+                                '/professor/app/aulas'} 
+                            component={ AulaList}
                         />
 
 
