@@ -5,6 +5,7 @@ import CursoListResults from "../../../components/professor/cursoList/CursoListR
 import ModalFilter from "../../../components/professor/cursoList/ModalFilter/ModalFilter";
 import { useHistory } from "react-router";
 import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
+import FormCursoFilter from "../../../components/professor/cursoList/FormCursoFilter/FormCursoFilter";
 
 function CursoList() {
   const [openModal, setOpenModal] = useState(false);
@@ -57,7 +58,7 @@ function CursoList() {
           </Box>
         </Container>
       </Box>
-      <ModalFilter openModal={openModal} onModalClose={handleOpenModal} />
+      <ModalFilter form={FormCursoFilter} openModal={openModal} onModalClose={handleOpenModal} />
     </>
   );
 }
