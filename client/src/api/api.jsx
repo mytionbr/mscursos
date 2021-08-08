@@ -29,6 +29,14 @@ const createCurso = (curso,professorInfo) => axios.post(
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
     })
 
+const createAula = (aula,professorInfo) => axios.post(
+    `/api/cursos/${aula.curso_id}/aulas`,
+    aula,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
+})
+    
+
 const updateCurso = (curso,professorInfo) => axios.put(
     `/api/cursos/${curso.curso_id}`,
     curso,
@@ -63,7 +71,8 @@ const Api = {
     updateCurso,
     deleteCurso,
     findAulas,
-    deleteAula
+    deleteAula,
+    createAula
 }
 
 export default Api

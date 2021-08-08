@@ -442,21 +442,3 @@ export const findByProfessor = async (req, res) => {
 }
 
 
-export const removeAula = async (req, res) =>{
-    try {
-        const curso = req.profile
-        const aulaId = req.params.aulaId
-
-        await pool.query(
-            'DELETE FROM aula WHERE curso_id = $1, aula_id = $2',
-            [curso.curso_id,aulaId]
-        )
-
-        res.status(200).json({
-            message: 'aula deletada com sucesso',
-            curso: curso 
-        })
-    } catch (err) {
-        res.status(400).json({message: err.message})
-    }
-}

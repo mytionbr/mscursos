@@ -60,7 +60,7 @@ function AlunoList() {
           <ToolbarPage title={"Aulas"} links={links} btns={btns} />
           <Grid container spacing={2}>
             <Grid item lg={4} sm={12} xl={4} xs={12}>
-                <CursosTabs currentCurso={currentCurso} handleChangeCurso={setCurrentCurso} />
+                <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
             </Grid>
             <Grid item lg={8} sm={12} xl={8} xs={12}>
                 <AulaListResult currentCurso={currentCurso} />

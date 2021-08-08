@@ -1,6 +1,7 @@
 import express from 'express'
 import { hasAuthorizationCurso, isAuth } from '../controllers/auth.controller.js'
-import { create, enroll, findById, findCursoByCategoriaId, find, getAluno, getAulas, listMatriculas, read, remove, unenroll, update, findByProfessor, removeAula } from '../controllers/curso.controller.js'
+import { create, enroll, findById, findCursoByCategoriaId, find, getAluno, getAulas, listMatriculas, read, remove, unenroll, update, findByProfessor } from '../controllers/curso.controller.js'
+import { remove as removeAula, create as createAula } from '../controllers/aula.controller.js'
 
 const router = express.Router()
 
@@ -29,6 +30,7 @@ router.route('/:id/matriculas/:alunoId')
 
 router.route('/:id/aulas')
     .get( getAulas )
+    .post(isAuth,hasAuthorizationCurso,createAula)
 
 router.route('/:id/aulas/:aulaId')
     .get( isAuth,hasAuthorizationCurso,removeAula )
