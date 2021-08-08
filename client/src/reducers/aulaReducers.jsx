@@ -1,4 +1,4 @@
-import { AULA_FIND_FAIL, AULA_FIND_REQUEST, AULA_FIND_SUCCESS } from "../constants/aulaConstantes"
+import { AULA_DELETE_FAIL, AULA_DELETE_REQUEST, AULA_DELETE_RESET, AULA_DELETE_SUCCESS, AULA_FIND_FAIL, AULA_FIND_REQUEST, AULA_FIND_SUCCESS } from "../constants/aulaConstantes"
 
 export const aulaFindReducer = (
     state = { loading: true, data:[] },
@@ -11,6 +11,24 @@ export const aulaFindReducer = (
             return { loading: false, data: action.payload }
         case AULA_FIND_FAIL:
             return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+export const aulaDeleteReducer = (
+    state ={},
+    action 
+) =>{
+    switch(action.type){
+        case AULA_DELETE_REQUEST:
+            return { loading: true }
+        case AULA_DELETE_SUCCESS:
+            return { laoding: false, success: true}
+        case AULA_DELETE_FAIL:
+            return { loading: false, error: action.payload }
+        case AULA_DELETE_RESET:
+            return {}
         default:
             return state
     }
