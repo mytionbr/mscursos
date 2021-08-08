@@ -11,17 +11,14 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCategoria } from "../../../../actions/categoriaActions";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 
 import useStyles from "./styles";
-import { detailsCurso, findCursosByProfessor, updateCurso } from "../../../../actions/cursoActions";
+import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
-import {
-  CURSO_UPDATE_RESET,
-} from "../../../../constants/cursoConstants";
-import { detailsAula } from "../../../../actions/aulaActions";
+import { detailsAula, updateAula } from "../../../../actions/aulaActions";
+import { AULA_UPDATE_RESET } from "../../../../constants/aulaConstantes";
 
 function UpdateFormAula({aulaId,cursoId,...rest}) {
   const classes = useStyles();

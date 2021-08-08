@@ -64,8 +64,14 @@ export const read = async (req, res) => {
 
 export const update = async (req,res) => {
     try {
-        let aula = req.profile
-        aula = extend(aula, req.body)
+        const curso = req.profile
+        const aulaId = req.params.aulaId
+        
+        const { aulasRows } = await pool.query(
+            'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
+            [aulaId,curso.curso_id])
+
+        let aula = extend(aulasRows.rows[0], req.body)
 
         const { rows } = await pool.query(
             'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3 WHERE aula_id = $4 RETURNING *;',

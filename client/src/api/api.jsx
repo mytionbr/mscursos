@@ -45,6 +45,13 @@ const updateCurso = (curso,professorInfo) => axios.put(
     curso,
     {
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
+})
+
+const updateAula = (aula,professorInfo) => axios.put(
+    `/api/cursos/${aula.curso_id}/aulas/${aula.aula_id}`,
+    aula,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
     })
 
 const deleteCurso = (cursoId, professorInfo) => axios.delete(
@@ -76,7 +83,8 @@ const Api = {
     findAulas,
     deleteAula,
     createAula,
-    findAulaById
+    findAulaById,
+    updateAula
 }
 
 export default Api
