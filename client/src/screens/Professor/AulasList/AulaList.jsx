@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
 import AulaListResult from "../../../components/professor/aulaList/AulaListResult/AulaListResult";
 import CursosTabs from "../../../components/professor/aulaList/CursosTabs/CursosTabs";
+import FormAulaFilter from "../../../components/professor/aulaList/FormAulaFilter/FormAulaFilter";
+import ModalFilter from "../../../components/professor/ModalFilter/ModalFilter";
 import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
 
 function AlunoList() {
@@ -66,6 +68,8 @@ function AlunoList() {
           </Grid>
         </Container>
       </Box>
+      <ModalFilter form={FormAulaFilter} openModal={openModal} onModalClose={handleOpenModal} />
+
     </>
   );
 }

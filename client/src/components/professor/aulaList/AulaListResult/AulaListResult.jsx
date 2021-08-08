@@ -92,7 +92,6 @@ const handleModalDelete = (id) => {
                       <TableCell>Id</TableCell>
                       <TableCell>Nome</TableCell>
                       <TableCell>Descrição</TableCell>
-                      <TableCell>Alunos</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -111,7 +110,6 @@ const handleModalDelete = (id) => {
                               ? aula.descricao.slice(0, 20) + "..."
                               : aula.descricao}
                           </TableCell>
-                          <TableCell>{aula.alunos}</TableCell>
                           <TableCell>
                             <MenuButton
                               handleOpenModal={handleOpenModal}
