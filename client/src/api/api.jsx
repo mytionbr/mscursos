@@ -6,6 +6,8 @@ const fetchCategorias = () => axios.get('/api/categorias')
 
 const findCursos = (query) => axios.get('/api/cursos/' + query)
 
+const findAulas = (cursoId, query) => axios.get(`/api/cursos/${cursoId}/aulas${query}`)
+
 const signinAluno = (email, password) => axios.post('/api/auth/aluno/signin', {email: email, senha: password })
 
 const signinProfessor = (email, password) => axios.post('/api/auth/professor/signin', {email: email, senha: password })
@@ -41,6 +43,13 @@ const deleteCurso = (cursoId, professorInfo) => axios.delete(
     }
 )
 
+const deleteAula = (aulaId,cursoId, professorInfo) => axios.delete(
+    `/api/cursos/${cursoId}/aulas/${aulaId}`,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
+    }
+)
+
 const Api = {
     fetchCursos,
     fetchCategorias,
@@ -52,7 +61,9 @@ const Api = {
     createCurso,
     findCursoById,
     updateCurso,
-    deleteCurso
+    deleteCurso,
+    findAulas,
+    deleteAula
 }
 
 export default Api

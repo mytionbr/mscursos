@@ -30,6 +30,7 @@ router.route('/:id/matriculas/:alunoId')
 router.route('/:id/aulas')
     .get( getAulas )
 
+
 router.param('id', findById)
 
 

@@ -18,13 +18,10 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
     const professorSignin = useSelector((state) => state.professorSignin)
     const {professorInfo} = professorSignin
 
-
-
     const user = {
         office: 'Professor',
         name: professorInfo.nome
-    }
-        
+    }       
 
     const items = [
         {
@@ -39,13 +36,13 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
         },
         {
             href: '/professor/app',
-            icon: PeopleIcon,
-            title: 'Alunos'
+            icon: ClassIcon,
+            title: 'Aulas'
         },
         {
             href: '/professor/app',
-            icon: ClassIcon,
-            title: 'Notas'
+            icon: PeopleIcon,
+            title: 'Alunos'
         },
         {
             href: '/professor/app',
