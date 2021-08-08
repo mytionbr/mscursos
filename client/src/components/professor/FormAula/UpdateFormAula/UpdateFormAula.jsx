@@ -16,58 +16,63 @@ import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 
 import useStyles from "./styles";
-import { detailsCurso, updateCurso } from "../../../../actions/cursoActions";
+import { detailsCurso, findCursosByProfessor, updateCurso } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
 import {
   CURSO_UPDATE_RESET,
 } from "../../../../constants/cursoConstants";
+import { detailsAula } from "../../../../actions/aulaActions";
 
-function UpdateFormCurso({cursoId,...rest}) {
+function UpdateFormAula({aulaId,cursoId,...rest}) {
   const classes = useStyles();
   
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const categoriaList = useSelector((state) => state.categoriaList);
-  const cursoDetails = useSelector((state) => state.cursoDetails);
-  const { loading, error,  curso } = cursoDetails;
+  const cursoProfessor = useSelector((state) => state.cursoProfessor);
+  const aulaDetails = useSelector((state) => state.aulaDetails);
+  const { loading, error,  aula } = aulaDetails;
 
-  const cursoUpdate = useSelector((state) => state.cursoUpdate);
+  const aulaUpdate = useSelector((state) => state.aulaUpdate);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = cursoUpdate;
+  } = aulaUpdate;
 
   const {
-    categorias,
-    loading: loadingCategorias,
-    error: errorCategorias,
-  } = categoriaList;
+    cursos,
+    loading: loadingCursos,
+    error: errorCursos,
+  } = cursoProfessor;
 
   useEffect(() => {
-    dispatch(listCategoria());
+    dispatch(
+      findCursosByProfessor({
+        nome: "",
+        categorias: [],
+      })
+    );
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(successUpdate)
     if (successUpdate) {
-      dispatch({ type: CURSO_UPDATE_RESET });
-      history.push("/professor/app/cursos");
+      dispatch({ type: AULA_UPDATE_RESET });
+      history.push("/professor/app/aulas");
     }
-    if (!curso || curso.curso_id !== Number(cursoId) || successUpdate) {
-      dispatch({ type: CURSO_UPDATE_RESET });
-      dispatch(detailsCurso(cursoId));
+    if (!aula || aula.aula_id !== Number(aulaId) || successUpdate) {
+      dispatch({ type: AULA_UPDATE_RESET });
+      dispatch(detailsAula(aulaId,cursoId));
     } else {
-      setNome(curso.nome);
-      setCategoria(curso.categoria_id);
-      setDescricao(curso.descricao);
+      setNome(aula.nome);
+      setCurso(aula.curso_id);
+      setDescricao(aula.descricao);
     }
-  }, [curso, cursoId, dispatch, history, successUpdate]);
+  }, [aula, aulaId, cursoId, dispatch, history, successUpdate]);
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [curso, setCurso] = useState("");
 
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -79,19 +84,19 @@ function UpdateFormCurso({cursoId,...rest}) {
     setDescricao(value);
   };
 
-  const handlerChangeCategoria = (event) => {
+  const handlerChangeCurso = (event) => {
     const value = event.target.value;
-    setCategoria(value);
+    setCurso(value);
   };
 
   const handlerSubmit = (event) => {
     event.preventDefault();
     dispatch(
-      updateCurso({
-        curso_id: cursoId,
+      updateAula({
+        aula_id: aulaId,
         nome: nome,
         descricao: descricao,
-        categoria_id: categoria,
+        curso_id: curso,
       })
     );
   };
@@ -104,7 +109,7 @@ function UpdateFormCurso({cursoId,...rest}) {
         <MessageBox variant="error">{error}</MessageBox>
       ) : (
         <Box className={classes.boxContainer}>
-          <Typography variant="h6">CURSO ID: {cursoId}</Typography>
+          <Typography variant="h6">AULA ID: {aulaId}</Typography>
           <TextField
             name="nome"
             variant="outlined"
@@ -124,10 +129,10 @@ function UpdateFormCurso({cursoId,...rest}) {
             onChange={handlerChangeDescricao}
             value={descricao}
           />
-          {loadingCategorias ? (
+          {loadingCursos ? (
             <LoadingBox />
-          ) : errorCategorias ? (
-            <MessageBox type="error">{errorCategorias}</MessageBox>
+          ) : errorCursos ? (
+            <MessageBox type="error">{errorCursos}</MessageBox>
           ) : (          
             <FormControl
               color="secondary"
@@ -135,15 +140,15 @@ function UpdateFormCurso({cursoId,...rest}) {
               className={classes.formControl}
             >
              
-              <InputLabel id="categorias">Categoria</InputLabel>
+              <InputLabel id="cursos">Cursos</InputLabel>
               <Select
-                labelId="categorias"
-                id="categorias"
-                value={categoria}
-                onChange={handlerChangeCategoria}
+                labelId="cursos"
+                id="cursos"
+                value={curso}
+                onChange={handlerChangeCurso}
               >
-                {categorias.map((item) => (
-                  <MenuItem value={item.categoria_id}>{item.nome}</MenuItem>
+                {cursos.map((item) => (
+                  <MenuItem value={item.curso_id}>{item.nome}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -173,4 +178,4 @@ function UpdateFormCurso({cursoId,...rest}) {
   );
 }
 
-export default UpdateFormCurso;
+export default UpdateFormAula;

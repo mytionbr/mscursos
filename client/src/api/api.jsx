@@ -22,6 +22,9 @@ const findCursosByProfessor = (professorInfo,query) => axios.get(`/api/cursos/pr
 
 const findCursoById = (cursoId) => axios.get(`/api/cursos/${cursoId}`)
 
+const findAulaById = (aulaId,cursoId) => axios.get(`/api/cursos/${cursoId}/aulas/${aulaId}`)
+
+
 const createCurso = (curso,professorInfo) => axios.post(
     `/api/cursos`,
     curso,
@@ -72,7 +75,8 @@ const Api = {
     deleteCurso,
     findAulas,
     deleteAula,
-    createAula
+    createAula,
+    findAulaById
 }
 
 export default Api
