@@ -1,9 +1,7 @@
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 
-function MenuButton({id,handleOpenModal,setIdDelete}) {
-    const history = useHistory()
+function MenuButton({id,handleModalEdit,handleModalDelete}) {
     const [anchorEl, setAnchorEl] = useState(null)
     
     const handleClick = (event) => {
@@ -14,14 +12,13 @@ function MenuButton({id,handleOpenModal,setIdDelete}) {
         setAnchorEl(null);
     };
 
-    const handleEdit = () => {
-        history.push(`/professor/app/cursos/${id}`)
-        handleClose()
+    const handleDelete = () =>{
+      handleModalDelete(id)
+      handleClose()
     }
 
-    const handleDelete = () => {
-      setIdDelete(id)
-      handleOpenModal()  
+    const handleEdit = () =>{
+      handleModalEdit(id)
       handleClose()
     }
 

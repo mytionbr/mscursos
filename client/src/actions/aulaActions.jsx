@@ -23,7 +23,7 @@ export const findAulas = (params) => async (dispatch) => {
     }
   };
   
-  export const deleteCurso = ({aulaId,cursoId}) => async (dispatch, getState) => {
+  export const deleteAula = ({aulaId,cursoId}) => async (dispatch, getState) => {
     dispatch({type: AULA_DELETE_REQUEST, payload: {aulaId,cursoId}})
     const {
       professorSignin: { professorInfo }

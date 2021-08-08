@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
 import MenuButton from '../../cursoList/MenuButton/MenuButton';
-import ModalDelete from '../../cursoList/ModalDelete/ModalDelete';
+import ModalDelete from '../../ModalDelete/ModalDelete';
 import useStyles from './styles'
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { findAulas } from '../../../../actions/aulaActions';
+import { deleteAula, findAulas } from '../../../../actions/aulaActions';
+import { AULA_DELETE_RESET } from '../../../../constants/aulaConstantes';
 function AulaListResult({currentCurso,...rest}) {
   const classes = useStyles()
     
@@ -30,12 +31,12 @@ function AulaListResult({currentCurso,...rest}) {
   const [open, setOpen] = useState(false);
   const [idDelete, setIdDelete] = useState(null);
 
-  const handleOpenModal = (id) => {    
+  const handleOpenModal = () => {    
     setOpen(!open);
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteAula(id));
+  const handleDelete = (aulaId,cursoId) => {
+    dispatch(deleteAula(aulaId,cursoId));
   };
 
   useEffect(() => {
@@ -52,7 +53,7 @@ function AulaListResult({currentCurso,...rest}) {
       );
     }
 
-  }, [dispatch, successDelete]);
+  }, [currentCurso, dispatch, successDelete]);
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);

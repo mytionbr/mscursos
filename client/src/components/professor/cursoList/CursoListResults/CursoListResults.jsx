@@ -12,6 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   deleteCurso,
   findCursosByProfessor,
@@ -23,6 +24,7 @@ import MenuButton from "../MenuButton/MenuButton";
 import ModalDelete from "../ModalDelete/ModalDelete";
 
 function CursoListResults(props) {
+  const history = useHistory()
   const dispatch = useDispatch();
   const cursoProfessor = useSelector((state) => state.cursoProfessor);
   const { loading, error, data } = cursoProfessor;
@@ -46,9 +48,18 @@ function CursoListResults(props) {
   };
 
   const handleDelete = (id) => {
-    console.log(id)
+   
     dispatch(deleteCurso(id));
   };
+
+const handleModalEdit = (id) => {
+    history.push(`/professor/app/cursos/${id}`)
+}
+
+const handleModalDelete = (id) => {
+  setIdDelete(id)
+  handleOpenModal()  
+}
 
   useEffect(() => {
     if (successDelete) {
@@ -118,6 +129,8 @@ function CursoListResults(props) {
                             handleOpenModal={handleOpenModal}
                             setIdDelete={setIdDelete}
                             id={curso.curso_id}
+                            handleEdit={handleModalEdit}
+                            handleDelete={handleModalDelete}
                           />
                         </TableCell>
                       </TableRow>
