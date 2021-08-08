@@ -37,11 +37,13 @@ export const list = async (req, res) => {
     }
 }
 
-export const findById = async (req, res, next, id) => {
+export const findById = async (req, res) => {
     try {
+        const curso = req.profile
+        const aulaId = req.params.aulaId
         const { rows } = await pool.query(
-            'SELECT * FROM aula WHERE aula_id = $1',
-            [id])
+            'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
+            [aulaId,curso.curso_id])
 
         const aula = rows[0]
         
@@ -49,15 +51,14 @@ export const findById = async (req, res, next, id) => {
             return res.status(400).json('Aula não encontrada')
         }
 
-        req.profile = aula
-        next()
+        res.status(200).json(aula)
     } catch (err) {
         res.status(400).json({message: err.message})
     }
 }
 
 export const read = async (req, res) => {
-    const aula = req.profile
+    const aula = req.aula
     res.status(200).json(aula)
 }
 
