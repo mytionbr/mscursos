@@ -20,8 +20,8 @@ import {
 import { CURSO_DELETE_RESET } from "../../../../constants/cursoConstants";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
-import MenuButton from "../MenuButton/MenuButton";
-import ModalDelete from "../ModalDelete/ModalDelete";
+import MenuButton from "../../MenuButton/MenuButton";
+import ModalDelete from "../../ModalDelete/ModalDelete";
 
 function CursoListResults(props) {
   const history = useHistory()

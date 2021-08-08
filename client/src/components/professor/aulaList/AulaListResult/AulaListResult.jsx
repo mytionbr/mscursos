@@ -9,9 +9,10 @@ import useStyles from './styles'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { deleteAula, findAulas } from '../../../../actions/aulaActions';
 import { AULA_DELETE_RESET } from '../../../../constants/aulaConstantes';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 function AulaListResult({currentCurso,...rest}) {
   const classes = useStyles()
-    
+  const history = useHistory()
   const dispatch = useDispatch();
   const aulasCurso = useSelector((state) => state.aulaFind);
   const { loading, error, data } = aulasCurso;
@@ -63,6 +64,15 @@ function AulaListResult({currentCurso,...rest}) {
     setPage(newPage);
   };
 
+  const handleModalEdit = (id) => {
+    history.push(`/professor/app/aulas/${id}`)
+}
+
+const handleModalDelete = (id) => {
+  setIdDelete(id)
+  handleOpenModal()  
+}
+
 
     return (
         <>
@@ -88,25 +98,27 @@ function AulaListResult({currentCurso,...rest}) {
                   <TableBody>
                     {aulas
                       .slice(page * limit, page * limit + limit)
-                      .map((curso) => (
-                        <TableRow hover key={curso.curso_id}>
-                          <TableCell>{curso.curso_id}</TableCell>
+                      .map((aula) => (
+                        <TableRow hover key={aula.aula_id}>
+                          <TableCell>{aula.aula_id}</TableCell>
                           <TableCell>
                             <Typography color="textPrimary" variant="body1">
-                              {curso.nome}
+                              {aula.nome}
                             </Typography>
                           </TableCell>
                           <TableCell>
-                            {curso.descricao.length > 20
-                              ? curso.descricao.slice(0, 20) + "..."
-                              : curso.descricao}
+                            {aula.descricao.length > 20
+                              ? aula.descricao.slice(0, 20) + "..."
+                              : aula.descricao}
                           </TableCell>
-                          <TableCell>{curso.alunos}</TableCell>
+                          <TableCell>{aula.alunos}</TableCell>
                           <TableCell>
                             <MenuButton
                               handleOpenModal={handleOpenModal}
                               setIdDelete={setIdDelete}
-                              id={curso.curso_id}
+                              id={aula.aula_id}
+                              handleEdit={handleModalEdit}
+                              handleDelete={handleModalDelete}
                             />
                           </TableCell>
                         </TableRow>
@@ -117,7 +129,7 @@ function AulaListResult({currentCurso,...rest}) {
             </PerfectScrollbar>
             <TablePagination
               component="div"
-              count={cursos.length}
+              count={aulas.length}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleLimitChange}
               page={page}
