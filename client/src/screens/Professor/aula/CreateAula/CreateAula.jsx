@@ -1,7 +1,7 @@
 import { Box, Container } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
-import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
+import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 import { useHistory } from 'react-router-dom'
 import CreateFormAula from "../../../../components/professor/FormAula/CreateFormAula/CreateFormAula";
 

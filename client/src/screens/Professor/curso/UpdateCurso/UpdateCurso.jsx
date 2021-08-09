@@ -1,9 +1,9 @@
 import { Box, Container } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
-import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
+import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 import { useHistory } from 'react-router-dom'
-import UpdateFormCurso from "../../../components/professor/FormCurso/UpdateFormCurso/UpdateFormCurso";
+import UpdateFormCurso from "../../../../components/professor/FormCurso/UpdateFormCurso/UpdateFormCurso";
 
 function UpdateCurso(props) {
   const cursoId = props.match.params.cursoId;

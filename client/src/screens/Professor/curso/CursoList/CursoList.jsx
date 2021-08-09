@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Box, Container } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import CursoListResults from "../../../../components/professor/cursoList/CursoListResults/CursoListResults";
-import ModalFilter from "../../../components/professor/cursoList/ModalFilter/ModalFilter";
 import { useHistory } from "react-router";
 import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 import FormCursoFilter from "../../../../components/professor/cursoList/FormCursoFilter/FormCursoFilter";
+import ModalFilter from "../../../../components/professor/ModalFilter/ModalFilter";
 
 function CursoList() {
   const [openModal, setOpenModal] = useState(false);

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
-import MenuButton from '../../cursoList/MenuButton/MenuButton';
-import ModalDelete from '../../ModalDelete/ModalDelete';
+import ModalDelete from "../../ModalDelete/ModalDelete";
+import MenuButton from "../../MenuButton/MenuButton"
 import useStyles from './styles'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { deleteAula, findAulas } from '../../../../actions/aulaActions';

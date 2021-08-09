@@ -34,7 +34,7 @@ router.route('/:id/aulas')
 
 router.route('/:id/aulas/:aulaId')
     .get(isAuth,hasAuthorizationCurso, findAulaById)
-    .remove( isAuth,hasAuthorizationCurso,removeAula )
+    .delete( isAuth,hasAuthorizationCurso,removeAula)
     .put(isAuth,hasAuthorizationCurso,updateAula)
 
 router.param('id', findById)

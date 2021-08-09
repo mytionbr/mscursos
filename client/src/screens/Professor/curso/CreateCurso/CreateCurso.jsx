@@ -1,8 +1,8 @@
 import { Box, Container } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
-import CreateFormCurso from "../../../components/professor/FormCurso/CreateFormCurso/CreateFormCurso";
-import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
+import CreateFormCurso from "../../../../components/professor/FormCurso/CreateFormCurso/CreateFormCurso";
+import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 import { useHistory } from 'react-router-dom'
 
 function CreateCurso() {

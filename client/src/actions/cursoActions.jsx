@@ -105,7 +105,7 @@ export const findCursosByProfessor = (params) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_PROFESSOR_FAIL,
-      payload: error.response.data.error || error.response.data.message
+      payload: error.error || error.message
     });
   }
 };

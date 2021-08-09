@@ -11,7 +11,6 @@ import Navitem from './Navitem';
 import { useSelector } from 'react-redux';
 
 function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
-    console.log(onMobileClose, openMobile)
    
     const location = useLocation()
 
@@ -35,7 +34,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
             title: 'Cursos'
         },
         {
-            href: '/professor/app',
+            href: '/professor/app/aulas',
             icon: ClassIcon,
             title: 'Aulas'
         },

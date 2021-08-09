@@ -1,7 +1,11 @@
 import { Box, Container, Grid } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { findCursosByProfessor } from "../../../../actions/cursoActions";
+import LoadingBox from "../../../../components/core/LoadingBox/LoadingBox";
+import MessageBox from "../../../../components/core/MessageBox/MessageBox";
 import AulaListResult from "../../../../components/professor/aulaList/AulaListResult/AulaListResult";
 import CursosTabs from "../../../../components/professor/aulaList/CursosTabs/CursosTabs";
 import FormAulaFilter from "../../../../components/professor/aulaList/FormAulaFilter/FormAulaFilter";
@@ -18,8 +22,13 @@ function AulaList() {
     setOpenModal(!openModal);
   };
 
-  const handleChangeCurso = (event, newValue) => {
-    setCurrentCurso(newValue);
+  const handleChangeCurso = (newValue) => {
+    if(typeof newValue === 'object'){
+      setCurrentCurso(newValue.target.value);
+    } else {
+      setCurrentCurso(newValue);
+    }
+    
   };
 
   const links = [
@@ -60,7 +69,7 @@ function AulaList() {
           <ToolbarPage title={"Aulas"} links={links} btns={btns} />
           <Grid container spacing={2}>
             <Grid item lg={4} sm={12} xl={4} xs={12}>
-                <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
+                  <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
             </Grid>
             <Grid item lg={8} sm={12} xl={8} xs={12}>
                 <AulaListResult currentCurso={currentCurso} />
