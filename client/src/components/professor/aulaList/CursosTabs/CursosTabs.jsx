@@ -13,7 +13,7 @@ function CursosTabs({handleChangeCurso, currentCurso,...rest}) {
   const cursoProfessor = useSelector((state) => state.cursoProfessor);
   const { loading, error, data } = cursoProfessor;
   const cursos = data ? data : [];
-  console.log(currentCurso)
+  
   useEffect(()=>{
     console.log('opa')
     if(!currentCurso && cursos.length > 0){

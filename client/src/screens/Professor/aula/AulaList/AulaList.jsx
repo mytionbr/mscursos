@@ -67,14 +67,10 @@ function AulaList() {
       >
         <Container maxWidth={false}>
           <ToolbarPage title={"Aulas"} links={links} btns={btns} />
-          <Grid container spacing={2}>
-            <Grid item lg={4} sm={12} xl={4} xs={12}>
-                  <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
-            </Grid>
-            <Grid item lg={8} sm={12} xl={8} xs={12}>
-                <AulaListResult currentCurso={currentCurso} />
-            </Grid>
-          </Grid>
+          <Box style={{ padding: "1rem 0" }}>
+            <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
+            <AulaListResult currentCurso={currentCurso} />
+          </Box>
         </Container>
       </Box>
       <ModalFilter form={FormAulaFilter} openModal={openModal} onModalClose={handleOpenModal} />

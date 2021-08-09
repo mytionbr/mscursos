@@ -82,6 +82,8 @@ const handleModalDelete = (id) => {
           <MessageBox type="error">{error}</MessageBox>
         ) : errorDelete ?(
           <MessageBox type="error">{errorDelete}</MessageBox>
+        ) : aulas.length === 0 ?(
+          <MessageBox type="info">{'Sem aulas'}</MessageBox>
         ) : currentCurso ? (
           <Card {...rest}>
             <PerfectScrollbar component="div">
