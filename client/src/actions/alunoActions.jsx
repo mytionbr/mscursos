@@ -12,7 +12,7 @@ export const signin = (email, password) => async (dispatch) => {
         
         dispatch({
             type: ALUNO_SIGNIN_FAIL,
-            payload: error.response.data.error || error.response.data.message
+            payload: error.error || error.message
         })
     }
 }

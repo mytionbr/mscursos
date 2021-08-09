@@ -11,7 +11,7 @@ export const signin = (email, password) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PROFESSOR_SIGNIN_FAIL,
-            payload: error.response.data.error || error.response.data.message
+            payload: error.error || error.message
         })
     }
 }
@@ -31,7 +31,7 @@ export const findAssignments = (id) => async (dispatch,getState) => {
     } catch (error) {
         dispatch({
             type:PROFESSOR_ASSIGNMENTS_FAIL, 
-            payload: error.response.data.error || error.response.data.message
+            payload: error.error || error.message
         })
     }
 }

@@ -43,12 +43,11 @@ function CursoListResults(props) {
   const [open, setOpen] = useState(false);
   const [idDelete, setIdDelete] = useState(null);
 
-  const handleOpenModal = (id) => {    
+  const handleOpenModal = () => {    
     setOpen(!open);
   };
 
   const handleDelete = (id) => {
-   
     dispatch(deleteCurso(id));
   };
 
@@ -129,8 +128,8 @@ const handleModalDelete = (id) => {
                             handleOpenModal={handleOpenModal}
                             setIdDelete={setIdDelete}
                             id={curso.curso_id}
-                            handleEdit={handleModalEdit}
-                            handleDelete={handleModalDelete}
+                            handleModalEdit={handleModalEdit}
+                            handleModalDelete={handleModalDelete}
                           />
                         </TableCell>
                       </TableRow>

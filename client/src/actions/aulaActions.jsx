@@ -18,7 +18,7 @@ export const findAulas = (params) => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: AULA_FIND_FAIL,
-        payload: error.response.data.error || error.response.data.message
+        payload: error.error || error.message
       });
     }
   };
@@ -29,15 +29,14 @@ export const findAulas = (params) => async (dispatch) => {
       professorSignin: { professorInfo }
     } = getState()
     try {
-      console.log(professorInfo)
-      console.log('aula' + aulaId,'cursos' + cursoId)
+
       const { data } = Api.deleteAula(aulaId,cursoId, professorInfo)
       dispatch({type: AULA_DELETE_SUCCESS})
     } catch (error) {
       dispatch({
         type: AULA_DELETE_FAIL,
-        payload: error.response.data.error || error.response.data.message
-      });
+        payload: error.error || error.message
+     });
     }
 }
 
@@ -55,7 +54,7 @@ export const createAula = (aula) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: AULA_CREATE_FAIL,
-      payload: error.response.data.error || error.response.data.message
+      payload: error.error || error.message
     });
   }
 };
@@ -73,7 +72,7 @@ export const detailsAula = (aulaId,cursoId) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: AULA_DETAILS_FAIL,
-      payload: error
+      payload: error.error || error.message
     });
   }
 };
@@ -89,7 +88,7 @@ export const updateAula = (aula) => async(dispatch, getState) => {
   } catch (error) {
       dispatch({
           type: AULA_UPDATE_FAIL,
-          payload: error.response.data.error || error.response.data.message
+          payload: error.error || error.message
         });
   }
 }

@@ -42,7 +42,6 @@ export const findById = async (req, res) => {
        
         const curso = req.profile
         const aulaId = req.params.aulaId
-        console.log(curso,aulaId)
         const { rows } = await pool.query(
             'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
             [aulaId,curso.curso_id])
@@ -69,16 +68,15 @@ export const update = async (req,res) => {
         const curso = req.profile
         const aulaId = req.params.aulaId
         
-        const { aulasRows } = await pool.query(
+        const { rows: aulasRows } = await pool.query(
             'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
             [aulaId,curso.curso_id])
-
-        let aula = extend(aulasRows.rows[0], req.body)
-
+       
+        let aula = extend(aulasRows[0], req.body)
+        
         const { rows } = await pool.query(
             'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3 WHERE aula_id = $4 RETURNING *;',
             [aula.nome, aula.descricao, aula.curso_id, aula.aula_id])
-        
         const updatedAula = rows[0]
 
         res.status(200).json(updatedAula)
@@ -89,7 +87,7 @@ export const update = async (req,res) => {
 
 export const remove = async (req, res) =>{
     try {
-        console.log('chegou na api')
+        
         const curso = req.profile
         const aulaId = req.params.aulaId
 

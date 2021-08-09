@@ -34,7 +34,7 @@ export const listCursos = () => async (dispatch) => {
   } catch (error) {
     dispatch({ 
         type: CURSO_LIST_FAIL, 
-        payload: error.response.data.error || error.response.data.message });
+        payload: error.error || error.message})
   }
 };
 
@@ -67,7 +67,7 @@ export const findCursos = (params) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_FIND_FAIL,
-      payload: error.response.data.error || error.response.data.message
+      payload: error.error || error.message
     });
   }
 };
@@ -126,8 +126,8 @@ export const createCurso = (curso) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_CREATE_FAIL,
-      payload: error.response.data.error || error.response.data.message
-    });
+      payload: error.error || error.message
+        });
   }
 };
 
@@ -140,7 +140,7 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_DETAILS_FAIL,
-      payload: error
+      payload: error.error || error.message
     });
   }
 };
@@ -156,7 +156,7 @@ export const updateCurso = (curso) => async(dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: CURSO_UPDATE_FAIL,
-            payload: error.response.data.error || error.response.data.message
+            payload: error.error || error.message
           });
     }
 }
@@ -173,7 +173,7 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_DELETE_FAIL,
-      payload: error.response.data.error || error.response.data.message
+      payload: error.error || error.message
     });
   }
 }

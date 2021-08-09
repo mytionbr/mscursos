@@ -165,7 +165,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
           {loadingUpdate ? (
             <LoadingBox />
           ) : (
-            errorUpdate && <MessageBox type="error">{error}</MessageBox>
+            errorUpdate && <MessageBox type="error">{errorUpdate}</MessageBox>
           )}
         </Box>
          
