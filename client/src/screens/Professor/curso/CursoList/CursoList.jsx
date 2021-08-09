@@ -37,6 +37,7 @@ function CursoList() {
       action: handleOpenModal,
     },
   ];
+  
 
   return (
     <>
@@ -58,7 +59,10 @@ function CursoList() {
           </Box>
         </Container>
       </Box>
-      <ModalFilter form={FormCursoFilter} openModal={openModal} onModalClose={handleOpenModal} />
+      <ModalFilter 
+        form={<FormCursoFilter  onModalClose={handleOpenModal}/>} 
+        openModal={openModal} 
+        onModalClose={handleOpenModal} />
     </>
   );
 }

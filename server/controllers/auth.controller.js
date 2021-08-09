@@ -68,6 +68,7 @@ export const signinAluno = async (req,res) =>{
 
 export const isAuth = (req, res, next) => {
     const authorization = req.headers.authorization
+    console.log('autenticação')
     if (authorization){
         const token = authorization.slice(7, authorization.length)
         jwt.verify(
@@ -104,7 +105,7 @@ export const hasAuthorization = (req, res, next) =>{
 export const hasAuthorizationCurso = async (req, res, next) =>{
 
    const authorized = req.profile && req.auth &&  req.profile.professor_id === req.auth._id
-    
+   console.log('autorização')
    if(!authorized){
         return res.status(403).json({
             message: "Usuário não está autorizado"

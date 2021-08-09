@@ -15,7 +15,6 @@ function CursosTabs({handleChangeCurso, currentCurso,...rest}) {
   const cursos = data ? data : [];
   
   useEffect(()=>{
-    console.log('opa')
     if(!currentCurso && cursos.length > 0){
       handleChangeCurso(cursos[0].curso_id)
     }

@@ -53,6 +53,8 @@ function AulaList() {
     },
   ];
 
+  const filter = <FormAulaFilter onModalClose={handleOpenModal} curso={currentCurso} />
+
   return (
     <>
       <Helmet>
@@ -73,8 +75,10 @@ function AulaList() {
           </Box>
         </Container>
       </Box>
-      <ModalFilter form={FormAulaFilter} openModal={openModal} onModalClose={handleOpenModal} />
-
+      <ModalFilter
+        openModal={openModal} 
+        onModalClose={handleOpenModal} 
+        form={filter} />
     </>
   );
 }

@@ -87,17 +87,17 @@ export const update = async (req,res) => {
 
 export const remove = async (req, res) =>{
     try {
+        console.log('chegou na api')
         const curso = req.profile
         const aulaId = req.params.aulaId
 
         await pool.query(
-            'DELETE FROM aula WHERE curso_id = $1, aula_id = $2',
+            'DELETE FROM aula WHERE curso_id = $1 AND aula_id = $2',
             [curso.curso_id,aulaId]
         )
 
         res.status(200).json({
-            message: 'aula deletada com sucesso',
-            curso: curso 
+            message: 'aula deletada com sucesso'
         })
     } catch (err) {
         res.status(400).json({message: err.message})

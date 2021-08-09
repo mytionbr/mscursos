@@ -5,7 +5,7 @@ import useStyles from './styles'
 
 import { findAulas } from '../../../../actions/aulaActions'
 
-function FormAulaFilter({ onModalClose, curso  }) {
+function FormAulaFilter({ onModalClose, curso}) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
@@ -14,25 +14,17 @@ function FormAulaFilter({ onModalClose, curso  }) {
 
   const handlerInput = (e) => {
     const { value } = e.target;
-
     setNome(value);
   };
 
-
-
   const handlerClear = () => {
-    if (curso){
       dispatch(
         findAulas({
           nome: "",
-          curso: curso.curso_id,
+          curso: curso,
         })
       );
-      setNome("");
-    } else {
-      alert('Selecione um curso')
-    }
-   
+    setNome("");   
     onModalClose()
   };
 
@@ -53,7 +45,7 @@ function FormAulaFilter({ onModalClose, curso  }) {
 
   return (
         <div className={classes.form}>
-          <Typography variant="h6">Filtre por um curso</Typography>
+          <Typography variant="h6">Filtre por uma aula</Typography>
           <TextField
             name="nome"
             variant="outlined"

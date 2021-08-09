@@ -81,6 +81,7 @@ export const update = async (req,res) => {
 }
 
 export const remove = async (req, res) =>{
+   
     try {
         const curso = req.profile
        
@@ -186,11 +187,21 @@ export const getAluno = async (req,res) => {
 
 export const getAulas = async (req,res) => {
     try {
+        let values = []
+
         const curso = req.profile
-        
+        const nome = req.query.nome || '' 
+
+        let query = 'SELECT * FROM aula WHERE curso_id = $1'
+        values.push(curso.curso_id)
+
+        if (nome){
+            query += " AND nome iLIKE '%'||$2||'%'"
+            values.push(nome)
+        }
         const { rows } = await pool.query(
-            'SELECT * FROM aula WHERE curso_id = $1',
-            [curso.curso_id]
+            query,
+            [...values]
         )
      
         const aulas = rows

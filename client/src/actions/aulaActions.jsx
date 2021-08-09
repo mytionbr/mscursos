@@ -5,12 +5,11 @@ export const findAulas = (params) => async (dispatch) => {
     dispatch({ type: AULA_FIND_REQUEST });
     try {
       const { curso: cursoId, nome } = params;
-      console.log(cursoId)
 
       let queryString = "?";
   
       if (nome) {
-        queryString += `nome=${nome}&`;
+        queryString += `nome=${nome}`;
       }
   
       const { data } = await Api.findAulas(cursoId,queryString);
@@ -24,13 +23,15 @@ export const findAulas = (params) => async (dispatch) => {
     }
   };
   
-  export const deleteAula = ({aulaId,cursoId}) => async (dispatch, getState) => {
+  export const deleteAula = (aulaId,cursoId) => async (dispatch, getState) => {
     dispatch({type: AULA_DELETE_REQUEST, payload: {aulaId,cursoId}})
     const {
       professorSignin: { professorInfo }
     } = getState()
     try {
-      const { data } = Api.deleteCurso(aulaId,cursoId, professorInfo)
+      console.log(professorInfo)
+      console.log('aula' + aulaId,'cursos' + cursoId)
+      const { data } = Api.deleteAula(aulaId,cursoId, professorInfo)
       dispatch({type: AULA_DELETE_SUCCESS})
     } catch (error) {
       dispatch({
@@ -46,7 +47,6 @@ export const createAula = (aula) => async (dispatch, getState) => {
     professorSignin: { professorInfo },
   } = getState();
   try {
-    console.log(aula)
     const { data } = await Api.createAula(aula, professorInfo);
     dispatch({
       type: AULA_CREATE_SUCCESS,

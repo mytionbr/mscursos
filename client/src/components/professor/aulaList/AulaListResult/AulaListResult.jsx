@@ -17,7 +17,7 @@ function AulaListResult({currentCurso,...rest}) {
   const aulasCurso = useSelector((state) => state.aulaFind);
   const { loading, error, data } = aulasCurso;
   const aulas = data ? data : [];
-  console.log(currentCurso)
+ 
   const aulaDelete = useSelector((state) => state.aulaDelete);
   
   const {
@@ -36,8 +36,8 @@ function AulaListResult({currentCurso,...rest}) {
     setOpen(!open);
   };
 
-  const handleDelete = (aulaId,cursoId) => {
-    dispatch(deleteAula(aulaId,cursoId));
+  const handleDelete = (aulaId) => {
+    dispatch(deleteAula(aulaId,currentCurso));
   };
 
   useEffect(() => {
@@ -117,8 +117,8 @@ const handleModalDelete = (id) => {
                               handleOpenModal={handleOpenModal}
                               setIdDelete={setIdDelete}
                               id={aula.aula_id}
-                              handleEdit={handleModalEdit}
-                              handleDelete={handleModalDelete}
+                              handleModalEdit={handleModalEdit}
+                              handleModalDelete={handleModalDelete}
                             />
                           </TableCell>
                         </TableRow>
