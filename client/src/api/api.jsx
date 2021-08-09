@@ -22,7 +22,11 @@ const findCursosByProfessor = (professorInfo,query) => axios.get(`/api/cursos/pr
 
 const findCursoById = (cursoId) => axios.get(`/api/cursos/${cursoId}`)
 
-const findAulaById = (aulaId,cursoId) => axios.get(`/api/cursos/${cursoId}/aulas/${aulaId}`)
+const findAulaById = (aulaId,cursoId,professorInfo) => axios.get(`/api/cursos/${cursoId}/aulas/${aulaId}`,
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` }
+    }
+)
 
 const createCurso = (curso,professorInfo) => axios.post(
     `/api/cursos`,

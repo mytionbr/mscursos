@@ -22,7 +22,6 @@ import { AULA_UPDATE_RESET } from "../../../../constants/aulaConstantes";
 
 function UpdateFormAula({aulaId,cursoId,...rest}) {
   const classes = useStyles();
-  
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -38,10 +37,11 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
   } = aulaUpdate;
 
   const {
-    cursos,
+    data,
     loading: loadingCursos,
     error: errorCursos,
   } = cursoProfessor;
+  const cursos = data ? data : [];
 
   useEffect(() => {
     dispatch(

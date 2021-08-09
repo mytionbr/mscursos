@@ -61,10 +61,13 @@ export const createAula = (aula) => async (dispatch, getState) => {
 };
 
 
-export const detailsAula = (aulaId,cursoId) => async (dispatch) => {
+export const detailsAula = (aulaId,cursoId) => async (dispatch,getState) => {
   dispatch({ type: AULA_DETAILS_REQUEST, payload: {aulaId: aulaId,cursoId: cursoId} });
+  const {
+    professorSignin: { professorInfo }
+  } = getState()
   try {
-    const { data } = await Api.findAulaById(aulaId,cursoId);
+    const { data } = await Api.findAulaById(aulaId,cursoId,professorInfo);
   
     dispatch({ type: AULA_DETAILS_SUCCESS, payload: data });
   } catch (error) {

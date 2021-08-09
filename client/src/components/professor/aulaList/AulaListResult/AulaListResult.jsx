@@ -65,7 +65,7 @@ function AulaListResult({currentCurso,...rest}) {
   };
 
   const handleModalEdit = (id) => {
-    history.push(`/professor/app/aulas/${id}`)
+    history.push(`/professor/app/cursos/${currentCurso}/aulas/${id}`)
 }
 
 const handleModalDelete = (id) => {

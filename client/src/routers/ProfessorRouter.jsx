@@ -22,7 +22,7 @@ const ProfessorRouter = () => {
                             component={ CreateAula}
                         />
                         <ProfessorRoute 
-                            path={'/professor/app/aulas/:aulaId'} 
+                            path={'/professor/app/cursos/:cursoId/aulas/:aulaId'} 
                             component={ UpdateAula}
                         />
                         <ProfessorRoute 

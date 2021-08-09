@@ -5,8 +5,10 @@ import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPag
 import { useHistory } from 'react-router-dom'
 import UpdateFormAula from "../../../../components/professor/FormAula/UpdateFormAula/UpdateFormAula";
 
-function UpdateAula({cursoId,...rest}) {
-  const aulaId = rest.match.params.aulaId;
+function UpdateAula(props) {
+  const aulaId = props.match.params.aulaId;
+  const cursoId = props.match.params.cursoId
+  console.log('curso' + cursoId, 'aula' + aulaId)
   const history = useHistory()
 
   const links = [

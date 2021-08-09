@@ -39,8 +39,10 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res) => {
     try {
+       
         const curso = req.profile
         const aulaId = req.params.aulaId
+        console.log(curso,aulaId)
         const { rows } = await pool.query(
             'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
             [aulaId,curso.curso_id])
