@@ -46,6 +46,7 @@ export const createAula = (aula) => async (dispatch, getState) => {
     professorSignin: { professorInfo },
   } = getState();
   try {
+    console.log(aula)
     const { data } = await Api.createAula(aula, professorInfo);
     dispatch({
       type: AULA_CREATE_SUCCESS,

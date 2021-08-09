@@ -17,6 +17,7 @@ import useStyles from "./styles";
 import { createCurso, findCursosByProfessor } from "../../../../actions/cursoActions";
 import { useHistory } from 'react-router-dom'
 import { AULA_CREATE_RESET } from "../../../../constants/aulaConstantes";
+import { createAula } from "../../../../actions/aulaActions";
 
 function CreateFormAula(props) {
   const classes = useStyles();
@@ -69,7 +70,7 @@ function CreateFormAula(props) {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    dispatch(createCurso(
+    dispatch(createAula(
         {
             nome: nome,
             descricao: descricao, 
