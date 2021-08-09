@@ -12,7 +12,7 @@ function ToolbarPage({btns,links,title,...rest}) {
                 <Breadcrumbs>
                 {
                     links.map(link=>
-                            <LinkRoute key={link.name} to={link.href}> 
+                            <LinkRoute key={link.name} to={link.href} className={classes.link}> 
                                 {link.name}
                             </LinkRoute>
                     )

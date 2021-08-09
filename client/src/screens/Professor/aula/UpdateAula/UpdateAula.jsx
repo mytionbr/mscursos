@@ -17,12 +17,12 @@ function UpdateAula(props) {
       href: "/professor/app/dashboard",
     },
     {
-      name: "cursos",
+      name: "Aulas",
       href: "/professor/app/aulas",
     },
     {
-      name: "aulas",
-      href: `/professor/app/aulas/${aulaId}`,
+      name: "Aula",
+      href: `/professor/app/cursos/${cursoId}/aulas/${aulaId}`,
     },
   ];
 

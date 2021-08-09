@@ -8,6 +8,9 @@ export default makeStyles((theme) =>({
   buttonAddCurso:{
     color: theme.palette.primary.dark,
     margin: '0 1rem',
+  },
+  link:{
+    color:'#757575'
   }
    
 }))

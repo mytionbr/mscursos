@@ -122,6 +122,7 @@ function Dashboard() {
                   name: "Nova Aula",
                   description: "Prepare uma nova aula",
                 }}
+                action={() => history.push("/professor/app/aulas/novo")}
                 
               />
             </Grid>

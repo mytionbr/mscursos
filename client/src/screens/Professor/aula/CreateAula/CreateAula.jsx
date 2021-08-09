@@ -15,11 +15,11 @@ function CreateAula() {
       href: "/professor/app/dashboard",
     },
     {
-      name: "aulas",
+      name: "Aulas",
       href: "/professor/app/aulas",
     },
     {
-      name: "novo aula",
+      name: "Nova aula",
       href: "/professor/app/aulas/novo",
     },
   ];
