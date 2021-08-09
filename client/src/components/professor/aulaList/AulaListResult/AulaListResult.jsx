@@ -17,7 +17,7 @@ function AulaListResult({currentCurso,...rest}) {
   const aulasCurso = useSelector((state) => state.aulaFind);
   const { loading, error, data } = aulasCurso;
   const aulas = data ? data : [];
-
+  console.log(currentCurso)
   const aulaDelete = useSelector((state) => state.aulaDelete);
   
   const {
@@ -48,7 +48,7 @@ function AulaListResult({currentCurso,...rest}) {
     if(currentCurso){
       dispatch(
         findAulas({
-          curso: currentCurso.curso_id,
+          curso: currentCurso,
           nome: ''
         })
       );

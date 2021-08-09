@@ -5,7 +5,8 @@ export const findAulas = (params) => async (dispatch) => {
     dispatch({ type: AULA_FIND_REQUEST });
     try {
       const { curso: cursoId, nome } = params;
-  
+      console.log(cursoId)
+
       let queryString = "?";
   
       if (nome) {
