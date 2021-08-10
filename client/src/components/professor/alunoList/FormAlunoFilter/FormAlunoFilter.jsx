@@ -4,36 +4,46 @@ import { useDispatch } from 'react-redux'
 import useStyles from './styles'
 
 import { findAulas } from '../../../../actions/aulaActions'
+import { findAlunos } from '../../../../actions/alunoActions'
 
-function FormAulaFilter({ onModalClose, curso}) {
+function FormAlunoFilter({ onModalClose, currentCurso}) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
 
   const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleInput = (e) => {
+  const handleInputName = (e) => {
     const { value } = e.target;
     setNome(value);
   };
 
+  const handleInputEmail = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+  };
+
   const handleClear = () => {
       dispatch(
-        findAulas({
-          nome: "",
-          curso: curso,
+        findAlunos({
+          curso: currentCurso,
+          nome: '',
+          email:'',
         })
       );
     setNome("");   
+    setEmail("");   
     onModalClose()
   };
 
   const handleSubmit = () => {
-    if (curso) {
+    if (currentCurso) {
       dispatch(
-        findAulas({
+        findAlunos({
           nome: nome || "",
-          curso: curso || curso.curso_id,
+          email: email || "",
+          curso: currentCurso || currentCurso.curso_id,
         })
       );
     }else {
@@ -45,15 +55,24 @@ function FormAulaFilter({ onModalClose, curso}) {
 
   return (
         <div className={classes.form}>
-          <Typography variant="h6">Filtre por uma aula</Typography>
+          <Typography variant="h6">Filtre por um aluno</Typography>
           <TextField
             name="nome"
             variant="outlined"
             label="Nome"
             color="secondary"
             fullWidth
-            onChange={handleInput}
+            onChange={handleInputName}
             value={nome}
+          />
+           <TextField
+            name="email"
+            variant="outlined"
+            label="Email"
+            color="secondary"
+            fullWidth
+            onChange={handleInputEmail}
+            value={email}
           />
 
           <Button
@@ -82,4 +101,4 @@ function FormAulaFilter({ onModalClose, curso}) {
     )
 }
 
-export default FormAulaFilter
+export default FormAlunoFilter

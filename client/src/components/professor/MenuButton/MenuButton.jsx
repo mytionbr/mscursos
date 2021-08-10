@@ -1,28 +1,42 @@
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import React, { useState } from "react";
 
-function MenuButton({id,handleModalEdit,handleModalDelete}) {
-    const [anchorEl, setAnchorEl] = useState(null)
-  
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget)
-    }
+function MenuButton({
+  id,
+  handleModalEdit,
+  handleModalDelete,
+  handleModalAdd,
+  hasDeleteButton = true,
+  hasEditButton = true,
+  hasAddButton = false,
+  addButtonName
+}) {
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleDelete = () =>{
-      handleModalDelete(id)
-      handleClose()
-    }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    const handleEdit = () =>{
-      handleModalEdit(id)
-      handleClose()
-    }
+  const handleDelete = () => {
+    handleModalDelete(id);
+    handleClose();
+  };
 
-    return (
+  const handleAdd = () => {
+    handleModalAdd();
+    handleClose();
+  };
+
+  const handleEdit = () => {
+    handleModalEdit(id);
+    handleClose();
+  };
+
+  return (
     <div>
       <Button
         aria-controls="simple-menu"
@@ -30,8 +44,8 @@ function MenuButton({id,handleModalEdit,handleModalDelete}) {
         onClick={handleClick}
         variant="contained"
         style={{
-          background: '#506198',
-          color:'#fff'
+          background: "#506198",
+          color: "#fff",
         }}
       >
         Opções
@@ -43,18 +57,46 @@ function MenuButton({id,handleModalEdit,handleModalDelete}) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem 
-          onClick={handleEdit}
-          style={{
-            color:'#ff9800',
-            fontWeight:'600'
-          }}>Editar</MenuItem>
-        <MenuItem 
-          onClick={handleDelete}
-          style={{
-            color:'#e91e63',
-            fontWeight:'600'
-          }}>Excluir</MenuItem>
+        {hasEditButton ? (
+          <MenuItem
+            onClick={handleEdit}
+            style={{
+              color: "#ff9800",
+              fontWeight: "600",
+            }}
+          >
+            Editar
+          </MenuItem>
+        ) : (
+          ""
+        )}
+        {hasAddButton ? (
+          <MenuItem
+            onClick={handleAdd}
+            style={{
+              color: "#49a812",
+              fontWeight: "600",
+            }}
+          >
+            {addButtonName}
+          </MenuItem>
+        ) : (
+          ""
+        )}
+          {hasDeleteButton ? (
+          <MenuItem
+            onClick={handleDelete}
+            style={{
+              color: "#e91e63",
+              fontWeight: "600",
+            }}
+          >
+            Excluir
+          </MenuItem>
+        ) : (
+          ""
+        )}
+
       </Menu>
     </div>
   );

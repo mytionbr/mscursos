@@ -22,13 +22,13 @@ function FormCursoFilter({ onModalClose, openModal }) {
     dispatch(listCategoria());
   }, [dispatch]);
 
-  const handlerInput = (e) => {
+  const handleInput = (e) => {
     const { value } = e.target;
 
     setNome(value);
   };
 
-  const handlerInputCategorias = (event, newValue) => {
+  const handleInputCategorias = (event, newValue) => {
     if (typeof newValue === "string") {
       setCategoriasTags({ categoria: newValue });
     } else if (newValue && newValue.inputValue) {
@@ -40,7 +40,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
     }
   };
 
-  const handlerClear = () => {
+  const handleClear = () => {
     dispatch(
       findCursosByProfessor({
         nome: "",
@@ -52,7 +52,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
     onModalClose()
   };
 
-  const handlerSubmit = () => {
+  const handleSubmit = () => {
     dispatch(
       findCursosByProfessor({
         nome: nome || "",
@@ -70,7 +70,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
         fullWidth
         options={categorias}
         getOptionLabel={(option) => option.nome}
-        onChange={handlerInputCategorias}
+        onChange={handleInputCategorias}
         value={categoriasTags}
         renderInput={(params) => (
           <TextField
@@ -94,7 +94,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
             label="Nome"
             color="secondary"
             fullWidth
-            onChange={handlerInput}
+            onChange={handleInput}
             value={nome}
           />
           {loading ? (
@@ -111,7 +111,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
             variant="outlined"
             color="secundary"
             size="large"
-            onClick={handlerSubmit}
+            onClick={handleSubmit}
             fullWidth
           >
             Filtrar
@@ -123,7 +123,7 @@ function FormCursoFilter({ onModalClose, openModal }) {
             size="large"
             type="large"
             fullWidth
-            onClick={handlerClear}
+            onClick={handleClear}
           >
             Limpar
           </Button>

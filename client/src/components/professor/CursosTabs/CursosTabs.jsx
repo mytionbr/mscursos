@@ -1,9 +1,9 @@
 import { Card, FormControl, InputLabel, MenuItem, Select, Tab, Tabs } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findCursosByProfessor } from "../../../../actions/cursoActions";
-import LoadingBox from "../../../core/LoadingBox/LoadingBox";
-import MessageBox from "../../../core/MessageBox/MessageBox";
+import { findCursosByProfessor } from "../../../actions/cursoActions";
+import LoadingBox from "../../core/LoadingBox/LoadingBox";
+import MessageBox from "../../core/MessageBox/MessageBox";
 import useStyles from "./styles";
 
 function CursosTabs({handleChangeCurso, currentCurso,...rest}) {

@@ -5,13 +5,13 @@ import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
 import ModalDelete from "../../ModalDelete/ModalDelete";
 import MenuButton from "../../MenuButton/MenuButton"
-import useStyles from './styles'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { deleteAula, findAulas } from '../../../../actions/aulaActions';
 import { AULA_DELETE_RESET } from '../../../../constants/aulaConstantes';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 function AulaListResult({currentCurso,...rest}) {
-  const classes = useStyles()
+
   const history = useHistory()
   const dispatch = useDispatch();
   const aulasCurso = useSelector((state) => state.aulaFind);

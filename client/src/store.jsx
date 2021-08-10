@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { alunoSigninReducer } from './reducers/alunoReducers';
+import { alunoFindReducer, alunoNotaCreateReducer, alunoNotaDeleteReducer, alunoNotaDetailsReducer, alunoNotaUpdateReducer, alunoSigninReducer } from './reducers/alunoReducers';
 import { aulaCreateReducer, aulaDeleteReducer, aulaDetailsReducer, aulaFindReducer, aulaUpdateReducer } from './reducers/aulaReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
 import { cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
@@ -30,7 +30,12 @@ const reducer = combineReducers({
     aulaDelete:aulaDeleteReducer,
     aulaCreate:aulaCreateReducer,
     aulaDetails:aulaDetailsReducer,
-    aulaUpdate:aulaUpdateReducer
+    aulaUpdate:aulaUpdateReducer,
+    alunoFind:alunoFindReducer,
+    notaCreate:alunoNotaCreateReducer,
+    notaDetails: alunoNotaDetailsReducer,
+    notaUpdate:alunoNotaUpdateReducer,
+    notaDelete:alunoNotaDeleteReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

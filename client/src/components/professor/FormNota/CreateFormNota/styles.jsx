@@ -1,13 +1,22 @@
+import { red } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) =>({
+  root:{
+   
+  },
+  
   boxContainer:{
     display: 'flex',
-    justifyContent: 'space-between'
+    flexDirection: 'column',
+    padding:'1rem',
+    '& > *':{
+      margin: '0.5rem 0'
+     }
   },
   buttonAddCurso:{
     color: theme.palette.primary.dark,
     margin: '0 1rem',
-  }
+  },
    
 }))

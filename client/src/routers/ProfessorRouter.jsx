@@ -11,15 +11,26 @@ import CreateAula from '../screens/Professor/aula/CreateAula/CreateAula'
 import UpdateAula from '../screens/Professor/aula/UpdateAula/UpdateAula'
 import AulaListResult from '../components/professor/aulaList/AulaListResult/AulaListResult'
 import AulaList from '../screens/Professor/aula/AulaList/AulaList'
+import CreateNota from '../screens/Professor/aluno/CreateNota/CreateNota'
+import UpdateNota from '../screens/Professor/aluno/UpdateNota/UpdateNota'
+import AlunoList from '../screens/Professor/aluno/AlunoList/AlunoList'
 
 const ProfessorRouter = () => {
     const routes = ()=>{
         return (
                 <DashboardLayout>
                      <Switch>
+                     <ProfessorRoute 
+                            path={'/professor/app/notas/novo'} 
+                            component={ CreateNota}
+                        />
                         <ProfessorRoute 
                             path={'/professor/app/aulas/novo'} 
                             component={ CreateAula}
+                        />
+                        <ProfessorRoute 
+                            path={'/professor/app/cursos/:cursoId/notas/:notaId'} 
+                            component={ UpdateNota}
                         />
                         <ProfessorRoute 
                             path={'/professor/app/cursos/:cursoId/aulas/:aulaId'} 
@@ -44,6 +55,12 @@ const ProfessorRouter = () => {
                             path={
                                 '/professor/app/aulas'} 
                             component={ AulaList}
+                        />
+                        <ProfessorRoute 
+                            exact 
+                            path={
+                                '/professor/app/alunos'} 
+                            component={AlunoList}
                         />
 
 

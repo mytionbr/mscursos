@@ -27,13 +27,13 @@ function FilterForm() {
 
    
 
-    const handlerInput = (e) =>{
+    const handleInput = (e) =>{
         const { value } = e.target 
 
         setNome(value)
     }
 
-    const handlerInputCategorias = (event,newValue) => {
+    const handleInputCategorias = (event,newValue) => {
         if(typeof newValue === 'string'){
             setCategoriasTags({categoria: newValue,})
         } else if (newValue && newValue.inputValue){
@@ -46,7 +46,7 @@ function FilterForm() {
        
     }
 
-    const handlerClear = ()=>{
+    const handleClear = ()=>{
         dispatch(findCursos({
             nome: '',
             categorias: []
@@ -55,7 +55,7 @@ function FilterForm() {
         setCategoriasTags([])
     }
 
-    const handlerSubmit = ()=>{
+    const handleSubmit = ()=>{
         dispatch(findCursos({
             nome: nome || '',
             categorias: categoriasTags || []
@@ -72,7 +72,7 @@ function FilterForm() {
             fullWidth
             options={categorias}
             getOptionLabel={(option) => option.nome}
-            onChange={handlerInputCategorias}
+            onChange={handleInputCategorias}
             value={categoriasTags}
             renderInput={(params) => (
               <TextField {...params} color="secondary" variant="outlined" label="categorias" placeholder="categorias" />
@@ -93,7 +93,7 @@ function FilterForm() {
                     label="Nome"
                     color="secondary"
                     fullWidth
-                    onChange={handlerInput}  
+                    onChange={handleInput}  
                     value={nome}  
                 />
                {loading 
@@ -104,8 +104,8 @@ function FilterForm() {
                 }
                    
               
-                <Button type="submit" className={classes.button} variant="outlined" color="secundary" size="large" type="large" onClick={handlerSubmit} fullWidth>Filtrar</Button>
-                <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth onClick={handlerClear}>Limpar</Button>
+                <Button type="submit" className={classes.button} variant="outlined" color="secundary" size="large" type="large" onClick={handleSubmit} fullWidth>Filtrar</Button>
+                <Button className={classes.button} variant="outlined" color="secundary" size="large" type="large" fullWidth onClick={handleClear}>Limpar</Button>
             </div>
         </Paper>
     )

@@ -7,7 +7,7 @@ import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import LoadingBox from "../../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../../components/core/MessageBox/MessageBox";
 import AulaListResult from "../../../../components/professor/aulaList/AulaListResult/AulaListResult";
-import CursosTabs from "../../../../components/professor/aulaList/CursosTabs/CursosTabs";
+import CursosTabs from "../../../../components/professor/CursosTabs/CursosTabs";
 import FormAulaFilter from "../../../../components/professor/aulaList/FormAulaFilter/FormAulaFilter";
 import ModalFilter from "../../../../components/professor/ModalFilter/ModalFilter";
 import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";

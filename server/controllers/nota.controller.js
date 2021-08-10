@@ -37,8 +37,14 @@ export const list = async (req, res) => {
 export const findById = async (req, res, next, id) => {
     try{
         const { rows } = await pool.query(
-            'SELECT * FROM nota WHERE nota_id = $1',
-            [id])
+            `SELECT NOTA.ALUNO_ID as aluno_id, NOTA.CURSO_ID as curso_id,NOTA.NOTA_ID as nota_id, 
+            ALUNO.NOME as aluno_nome, ALUNO.EMAIL as aluno_email, CURSO.NOME as curso_nome,
+			NOTA.VALOR as valor, NOTA.APROVADO as aprovado, CURSO.PROFESSOR_ID as professor_id
+            FROM ALUNO INNER JOIN NOTA ON NOTA.ALUNO_ID = ALUNO.ALUNO_ID
+            INNER JOIN CURSO ON NOTA.CURSO_ID = CURSO.CURSO_ID
+            WHERE NOTA.NOTA_ID = $1`,
+            [id]
+        )
         
         let nota = rows[0]
 
@@ -86,12 +92,10 @@ export const update = async (req, res) => {
 export const remove = async (req,res) => {
     try {
         let nota = req.profile
-        const { rows } = await pool.query(
+         await pool.query(
             'DELETE FROM nota WHERE nota_id = $1 RETURNING *;',
             [nota.nota_id]
         )
-
-        const deletedNota = rows[0]
 
         res.status(200).json({message: 'nota deletada com sucesso', nota: nota})
     } catch (err) {

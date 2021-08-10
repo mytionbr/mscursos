@@ -12,7 +12,7 @@ function Cursos({data}) {
     console.log(state)
     const dispatch = useDispatch()
 
-    const handlerPagination = (event,value) => {
+    const handlePagination = (event,value) => {
         dispatch(findCursos({
             nome: data.params.nome || '',
             categorias: data.params.categoria || [],
@@ -42,7 +42,7 @@ function Cursos({data}) {
                 page={data.page} 
                 count={data.totalPages} 
                 color="secondary" 
-                onChange={handlerPagination}/>       
+                onChange={handlePagination}/>       
         </div>
         </>
     )

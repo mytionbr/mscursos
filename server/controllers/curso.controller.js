@@ -453,3 +453,68 @@ export const findByProfessor = async (req, res) => {
 }
 
 
+
+export const findAlunosByCurso = async (req,res) => {
+    try {
+        const curso = req.profile
+
+        const nome = req.query.nome || ''
+        const email = req.query.email || ''
+
+        let values = []
+        values.push(curso.curso_id)
+        
+        let query = ''
+
+        if(nome){
+            query +=  " AND ALUNO.NOME iLIKE '%'||$2||'%' "
+            values.push(nome)
+        }
+
+        if(email) {
+            let index = values.length
+            query += ` AND ALUNO.EMAIL iLIKE '%'||$${index + 1}||'%' `
+            values.push(email)
+        }
+
+        console.log(values)
+        
+        const { rows } = await pool.query(
+            `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,NOTA.VALOR as nota FROM ALUNO INNER JOIN CURSO_ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID
+            INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID 
+            LEFT JOIN NOTA ON ALUNO.ALUNO_ID = NOTA.ALUNO_ID 
+            WHERE CURSO.CURSO_ID = $1 ${query}`,
+            [...values]
+        )
+        
+        const alunos = rows
+
+        res.status(200).json(alunos)
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
+
+export const findNotaByCurso = async (req,res) => {
+    try {
+        const curso = req.profile
+        const notaId = req.params.notaId
+       
+        const { rows } = await pool.query(
+            `SELECT NOTA.ALUNO_ID as aluno_id, NOTA.CURSO_ID as curso_id,NOTA.NOTA_ID as nota_id, 
+            ALUNO.NOME as aluno_nome, ALUNO.EMAIL as aluno_email, CURSO.NOME as curso_nome,
+			NOTA.VALOR as valor, NOTA.APROVADO as aprovado
+            FROM ALUNO INNER JOIN NOTA ON NOTA.ALUNO_ID = ALUNO.ALUNO_ID
+            INNER JOIN CURSO ON NOTA.CURSO_ID = CURSO.CURSO_ID
+            WHERE NOTA.NOTA_ID = $1 AND CURSO.CURSO_ID = $2`,
+            [notaId, curso.curso_id]
+        )
+       
+        const result = rows[0]
+
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
+
