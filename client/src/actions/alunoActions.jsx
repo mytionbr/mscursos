@@ -4,12 +4,10 @@ import Api from '../api/api'
 export const signin = (email, password) => async (dispatch) => {
     dispatch({type: ALUNO_SIGNIN_REQUEST, payload: {email, password}})
     try {
-       
         const { data } = await Api.signinAluno(email, password)
         dispatch({type: ALUNO_SIGNIN_SUCCESS, payload: data})
         localStorage.setItem('alunoInfo', JSON.stringify(data))
     } catch (error) {
-        
         dispatch({
             type: ALUNO_SIGNIN_FAIL,
             payload: error.error || error.message
@@ -65,13 +63,15 @@ export const findAlunos = (params) => async (dispatch,getState) => {
   };
   
 
-  export const createNota = (nota) => async (dispatch, getState) => {
+  export const createNota = ({nota, curso, aluno }) => async (dispatch, getState) => {
     dispatch({ type: ALUNO_NOTA_CREATE_REQUEST });
     const {
       professorSignin: { professorInfo },
     } = getState();
     try {
-      const { data } = await Api.createNota(nota, professorInfo);
+      console.log(nota,curso,aluno)
+
+      const { data } = await Api.createNota(nota,curso,aluno, professorInfo);
       dispatch({
         type: ALUNO_NOTA_CREATE_SUCCESS,
         payload: data,

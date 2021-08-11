@@ -27,6 +27,8 @@ import {
   update as updateAula,
 } from "../controllers/aula.controller.js";
 
+import { create as createNota } from '../controllers/nota.controller.js'
+
 const router = express.Router();
 
 router.route("/").post(create).get(find);
@@ -61,12 +63,17 @@ router
   .put(isAuth, hasAuthorizationCurso, updateAula);
 
 router
+  .route("/:id/alunos/:alunoId/notas")
+  .post(isAuth, hasAuthorizationCurso, createNota)
+
+router
   .route("/:id/alunos")
   .get(isAuth, hasAuthorizationCurso, findAlunosByCurso);
-
+  
 router
   .route("/:id/notas/:notaId")
   .get(isAuth, hasAuthorizationCurso, findNotaByCurso)
+
 
 router.param("id", findById);
 

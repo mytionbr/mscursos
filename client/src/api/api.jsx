@@ -64,9 +64,9 @@ const createAula = (aula,professorInfo) => axios.post(
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
 })
 
-const createNota = (nota,professorInfo) => axios.post(
-    `/api/cursos/${nota.curso_id}/alunos/${nota.aluno_id}/notas`,
-    nota,
+const createNota = (nota,curso,aluno, professorInfo) => axios.post(
+    `/api/cursos/${curso}/alunos/${aluno}/notas`,
+    {nota:nota},
     {
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
 })

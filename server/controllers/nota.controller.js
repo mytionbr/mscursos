@@ -4,13 +4,16 @@ import { isAprovado } from '../utils/aprovado.js'
 
 export const create = async (req,res) => {
     try {
-        const { valor, curso_id, aluno_id } = req.body
+        const curso = req.profile
+        const alunoId = req.params.alunoId 
+        const nota = req.body.nota
+        console.log( req.body)
+        const aprovado = isAprovado(nota)
 
-        const aprovado = isAprovado(valor)
-
+       
         const { rows } = await pool.query(
             'INSERT INTO nota (valor, aprovado, curso_id, aluno_id) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [valor, aprovado, curso_id, aluno_id])
+            [nota, aprovado, curso.curso_id, alunoId])
 
         let createdNota = rows[0]
 

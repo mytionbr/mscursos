@@ -83,8 +83,7 @@ function CreateFormNota(props) {
     } else {
       setNota(value);
     }
-
-    
+   
   };
 
   const handleChangeAluno = (event) => {
@@ -107,9 +106,9 @@ function CreateFormNota(props) {
     if(nota && curso && aluno){
       dispatch(createNota(
         {
-            nota: nota,
-            aluno: aluno,
-            curso: curso
+            nota,
+            aluno,
+            curso
         }))
     }else {
       alert('campos não preenchidos corretamente!')

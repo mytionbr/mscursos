@@ -37,16 +37,18 @@ export const list = async (req,res) => {
 
 export const findById = async (req,res, next, id) => {
     try {
+      
         const { rows } = await pool.query(
             'SELECT * FROM curso WHERE curso_id = $1',
             [id]
         )
-
+       
         const curso = rows[0]
-
+       
         if (!curso){
             return res.status(400).json({message: 'curso não encontrado'})
         }
+
 
         req.profile = curso
         next()
@@ -457,7 +459,7 @@ export const findByProfessor = async (req, res) => {
 export const findAlunosByCurso = async (req,res) => {
     try {
         const curso = req.profile
-
+        
         const nome = req.query.nome || ''
         const email = req.query.email || ''
 
@@ -476,8 +478,6 @@ export const findAlunosByCurso = async (req,res) => {
             query += ` AND ALUNO.EMAIL iLIKE '%'||$${index + 1}||'%' `
             values.push(email)
         }
-
-        console.log(values)
         
         const { rows } = await pool.query(
             `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,NOTA.VALOR as nota FROM ALUNO INNER JOIN CURSO_ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID
