@@ -152,7 +152,7 @@ function CreateFormNota(props) {
           <LoadingBox />
         ) : errorAlunos ? (
           <MessageBox type="error">{errorCursos}</MessageBox>
-        ) : (
+        ) : alunos.length !== 0 ?  (
           <FormControl  color="secondary" variant="filled" className={classes.formControl}>
             <InputLabel id="alunos">Alunos</InputLabel>
             <Select
@@ -166,11 +166,15 @@ function CreateFormNota(props) {
               ))}
             </Select>
           </FormControl>
+        ): (
+          <MessageBox type="info">{'Esse curso não possue alunos'}</MessageBox>
         )}
 
         {!curso ? (
           ''
-        ) : !aluno ? (
+        ) : alunos && alunos.length === 0 ? (
+          ''
+        ) : !aluno   ? (
           <MessageBox type="info">{'Selecione um aluno'}</MessageBox>
         ) : (
           <>
