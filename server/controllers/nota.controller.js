@@ -9,15 +9,31 @@ export const create = async (req,res) => {
         const nota = req.body.nota
         
         const aprovado = isAprovado(nota)
-
        
-        const { rows } = await pool.query(
-            'INSERT INTO nota (valor, aprovado, curso_id, aluno_id) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nota, aprovado, curso.curso_id, alunoId])
-
-        let createdNota = rows[0]
-
-        res.status(201).json(createdNota)
+        const { rows: cursoExist } = await pool.query(
+            'SELECT * FROM NOTA WHERE NOTA.CURSO_ID = $1 AND NOTA.ALUNO_ID = $2',
+            [curso.curso_id,alunoId]
+        )
+        if(cursoExist.length === 0){
+            const { rows } = await pool.query(
+                'INSERT INTO nota (valor, aprovado, curso_id, aluno_id) VALUES ($1, $2, $3, $4) RETURNING *;',
+                [nota, aprovado, curso.curso_id, alunoId])
+    
+            let createdNota = rows[0]
+    
+            res.status(201).json(createdNota)
+        } else {
+            const { rows } = await pool.query(
+                `UPDATE nota SET valor = $1, aprovado = $2, curso_id = $3, 
+                aluno_id = $4 WHERE curso_id = $3 AND aluno_id = $4  RETURNING *;`,
+                [nota, aprovado, curso.curso_id, alunoId])
+    
+            let updatedNota = rows[0]
+    
+            res.status(200).json(updatedNota)
+        }
+       
+        
     } catch (err) {
         res.status(409).json({message: err.message})
     }
