@@ -1,3 +1,3 @@
 export function isAprovado (valor) {
-    return valor >= 7 ? true : false
+    return Number(valor) >= 7 ? true : false
 }

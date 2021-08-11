@@ -7,7 +7,7 @@ export const create = async (req,res) => {
         const curso = req.profile
         const alunoId = req.params.alunoId 
         const nota = req.body.nota
-        console.log( req.body)
+        
         const aprovado = isAprovado(nota)
 
        
@@ -39,7 +39,7 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res, next, id) => {
     try{
-        console.log('eita')
+        
         const { rows } = await pool.query(
             `SELECT NOTA.ALUNO_ID as aluno_id, NOTA.CURSO_ID as curso_id,NOTA.NOTA_ID as nota_id, 
             ALUNO.NOME as aluno_nome, ALUNO.EMAIL as aluno_email, CURSO.NOME as curso_nome,
@@ -96,6 +96,7 @@ export const update = async (req, res) => {
 export const remove = async (req,res) => {
     try {
         let nota = req.profile
+        
          await pool.query(
             'DELETE FROM nota WHERE nota_id = $1 RETURNING *;',
             [nota.nota_id]

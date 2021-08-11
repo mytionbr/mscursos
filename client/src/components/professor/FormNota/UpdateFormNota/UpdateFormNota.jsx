@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import ModalDelete from "../../ModalDelete/ModalDelete";
 import { deleteNota, detailsNota, updateNota } from "../../../../actions/alunoActions";
 import { ALUNO_NOTA_DELETE_RESET, ALUNO_NOTA_UPDATE_RESET } from "../../../../constants/alunoConstantes";
+import Alert from "@material-ui/lab/Alert";
 
 function UpdateFormNota({notaId,cursoId,...rest}) {
   const classes = useStyles();
@@ -38,12 +39,13 @@ function UpdateFormNota({notaId,cursoId,...rest}) {
     success: successDelete,
   } = notaDelete;
 
-  console.log(nota)
+  
 
   useEffect(() => {
     if (successDelete) {
       dispatch({ type: ALUNO_NOTA_DELETE_RESET });
       setIdDelete(null);
+      history.push("/professor/app/alunos");
     }
     if (successUpdate) {
       dispatch({ type: ALUNO_NOTA_UPDATE_RESET });
@@ -58,7 +60,7 @@ function UpdateFormNota({notaId,cursoId,...rest}) {
     }
   }, [cursoId, dispatch, history, nota, notaId, successDelete, successUpdate]);
 
-  
+  console.log(loadingDelete,errorDelete,successDelete)
 
   const [valor, setValor] = useState(0);
   const [aprovado, setAprovado] = useState(false);
@@ -72,13 +74,28 @@ function UpdateFormNota({notaId,cursoId,...rest}) {
 
   const handleChangeValor = (event) => {
     const value = event.target.value;
-    setValor(value);
+    if(String(value).length  > 2 ){
+      setValor(0);
+    } else 
+    if(Number(value) < 0 ){
+      setValor(0);
+    } else if (Number(value) > 10){
+      setValor(10)
+    } else {
+      setValor(value);
+    }
+   
   };
 
-  const handleChangeAprovado = (event) => {
-    const value = nota >= 6;
+  const handleChangeAprovado = () => {
+    const value = valor >= 7;
     setAprovado(value);
   };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+     handleChangeAprovado()
+    }
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -93,9 +110,7 @@ function UpdateFormNota({notaId,cursoId,...rest}) {
   const handleDelete = (event) => {
     event.preventDefault();
     dispatch(
-      deleteNota({
-        nota_id: notaId
-      })
+      deleteNota(notaId)
     );
   };
 
@@ -124,19 +139,12 @@ function UpdateFormNota({notaId,cursoId,...rest}) {
             fullWidth
             onChange={handleChangeValor}
             onBlur={handleChangeAprovado}
+            onKeyDown={handleKeyDown}
             value={valor}
           />
-          <TextField
-            name="nome"
-            variant="outlined"
-            multiline
-            label="Descrição"
-            color="secondary"
-            fullWidth
-            disabled={true}
-            onChange={handleChangeAprovado}
-            value={aprovado ? 'Aprovado' : 'Reprovado'}
-          />
+        <Alert icon={false} variant="filled" severity={aprovado ? "success" : "error"}>
+          {aprovado ? 'Aprovado' : 'Reprovado'}
+        </Alert>  
 
           <Button
             type="submit"

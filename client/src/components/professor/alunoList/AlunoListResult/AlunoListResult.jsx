@@ -100,7 +100,7 @@ function AlunoListResult({currentCurso,...rest}) {
                               {
                                  aluno.nota ? (
                                     <MenuButton
-                                      id={aluno.aluno_id}
+                                      id={aluno.nota_id}
                                       handleModalEdit={handleModalEdit}
                                       hasDeleteButton={false}
                                     />

@@ -480,7 +480,8 @@ export const findAlunosByCurso = async (req,res) => {
         }
         
         const { rows } = await pool.query(
-            `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,NOTA.VALOR as nota FROM ALUNO INNER JOIN CURSO_ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID
+            `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,
+            NOTA.VALOR as nota, NOTA.NOTA_ID as nota_id FROM ALUNO INNER JOIN CURSO_ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID
             INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID 
             LEFT JOIN NOTA ON ALUNO.ALUNO_ID = NOTA.ALUNO_ID 
             WHERE CURSO.CURSO_ID = $1 ${query}`,

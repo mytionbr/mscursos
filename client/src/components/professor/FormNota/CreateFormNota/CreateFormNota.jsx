@@ -97,7 +97,7 @@ function CreateFormNota(props) {
   };
 
   const handleChangeAprovado = () => {
-    const value = nota > 6;
+    const value = Number(nota) >= 7;
     setAprovado(value);
   };
 
@@ -182,9 +182,9 @@ function CreateFormNota(props) {
           fullWidth
           type="number"
           onChange={handleChangeNota}
-          onBlur={handleChangeAprovado}
           value={nota}
           required
+          onBlur={handleChangeAprovado}
           onKeyDown={handleKeyDown}
         />
 
