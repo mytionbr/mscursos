@@ -132,6 +132,7 @@ function Dashboard() {
                   name: "Nova nota",
                   description: "Avalie seus alunos",
                 }}
+                action={() => history.push("/professor/app/notas/novo")}
               />
             </Grid>
           </Grid>
