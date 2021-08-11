@@ -17,14 +17,13 @@ import ModalDelete from "../../ModalDelete/ModalDelete";
 import { deleteNota, detailsNota, updateNota } from "../../../../actions/alunoActions";
 import { ALUNO_NOTA_DELETE_RESET, ALUNO_NOTA_UPDATE_RESET } from "../../../../constants/alunoConstantes";
 
-function UpdateFormNota({notaId,...rest}) {
+function UpdateFormNota({notaId,cursoId,...rest}) {
   const classes = useStyles();
   const history = useHistory();
 
   const dispatch = useDispatch();
   const notaDetails = useSelector((state) => state.notaDetails);
-  const { loading, error,  data: nota } = notaDetails;
-
+  const { loading, error,  nota } = notaDetails;
   const notaUpdate = useSelector((state) => state.notaUpdate);
   const {
     loading: loadingUpdate,
@@ -39,7 +38,7 @@ function UpdateFormNota({notaId,...rest}) {
     success: successDelete,
   } = notaDelete;
 
-  
+  console.log(nota)
 
   useEffect(() => {
     if (successDelete) {
@@ -52,12 +51,12 @@ function UpdateFormNota({notaId,...rest}) {
     }
     if (!nota || nota.nota_id !== Number(notaId) || successUpdate) {
       dispatch({ type: ALUNO_NOTA_UPDATE_RESET });
-      dispatch(detailsNota(notaId));
+      dispatch(detailsNota({notaId,cursoId}));
     } else {
       setValor(nota.valor)
       setAprovado(nota.aprovado)
     }
-  }, [dispatch, history, nota, notaId, successDelete, successUpdate]);
+  }, [cursoId, dispatch, history, nota, notaId, successDelete, successUpdate]);
 
   
 
@@ -77,7 +76,7 @@ function UpdateFormNota({notaId,...rest}) {
   };
 
   const handleChangeAprovado = (event) => {
-    const value = nota > 6;
+    const value = nota >= 6;
     setAprovado(value);
   };
 
@@ -107,7 +106,7 @@ function UpdateFormNota({notaId,...rest}) {
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="error">{error}</MessageBox>
-      ) : (
+      ) : nota ? (
         <Box className={classes.boxContainer}>
           <Typography variant="h6">NOTA ID: {notaId}</Typography>
           <Divider/>
@@ -170,6 +169,8 @@ function UpdateFormNota({notaId,...rest}) {
           )}
         </Box>
          
+      ) : (
+        <LoadingBox />
       )
       }
     </Card>

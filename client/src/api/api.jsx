@@ -44,7 +44,7 @@ const findNotaById = (nota,professorInfo) => axios.get(`/api/notas/${nota}`,
     }
 )
 
-const findNotaByIdAndCurso = (nota,curso,professorInfo) => axios.get(`/api/cursos/${curso}notas/${nota}`,
+const findNotaByIdAndCurso = (nota,curso,professorInfo) => axios.get(`/api/cursos/${curso}/notas/${nota}`,
     {
         headers: { Authorization: `Bearer ${professorInfo?.token}` }
     }

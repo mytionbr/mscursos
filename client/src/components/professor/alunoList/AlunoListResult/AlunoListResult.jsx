@@ -42,7 +42,7 @@ function AlunoListResult({currentCurso,...rest}) {
     };
   
   const handleModalEdit = (id) => {
-      history.push(`/professor/app/alunos/${currentCurso}/nota/${id}`)
+      history.push(`/professor/app/cursos/${currentCurso}/notas/${id}`)
   }
 
   const handleModalAdd = (id) => {

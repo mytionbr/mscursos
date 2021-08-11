@@ -39,6 +39,7 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res, next, id) => {
     try{
+        console.log('eita')
         const { rows } = await pool.query(
             `SELECT NOTA.ALUNO_ID as aluno_id, NOTA.CURSO_ID as curso_id,NOTA.NOTA_ID as nota_id, 
             ALUNO.NOME as aluno_nome, ALUNO.EMAIL as aluno_email, CURSO.NOME as curso_nome,

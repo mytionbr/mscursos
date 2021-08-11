@@ -84,14 +84,15 @@ export const findAlunos = (params) => async (dispatch,getState) => {
     }
   };
 
-  export const detailsNota = (notaId) => async (dispatch,getState) => {
-    dispatch({ type: ALUNO_NOTA_DETAILS_REQUEST, payload: notaId });
+  export const detailsNota = ({notaId,cursoId}) => async (dispatch,getState) => {
+    dispatch({ type: ALUNO_NOTA_DETAILS_REQUEST, payload: {notaId,cursoId} });
     const {
       professorSignin: { professorInfo }
     } = getState()
     try {
-      const { data } = await Api.findNotaById(notaId,professorInfo);
-    
+      console.log(notaId,cursoId)
+      const { data } = await Api.findNotaByIdAndCurso(notaId,cursoId,professorInfo);
+      console.log(data)
       dispatch({ type: ALUNO_NOTA_DETAILS_SUCCESS, payload: data });
     } catch (error) {
       dispatch({

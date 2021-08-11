@@ -60,7 +60,7 @@ export const alunoNotaDetailsReducer = (
         case ALUNO_NOTA_DETAILS_REQUEST:
             return { loading: true }
         case ALUNO_NOTA_DETAILS_SUCCESS:
-            return { loading: false, aula: action.payload }
+            return { loading: false, nota: action.payload }
         case ALUNO_NOTA_DETAILS_FAIL:
             return { loading: false, error: action.payload }
         case ALUNO_NOTA_DETAILS_RESET:
