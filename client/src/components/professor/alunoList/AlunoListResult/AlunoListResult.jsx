@@ -46,7 +46,7 @@ function AlunoListResult({currentCurso,...rest}) {
   }
 
   const handleModalAdd = (id) => {
-    history.push(`/professor/app/alunos/nota/novo`)
+    history.push(`/professor/app/notas/novo`)
   }
   
   
