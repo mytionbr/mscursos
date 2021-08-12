@@ -30,7 +30,7 @@ export const findAulas = (params) => async (dispatch) => {
     } = getState()
     try {
 
-      const { data } = Api.deleteAula(aulaId,cursoId, professorInfo)
+      const { data } = await Api.deleteAula(aulaId,cursoId, professorInfo)
       dispatch({type: AULA_DELETE_SUCCESS})
     } catch (error) {
       dispatch({

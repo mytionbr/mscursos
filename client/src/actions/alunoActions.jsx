@@ -125,7 +125,7 @@ export const deleteNota = (notaId) => async (dispatch, getState) => {
     } = getState()
     try {
       console.log(notaId)
-      const { data } = Api.deleteNota(notaId, professorInfo)
+      const { data } = await Api.deleteNota(notaId, professorInfo)
       dispatch({type: ALUNO_NOTA_DELETE_SUCCESS})
     } catch (error) {
       dispatch({

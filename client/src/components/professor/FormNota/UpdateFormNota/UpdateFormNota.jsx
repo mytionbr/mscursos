@@ -10,7 +10,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
-
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import ModalDelete from "../../ModalDelete/ModalDelete";

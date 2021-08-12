@@ -113,6 +113,15 @@ const deleteNota = (notaId, professorInfo) => axios.delete(
     }
 )
 
+const detailsProfessor = (professorInfo) => axios.get(`/api/professores/${professorInfo.professor_id}`, {
+    headers: { Authorization: `Bearer ${professorInfo?.token}` },
+  });
+
+const updateProfessorProfile = (professor,professorInfo) => axios.put(`/api/professores/${professorInfo.professor_id}`, {
+    professor,
+    headers: { Authorization: `Bearer ${professorInfo?.token}` },
+});
+
 const Api = {
     fetchCursos,
     fetchCategorias,
@@ -137,6 +146,8 @@ const Api = {
     updateNota,
     deleteNota,
     findNotaByIdAndCurso,
+    detailsProfessor,
+    updateProfessorProfile
 }
 
 export default Api

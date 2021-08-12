@@ -168,7 +168,7 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
     professorSignin: { professorInfo }
   } = getState()
   try {
-    const { data } = Api.deleteCurso(cursoId, professorInfo)
+    const { data } = await Api.deleteCurso(cursoId, professorInfo)
     dispatch({type: CURSO_DELETE_SUCCESS})
   } catch (error) {
     dispatch({
