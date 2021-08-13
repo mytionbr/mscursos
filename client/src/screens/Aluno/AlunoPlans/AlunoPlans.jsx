@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from '@material-ui/core'
 import React from 'react'
-import PlanCard from '../../../components/PlanCard/PlanCard'
+import PlanCard from '../../../components/aluno/PlanCard/PlanCard'
 import useStyles from './styles'
 import {data} from './data'
 
