@@ -38,7 +38,9 @@ function Perfil() {
       >
         <Container maxWidth="lg">
           <ToolbarPage title={"Perfil"} links={links} btns={btns} />
-          <PerfilDetails />
+          <Box style={{ padding: "3rem 0" }}>
+            <PerfilDetails />
+          </Box>
         </Container>
         </Box>
     </>

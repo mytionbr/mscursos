@@ -33,7 +33,7 @@ function PerfilDetails(props) {
   } = professorUpdate;
 
   useEffect(() => {
-    if (!professor) {
+    if (!professor || successUpdate) {
       dispatch({ type: PROFESSOR_UPDATE_PROFILE_RESET });
       dispatch(detailsProfessor());
     } else {
