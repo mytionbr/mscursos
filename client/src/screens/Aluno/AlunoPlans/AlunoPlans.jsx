@@ -14,12 +14,12 @@ function AlunoPlans() {
         style={{
           backgroundColor: "inherit",
           minHeight: "100%",
-          padding: "3rem 0",
+          padding: "2rem 0",
         }}
       >
         <Container>
              <Grid container justifyContent="space-between" alignItems="center" spacing={3}>
-                <Grid item spacing={3} style={{ padding: "1rem 0" }}>
+                <Grid item spacing={3} style={{ padding: "2rem 0", textAlign:'center', width:'100%' }}>
                     <Typography variant="h4">
                         Adquira o conhecimento necessário para avançar em sua carreira
                     </Typography>

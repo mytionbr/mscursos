@@ -17,7 +17,7 @@ const Navbar = () => {
                 </Typography>
               </Link>
               <div className={classes.nav} >
-                <Button className={classes.navbarLink} component={Link} to="/" variant="contained" color="primary">Matricule-se</Button>
+                <Button className={classes.navbarLink} component={Link} to="/aluno/matriculas" variant="contained" color="primary">Matricule-se</Button>
                 <Button className={classes.navbarLink} component={Link} to="/aluno/signin" variant="contained" color="primary">Login</Button>
               </div>
           </Toolbar>
