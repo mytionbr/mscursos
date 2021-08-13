@@ -15,7 +15,7 @@ function CreateNota() {
         href: "/professor/app/dashboard",
       },
       {
-        name: "Aulas",
+        name: "Alunos",
         href: "/professor/app/alunos",
       },
       {

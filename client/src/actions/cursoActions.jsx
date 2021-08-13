@@ -22,6 +22,7 @@ import {
   CURSO_UPDATE_REQUEST,
   CURSO_UPDATE_SUCCESS,
 } from "../constants/cursoConstants";
+import { findAssignments } from "./professorActions";
 
 export const listCursos = () => async (dispatch) => {
   dispatch({
@@ -123,6 +124,7 @@ export const createCurso = (curso) => async (dispatch, getState) => {
       type: CURSO_CREATE_SUCCESS,
       payload: data,
     });
+    dispatch(findAssignments(professorInfo.professor_id))
   } catch (error) {
     dispatch({
       type: CURSO_CREATE_FAIL,
@@ -170,6 +172,7 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
   try {
     const { data } = await Api.deleteCurso(cursoId, professorInfo)
     dispatch({type: CURSO_DELETE_SUCCESS})
+    dispatch(findAssignments(professorInfo.professor_id))
   } catch (error) {
     dispatch({
       type: CURSO_DELETE_FAIL,

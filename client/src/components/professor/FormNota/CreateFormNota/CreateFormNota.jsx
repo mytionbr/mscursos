@@ -167,7 +167,7 @@ function CreateFormNota(props) {
             </Select>
           </FormControl>
         ): (
-          <MessageBox type="info">{'Esse curso não possue alunos'}</MessageBox>
+          <MessageBox type="info">{'Esse curso não possui alunos'}</MessageBox>
         )}
 
         {!curso ? (
