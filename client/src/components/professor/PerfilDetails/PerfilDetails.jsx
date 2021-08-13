@@ -15,6 +15,7 @@ import LoadingBox from "../../core/LoadingBox/LoadingBox";
 import { detailsProfessor, updateProfessorProfile } from "../../../actions/professorActions";
 import { PROFESSOR_UPDATE_PROFILE_RESET } from "../../../constants/professorConstantes";
 import moment from 'moment';
+import SuccessAlert from "../../SuccessAlert/AlertSuccess";
 function PerfilDetails(props) {
   const dispatch = useDispatch();
   const professorDetails = useSelector((state) => state.professorDetails);
@@ -188,9 +189,7 @@ function PerfilDetails(props) {
                         {errorUpdate}
                     </MessageBox>
                 ) : successUpdate && (
-                    <MessageBox type="success">
-                        Perfil atualizado com sucesso!
-                    </MessageBox>
+                  <SuccessAlert message='Perfil atualizado com sucesso!' />
                 )
             }
           </Card>
