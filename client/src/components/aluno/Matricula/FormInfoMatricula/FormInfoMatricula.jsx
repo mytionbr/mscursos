@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -10,54 +10,91 @@ import {
   Button,
 } from "@material-ui/core";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import LoadingBox from "../../../core/LoadingBox/LoadingBox";
+import MessageBox from "../../../core/MessageBox/MessageBox";
 
 function FormInfoMatricula({ handleNext }) {
-  
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefone, setTelefone] = useState("");
-    const [dataNascimento, setDataNascimento] = useState(
-        moment(new Date()).format("YYYY-MM-DD")
-    );
-    const [cpf, setCpf] = useState("");
-    
-const handleChangeNome = (event) => {
+  const dispatch = useDispatch();
+  const alunoRegister = dispatch((state) => state.alunoRegister);
+  const { alunoInfo, loading, error } = alunoRegister;
+
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [dataNascimento, setDataNascimento] = useState(
+    moment(new Date()).format("YYYY-MM-DD")
+  );
+  const [cpf, setCpf] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmSenha, setConfirmSenha] = useState("");
+
+  const handleChangeNome = (event) => {
     const { value } = event.target;
     setNome(value);
-    };
+  };
 
-    const handleChangeEmail = (event) => {
-        const { value } = event.target;
-        setEmail(value);
-    };
-    
-    const handleChangeTelefone = (event) => {
-        const { value } = event.target;
-        setTelefone(value);
-    };
+  const handleChangeEmail = (event) => {
+    const { value } = event.target;
+    setEmail(value);
+  };
 
-    const handleChangeDataNascimento = (event) => {
-        const { value } = event.target;
-        setDataNascimento(value);
-    };
+  const handleChangeTelefone = (event) => {
+    const { value } = event.target;
+    setTelefone(value);
+  };
 
-    const handleChangeCpf = (event) => {
-        const { value } = event.target;
-        setCpf(value);
-    };
+  const handleChangeDataNascimento = (event) => {
+    const { value } = event.target;
+    setDataNascimento(value);
+  };
+
+  const handleChangeCpf = (event) => {
+    const { value } = event.target;
+    setCpf(value);
+  };
+
+  const handleChangeSenha = (event) => {
+    const { value } = event.target;
+    setSenha(value);
+  };
+  const handleChangeConfirmSenha = (event) => {
+    const { value } = event.target;
+    setConfirmSenha(value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleNext()
+    if (senha !== confirmSenha) {
+      alert("As senhas não correspondem");
+    } else {
+      dispatch(
+        register(
+          nome,
+          email,
+          dataNascimento,
+          senha,
+          cpf,
+          telefone,
+        )
+      );
+    }
   };
+
+  useEffect(() => {
+    if (alunoInfo) {
+      handleNext();
+    }
+  });
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Card>
-          <CardHeader 
+          <CardHeader
             subheader="Cadastre as suas informações"
-            title="Cadastro" />
+            title="Cadastro"
+          />
           <Divider />
           <CardContent>
             <Grid container spacing={3}>
@@ -66,7 +103,7 @@ const handleChangeNome = (event) => {
                   fullWidth
                   label="Nome Completo"
                   name="nome"
-                  helperText={'Insira o seu nome completo'}
+                  helperText={"Insira o seu nome completo"}
                   onChange={handleChangeNome}
                   required
                   value={nome}
@@ -79,7 +116,7 @@ const handleChangeNome = (event) => {
                   fullWidth
                   label="Email"
                   name="email"
-                  helperText={'Insira o seu endereço de E-mail'}
+                  helperText={"Insira o seu endereço de E-mail"}
                   onChange={handleChangeEmail}
                   required
                   type="email"
@@ -93,9 +130,10 @@ const handleChangeNome = (event) => {
                   id="date"
                   label="Data de nascimento"
                   type="date"
-                  helperText={'Insira a data do seu Nascimento'}
+                  helperText={"Insira a data do seu Nascimento"}
                   value={dataNascimento}
                   fullWidth
+                  required
                   onChange={handleChangeDataNascimento}
                   InputLabelProps={{
                     shrink: true,
@@ -110,8 +148,9 @@ const handleChangeNome = (event) => {
                   label="Cpf"
                   name="cpf"
                   onChange={handleChangeCpf}
-                  type="password"
+                  type="text"
                   value={cpf}
+                  required
                   variant="outlined"
                   color="secondary"
                 />
@@ -124,12 +163,43 @@ const handleChangeNome = (event) => {
                   name="telefone"
                   onChange={handleChangeTelefone}
                   type="phone"
+                  required
                   value={telefone}
                   variant="outlined"
                   color="secondary"
                 />
               </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  helperText="Insira a sua Senha"
+                  label="Senha"
+                  name="cpf"
+                  onChange={handleChangeSenha}
+                  type="password"
+                  value={senha}
+                  required
+                  variant="outlined"
+                  color="secondary"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  helperText="Digite a senha novamente"
+                  label="Confirme Senha"
+                  name="confirmSenha"
+                  onChange={handleChangeConfirmSenha}
+                  type="password"
+                  value={confirmSenha}
+                  required
+                  variant="outlined"
+                  color="secondary"
+                />
+              </Grid>
             </Grid>
+            {loading && <LoadingBox />}
+            {error && <MessageBox type={"error"}>{error}</MessageBox>}
           </CardContent>
           <Divider />
           <Box
