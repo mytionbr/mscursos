@@ -44,7 +44,7 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
             title: 'Alunos'
         },
         {
-            href: '/professor/app',
+            href: '/professor/app/perfil',
             icon: PersonIcon,
             title: 'Perfil'
         },

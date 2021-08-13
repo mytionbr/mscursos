@@ -2,6 +2,7 @@ import { Box, Container } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import PerfilDetails from "../../../components/professor/PerfilDetails/PerfilDetails";
 import ToolbarPage from "../../../components/professor/ToolbarPage/ToolbarPage";
 function Perfil() {
     const history = useHistory()
@@ -10,6 +11,10 @@ function Perfil() {
             name: "dashboard",
             href: "/professor/app/dashboard",
         },
+        {
+          name: "perfil",
+          href: "/professor/app/perfil",
+      },
     ];
 
     const btns = [

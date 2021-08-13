@@ -117,10 +117,12 @@ const detailsProfessor = (professorInfo) => axios.get(`/api/professores/${profes
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const updateProfessorProfile = (professor,professorInfo) => axios.put(`/api/professores/${professorInfo.professor_id}`, {
+const updateProfessorProfile = (professor,professorInfo) => axios.put(`/api/professores/${professorInfo.professor_id}`, 
     professor,
-    headers: { Authorization: `Bearer ${professorInfo?.token}` },
-});
+    {
+        headers: { Authorization: `Bearer ${professorInfo?.token}` },
+    }
+);
 
 const Api = {
     fetchCursos,

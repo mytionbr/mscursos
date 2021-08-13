@@ -38,9 +38,7 @@ export const findAssignments = (id) => async (dispatch,getState) => {
 
 export const detailsProfessor = () => async (dispatch, getState) => {
     dispatch({ type: PROFESSOR_DETAILS_REQUEST});
-    const {
-        professorISignin: { professorInfo },
-    } = getState();
+    const { professorSignin: { professorInfo } } = getState()
     try {
       const { data } = await Api.detailsProfessor(professorInfo)
       dispatch({ type: PROFESSOR_DETAILS_SUCCESS, payload: data });
@@ -54,15 +52,15 @@ export const detailsProfessor = () => async (dispatch, getState) => {
 
   export const updateProfessorProfile = (professor) => async (dispatch, getState) => {
     dispatch({ type: PROFESSOR_UPDATE_PROFILE_REQUEST, payload: professor });
-    const {
-       professorSignin: { professorInfo },
-    } = getState();
+    const { professorSignin: { professorInfo } } = getState()
     try {
       const { data } = await Api.updateProfessorProfile(professor,professorInfo)
       dispatch({ type: PROFESSOR_UPDATE_PROFILE_SUCCESS, payload: data });
       dispatch({ type: PROFESSOR_SIGNIN_SUCCESS, payload: data });
+      console.log(data)
       localStorage.setItem('professorInfo', JSON.stringify(data));
     } catch (error) {
+        console.log(error)
         dispatch({
             type: PROFESSOR_UPDATE_PROFILE_FAIL, 
             payload: error.error || error.message

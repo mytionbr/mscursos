@@ -2,6 +2,7 @@ import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
 import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
+import { generateToken } from "../utils/generateToken.js";
 
 
 export const register = async (req,res) =>{
@@ -10,7 +11,6 @@ export const register = async (req,res) =>{
         const {nome, email, data_nascimento} = req.body
        
         const senhaDefault = bcrypt.hashSync(data_nascimento.replace('-',''),8)
-        
         const { rows } = await pool.query(
             'INSERT INTO professor (nome, email, data_nascimento, senha) VALUES ($1, $2, $3, $4) RETURNING *;',
             [nome, email, data_nascimento, senhaDefault])
@@ -63,19 +63,31 @@ export const read = async (req,res) => {
     usuarioResponseSuccess(res,professor)
 }
 
+
 export const update = async (req,res) => {
     try {
         let professor = req.profile
+        const senha = professor.senha
         professor = extend(professor, req.body)
-       
-        professor.senha = bcrypt.hashSync(professor.senha,8)
-    
+
+        if(req.body.senha && req.body.senha !== ''){
+            professor.senha = bcrypt.hashSync(professor.senha,8)
+        } else {
+            professor.senha = senha
+        }
+      
         const { rows } = await pool.query(
             'UPDATE professor SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE professor_id = $5 RETURNING *;',
             [professor.nome, professor.email, professor.data_nascimento, professor.senha, professor.professor_id]) 
               
         let updatedProfessor = rows[0]
-       
+        
+        updatedProfessor.token = generateToken({
+            _id: professor.professor_id,
+            nome: professor.nome,
+            email: professor.email
+        })
+
         usuarioResponseSuccess(res,updatedProfessor)
         
     } catch (err) {
@@ -86,7 +98,7 @@ export const update = async (req,res) => {
 export const remove = async (req, res) => {
     try {
         let professor = req.profile 
-        console.log(professor)
+
         const { rows } = await pool.query(
             'DELETE FROM professor WHERE professor_id = $1 RETURNING *;',
             [professor.professor_id]

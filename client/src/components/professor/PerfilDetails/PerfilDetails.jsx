@@ -4,7 +4,7 @@ import {
   Grid,
   Card,
   CardContent,
-  CartHeader,
+  CardHeader,
   TextField,
   Divider,
   Box,
@@ -14,6 +14,7 @@ import MessageBox from "../../core/MessageBox/MessageBox";
 import LoadingBox from "../../core/LoadingBox/LoadingBox";
 import { detailsProfessor, updateProfessorProfile } from "../../../actions/professorActions";
 import { PROFESSOR_UPDATE_PROFILE_RESET } from "../../../constants/professorConstantes";
+import moment from 'moment';
 function PerfilDetails(props) {
   const dispatch = useDispatch();
   const professorDetails = useSelector((state) => state.professorDetails);
@@ -37,14 +38,14 @@ function PerfilDetails(props) {
     } else {
       setNome(professor.nome);
       setEmail(professor.email);
-      setDataNascimento(professor.dataNascimento);
+      setDataNascimento(DateParse(professor.data_nascimento));
       setSenha(professor.senha);
     }
   }, [dispatch, professor]);
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [dataNascimento, setDataNascimento] = useState("");
+  const [dataNascimento, setDataNascimento] = useState(null);
   const [senha, setSenha] = useState("");
 
   const handleChangeNome = (event) => {
@@ -59,6 +60,7 @@ function PerfilDetails(props) {
 
   const handleChangeDataNascimento = (event) => {
     const { value } = event.target;
+
     setDataNascimento(value);
   };
 
@@ -71,7 +73,7 @@ function PerfilDetails(props) {
     event.preventDefault();
     dispatch(
       updateProfessorProfile({
-        professorId: professor.professor_id,
+        professor_id: professor.professor_id,
         nome,
         email,
         senha,
@@ -79,6 +81,18 @@ function PerfilDetails(props) {
       })
     );
   };
+
+  const DateParse = (date)=>{
+    let dateString = String(date)
+    let parts = dateString.split('-')
+    parts.forEach(i=>{
+      if(Number(i) < 10){
+        i = '0' + i
+      }
+    })
+   
+    return moment(new Date(...parts)).format("YYYY-MM-DD")
+  }
 
   return (
     <>
@@ -94,9 +108,8 @@ function PerfilDetails(props) {
           {...props}
         >
           <Card>
-            <CartHeader
+            <CardHeader
               subheader="As informações podem ser modificadas"
-              title="Perfil"
             />
             <Divider />
             <CardContent>
@@ -104,19 +117,18 @@ function PerfilDetails(props) {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    helperText="Escreva o seu nome"
                     label="Nome"
                     name="nome"
                     onChange={handleChangeNome}
                     required
                     value={nome}
                     variant="outlined"
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    helperText="Escreva o seu email"
                     label="Email"
                     name="email"
                     onChange={handleChangeEmail}
@@ -124,6 +136,7 @@ function PerfilDetails(props) {
                     type="email"
                     value={email}
                     variant="outlined"
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -132,23 +145,25 @@ function PerfilDetails(props) {
                     label="Data de nascimento"
                     type="date"
                     value={dataNascimento}
+                    fullWidth
                     onChange={handleChangeDataNascimento}
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    helperText="Sua senha"
+                    helperText="* Caso não queira substituir a sua senha atual, não preencha esse campo"
                     label="Senha"
                     name="senha"
                     onChange={handleChangeSenha}
-                    required
                     type="password"
                     value={senha}
                     variant="outlined"
+                    color="secondary"
                   />
                 </Grid>
               </Grid>
@@ -161,8 +176,8 @@ function PerfilDetails(props) {
                 p: 2,
               }}
             >
-              <Button color="secondary" variant="contained">
-                Save details
+              <Button type="submit" color="secondary" variant="contained">
+                Salvar
               </Button>
             </Box>
             {

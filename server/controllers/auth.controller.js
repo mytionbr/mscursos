@@ -7,11 +7,11 @@ import config from "../config/config.js";
 
 export const signinProfessor = async (req, res) =>{
     try {
+       
         let {rows} = await pool.query(
             'SELECT * FROM professor WHERE email = $1',
             [req.body.email])
         let professor = rows[0]
-        
             if (professor){   
                 if (bcrypt.compareSync(req.body.senha, professor.senha)){
                    
@@ -68,9 +68,10 @@ export const signinAluno = async (req,res) =>{
 
 export const isAuth = (req, res, next) => {
     const authorization = req.headers.authorization
-   
+
     if (authorization){
         const token = authorization.slice(7, authorization.length)
+      
         jwt.verify(
             token,
             config.JWT_SECRET,
