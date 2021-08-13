@@ -7,6 +7,10 @@ CREATE TABLE IF NOT EXISTS aluno(
     email VARCHAR (255) NOT NULL,
     data_nascimento date NOT NULL,
     senha VARCHAR (255) NOT NULL,
+    telefone VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
+    data_criacao DATE NOT NULL,
+    data_update DATE NOT NULL,
     CONSTRAINT email_unique_aluno UNIQUE (email)
 );
 
@@ -52,6 +56,26 @@ CREATE TABLE IF NOT EXISTS nota (
     curso_id INT NOT NULL,
     aluno_id INT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS plano(
+    plano_id serial PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS assinatura(
+	assinatura_id serial PRIMARY KEY,
+	pago BOOLEAN NOT NULL,
+	data_pagamento DATE,
+	preco FLOAT NOT NULL,
+	plano_id INT NOT NULL,
+	aluno_id INT NOT NULL
+);
+
+ALTER TABLE assinatura ADD CONSTRAINT assinatura_plano_id_fkey
+	FOREIGN KEY (plano_id) REFERENCES plano (plano_id);
+	
+ALTER TABLE assinatura ADD CONSTRAINT assinatura_aluno_id_fkey
+	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id);
+
 
 ALTER TABLE curso_aluno ADD CONSTRAINT curso_aluno_aluno_id_fkey
 	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE

@@ -33,7 +33,7 @@ export const data =  [
         ]
     },
     {
-        title: 'Médio',
+        title: 'Intermediário',
         icon: <LayersIcon/>,
         price: 'R$200,00',
         action: ()=> alert('eita'),
