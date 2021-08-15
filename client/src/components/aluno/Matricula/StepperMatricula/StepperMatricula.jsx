@@ -1,25 +1,28 @@
-import { Step, StepLabel, Stepper } from '@material-ui/core'
-import React from 'react'
+import { Step, StepLabel, Stepper } from "@material-ui/core";
+import React from "react";
+import useStyles from "./styles";
 
-function StepperMatricula({step}) {
-    
-    const steps = [
-        'Suas informações',
-        'Infomações de pagamento',
-        'Acesse a plataforma'
-    ]
 
-    return (
-        <div>
-            <Stepper activeStep={step} alternativeLabel>
-                {steps.map(label=>(
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>      
-        </div>
-    )
+function StepperMatricula({ step }) {
+  const classes = useStyles();
+   const steps = [
+    "Suas informações",
+    "Infomações de pagamento",
+    "Acesse a plataforma",
+  ];
+  return (
+    <div>
+      <Stepper color="secondary" activeStep={step} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>
+              {label}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+    </div>
+  );
 }
 
-export default StepperMatricula
+export default StepperMatricula;

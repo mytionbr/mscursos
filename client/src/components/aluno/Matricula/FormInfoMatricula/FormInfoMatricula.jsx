@@ -9,14 +9,16 @@ import {
   Box,
   Button,
 } from "@material-ui/core";
+
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
+import { register } from "../../../../actions/alunoActions";
 
 function FormInfoMatricula({ handleNext }) {
   const dispatch = useDispatch();
-  const alunoRegister = dispatch((state) => state.alunoRegister);
+  const alunoRegister = useSelector((state) => state.alunoRegister);
   const { alunoInfo, loading, error } = alunoRegister;
 
   const [nome, setNome] = useState("");
@@ -84,6 +86,7 @@ function FormInfoMatricula({ handleNext }) {
   useEffect(() => {
     if (alunoInfo) {
       handleNext();
+      alert('boa')
     }
   });
 
@@ -98,7 +101,7 @@ function FormInfoMatricula({ handleNext }) {
           <Divider />
           <CardContent>
             <Grid container spacing={3}>
-              <Grid item>
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Nome Completo"
@@ -125,7 +128,7 @@ function FormInfoMatricula({ handleNext }) {
                   color="secondary"
                 />
               </Grid>
-              <Grid item>
+              <Grid  item md={6} xs={12}>
                 <TextField
                   id="date"
                   label="Data de nascimento"
@@ -134,6 +137,7 @@ function FormInfoMatricula({ handleNext }) {
                   value={dataNascimento}
                   fullWidth
                   required
+                  variant="outlined"
                   onChange={handleChangeDataNascimento}
                   InputLabelProps={{
                     shrink: true,

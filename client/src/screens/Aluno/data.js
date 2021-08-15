@@ -1,6 +1,7 @@
 import LayersIcon from '@material-ui/icons/Layers';
 export const data =  [
     {
+        _id: 1,
         title: 'Básico',
         icon: <LayersIcon/>,
         price: 'R$100,00',
@@ -33,6 +34,7 @@ export const data =  [
         ]
     },
     {
+        _id: 2,
         title: 'Intermediário',
         icon: <LayersIcon/>,
         price: 'R$200,00',
@@ -65,6 +67,7 @@ export const data =  [
         ]
     },
     {
+        _id:3,
         title: 'Avançado',
         icon: <LayersIcon/>,
         price: 'R$300,00',

@@ -115,3 +115,8 @@ INSERT INTO categoria(nome)
 		   ('Gestão'),
 		   ('Linguas'),
 		   ('Data Science');
+
+INSERT INTO plano (plano_id,nome)
+	values (1,'Básico'),
+		   (2,'Intermediário'),
+		   (3, 'Avançado');

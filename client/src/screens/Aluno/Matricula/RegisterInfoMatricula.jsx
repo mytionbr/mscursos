@@ -1,11 +1,37 @@
 import { Box, Container, Grid, Paper } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MatriculaProcess from "../../../components/aluno/Matricula/MatriculaProcess/MatriculaProcess";
+import PaymentInfo from "../../../components/aluno/Matricula/PaymentInfo/PaymentInfo";
 import StepperMatricula from "../../../components/aluno/Matricula/StepperMatricula/StepperMatricula";
+import MessageBox from "../../../components/core/MessageBox/MessageBox";
+import {data} from '../data'
 
-function RegisterInfoMatricula() {
+function RegisterInfoMatricula(props) {
+  const selectPlan = props.match.params.plano
+
   const [step, setStep] = useState(0)
-  
+  const [plan, setPlan] = useState(null)
+  const [error, setError] = useState(false)
+  console.log(plan)
+  console.log(step)
+ 
+  useEffect(()=>{
+    switch(selectPlan){
+      case 'basico':
+        setPlan(...data.filter(p => p._id === 1))
+        break
+      case 'intermediario':
+        setPlan(...data.filter(p => p._id === 2))
+        break
+      case 'avancado':
+        setPlan(...data.filter(p => p._id === 3))
+        break
+      default:
+        setError(true);
+    } 
+  }, [selectPlan])
+    
+
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
   };
@@ -14,12 +40,15 @@ function RegisterInfoMatricula() {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const handleReset = () => {
-    setStep(0);
-  };
-
   return (
-    <Box
+    <>
+    {
+      error ? (
+        <MessageBox type="error">
+          Erro na seleção do plano
+        </MessageBox>
+      ) : plan ? (
+        <Box
       style={{
         backgroundColor: "inherit",
         minHeight: "100%",
@@ -27,8 +56,8 @@ function RegisterInfoMatricula() {
       }}
     >
         <Container>
-            <Grid container justifyContent={'space-evenly'} alignItems="center" spacing={3}>
-                <Grid item lg={6} sm={12}>
+            <Grid container justifyContent={'space-evenly'}  alignItems="stretch" spacing={3}>
+                <Grid item lg={8} sm={12}>
                   <Paper>
                     <StepperMatricula step={step} />
                     <MatriculaProcess 
@@ -37,12 +66,17 @@ function RegisterInfoMatricula() {
                       handleBack={handleBack}/>
                   </Paper>
                 </Grid>
-                <Grid item lg={6} sm={12}>
-                    
+                <Grid item alignItems={'flex-start'} lg={4} sm={12}>
+                    <PaymentInfo data={plan} />
                 </Grid>
             </Grid>
         </Container>
     </Box>
+      ) : (
+        ''
+      )
+    }
+    </>
   );
 }
 
