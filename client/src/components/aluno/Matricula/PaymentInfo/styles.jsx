@@ -3,23 +3,23 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) =>({
    card: {
-     width: '20rem',
-     display: 'flex',
-     justifyContent: 'space-evenly',
-     alignItems:'center',
-     flexDirection:'column',
-     padding: theme.spacing(2),
+     width: '100%',
+     padding: theme.spacing(1),
       position: '-webkit-sticky',
       position: 'sticky',
       top: 20,
-      bottom: 20, 
-      paddingTop: '40px',
-      paddingBottom: '40px',
+      bottom: 20,
       zIndex: 5,
+   },
+   content:{
+    display: 'flex',
+     justifyContent: 'space-evenly',
+     alignItems:'center',
+     flexDirection:'column',
    },
    header: {
      "& > *":{
-       fontWeight: '700'
+       textAlign: 'center'
      }
    },
    listAdvantages: {
@@ -29,7 +29,7 @@ export default makeStyles((theme) =>({
    advantage:{
      display: 'flex',
      flex: '1 1 auto',
-     fontSize: '1rem',
+     fontSize: '1.3rem',
      height: '2rem',
      alignItems: 'center',
      "& > span": {
@@ -42,6 +42,12 @@ export default makeStyles((theme) =>({
    price:{
     color:grey[700]
    },
+   hasIcon:{
+    color:theme.palette.secondary.main,
+  },
+  icon:{
+    fontSize:'2rem'
+  },
    notHasIcon:{
     color: grey[400]
   },

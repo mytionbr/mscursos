@@ -1,4 +1,4 @@
-import { Step, StepLabel, Stepper } from "@material-ui/core";
+import { Divider, Step, StepLabel, Stepper } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 
@@ -21,6 +21,7 @@ function StepperMatricula({ step }) {
           </Step>
         ))}
       </Stepper>
+      <Divider />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Divider, Paper, Typography } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Divider, Paper, Typography } from "@material-ui/core";
 import React from "react";
 import useStyle from "./styles";
 import DoneIcon from "@material-ui/icons/Done";
@@ -8,14 +8,12 @@ const PaymentInfo = ({ data }) => {
   const classes = useStyle();
 
   return (
-    <Paper className={classes.card}>
-      <div className={classes.header}>
-        <Typography variant="subtitle1" gutterBottom>
-          Informações sobre a compra
-        </Typography>
-      </div>
-      <Divider />
-      <Divider />
+    <Card className={classes.card}>  
+      <CardHeader className={classes.header} 
+        title={'Informações sobre a compra'}
+      />
+        <Divider />
+    <CardContent className={classes.content}>
       <div className={classes.plan}>
         <Typography variant="h4" gutterBottom>
           Plano {data.title}
@@ -31,9 +29,9 @@ const PaymentInfo = ({ data }) => {
           <li className={classes.advantage}>
             <span className={classes.advantageIcon}>
               {advantage.itHas ? (
-                <DoneIcon className={classes.hasIcon} />
+                <DoneIcon className={[classes.hasIcon,classes.icon]} />
               ) : (
-                <ClearIcon className={classes.notHasIcon} />
+                <ClearIcon className={[classes.notHasIcon,classes.icon]} />
               )}
             </span>
             <p className={classes.advantageDescription}>
@@ -42,7 +40,8 @@ const PaymentInfo = ({ data }) => {
           </li>
         ))}
       </ul>
-    </Paper>
+      </CardContent>
+    </Card>
   );
 };
 

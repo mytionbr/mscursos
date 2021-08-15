@@ -66,7 +66,7 @@ function RegisterInfoMatricula(props) {
                       handleBack={handleBack}/>
                   </Paper>
                 </Grid>
-                <Grid item alignItems={'flex-start'} lg={4} sm={12}>
+                <Grid item lg={4} sm={12}>
                     <PaymentInfo data={plan} />
                 </Grid>
             </Grid>
