@@ -5,7 +5,7 @@ export const data =  [
         title: 'Básico',
         icon: <LayersIcon/>,
         price: 'R$100,00',
-        action: ()=> alert('eita'),
+        href: '/aluno/matriculas/compra/basico',
         advantages: [
             {
                 itHas: true,
@@ -38,7 +38,7 @@ export const data =  [
         title: 'Intermediário',
         icon: <LayersIcon/>,
         price: 'R$200,00',
-        action: ()=> alert('eita'),
+        href: '/aluno/matriculas/compra/intermediario',
         advantages: [
             {
                 itHas: true,
@@ -71,7 +71,7 @@ export const data =  [
         title: 'Avançado',
         icon: <LayersIcon/>,
         price: 'R$300,00',
-        action: ()=> alert('eita'),
+        href: '/aluno/matriculas/compra/avancado',
         advantages: [
             {
                 itHas: true,

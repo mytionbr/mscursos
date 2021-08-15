@@ -9,8 +9,9 @@ import {
 import useStyles from "./styles";
 import DoneIcon from "@material-ui/icons/Done";
 import ClearIcon from "@material-ui/icons/Clear";
+import { Link } from "react-router-dom";
 
-function PlanCard({ icon, title, price, advantages, action, ...rest }) {
+function PlanCard({ icon, title, price, advantages, href, ...rest }) {
   const classes = useStyles();
   return (
     <Card className={classes.card} {...rest}>
@@ -42,9 +43,10 @@ function PlanCard({ icon, title, price, advantages, action, ...rest }) {
         </ul>
         <Button
           className={classes.buttonEnroll}
-          variant="contained"
-          color="primary"
-          onClick={action}
+          component={Link}
+          variant="contained" 
+          color="primary" 
+          to={href}
         >
           Matricule-se
         </Button>

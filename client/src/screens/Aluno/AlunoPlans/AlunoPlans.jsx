@@ -34,7 +34,7 @@ function AlunoPlans() {
                             title={plain.title}
                             price={plain.price}
                             advantages={plain.advantages} 
-                            action={plain.action}/>
+                            href={plain.href}/>
                     ))
                     }
                 </Container>

@@ -7,7 +7,6 @@ export default makeStyles((theme) =>({
    },
    card: {
      width: '20rem',
-     padding: '0 3rem',
    },
    content:{
      display: 'flex',
