@@ -147,6 +147,7 @@ function PerfilDetails(props) {
                     type="date"
                     value={dataNascimento}
                     fullWidth
+                    variant="outlined"
                     onChange={handleChangeDataNascimento}
                     InputLabelProps={{
                       shrink: true,

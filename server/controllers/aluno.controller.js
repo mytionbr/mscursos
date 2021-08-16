@@ -7,15 +7,33 @@ import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 export const register = async (req,res) => {
     
     try{
-        const { nome, email, data_nascimento } = req.body
-        
-        /*O sistema vai definir como senha default a data de nascimento do 
-            aluno em formato americano: ex 2000-02-05 as 20000205 */
-        const senhaDefault =  bcrypt.hashSync(data_nascimento.replace('-',''),8)
+        const { nome, email, senha, telefone, cpf, data_nascimento } = req.body
+        let mistakes = []
+
+        let cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;  
+        let cpfFormatado = cpf.replace( /\D/g , "") 
+
+        if(senha.length < 6){
+            let senhaError = {error: 'A senha não possui o tamanho mínimo de 6 caracteres!'}
+            mistakes.push(senhaError)
+        }
+        if(cpf.length < 11){
+            let cpfSizeError = {error: 'O CPF deve ter 11 caracteres'}
+            mistakes.push(cpfSizeError)
+        }
+        if(cpfValido.test(cpfFormatado) === false){
+            let cpfInvalidError = {error: 'O CPF é inválido'}
+            mistakes.push(cpfInvalidError)
+        }
+        if(mistakes.length > 0){
+            res.status(400).json(mistakes)
+        }
+
+        const senhaHash =  bcrypt.hashSync(senha,8)
 
         const{ rows } = await pool.query(
-            'INSERT INTO aluno(nome, email, data_nascimento, senha) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nome, email, data_nascimento, senhaDefault]
+            'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
+            [nome, email, data_nascimento, senhaHash, telefone, cpf]
         )   
 
         let createdAluno = rows[0]
@@ -23,7 +41,7 @@ export const register = async (req,res) => {
         usuarioResponseSuccess(res,createdAluno)
         
     } catch (err){
-            res.status(409).json({message: err.message})
+            res.status(400).json({message: err.message})
         }
     }
 

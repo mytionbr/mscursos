@@ -67,9 +67,18 @@ function FormInfoMatricula({ handleNext }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;  
+    let cpfFormatado = cpf.replace( /\D/g , "") 
+    setCpf(cpfFormatado)
     if (senha !== confirmSenha) {
       alert("As senhas não correspondem");
-    } else {
+    } else if(senha.length < 6){
+      alert("A senha deve ter o tamanho mínimo de 6 caracteres");
+    } else if(cpf.length < 11){ 
+      alert("O CPF deve ter 11 caracteres");
+    }else if (cpfValido.test(cpf) === false){
+      alert("CPF invalido");
+    }else  {
       dispatch(
         register(
           nome,
