@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import { register } from "../../../../actions/alunoActions";
+import { isValidCPF } from "../../../../utils/isValidCPF";
 
 function FormInfoMatricula({ handleNext }) {
   const dispatch = useDispatch();
@@ -67,16 +68,17 @@ function FormInfoMatricula({ handleNext }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;  
+
     let cpfFormatado = cpf.replace( /\D/g , "") 
     setCpf(cpfFormatado)
+
     if (senha !== confirmSenha) {
       alert("As senhas não correspondem");
     } else if(senha.length < 6){
       alert("A senha deve ter o tamanho mínimo de 6 caracteres");
     } else if(cpf.length < 11){ 
       alert("O CPF deve ter 11 caracteres");
-    }else if (cpfValido.test(cpf) === false){
+    }else if (!isValidCPF(cpf)){
       alert("CPF invalido");
     }else  {
       dispatch(

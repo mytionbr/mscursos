@@ -2,17 +2,17 @@ import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
 import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
-
+import { isValidCPF } from '../utils/isValidCPF.js'
+import moment from 'moment'
 
 export const register = async (req,res) => {
     
     try{
+        
         const { nome, email, senha, telefone, cpf, data_nascimento } = req.body
         let mistakes = []
-
-        let cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;  
         let cpfFormatado = cpf.replace( /\D/g , "") 
-
+        
         if(senha.length < 6){
             let senhaError = {error: 'A senha não possui o tamanho mínimo de 6 caracteres!'}
             mistakes.push(senhaError)
@@ -21,7 +21,7 @@ export const register = async (req,res) => {
             let cpfSizeError = {error: 'O CPF deve ter 11 caracteres'}
             mistakes.push(cpfSizeError)
         }
-        if(cpfValido.test(cpfFormatado) === false){
+        if(isValidCPF(cpfFormatado) === false){
             let cpfInvalidError = {error: 'O CPF é inválido'}
             mistakes.push(cpfInvalidError)
         }
@@ -30,10 +30,12 @@ export const register = async (req,res) => {
         }
 
         const senhaHash =  bcrypt.hashSync(senha,8)
+        const dataCriacao = moment().format("YYYY-MM-DD")
+        const dataUpdate = dataCriacao
 
         const{ rows } = await pool.query(
-            'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
-            [nome, email, data_nascimento, senhaHash, telefone, cpf]
+            'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf,data_criacao, data_update) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
+            [nome, email, data_nascimento, senhaHash, telefone, cpf, dataCriacao, dataUpdate]
         )   
 
         let createdAluno = rows[0]
@@ -41,7 +43,7 @@ export const register = async (req,res) => {
         usuarioResponseSuccess(res,createdAluno)
         
     } catch (err){
-            res.status(400).json({message: err.message})
+            res.status(400).json({message: err.error})
         }
     }
 
