@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS aluno(
     cpf VARCHAR(11) NOT NULL,
     data_criacao DATE NOT NULL,
     data_update DATE NOT NULL,
-    CONSTRAINT email_unique_aluno UNIQUE (email)
+    CONSTRAINT email_unique_aluno UNIQUE (email),
+    CONSTRAINT cpf_unique_aluno UNIQUE (cpf)
 );
 
 CREATE TABLE IF NOT EXISTS professor(
