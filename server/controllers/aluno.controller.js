@@ -7,8 +7,7 @@ import moment from 'moment'
 
 export const register = async (req,res) => {
     
-    try{
-        
+    try{ 
         const { nome, email, senha, telefone, cpf, data_nascimento } = req.body
         let mistakes = []
         let cpfFormatado = cpf.replace( /\D/g , "") 

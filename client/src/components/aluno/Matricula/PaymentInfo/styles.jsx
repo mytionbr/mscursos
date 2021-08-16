@@ -19,8 +19,10 @@ export default makeStyles((theme) =>({
    },
    header: {
      "& > *":{
-       textAlign: 'center'
-     }
+       textAlign: 'center',
+       color:grey[700],
+     },
+     
    },
    listAdvantages: {
     listStyleType: 'none', 
@@ -37,7 +39,8 @@ export default makeStyles((theme) =>({
      }
    },
    plan:{
-    fontWeight: '700'
+    fontWeight: '700',
+    color:theme.palette.secondary.main
    },
    price:{
     color:grey[700]

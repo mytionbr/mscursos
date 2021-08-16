@@ -1,10 +1,10 @@
 import { Divider, Step, StepLabel, Stepper } from "@material-ui/core";
 import React from "react";
-import useStyles from "./styles";
+import theme from "./styles";
+import { ThemeProvider } from '@material-ui/core/styles'
 
 
 function StepperMatricula({ step }) {
-  const classes = useStyles();
    const steps = [
     "Suas informações",
     "Infomações de pagamento",
@@ -12,6 +12,7 @@ function StepperMatricula({ step }) {
   ];
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <Stepper color="secondary" activeStep={step} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -21,6 +22,8 @@ function StepperMatricula({ step }) {
           </Step>
         ))}
       </Stepper>
+      </ThemeProvider>
+      
       <Divider />
     </div>
   );

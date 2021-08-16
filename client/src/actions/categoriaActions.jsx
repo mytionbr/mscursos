@@ -12,7 +12,7 @@ export const listCategoria = () => async (dispatch) => {
     } catch (error) {
         dispatch({ 
             type: CATEGORIA_LIST_FAIL, 
-            payload: error.response.data.error || error.response.data.message })
+            payload: error.error || error.message })
     }
 }
 
