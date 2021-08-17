@@ -68,5 +68,8 @@ export default makeStyles((theme) =>({
     },
     headerPrice:{
       color: grey[600]
+    },
+    title:{
+      color:theme.palette.secondary.main
     }
 }))

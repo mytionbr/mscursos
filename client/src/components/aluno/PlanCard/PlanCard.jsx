@@ -10,6 +10,7 @@ import useStyles from "./styles";
 import DoneIcon from "@material-ui/icons/Done";
 import ClearIcon from "@material-ui/icons/Clear";
 import { Link } from "react-router-dom";
+import { formatMonetaryValue } from "../../../utils/formatMonetaryValue";
 
 function PlanCard({ icon, title, price, advantages, href, ...rest }) {
   const classes = useStyles();
@@ -22,7 +23,7 @@ function PlanCard({ icon, title, price, advantages, href, ...rest }) {
             {title}
           </Typography>
           <Typography className={classes.headerPrice} variant="h5" component="h2">
-            {price}
+            {formatMonetaryValue(price)}
           </Typography>
         </div>
         <ul className={classes.listAdvantages}>

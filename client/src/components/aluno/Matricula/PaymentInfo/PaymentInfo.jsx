@@ -3,6 +3,7 @@ import React from "react";
 import useStyle from "./styles";
 import DoneIcon from "@material-ui/icons/Done";
 import ClearIcon from "@material-ui/icons/Clear";
+import { formatMonetaryValue } from "../../../../utils/formatMonetaryValue";
 
 const PaymentInfo = ({ data }) => {
   const classes = useStyle();
@@ -21,7 +22,7 @@ const PaymentInfo = ({ data }) => {
       </div>
       <div className={classes.price}>
         <Typography variant="h5" gutterBottom>
-          {data.price}
+          {formatMonetaryValue(data.price)}
         </Typography>
       </div>
       <ul className={classes.listAdvantages}>
