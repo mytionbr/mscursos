@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS assinatura(
 	preco FLOAT NOT NULL,
 	plano_id INT NOT NULL,
 	aluno_id INT NOT NULL,
+    payment_result_id VARCHAR(255) NOT NULL,
     pagamento_id INT,
 );
 
