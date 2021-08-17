@@ -111,6 +111,17 @@ const updateProfessorProfile = (professor, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
+const createAssinatura = (price, planoId,paymentResult, alunoInfo) =>
+  axios.post(`/api/assinaturas/`,
+  {
+    price,
+    planoId,
+    paymentResult,
+    alunoId: alunoInfo.aluno_id
+  }, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  })
+
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
 const Api = {
@@ -139,7 +150,8 @@ const Api = {
   findNotaByIdAndCurso,
   detailsProfessor,
   updateProfessorProfile,
-  registerAluno
+  registerAluno,
+  createAssinatura
 };
 
 export default Api;

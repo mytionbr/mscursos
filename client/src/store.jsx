@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { alunoFindReducer, alunoNotaCreateReducer, alunoNotaDeleteReducer, alunoNotaDetailsReducer, alunoNotaUpdateReducer, alunoRegisterReducer, alunoSigninReducer } from './reducers/alunoReducers';
+import { assinaturaCreateReducer } from './reducers/assinaturaReducers';
 import { aulaCreateReducer, aulaDeleteReducer, aulaDetailsReducer, aulaFindReducer, aulaUpdateReducer } from './reducers/aulaReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
 import { cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
@@ -11,7 +12,12 @@ const initialState = {
         professorInfo: localStorage.getItem('professorInfo')
             ? JSON.parse(localStorage.getItem('professorInfo'))
             : null
-    }
+    },
+    alunoSignin:{
+        alunoInfo: localStorage.getItem('alunoInfo')
+            ? JSON.parse(localStorage.getItem('alunoInfo'))
+            : null
+    },
 }
 
 const reducer = combineReducers({
@@ -38,7 +44,8 @@ const reducer = combineReducers({
     notaDelete:alunoNotaDeleteReducer,
     professorDetails:professorDetailsReducer,
     professorUpdateProfile:professorUpdateProfileReducer,
-    alunoRegister:alunoRegisterReducer
+    alunoRegister:alunoRegisterReducer,
+    assinaturaCreate:assinaturaCreateReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

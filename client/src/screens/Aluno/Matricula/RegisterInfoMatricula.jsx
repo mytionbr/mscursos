@@ -12,8 +12,6 @@ function RegisterInfoMatricula(props) {
   const [step, setStep] = useState(0)
   const [plan, setPlan] = useState(null)
   const [error, setError] = useState(false)
-  console.log(plan)
-  console.log(step)
  
   useEffect(()=>{
     switch(selectPlan){
@@ -63,7 +61,8 @@ function RegisterInfoMatricula(props) {
                     <MatriculaProcess 
                       step={step} 
                       handleNext={handleNext}
-                      handleBack={handleBack}/>
+                      handleBack={handleBack}
+                      plan={plan}/>
                   </Paper>
                 </Grid>
                 <Grid item lg={4} sm={12}>

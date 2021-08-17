@@ -97,7 +97,6 @@ function FormInfoMatricula({ handleNext }) {
   useEffect(() => {
     if (alunoInfo) {
       handleNext();
-      alert('boa')
     }
   });
 

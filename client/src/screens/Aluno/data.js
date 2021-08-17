@@ -4,7 +4,7 @@ export const data =  [
         _id: 1,
         title: 'Básico',
         icon: <LayersIcon/>,
-        price: 'R$100,00',
+        price: '100.00',
         href: '/aluno/matriculas/compra/basico',
         advantages: [
             {
@@ -37,7 +37,7 @@ export const data =  [
         _id: 2,
         title: 'Intermediário',
         icon: <LayersIcon/>,
-        price: 'R$200,00',
+        price: '200.00',
         href: '/aluno/matriculas/compra/intermediario',
         advantages: [
             {
@@ -70,7 +70,7 @@ export const data =  [
         _id:3,
         title: 'Avançado',
         icon: <LayersIcon/>,
-        price: 'R$300,00',
+        price: '300.00',
         href: '/aluno/matriculas/compra/avancado',
         advantages: [
             {

@@ -4,6 +4,7 @@ import extend from 'lodash/extend.js'
 import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 import { isValidCPF } from '../utils/isValidCPF.js'
 import moment from 'moment'
+import { generateToken } from '../utils/generateToken.js'
 
 export const register = async (req,res) => {
     
@@ -38,10 +39,17 @@ export const register = async (req,res) => {
         )   
 
         let createdAluno = rows[0]
+
+        createdAluno.token = generateToken({
+            _id: createdAluno.aluno_id,
+            nome: createdAluno.nome,
+            email: createdAluno.email
+        })
         
         usuarioResponseSuccess(res,createdAluno)
         
     } catch (err){
+            
             res.status(400).json({message: err.error})
         }
     }

@@ -95,8 +95,6 @@ export const createNota =
       professorSignin: { professorInfo },
     } = getState();
     try {
-      console.log(nota, curso, aluno);
-
       const { data } = await Api.createNota(nota, curso, aluno, professorInfo);
       dispatch({
         type: ALUNO_NOTA_CREATE_SUCCESS,
@@ -121,13 +119,11 @@ export const detailsNota =
       professorSignin: { professorInfo },
     } = getState();
     try {
-      console.log(notaId, cursoId);
       const { data } = await Api.findNotaByIdAndCurso(
         notaId,
         cursoId,
         professorInfo
       );
-      console.log(data);
       dispatch({ type: ALUNO_NOTA_DETAILS_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -159,9 +155,9 @@ export const deleteNota = (notaId) => async (dispatch, getState) => {
     professorSignin: { professorInfo },
   } = getState();
   try {
-    console.log(notaId);
     const { data } = await Api.deleteNota(notaId, professorInfo);
     dispatch({ type: ALUNO_NOTA_DELETE_SUCCESS });
+
   } catch (error) {
     dispatch({
       type: ALUNO_NOTA_DELETE_FAIL,
@@ -180,6 +176,7 @@ export const register =
       const { data } = await Api.registerAluno({nome, senha, data_nascimento, telefone, cpf, email})
       dispatch({type:ALUNO_REGISTER_SUCCESS, payload: data})
       dispatch({type:ALUNO_SIGNIN_SUCCESS, payload: data})
+      localStorage.setItem("alunoInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: ALUNO_REGISTER_FAIL,

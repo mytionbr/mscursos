@@ -40,8 +40,7 @@ export const signinAluno = async (req,res) =>{
         const { rows } = await pool.query(
             'SELECT * FROM aluno WHERE email = $1',
             [req.body.email])
-        
-    
+           
        
         const aluno = rows[0]
        
@@ -68,10 +67,8 @@ export const signinAluno = async (req,res) =>{
 
 export const isAuth = (req, res, next) => {
     const authorization = req.headers.authorization
-
     if (authorization){
         const token = authorization.slice(7, authorization.length)
-      
         jwt.verify(
             token,
             config.JWT_SECRET,
@@ -93,7 +90,6 @@ export const isAuth = (req, res, next) => {
 export const hasAuthorization = (req, res, next) =>{
 
     const authorized = req.profile && req.auth && req.profile._id === req.auth._id
-
 
     if(!authorized){
         return res.status(403).json({
