@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import DashboardNavbar from '../DashboardNavbar/DashboardNavbar'
-import DashboardSidebar from '../DashboardSidebar'
+import DashboardSidebar from '../DashboardSidebar/DashboardSidebar'
 import useStyles from './styles'
 
 function DashboardLayout(props) {
@@ -13,6 +13,7 @@ function DashboardLayout(props) {
     const handleSignout = () => {
        alert('opa')
     } 
+    console.log(props.children)
 
     return (
         <div className={classes.dashboardLayoutRoot}>

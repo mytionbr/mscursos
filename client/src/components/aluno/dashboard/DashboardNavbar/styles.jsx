@@ -1,6 +1,13 @@
+import { grey } from "@material-ui/core/colors";
 import { makeStyles,alpha } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
+  toolbar:{
+    backgroundColor: "#fff",
+    color: grey[700],
+    alignItems: 'center',
+    padding: '10px 50px',
+  },
   grow: {
     flexGrow: 1,
   },
@@ -12,14 +19,16 @@ export default makeStyles((theme) => ({
   brandLink:{
     color: "inherit",
     textDecoration: "none",
-    fontSize: "2rem",
+    display: 'flex',
+    alignItems: 'center',
   },
   search: {
     position: 'relative',
+    flexGrow: 1,
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(grey[700], 0.15),
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(grey[700], 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -57,6 +66,19 @@ export default makeStyles((theme) => ({
     },
   },
   navLink:{
-    color:"inherit"
+    color:"inherit",
+    fontSize: '1rem',
+    '&:hover': {
+      color:'#000'
+    },
+  },
+  icon:{
+    fontSize: '1.5rem',
+    marginRight: '0.2rem'
+  },
+  brandIcon:{
+    color: theme.palette.secondary.main,
+    fontSize: '2rem',
+    marginRight: '0.2rem'
   }
 }));

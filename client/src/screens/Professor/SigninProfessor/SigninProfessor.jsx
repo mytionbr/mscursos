@@ -26,7 +26,6 @@ function SigninProfessor(props) {
   };
 
   useEffect(() => {
-    console.log(redirect);
     if (professorInfo) {
       props.history.push(redirect);
     }

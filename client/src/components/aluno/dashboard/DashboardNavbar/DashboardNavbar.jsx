@@ -16,7 +16,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "./styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ClassIcon from "@material-ui/icons/Class";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,41 +34,21 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    onMobileNavOpen();
   };
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Editar</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
-    </Menu>
-  );
 
   return (
     <div>
       <AppBar elevation={0} {...rest}>
-        <Toolbar
-          style={{
-            backgroundColor: "#fff",
-            color: "#506198",
-          }}
-        >
+        <Toolbar className={classes.toolbar}>
           <Link to="/" className={classes.brandLink}>
-            <Typography className={classes.brand} variant="h6" noWrap>
+            <MenuBookIcon className={classes.brandIcon}/>
+            <Typography className={classes.brand} variant="h5" noWrap>
               Mscursos
             </Typography>
           </Link>
           <Box style={{ flexGrow: 1 }} />
-          <div>
+          <Hidden smDown>
+          <div  className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -80,8 +63,9 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
               />
             </div>
           </div>
+          </Hidden>
           <Box style={{ flexGrow: 1 }} />
-          <Hidden mdDown>
+          <Hidden smDown>
             <div className={classes.sectionNav}>
               <Button
                 component={NavLink}
@@ -89,6 +73,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                 to="/"
                 color="inherit"
               >
+                 <DashboardIcon className={classes.icon} />
                 Dashboard
               </Button>
               <Button
@@ -97,7 +82,8 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                 to="/"
                 color="inherit"
               >
-                Forum
+                 <ClassIcon className={classes.icon} />
+                Cursos
               </Button>
               <Button
                 component={NavLink}
@@ -105,18 +91,34 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                 to="/"
                 color="inherit"
               >
+                <LibraryBooksIcon className={classes.icon} />
                 Forum
               </Button>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
+            
+              <div>
+              <Button
+                className={classes.navLink}
                 onClick={handleProfileMenuOpen}
                 color="inherit"
+                aria-controls="simple-menu" aria-haspopup="true"
               >
-                <AccountCircle />
-              </IconButton>
+                <AccountCircle className={classes.icon} />
+                Usuário
+              </Button>
+              <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  id={menuId}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                  open={isMenuOpen}
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                  <MenuItem onClick={handleMenuClose}>Editar</MenuItem>
+                  <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
+                </Menu>
+              </div>
             </div>
           </Hidden>
           <Hidden mdUp>

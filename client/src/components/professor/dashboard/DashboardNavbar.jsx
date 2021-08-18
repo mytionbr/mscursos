@@ -10,7 +10,6 @@ function DashboardNavbar({onMobileNavOpen,handleSignout, ...rest}) {
         <AppBar
             elevation={0}
             {...rest}
-           
         >
             <Toolbar
                   style={{

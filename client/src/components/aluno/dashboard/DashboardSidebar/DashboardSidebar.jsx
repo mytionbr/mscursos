@@ -20,37 +20,37 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
-  });
+  }, []);
 
   const items = [
     {
       href: "/aluno/app/dashboard",
-      icon: DashboardIcon,
+      icon: <DashboardIcon/>,
       title: "Dashboard",
     },
     {
       href: "/aluno/app/cursos",
-      icon: LibraryBooksIcon,
+      icon: <LibraryBooksIcon/>,
       title: "Cursos",
     },
     {
       href: "/aluno/app/forum",
-      icon: ClassIcon,
+      icon: <ClassIcon/>,
       title: "Forum",
     },
     {
       href: "/aluno/app/perfil",
-      icon: PeopleIcon,
+      icon: <PeopleIcon/>,
       title: "Perfil",
     },
     {
       href: "/professor/app/perfil/editar",
-      icon: PersonIcon,
+      icon: <PersonIcon/>,
       title: "Editar perfil",
     },
     {
       href: "/aluno/signout",
-      icon: ExitToAppIcon,
+      icon: <ExitToAppIcon/>,
       title: "Sair",
       action: handleSignout,
     },
@@ -67,7 +67,7 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
       <Box style={{ padding: "1rem" }}>
         <List>
           {items.map((item) => (
-            <ListItem button component={NavLink} to={item.href} key={item.title} action={item.href}>
+            <ListItem button component={NavLink} to={item.href} key={item.title}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItem>
@@ -80,22 +80,22 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
 
   return (
     <>
-      <Hidden mdDown>
-        <Drawer
-          anchor="left"
-          open
-          variant="persistent"
-          PaperProps={{
-            style: {
-              width: 256,
-              top: 64,
-              height: "calc(100% - 64px)",
-            },
-          }}
-        >
-          {content}
-        </Drawer>
-      </Hidden>
+     
+      <Hidden mdUp>
+                <Drawer
+                    anchor="left"
+                    onClose={onMobileClose}
+                    open={openMobile}
+                    variant="temporary"
+                    PaperProps={{
+                        style:{
+                            width: 256
+                        }
+                    }}
+                >
+                    {content}
+                </Drawer>
+            </Hidden>
     </>
   );
 }

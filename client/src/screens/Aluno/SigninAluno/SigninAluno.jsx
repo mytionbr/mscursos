@@ -12,6 +12,8 @@ import { signin } from '../../../actions/alunoActions';
 function SigninAluno(props) {
     const classes = useStyles()
 
+    const redirect = "/aluno/app";
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -27,9 +29,9 @@ function SigninAluno(props) {
 
     useEffect(() => {
         if(alunoInfo) {
-            alert('Seja bem vindo')
+            props.history.push(redirect);
         }
-    }, [alunoInfo])
+    }, [alunoInfo, props.history])
 
     return (
         <Container>
