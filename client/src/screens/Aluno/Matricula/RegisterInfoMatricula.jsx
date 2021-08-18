@@ -57,9 +57,9 @@ function RegisterInfoMatricula(props) {
             <Grid container justifyContent={'space-evenly'}  alignItems="stretch" spacing={3}>
                 <Grid item lg={8} sm={12}>
                   <Paper>
-                    <StepperMatricula step={2} />
+                    <StepperMatricula step={step} />
                     <MatriculaProcess 
-                      step={2} 
+                      step={step} 
                       handleNext={handleNext}
                       handleBack={handleBack}
                       plan={plan}/>

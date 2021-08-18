@@ -94,6 +94,7 @@ function FormInfoMatricula({ handleNext }) {
     }
   };
 
+  
   useEffect(() => {
     if (alunoInfo) {
       handleNext();
