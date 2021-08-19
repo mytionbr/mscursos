@@ -12,10 +12,7 @@ export default makeStyles((theme) =>({
         display: 'flex',
         flex: '1 1 auto',
         overflow: 'hidden',
-        paddingTop: 64,
-        [theme.breakpoints.up('lg')]: {
-            paddingLeft: 256
-        }
+        paddingTop: 70,
     },
     dashboardLayoutContainer:{
         display: 'flex',
@@ -25,7 +22,6 @@ export default makeStyles((theme) =>({
     dashboardLayoutContent:{
         flex: '1 1 auto',
         height: '100%',
-        overflow: 'auto'
     }
 
 }))

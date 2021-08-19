@@ -7,36 +7,41 @@ import RegisterInfoMatricula from "../screens/Aluno/Matricula/RegisterInfoMatric
 import SigninAluno from "../screens/Aluno/SigninAluno/SigninAluno";
 import DashboardLayout from "../components/aluno/dashboard/DashboardLayout/DashboardLayout";
 import AlunoRoute from "../components/aluno/AlunoRoute";
+import Dashboard from "../screens/Aluno/Dashboard";
 const AlunoRouter = () => {
+  
   const appRoutes = () => {
     return (
       <DashboardLayout>
         <Switch>
+          <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>
     );
   };
 
   const homeRoutes = () =>{
-    <>
-       <Navbar />
-       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/aluno/signin" component={SigninAluno} />
-        <Route exact path="/aluno/matriculas" component={AlunoPlans} />
-        <Route
-          path="/aluno/matriculas/compra/:plano"
-          component={RegisterInfoMatricula}
-        />
-      </Switch>
-    </>
+    return (
+      <div>
+      <Navbar />
+      <Switch>
+       <Route exact path="/aluno/signin" component={SigninAluno} />
+       <Route exact path="/aluno/matriculas" component={AlunoPlans} />
+       <Route exact path="/" component={Home} />
+       <Route
+         path="/aluno/matriculas/compra/:plano"
+         component={RegisterInfoMatricula}
+       />
+     </Switch>
+     </div>
+    )
   }
 
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={homeRoutes} />
         <AlunoRoute path={"/aluno/app"} component={appRoutes} />
+        <Route path="/" component={homeRoutes} />
       </Switch>
     </div>
   );

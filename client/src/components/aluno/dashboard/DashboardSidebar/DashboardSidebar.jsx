@@ -36,7 +36,7 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
     {
       href: "/aluno/app/forum",
       icon: <ClassIcon/>,
-      title: "Forum",
+      title: "Fórum",
     },
     {
       href: "/aluno/app/perfil",

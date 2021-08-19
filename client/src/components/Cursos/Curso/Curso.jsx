@@ -33,7 +33,7 @@ function Curso({curso}) {
           Icon = (props) => <Code {...props}/>
         break;
     }
-    console.log(Icon)
+
     return (
      <Box>
          <Link className={classes.picture} to="/">

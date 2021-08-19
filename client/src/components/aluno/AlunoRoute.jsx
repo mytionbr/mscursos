@@ -5,7 +5,7 @@ import { Redirect, Route } from 'react-router-dom'
 function AlunoRoute({component: Component, ...rest}) {
     const alunoSignin = useSelector((state) => state.alunoSignin)
     const { alunoInfo } = alunoSignin
-
+    
     return (
         <Route
             {...rest}

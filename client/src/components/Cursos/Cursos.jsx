@@ -9,7 +9,6 @@ function Cursos({data}) {
 
     const [state, setState] = useState(data.cursos)
     const classes = useStyles()
-    console.log(state)
     const dispatch = useDispatch()
 
     const handlePagination = (event,value) => {
