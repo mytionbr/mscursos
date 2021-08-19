@@ -5,7 +5,18 @@ export default makeStyles((theme) =>({
         width: '100%',
       },
       heading: {
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(25),
         fontWeight: theme.typography.fontWeightRegular,
       },
-}))
+    grid:{
+      flexGrow: 1,
+    },
+    details:{
+        background: theme.palette.secondary.main,
+        color: '#fff'
+    },
+    icon:{
+      color:'#fff'
+    }
+}
+))

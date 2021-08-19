@@ -38,7 +38,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
 
   return (
     <div>
-      <AppBar elevation={0} {...rest}>
+      <AppBar elevation={0} position="absolute" {...rest}>
         <Toolbar className={classes.toolbar}>
           <Link to="/" className={classes.brandLink}>
             <MenuBookIcon className={classes.brandIcon} />

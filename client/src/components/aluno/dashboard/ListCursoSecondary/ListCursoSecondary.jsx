@@ -9,18 +9,19 @@ function ListCursoSecondary(props) {
         <Grid
             container
             direction="column"
-            justifyContent="center"
-            alignItems="center"
+            spacing={1}
             {...props}
         >
             {
                 cursos.map(curso =>(
-                    <CursoCard 
-                        title={curso.name}
-                        percent={curso.percentAulas}
-                        icon={curso.icon}
-                        action={curso.action}
-                    />
+                    <Grid item xs={12}>
+                        <CursoCard 
+                            name={curso.name}
+                            percent={curso.percent}
+                            icon={curso.icon}
+                            action={curso.action}
+                        />
+                    </Grid>
                 ))
             }
         </Grid>

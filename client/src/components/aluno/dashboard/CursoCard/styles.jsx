@@ -1,34 +1,27 @@
-import { grey } from '@material-ui/core/colors'
-import { makeStyles } from '@material-ui/core/styles'
+import { grey } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles((theme) =>({
-    card:{
-        width: '100%'
+export default makeStyles((theme) => ({
+  card: {
+    width: "100%",
+  },
+  gridContainer: {
+   justifyContent: 'center',
+   alignItems: 'center'
+  },
+  avatar: {
+    backgroundColor: theme.palette.secondary.main,
+    height: "6rem",
+    width: "6rem",
+    "& > svg ": {
+      fontSize: "3rem",
     },
-    gridHeader:{
-        width: '100%',
-    },
-    avatar:{
-        backgroundColor: theme.palette.secondary.main,
-        height: "4rem",
-        width: "4rem",
-    },
-    gridPercent:{
-        width: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start'
-    },
-    percent:{
-        root:{
-            height: 10,
-            borderRadius: 5,
-        },
-        colorPrimary:{
-            backgroundColor: grey[400]
-        },
-        bar: {
-            borderRadius: 5,
-            backgroundColor: theme.palette.secondary.main,
-          },
-    }
-}))
+  },
+  gridPercent: {
+    flexDirection: "column",
+  },
+  percent: {
+    height: 10,
+    borderRadius: 5,
+  },
+}));

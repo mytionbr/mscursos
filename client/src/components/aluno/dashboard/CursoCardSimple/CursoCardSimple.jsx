@@ -5,7 +5,7 @@ function CursoCardSimple(props) {
     const { name, icon, action } = props
     const classes = useStyles()
     return (
-        <Grid xs={3}>
+        <Grid item xs={3}>
             <Card className={classes.card}
         onClick={action}
         {...props}

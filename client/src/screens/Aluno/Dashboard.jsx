@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@material-ui/core";
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import Helmet from "react-helmet";
 import CursoCard from "../../components/aluno/dashboard/CursoCard/CursoCard";
@@ -83,30 +83,36 @@ function Dashboard() {
       <Box
         style={{
           minHeight: "100%",
-          padding: "3rem 0",
+          padding: "2rem 0",
         }}
       >
         <Container>
-          <Grid container spacing={3}>
-            <Grid item lg={6} sm={12} xl={6} xs={12}>
+          <Grid container spacing={4} justifyContent={'space-between'}>
+            <Grid item lg={5} sm={12} xl={5} xs={12}>
+            <Typography align={'left'}  gutterBottom variant="h5">
+              Curso atual:
+            </Typography>
               <CursoCard
                 name={cursos[0].name}
-                percent={cursos[0].parcent}
+                percent={cursos[0].percent}
                 icon={cursos[0].icon}
                 action={cursos[0].action}
               />
             </Grid>
             <Grid
               item
-              lg={6}
+              lg={5}
               sm={12}
-              xl={6}
+              xl={5}
               xs={12}
               spacing={1}
               direction="column"
               justifyContent="flex-start"
               alignItems="center"
             >
+            <Typography align={'left'}  gutterBottom variant="h5">
+              Últimos cursos:
+            </Typography>
               <ListCursoSecondary
                 cursos={[].concat(cursos[0], cursos[0], cursos[0])}
               />

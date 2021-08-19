@@ -12,7 +12,7 @@ export default makeStyles((theme) =>({
         display: 'flex',
         flex: '1 1 auto',
         overflow: 'hidden',
-        paddingTop: 70,
+        paddingTop: 65,
     },
     dashboardLayoutContainer:{
         display: 'flex',
