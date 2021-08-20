@@ -8,6 +8,7 @@ import SigninAluno from "../screens/Aluno/SigninAluno/SigninAluno";
 import DashboardLayout from "../components/aluno/dashboard/DashboardLayout/DashboardLayout";
 import AlunoRoute from "../components/aluno/AlunoRoute";
 import Dashboard from "../screens/Aluno/Dashboard";
+import CursoPage from "../screens/Aluno/CursoPage/CursoPage";
 const AlunoRouter = () => {
   
   const appRoutes = () => {
@@ -27,6 +28,7 @@ const AlunoRouter = () => {
       <Switch>
        <Route exact path="/aluno/signin" component={SigninAluno} />
        <Route exact path="/aluno/matriculas" component={AlunoPlans} />
+       <Route path="/curso/:cursoId" component={CursoPage} />
        <Route exact path="/" component={Home} />
        <Route
          path="/aluno/matriculas/compra/:plano"
