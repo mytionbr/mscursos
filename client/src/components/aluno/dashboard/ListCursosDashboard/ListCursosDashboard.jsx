@@ -2,7 +2,6 @@ import React from 'react'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@material-ui/core';
 import useStyles from './styles'
-import CursoCardSimple from '../CursoCardSimple/CursoCardSimple';
 import CursoCard from '../CursoCard/CursoCard';
 function ListCursosDashboard(props) {
     const classes = useStyles()

@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { Avatar, Card, CardContent, CardHeader, Divider, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import useStyle from './styles'
 
@@ -7,23 +7,21 @@ function ProfessorInfo({nome,descricao}) {
   const classes = useStyle()
   return (
     <Card>
+       <CardHeader 
+          title={nome}
+          avatar={
+            <Avatar className={classes.icon}>{nome[0]}</Avatar>
+          }
+          subheader={'Professor(a) do curso'}
+          classes={{
+            title: classes.title,
+            subheader: classes.subheader
+          }}
+        />
       <CardContent>
-        <Grid container className={classes.container}>
-            <Typography variant="h5" gutterBottom>
-                Professor(a)
-            </Typography>
-            <Grid item className={classes.header}>
-                <Avatar className={classes.orange}>{nome[0]}</Avatar>
-                <Typography variant="h6" gutterBottom>
-                    {nome}
-                </Typography>
-            </Grid>
-            <Grid item>
-                <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="body1" gutterBottom>
                     {descricao}
                 </Typography>
-            </Grid>
-        </Grid>
       </CardContent>
     </Card>
   );

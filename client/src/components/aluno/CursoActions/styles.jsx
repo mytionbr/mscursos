@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
     margin: '2rem'
   },
   button:{
-    fontSize: '1.5rem',
+    fontSize: '1.2rem',
     color: '#fff'
 }
 }));

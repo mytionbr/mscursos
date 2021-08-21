@@ -1,19 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
-    container:{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        padding: "1rem 0",
+    icon:{
+        fontSize:'2rem',
+        width: '3rem',
+        height: '3rem',
+        color: '#fff',
+        background: theme.palette.secondary.main
     },
-    header:{
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
+    title:{
+        fontSize:'1.5rem',      
     },
-    description:{
-        
+    subheader:{
+        fontSize:'1rem',      
     }
 }));
