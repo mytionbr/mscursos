@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     width: "40%",
     justifyContent: "space-evenly",
+    margin: '2rem'
   },
   button:{
     fontSize: '1.5rem',

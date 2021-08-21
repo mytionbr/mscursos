@@ -1,15 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
-    container:{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        padding: "2rem 0",
+    box:{
+        paddingTop: "2rem",
         backgroundColor: theme.palette.secondary.main,
-        color: '#fff',
         minWidth: "100%",
     },
-    
+    container:{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        color: '#fff',
+    },
+    title:{
+        fontWeight:'700'
+    },
 }));

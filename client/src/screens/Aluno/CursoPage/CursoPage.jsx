@@ -29,7 +29,8 @@ function CursoPage(props) {
         descricao: 'dfsoisjdfiojsiofjsiofjsiofjiofjsiofj',
       },
     ],
-    ducarcao: '10:00',
+    duracao: '10',
+    atualizado:'02/06/21',
     alunos: 200,
     avaliacao: 5,
     progresso: 50,
@@ -40,7 +41,8 @@ function CursoPage(props) {
 
   const [aluno,setAluno] = useState({
     nome: 'marcos',
-    isMatriculado: false
+    isMatriculado: true,
+    progresso: '10'
   })
   
   return (
@@ -61,7 +63,7 @@ function CursoPage(props) {
           />
           <CursoStatistics
             aulas={curso.aulas}
-            duracao={curso.ducarcao}
+            duracao={curso.duracao}
             alunos={curso.alunos}
             atualizado={curso.atualizado}
             avaliacao={curso.avaliacao}

@@ -11,6 +11,25 @@ export default makeStyles((theme) => ({
             color: '#fff',
             fontSize: '1rem',
         },
+        '& > h5':{
+            display: 'flex',
+            alignItems: 'center',
+           
+        },
+
     },
+    icon:{
+        '& > svg':{
+            marginRight: '0.5rem',
+            fontSize: '2.2rem'
+        },
+    },
+    rating:{
+        color: '#fff',
+        fontSize: '1rem'
+    },
+    text:{
+        fontSize: '1rem'
+    }
     
 }));
