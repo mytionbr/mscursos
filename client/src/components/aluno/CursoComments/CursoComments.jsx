@@ -49,7 +49,7 @@ function CursoComments({cursoId}) {
             aluno_nome: 'lucas',
             date: '2021-01-01',
             avaliacao: 5,
-            conteudo: 'Muito bom'
+            conteudo: 'Muito bommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'
         },
         {
             aluno_nome: 'lucas',
