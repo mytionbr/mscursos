@@ -25,11 +25,14 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "marked": "^3.0.1",
+    "material-ui-markdown-editor": "^1.0.10",
     "moment": "^2.29.1",
     "node-pg-migrate": "^5.10.0",
     "nodemon": "^2.0.12",
     "pg": "^8.6.0",
     "pg-format": "^1.0.4",
+    "react-markdown": "^7.0.0",
+    "remark-gfm": "^2.0.0",
     "slugify": "^1.6.0"
   }
 }
