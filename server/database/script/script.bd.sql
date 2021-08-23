@@ -37,9 +37,11 @@ CREATE TABLE IF NOT EXISTS curso (
     professor_id INT,
     categoria_id INT,
     data_atualizacao DATE NOT NULL,
+    data_criacao DATA NOT NULL,
     resumo TEXT,
     slug VARCHAR(255) not null,
-    CONSTRAINT nome_curso UNIQUE (nome)
+    CONSTRAINT nome_curso UNIQUE (nome),
+    CONSTRAINT slug_curso UNIQUE (slug)
 );
 
 CREATE TABLE IF NOT EXISTS aula (
