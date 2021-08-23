@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS aula (
     aula_id serial PRIMARY KEY,
     nome VARCHAR (255) NOT NULL,
     descricao VARCHAR (255) NOT NULL,
-    curso_id INT NOT NULL
+    curso_id INT NOT NULL,
+    duracao INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS curso_aluno (
