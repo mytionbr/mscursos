@@ -95,6 +95,13 @@ CREATE TABLE IF NOT EXISTS avaliacao(
 	curso_id INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS visualizacao(
+	visualizacao_id serial PRIMARY KEY,
+	aluno_id INT NOT NULL,
+	aula_id INT NOT NULL,
+	data_criacao INT NOT NULL
+);
+
 ALTER TABLE assinatura ADD CONSTRAINT assinatura_plano_id_fkey
 	FOREIGN KEY (plano_id) REFERENCES plano (plano_id);
 	
@@ -133,12 +140,17 @@ ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_aluno_id_fkey
 ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_curso_id_fkey
 	FOREIGN KEY (curso_id) REFERENCES curso ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aluno_id_fkey
+	FOREIGN KEY (aluno_id) REFERENCES aluno ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aula_id_fkey
+	FOREIGN KEY (aula_id) REFERENCES aula ON UPDATE CASCADE ON DELETE CASCADE;
+
 INSERT INTO aluno(nome, email, data_nascimento, senha) 
 	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
 
 INSERT INTO professor(nome, email, data_nascimento, senha) 
 	VALUES ('pedro', 'pedro@examplo.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
-
 
 INSERT INTO categoria(nome) 
 	VALUES ('Programação'),
