@@ -86,6 +86,15 @@ CREATE TABLE IF NOT EXISTS assinatura(
     pagamento_id INT,
 );
 
+CREATE TABLE IF NOT EXISTS avaliacao(
+	avaliacao_id serial PRIMARY KEY,
+	valor INT NOT NULL,
+	comentario TEXT NOT NULL,
+	data_criacao DATE NOT NULL,
+	aluno_id INT NOT NULL,
+	curso_id INT NOT NULL
+);
+
 ALTER TABLE assinatura ADD CONSTRAINT assinatura_plano_id_fkey
 	FOREIGN KEY (plano_id) REFERENCES plano (plano_id);
 	
@@ -118,6 +127,11 @@ ALTER TABLE nota ADD CONSTRAINT nota_aluno_id_fkey
 ALTER TABLE aula ADD CONSTRAINT aula_curso_id_fkey 
     FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_aluno_id_fkey
+	FOREIGN KEY (aluno_id) REFERENCES aluno ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_curso_id_fkey
+	FOREIGN KEY (curso_id) REFERENCES curso ON UPDATE CASCADE ON DELETE CASCADE;
 
 INSERT INTO aluno(nome, email, data_nascimento, senha) 
 	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
