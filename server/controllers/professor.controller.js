@@ -8,12 +8,12 @@ import { generateToken } from "../utils/generateToken.js";
 export const register = async (req,res) =>{
     try {
       
-        const {nome, email, data_nascimento} = req.body
+        const {nome, email, data_nascimento,descricao} = req.body
        
         const senhaDefault = bcrypt.hashSync(data_nascimento.replace('-',''),8)
         const { rows } = await pool.query(
-            'INSERT INTO professor (nome, email, data_nascimento, senha) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nome, email, data_nascimento, senhaDefault])
+            'INSERT INTO professor (nome, email, data_nascimento, senha,descricao) VALUES ($1, $2, $3, $4,$5) RETURNING *;',
+            [nome, email, data_nascimento, senhaDefault,descricao])
  
         let professorCreated = rows[0]
         
@@ -77,8 +77,8 @@ export const update = async (req,res) => {
         }
       
         const { rows } = await pool.query(
-            'UPDATE professor SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE professor_id = $5 RETURNING *;',
-            [professor.nome, professor.email, professor.data_nascimento, professor.senha, professor.professor_id]) 
+            'UPDATE professor SET nome = $1, email = $2, data_nascimento = $3, senha = $4, descricao = $5 WHERE professor_id = $6 RETURNING *;',
+            [professor.nome, professor.email, professor.data_nascimento, professor.senha,professor.descricao, professor.professor_id]) 
               
         let updatedProfessor = rows[0]
         

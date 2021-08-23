@@ -90,14 +90,32 @@ export const update = async (req, res) => {
   try {
     let curso = req.profile;
     curso = extend(curso, req.body);
+    const data_atualizacao = moment().format('YYYY-MM-DD')
+
+    const slug = slugify(
+      curso.nome,
+      {
+        lower: true,
+        strict: true
+      }
+    )
+
+    let sanitizedResumo;
+
+    if(curso.resumo){
+      sanitizedResumo = dompurify.sanitize(marked(curso.resumo)) 
+    }
 
     const { rows } = await pool.query(
-      "UPDATE curso SET nome = $1, descricao = $2, professor_id = $3, categoria_id = $4 WHERE curso_id = $5 RETURNING *;",
+      "UPDATE curso SET nome = $1, descricao = $2, professor_id = $3, categoria_id = $4, curso_slug = $5, curso_resumo = $6 data_atualizacao = $5 WHERE curso_id = $7 RETURNING *;",
       [
         curso.nome,
         curso.descricao,
         curso.professor_id,
         curso.categoria_id,
+        data_atualizacao,
+        slug,
+        sanitizedResumo,
         curso.curso_id,
       ]
     );
@@ -538,15 +556,12 @@ export const findCursoInfo = async (req, res) => {
             `,
       [slug]
     );
-
     
     if (!cursoResult.rows[0]) {
       return res.status(400).json({ message: "curso não existe" });
     }
 
     cursoInfo.curso = cursoResult.rows[0];
-
-
 
     const aulasResult = await pool.query(
       `

@@ -49,6 +49,7 @@ function CreateFormCurso(props) {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [resumo, setResumo] = useState("")
 
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -65,13 +66,19 @@ function CreateFormCurso(props) {
     setCategoria(value);
   };
 
+  const handlerChangeResumo = (event) => {
+    const value = event.target.value;
+    setResumo(resumo);
+  };
+
   const handlerSubmit = (event) => {
     event.preventDefault();
     dispatch(createCurso(
         {
             nome: nome,
             descricao: descricao, 
-            categoria_id: categoria
+            categoria_id: categoria,
+            resumo: resumo
         }))
   };
 

@@ -1,13 +1,20 @@
 import pool from "../database/pool.js";
 import extend from "lodash/extend.js";
+import moment from "moment";
 
 export const create = async (req,res) => {
     try {
-        const { nome, descricao, curso_id } = req.body
+        const { nome, descricao,duracao, curso_id } = req.body
 
         const { rows } = await pool.query(
-            'INSERT INTO aula (nome, descricao, curso_id) VALUES ($1, $2, $3) RETURNING *;',
-            [nome, descricao, curso_id])
+            'INSERT INTO aula (nome, descricao,duracao, curso_id) VALUES ($1, $2, $3, $4) RETURNING *;',
+            [nome, descricao,duracao, curso_id])
+        
+        const data_atualizacao = moment().format('YYYY-MM-DD')
+
+       await pool.query(
+            'UPDATE curso SET data_atualizacao = $1 WHERE curso_id = $2',
+            [data_atualizacao,curso_id])
         
         const createdAula = rows[0]
 
@@ -75,8 +82,8 @@ export const update = async (req,res) => {
         let aula = extend(aulasRows[0], req.body)
         
         const { rows } = await pool.query(
-            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3 WHERE aula_id = $4 RETURNING *;',
-            [aula.nome, aula.descricao, aula.curso_id, aula.aula_id])
+            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4 WHERE aula_id = $5s RETURNING *;',
+            [aula.nome, aula.descricao, aula.curso_id,aula.duracao, aula.aula_id])
         const updatedAula = rows[0]
 
         res.status(200).json(updatedAula)
