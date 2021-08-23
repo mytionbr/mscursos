@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS professor(
     email VARCHAR (255) NOT NULL,
     data_nascimento date NOT NULL,
     senha VARCHAR (255) NOT NULL,
+    descricao TEXT,
     CONSTRAINT email_unique_professor UNIQUE (email)
 );
 
@@ -35,6 +36,9 @@ CREATE TABLE IF NOT EXISTS curso (
     descricao TEXT NOT NULL,
     professor_id INT,
     categoria_id INT,
+    data_atualizacao DATE NOT NULL,
+    resumo TEXT,
+    slug VARCHAR(255) not null,
     CONSTRAINT nome_curso UNIQUE (nome)
 );
 
