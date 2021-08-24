@@ -149,6 +149,24 @@ export const enroll = async (req, res) => {
     const curso = req.profile;
     const aluno_id = req.params["alunoId"];
 
+    const { rows: assinatura } = await pool.query(
+      `SELECT ASSINATURA.PAGO, ASSINATURA.PLANO_ID AS assinatura_plano, ASSINATURA.ALUNO_ID
+      FROM ASSINATURA WHERE ASSINATURA.ALUNO_ID = $1`,
+      [aluno_id])
+
+    if(!assinatura[0] || !assinatura[0].pago){
+      return res.status(400).json({message: 'Essa operação não é permitida a esse usuário'})
+    }
+
+    const { rows: categoria } = await pool.query(
+      `SELECT * FROM CATEGORIA WHERE CATEGORIA_ID = $1`,
+      [curso.categoria_id]
+    )
+
+    if(categoria[0] && categoria[0].plano_id !== assinatura[0].plano_id){
+      return res.status(400).json({message: 'O plano do usuário não cobre esse curso'})
+    }
+
     const { rows } = await pool.query(
       `
             INSERT INTO curso_aluno (curso_id, aluno_id)
@@ -621,3 +639,5 @@ export const addRating = async (req,res)=>{
       })
   }
 }
+
+
