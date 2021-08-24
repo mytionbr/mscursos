@@ -9,6 +9,9 @@ import ProfessorInfo from "../../../components/aluno/ProfessorInfo/ProfessorInfo
 
 function CursoPage(props) {
   const currentCurso = props.match.params.cursoId;
+
+  
+
   console.log(currentCurso);
 
   const [curso, setCurso] = useState({

@@ -591,3 +591,33 @@ export const findCursoInfo = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+
+export const addRating = async (req,res)=>{
+  try{
+      const {curso_id, aluno_id,valor, comentario } = req.body
+
+      const data_criacao = moment().format('YYYY-MM-DD')
+
+      const {rows: matricula} = await pool.query(
+        `SELECT * FROM CURSO_ALUNO WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,
+        [aluno_id, curso_id]
+      )
+
+      if(!matricula){
+        return res.status(400).json('Essa operação não é permitida a esse usuário')
+      }
+
+      const { rows } = await pool.query(
+        'INSERT INTO avaliacao (valor, comentario, data_criacao, aluno_id, curso_id) VALUES ($1,$2,$3,$4,$5) RETUNING *;',
+        [valor, comentario, data_criacao, aluno_id, curso_id]
+      )
+      
+      res.status(201).json(rows)
+
+  } catch(err){
+      res.status(400).json({
+          message: err.message
+      })
+  }
+}

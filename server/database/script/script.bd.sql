@@ -25,9 +25,15 @@ CREATE TABLE IF NOT EXISTS professor(
     CONSTRAINT email_unique_professor UNIQUE (email)
 );
 
+CREATE TABLE IF NOT EXISTS plano(
+    plano_id serial PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS categoria (
     categoria_id serial PRIMARY KEY,
-    nome VARCHAR (255) NOT NULL
+    nome VARCHAR (255) NOT NULL,
+    plano_id INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS curso (
@@ -66,10 +72,7 @@ CREATE TABLE IF NOT EXISTS nota (
     aluno_id INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS plano(
-    plano_id serial PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
-);
+
 
 CREATE TABLE IF NOT EXISTS pagamento(
 	pagamento_id serial PRIMARY KEY,
@@ -149,21 +152,26 @@ ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aluno_id_fkey
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aula_id_fkey
 	FOREIGN KEY (aula_id) REFERENCES aula ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE categoria ADD CONSTRAINT categoria_plano_id_fkey 
+    FOREIGN KEY (plano_id) REFERENCES plano (plano_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
 INSERT INTO aluno(nome, email, data_nascimento, senha) 
 	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
 
 INSERT INTO professor(nome, email, data_nascimento, senha) 
 	VALUES ('pedro', 'pedro@examplo.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
 
-INSERT INTO categoria(nome) 
-	VALUES ('Programação'),
-		   ('Frontend'),
-		   ('Ux e desing'),
-		   ('Gestão'),
-		   ('Linguas'),
-		   ('Data Science');
-
 INSERT INTO plano (plano_id,nome)
 	values (1,'Básico'),
 		   (2,'Intermediário'),
 		   (3, 'Avançado');
+
+INSERT INTO categoria(categoria_id, nome, plano_id) 
+	VALUES (1,'Programação',1),
+		   (2,'Frontend',1),
+		   (3,'Ux e desing',2),
+		   (4,'Gestão',2),
+		   (5,'Linguas',3),
+		   (6,'Data Science',3);
+
