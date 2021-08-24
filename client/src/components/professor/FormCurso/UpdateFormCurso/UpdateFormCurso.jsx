@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listCategoria } from "../../../../actions/categoriaActions";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
-
+import MDEditor from '@uiw/react-md-editor';
 import useStyles from "./styles";
 import { detailsCurso, updateCurso } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
@@ -61,12 +61,14 @@ function UpdateFormCurso({cursoId,...rest}) {
       setNome(curso.nome);
       setCategoria(curso.categoria_id);
       setDescricao(curso.descricao);
+      setResumo(curso.resumo)
     }
   }, [curso, cursoId, dispatch, history, successUpdate]);
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [resumo, setResumo] = useState("")
 
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -91,6 +93,7 @@ function UpdateFormCurso({cursoId,...rest}) {
         nome: nome,
         descricao: descricao,
         categoria_id: categoria,
+        resumo: resumo
       })
     );
   };
@@ -113,16 +116,7 @@ function UpdateFormCurso({cursoId,...rest}) {
             onChange={handlerChangeNome}
             value={nome}
           />
-          <TextField
-            name="nome"
-            variant="outlined"
-            multiline
-            label="Descrição"
-            color="secondary"
-            fullWidth
-            onChange={handlerChangeDescricao}
-            value={descricao}
-          />
+          
           {loadingCategorias ? (
             <LoadingBox />
           ) : errorCategorias ? (
@@ -148,6 +142,24 @@ function UpdateFormCurso({cursoId,...rest}) {
             </FormControl>
           )}
 
+        <TextField
+          name="descricao"
+          variant="outlined"
+          multiline
+          rows={4}
+          label="Descrição"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeDescricao}
+          value={descricao}
+        />
+
+      <InputLabel style={{marginLeft:'0.8rem'}} id="resumo">Resumo</InputLabel>
+      <MDEditor
+        value={resumo}
+        onChange={setResumo}
+      />
+
           <Button
             type="submit"
             className={classes.button}
@@ -162,7 +174,7 @@ function UpdateFormCurso({cursoId,...rest}) {
           {loadingUpdate ? (
             <LoadingBox />
           ) : (
-            errorUpdate && <MessageBox type="error">{error}</MessageBox>
+            errorUpdate && <MessageBox type="error">{errorUpdate}</MessageBox>
           )}
         </Box>
          

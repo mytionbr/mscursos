@@ -12,7 +12,6 @@ const dompurify = createDomPurify(new JSDOM().window)
 export const create = async (req, res) => {
   try {
     const { nome, descricao, professor_id, categoria_id, resumo } = req.body;
-
     const data_criacao = moment().format('YYYY-MM-DD')
     const data_atualizacao = data_criacao
 
@@ -43,7 +42,7 @@ export const create = async (req, res) => {
 
     res.status(201).json(cursoCreated);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).send({ message: err.message });
   }
 };
 
@@ -107,15 +106,15 @@ export const update = async (req, res) => {
     }
 
     const { rows } = await pool.query(
-      "UPDATE curso SET nome = $1, descricao = $2, professor_id = $3, categoria_id = $4, curso_slug = $5, curso_resumo = $6 data_atualizacao = $5 WHERE curso_id = $7 RETURNING *;",
+      "UPDATE curso SET nome = $1, descricao = $2, professor_id = $3, categoria_id = $4, slug = $5, resumo = $6, data_atualizacao = $7 WHERE curso_id = $8 RETURNING *;",
       [
         curso.nome,
         curso.descricao,
         curso.professor_id,
         curso.categoria_id,
-        data_atualizacao,
         slug,
         sanitizedResumo,
+        data_atualizacao,
         curso.curso_id,
       ]
     );

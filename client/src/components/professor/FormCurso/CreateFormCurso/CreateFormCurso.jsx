@@ -19,6 +19,8 @@ import { createCurso } from "../../../../actions/cursoActions";
 import { useHistory } from 'react-router-dom'
 import { CURSO_CREATE_RESET } from "../../../../constants/cursoConstants";
 
+import MDEditor from '@uiw/react-md-editor';
+
 function CreateFormCurso(props) {
   const classes = useStyles();
 
@@ -66,10 +68,6 @@ function CreateFormCurso(props) {
     setCategoria(value);
   };
 
-  const handlerChangeResumo = (event) => {
-    const value = event.target.value;
-    setResumo(resumo);
-  };
 
   const handlerSubmit = (event) => {
     event.preventDefault();
@@ -94,16 +92,7 @@ function CreateFormCurso(props) {
           onChange={handlerChangeNome}
           value={nome}
         />
-        <TextField
-          name="nome"
-          variant="outlined"
-          multiline
-          label="Descrição"
-          color="secondary"
-          fullWidth
-          onChange={handlerChangeDescricao}
-          value={descricao}
-        />
+        
         {loadingCategorias ? (
           <LoadingBox />
         ) : errorCategorias ? (
@@ -123,7 +112,23 @@ function CreateFormCurso(props) {
             </Select>
           </FormControl>
         )}
-
+        <TextField
+          name="descricao"
+          variant="outlined"
+          multiline
+          rows={4}
+          label="Descrição"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeDescricao}
+          value={descricao}
+        />
+       <InputLabel style={{marginLeft:'0.8rem'}} id="resumo">Resumo</InputLabel>
+      <MDEditor
+        value={resumo}
+        onChange={setResumo}
+      />
+     
         <Button
           type="submit"
           className={classes.button}
