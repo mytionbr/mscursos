@@ -43,9 +43,7 @@ router
   .route("/info/:slug")
   .get(findCursoInfo)
   
-router
-  .route("/avaliacoes")
-  .post(addRating)
+
 
 router
   .route("/:id")
@@ -53,11 +51,15 @@ router
   .put(isAuth, hasAuthorizationCurso, update)
   .delete(isAuth, hasAuthorizationCurso, remove);
 
-router.route("/:id/matriculas/").get(listMatriculas);
+router.route("/:id/matriculas/")
+  .get(listMatriculas)
+  .post(enroll)
+
+router.route("/:id/avaliacoes")
+  .post(addRating)
 
 router
   .route("/:id/matriculas/:alunoId")
-  .post(enroll)
   .get(getAluno)
   .delete(unenroll);
 

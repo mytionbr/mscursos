@@ -9,7 +9,6 @@ import ProfessorInfo from "../../../components/aluno/ProfessorInfo/ProfessorInfo
 
 function CursoPage(props) {
   const currentCurso = props.match.params.cursoId;
-
   
 
   console.log(currentCurso);
@@ -44,6 +43,62 @@ function CursoPage(props) {
     professor_nome: "João",
     professor_descricao: "Formado na USP",
     curso_id: 1,
+    avaliacao_media: 4,
+    avaliacao_total: 200,
+    stars:{
+        star5:{
+            star:5,
+            percent: 80
+        },
+        star4:{
+            star:4,
+            percent: 15
+        },
+        star3:{
+            star:3,
+            percent: 5
+        },
+        star2:{
+            star:2,
+            percent: 3 
+        },
+        star1:{
+            star:1,
+            percent: 2
+        },
+    },
+    comentarios:[
+    {
+        aluno_nome: 'lucas',
+        date: '2021-01-01',
+        avaliacao: 5,
+        conteudo: 'Muito bom'
+    },
+    {
+        aluno_nome: 'lucas',
+        date: '2021-01-01',
+        avaliacao: 5,
+        conteudo: 'Muito bom'
+    },
+    {
+        aluno_nome: 'lucas',
+        date: '2021-01-01',
+        avaliacao: 5,
+        conteudo: 'Muito bommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'
+    },
+    {
+        aluno_nome: 'lucas',
+        date: '2021-01-01',
+        avaliacao: 5,
+        conteudo: 'Muito bom'
+    },
+    {
+        aluno_nome: 'lucas',
+        date: '2021-01-01',
+        avaliacao: 5,
+        conteudo: 'Muito bom'
+    },
+    ]
   });
 
   const [aluno, setAluno] = useState({
@@ -113,7 +168,7 @@ function CursoPage(props) {
               <AulasInfo aulas={curso.aulas} />
             </Grid>
           </Grid>
-          <CursoComments cursoId={curso.curso_id} />
+          <CursoComments curso={curso} />
         </Container>
       </Box>
     </>

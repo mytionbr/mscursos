@@ -5,6 +5,8 @@ import slugify from 'slugify'
 import marked from 'marked'
 import createDomPurify from 'dompurify'
 import jsdom from 'jsdom'
+import { countOccurrences } from "../utils/countOccurrences.js";
+import { calculateAverage } from "../utils/calculateAverage.js";
 
 const { JSDOM } = jsdom
 const dompurify = createDomPurify(new JSDOM().window)
@@ -147,7 +149,7 @@ export const remove = async (req, res) => {
 export const enroll = async (req, res) => {
   try {
     const curso = req.profile;
-    const aluno_id = req.params["alunoId"];
+    const aluno_id = req.body.aluno_id
 
     const { rows: assinatura } = await pool.query(
       `SELECT ASSINATURA.PAGO, ASSINATURA.PLANO_ID AS assinatura_plano, ASSINATURA.ALUNO_ID
@@ -191,6 +193,7 @@ export const enroll = async (req, res) => {
       matricula: matricula,
     });
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
@@ -564,6 +567,7 @@ export const findCursoInfo = async (req, res) => {
             PROFESSOR.DESCRICAO AS professor_descricao,
             PROFESSOR.PROFESSOR_ID AS professor_id,
             (SELECT COUNT(*) FROM AULA WHERE CURSO.CURSO_ID = AULA.CURSO_ID) AS aulas_total,
+            (SELECT COUNT(AVALIACAO.AVALIACAO_ID) FROM AVALIACAO INNER JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID) AS avaliacao_total,
             (SELECT AVG(AVALIACAO.VALOR) FROM AVALIACAO INNER JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID)
             AS curso_avaliacao
             FROM CURSO 
@@ -602,6 +606,18 @@ export const findCursoInfo = async (req, res) => {
     );
 
     cursoInfo.avaliacoes = avaliacaoResult.rows;
+    
+    
+    let starList = cursoInfo.avaliacoes.map(avaliacao =>{
+      return avaliacao.valor
+    })
+
+    
+    let starsOccurrences = countOccurrences(starList)
+    
+    let starsPercent = calculateAverage(starsOccurrences,Number(cursoInfo.curso.avaliacao_total))
+
+    cursoInfo.stars = starsPercent 
 
     res.status(200).json(cursoInfo)
 
@@ -613,22 +629,23 @@ export const findCursoInfo = async (req, res) => {
 
 export const addRating = async (req,res)=>{
   try{
-      const {curso_id, aluno_id,valor, comentario } = req.body
+      const curso = req.profile;
+      const {aluno_id,valor, comentario } = req.body
 
       const data_criacao = moment().format('YYYY-MM-DD')
 
       const {rows: matricula} = await pool.query(
         `SELECT * FROM CURSO_ALUNO WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,
-        [aluno_id, curso_id]
+        [aluno_id, curso.curso_id]
       )
 
-      if(!matricula){
-        return res.status(400).json('Essa operação não é permitida a esse usuário')
+      if(!matricula || matricula.length === 0){
+        return res.status(400).json({message:'Essa operação não é permitida a esse usuário'})
       }
 
       const { rows } = await pool.query(
-        'INSERT INTO avaliacao (valor, comentario, data_criacao, aluno_id, curso_id) VALUES ($1,$2,$3,$4,$5) RETUNING *;',
-        [valor, comentario, data_criacao, aluno_id, curso_id]
+        'INSERT INTO avaliacao (valor, comentario, data_criacao, aluno_id, curso_id) VALUES ($1,$2,$3,$4,$5) RETURNING *;',
+        [valor, comentario, data_criacao, aluno_id, curso.curso_id]
       )
       
       res.status(201).json(rows)

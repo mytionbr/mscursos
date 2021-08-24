@@ -3,69 +3,8 @@ import React, { useState } from 'react'
 import AlunosComments from './AlunosComments/AlunosComments'
 import CommentsRating from './CommentsRating/CommentsRating'
 
-function CursoComments({cursoId}) {
+function CursoComments({curso}) {
     
-    const [curso, setCurso] = useState({
-        avaliacao_media: 4,
-        avaliacao_total: 200,
-        stars:{
-            star5:{
-                star:5,
-                percent: 80
-            },
-            star4:{
-                star:4,
-                percent: 15
-            },
-            star3:{
-                star:3,
-                percent: 5
-            },
-            star2:{
-                star:2,
-                percent: 3 
-            },
-            star1:{
-                star:1,
-                percent: 2
-            },
-        }
-
-    })
-    const [comentarios, setComentarios] = useState([
-        {
-            aluno_nome: 'lucas',
-            date: '2021-01-01',
-            avaliacao: 5,
-            conteudo: 'Muito bom'
-        },
-        {
-            aluno_nome: 'lucas',
-            date: '2021-01-01',
-            avaliacao: 5,
-            conteudo: 'Muito bom'
-        },
-        {
-            aluno_nome: 'lucas',
-            date: '2021-01-01',
-            avaliacao: 5,
-            conteudo: 'Muito bommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'
-        },
-        {
-            aluno_nome: 'lucas',
-            date: '2021-01-01',
-            avaliacao: 5,
-            conteudo: 'Muito bom'
-        },
-        {
-            aluno_nome: 'lucas',
-            date: '2021-01-01',
-            avaliacao: 5,
-            conteudo: 'Muito bom'
-        },
-        
-    ])
-
     return (
         <Box
         style={{
@@ -83,7 +22,7 @@ function CursoComments({cursoId}) {
                     ratingStars={curso.stars}
                 />
                  <AlunosComments
-                    comments={comentarios}
+                    comments={curso.comentarios}
                 />    
             </Grid>          
         </Box>
