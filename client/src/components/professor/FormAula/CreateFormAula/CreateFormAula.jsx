@@ -14,11 +14,10 @@ import MessageBox from '../../../core/MessageBox/MessageBox';
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 
 import useStyles from "./styles";
-import { createCurso, findCursosByProfessor } from "../../../../actions/cursoActions";
+import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import { useHistory } from 'react-router-dom'
 import { AULA_CREATE_RESET } from "../../../../constants/aulaConstantes";
 import { createAula } from "../../../../actions/aulaActions";
-
 function CreateFormAula(props) {
   const classes = useStyles();
   const history = useHistory()
@@ -52,6 +51,7 @@ function CreateFormAula(props) {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [curso, setCurso] = useState(null);
+  const [duracao, setDuracao] = useState(0)
 
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -68,39 +68,29 @@ function CreateFormAula(props) {
     setCurso(value);
   };
 
+  const handlerChangeDuracao = (event) => {
+    const re = /^[0-9\b]+$/;
+    const value = event.target.value;
+    if (value === '' || re.test(value)) {
+      setDuracao(value);
+    }   
+  };
+
   const handlerSubmit = (event) => {
     event.preventDefault();
     dispatch(createAula(
         {
             nome: nome,
             descricao: descricao, 
-            curso_id: curso
+            curso_id: curso,
+            duracao: duracao
         }))
   };
 
   return (
     <Card {...props}>
       <Box className={classes.boxContainer}>
-        <TextField
-          name="nome"
-          variant="outlined"
-          label="Nome"
-          color="secondary"
-          fullWidth
-          onChange={handlerChangeNome}
-          value={nome}
-        />
-        <TextField
-          name="nome"
-          variant="outlined"
-          multiline
-          label="Descrição"
-          color="secondary"
-          fullWidth
-          onChange={handlerChangeDescricao}
-          value={descricao}
-        />
-        {loadingCursos ? (
+      {loadingCursos ? (
           <LoadingBox />
         ) : errorCursos ? (
           <MessageBox type="error">{errorCursos}</MessageBox>
@@ -118,8 +108,47 @@ function CreateFormAula(props) {
               ))}
             </Select>
           </FormControl>
-        )}
+        )}{
+          !curso ? (
+            <MessageBox type="info">
+              Selecione um curso
+            </MessageBox>
+          ) : (
+            <>
+            <TextField
+          name="nome"
+          variant="outlined"
+          label="Nome"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeNome}
+          value={nome}
+        />
+        <TextField
+          name="descricao"
+          variant="outlined"
+          multiline
+          rows={4}
+          label="Descrição"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeDescricao}
+          value={descricao}
+        />
 
+        <TextField
+          name="duracao"
+          variant="outlined"
+          multiline
+          label="Duração"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeDuracao}
+          value={duracao}
+          placeholder={'Ex: 10 min'}
+          helperText="O valor está em minutos"
+          type='number'
+        />
         <Button
           type="submit"
           className={classes.button}
@@ -131,6 +160,10 @@ function CreateFormAula(props) {
         >
           Salvar
         </Button>
+          </>
+          )
+        }
+        
         {
             loading ? (
                 <LoadingBox />

@@ -82,7 +82,7 @@ export const update = async (req,res) => {
         let aula = extend(aulasRows[0], req.body)
         
         const { rows } = await pool.query(
-            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4 WHERE aula_id = $5s RETURNING *;',
+            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4 WHERE aula_id = $5 RETURNING *;',
             [aula.nome, aula.descricao, aula.curso_id,aula.duracao, aula.aula_id])
         const updatedAula = rows[0]
 

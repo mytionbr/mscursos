@@ -12,9 +12,12 @@ import {
 } from "@material-ui/core";
 import MessageBox from "../../core/MessageBox/MessageBox";
 import LoadingBox from "../../core/LoadingBox/LoadingBox";
-import { detailsProfessor, updateProfessorProfile } from "../../../actions/professorActions";
+import {
+  detailsProfessor,
+  updateProfessorProfile,
+} from "../../../actions/professorActions";
 import { PROFESSOR_UPDATE_PROFILE_RESET } from "../../../constants/professorConstantes";
-import moment from 'moment';
+import moment from "moment";
 import SuccessAlert from "../../SuccessAlert/AlertSuccess";
 function PerfilDetails(props) {
   const dispatch = useDispatch();
@@ -41,6 +44,7 @@ function PerfilDetails(props) {
       setEmail(professor.email);
       setDataNascimento(DateParse(professor.data_nascimento));
       setSenha(professor.senha);
+      setDescricao(professor.descricao)
     }
   }, [dispatch, professor]);
 
@@ -48,6 +52,7 @@ function PerfilDetails(props) {
   const [email, setEmail] = useState("");
   const [dataNascimento, setDataNascimento] = useState(null);
   const [senha, setSenha] = useState("");
+  const [descricao, setDescricao] = useState("");
 
   const handleChangeNome = (event) => {
     const { value } = event.target;
@@ -70,6 +75,11 @@ function PerfilDetails(props) {
     setSenha(value);
   };
 
+  const handlerChangeDescricao = (event) => {
+    const value = event.target.value;
+    setDescricao(value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -79,21 +89,22 @@ function PerfilDetails(props) {
         email,
         senha,
         dataNascimento,
+        descricao: descricao
       })
     );
   };
 
-  const DateParse = (date)=>{
-    let dateString = String(date)
-    let parts = dateString.split('-')
-    parts.forEach(i=>{
-      if(Number(i) < 10){
-        i = '0' + i
+  const DateParse = (date) => {
+    let dateString = String(date);
+    let parts = dateString.split("-");
+    parts.forEach((i) => {
+      if (Number(i) < 10) {
+        i = "0" + i;
       }
-    })
-   
-    return moment(new Date(...parts)).format("YYYY-MM-DD")
-  }
+    });
+
+    return moment(new Date(...parts)).format("YYYY-MM-DD");
+  };
 
   return (
     <>
@@ -109,9 +120,7 @@ function PerfilDetails(props) {
           {...props}
         >
           <Card>
-            <CardHeader
-              subheader="As informações podem ser modificadas"
-            />
+            <CardHeader subheader="As informações podem ser modificadas" />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
@@ -168,6 +177,19 @@ function PerfilDetails(props) {
                     color="secondary"
                   />
                 </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    name="descricao"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    label="Descrição"
+                    color="secondary"
+                    fullWidth
+                    onChange={handlerChangeDescricao}
+                    value={descricao}
+                  />
+                </Grid>
               </Grid>
             </CardContent>
             <Divider />
@@ -182,17 +204,15 @@ function PerfilDetails(props) {
                 Salvar
               </Button>
             </Box>
-            {
-                loadingUpdate ? (
-                    <LoadingBox />
-                ) : errorUpdate ? (
-                    <MessageBox type="error">
-                        {errorUpdate}
-                    </MessageBox>
-                ) : successUpdate && (
-                  <SuccessAlert message='Perfil atualizado com sucesso!' />
-                )
-            }
+            {loadingUpdate ? (
+              <LoadingBox />
+            ) : errorUpdate ? (
+              <MessageBox type="error">{errorUpdate}</MessageBox>
+            ) : (
+              successUpdate && (
+                <SuccessAlert message="Perfil atualizado com sucesso!" />
+              )
+            )}
           </Card>
         </form>
       )}

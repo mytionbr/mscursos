@@ -64,13 +64,14 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
       setNome(aula.nome);
       setCurso(aula.curso_id);
       setDescricao(aula.descricao);
+      setDuracao(aula.duracao)
     }
   }, [aula, aulaId, cursoId, dispatch, history, successUpdate]);
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [curso, setCurso] = useState("");
-
+  const [duracao, setDuracao] = useState(0);
   const handlerChangeNome = (event) => {
     const value = event.target.value;
     setNome(value);
@@ -86,6 +87,14 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
     setCurso(value);
   };
 
+  const handlerChangeDuracao = (event) => {
+    const re = /^[0-9\b]+$/;
+    const value = event.target.value;
+    if (value === '' || re.test(value)) {
+      setDuracao(value);
+    }   
+  };
+
   const handlerSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -94,6 +103,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
         nome: nome,
         descricao: descricao,
         curso_id: curso,
+        duracao:duracao
       })
     );
   };
@@ -117,7 +127,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
             value={nome}
           />
           <TextField
-            name="nome"
+            name="descricao"
             variant="outlined"
             multiline
             label="Descrição"
@@ -125,7 +135,21 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
             fullWidth
             onChange={handlerChangeDescricao}
             value={descricao}
+            rows={4}
           />
+           <TextField
+          name="duracao"
+          variant="outlined"
+          multiline
+          label="Duração"
+          color="secondary"
+          fullWidth
+          onChange={handlerChangeDuracao}
+          value={duracao}
+          placeholder={'Ex: 10 min'}
+          helperText="O valor está em minutos"
+          type='number'
+        />
           {loadingCursos ? (
             <LoadingBox />
           ) : errorCursos ? (
