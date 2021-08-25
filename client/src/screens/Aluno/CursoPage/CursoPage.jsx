@@ -14,7 +14,7 @@ import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import DOMPurify from "dompurify";
 
 function CursoPage(props) {
-  const slug = props.match.params.cursoId;
+  const slug = props.match.params.cursoSlug;
 
   const dispatch = useDispatch();
   const cursoInfomations = useSelector((state) => state.cursoInfomations);

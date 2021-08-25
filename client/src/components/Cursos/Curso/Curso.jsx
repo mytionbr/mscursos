@@ -3,7 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "@material-ui/icons/";
 import { Link } from "react-router-dom";
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 function Curso({curso}) {
   const classes = useStyles();
 
@@ -36,7 +36,7 @@ function Curso({curso}) {
 
     return (
      <Box>
-         <Link className={classes.picture} to="/">
+         <Link className={classes.picture} to={`/curso/${curso.slug}`}>
             <Icon className={classes.pictureItem} />
          </Link>
       </Box>
@@ -47,19 +47,19 @@ function Curso({curso}) {
     <div>
       <Card className={classes.card}>
         <CardMedia title={"Programação Linear"} children={<Picture />} />
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant="h5" component="h2">
             {curso.nome}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {curso.descricao}
+            {curso.descricao.slice(0,150) + '...'}
           </Typography>
-          <CardActions  >
-            <Button size="small" color="secondary" >
-              Saiba mais
-            </Button>
-          </CardActions>
         </CardContent>
+        <CardActions  className={classes.actions}>
+            <Link className={classes.link} to={`/curso/${curso.slug}`}>
+              Saiba mais <ArrowForwardIcon/>
+            </Link>
+          </CardActions>
       </Card>
     </div>
   );

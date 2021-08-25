@@ -15,6 +15,7 @@ const AlunoRouter = () => {
     return (
       <DashboardLayout>
         <Switch>
+          <AlunoRoute path={"/aluno/app/curso/:cursoSlug"} component={CursoPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>
@@ -28,7 +29,7 @@ const AlunoRouter = () => {
       <Switch>
        <Route exact path="/aluno/signin" component={SigninAluno} />
        <Route exact path="/aluno/matriculas" component={AlunoPlans} />
-       <Route path="/curso/:cursoId" component={CursoPage} />
+       <Route path="/curso/:cursoSlug" component={CursoPage} />
        <Route exact path="/" component={Home} />
        <Route
          path="/aluno/matriculas/compra/:plano"
