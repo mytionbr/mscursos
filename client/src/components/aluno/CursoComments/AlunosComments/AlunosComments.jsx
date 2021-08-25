@@ -20,7 +20,7 @@ function AlunosComments({ comments }) {
           alignItems="flex-start"
           xs={3}
         >
-          <Avatar>{alunoNome[0]}</Avatar>
+          <Avatar>{alunoNome[0].toUpperCase()}</Avatar>
         </Grid>
         <Grid
           xs={9}

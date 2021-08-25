@@ -10,7 +10,6 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import Rating from "@material-ui/lab/Rating";
 import moment from "moment";
 import Skeleton from "@material-ui/lab/Skeleton";
-import jsdom from "jsdom"
 function CursoStatistics({
   aulasTotal,
   duracao,
@@ -18,7 +17,7 @@ function CursoStatistics({
   atualizado,
   avaliacao,
   progresso,
-  loading
+  loading,
 }) {
   const classes = useStyles();
   const Statistic = ({ icon, title, data }) => {
@@ -28,7 +27,7 @@ function CursoStatistics({
           {icon}
         </Grid>
         <Grid direction="column">
-          <Typography variant="h6"  align="right" className={classes.text}>
+          <Typography variant="h6" align="right" className={classes.text}>
             {title}
           </Typography>
           <Typography variant="h6" align="right" className={classes.text}>
@@ -41,36 +40,50 @@ function CursoStatistics({
 
   return (
     <Box className={classes.container}>
-      {
-        loading ? (
-          <Skeleton variant="rect" width={210} height={118} />
-        ) : (
-          <>
-             <Statistic 
-        icon={<ClassIcon />} 
-        title={"Aulas"} 
-        data={aulasTotal} />
-      <Statistic
-        icon={<TimelapseIcon />}
-        title={"Duração"}
-        data={`${Number(duracao).toFixed(2)} minutos`}
-      />
-      <Statistic 
-        icon={<PeopleIcon />} 
-        title={"alunos"} 
-        data={alunosTotal} />
-      <Statistic
-        icon={<EventIcon />}
-        title={"Atualizado em"}
-        data={moment(atualizado).format('L')}
-      />
-      <Statistic
-        icon={<ThumbUpAltIcon />}
-        title={"Avaliação"}
-        data={
-        <Rating className={classes.rating} name="read-only" value={Number(avaliacao).toFixed(2)} readOnly /> 
-      }
-      />
+      {loading ? (
+        <Skeleton variant="rect" width={"10rem"} height={40} />
+      ) : (
+        <Statistic icon={<ClassIcon />} title={"Aulas"} data={aulasTotal} />
+      )}
+      {loading ? (
+        <Skeleton variant="rect" width={"10rem"} height={40} />
+      ) : (
+        <Statistic
+          icon={<TimelapseIcon />}
+          title={"Duração"}
+          data={`${Number(duracao).toFixed(0)} minutos`}
+        />
+      )}
+      {loading ? (
+        <Skeleton variant="rect" width={"10rem"} height={40} />
+      ) : (
+        <Statistic icon={<PeopleIcon />} title={"alunos"} data={alunosTotal} />
+      )}
+      {loading ? (
+        <Skeleton variant="rect" width={"10rem"} height={40} />
+      ) : (
+        <Statistic
+          icon={<EventIcon />}
+          title={"Atualizado em"}
+          data={moment(atualizado).format("L")}
+        />
+      )}
+      {loading ? (
+        <Skeleton variant="rect" width={"10rem"} height={40} />
+      ) : (
+        <Statistic
+          icon={<ThumbUpAltIcon />}
+          title={"Avaliação"}
+          data={
+            <Rating
+              className={classes.rating}
+              name="read-only"
+              value={Number(avaliacao).toFixed(2)}
+              readOnly
+            />
+          }
+        />
+      )}
       {progresso && (
         <Statistic
           icon={<SlowMotionVideoIcon />}
@@ -78,10 +91,6 @@ function CursoStatistics({
           data={`${progresso}%`}
         />
       )}
-          </>
-        ) 
-      }
-     
     </Box>
   );
 }

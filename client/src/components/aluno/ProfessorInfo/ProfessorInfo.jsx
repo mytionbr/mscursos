@@ -10,7 +10,7 @@ function ProfessorInfo({nome,descricao}) {
        <CardHeader 
           title={nome}
           avatar={
-            <Avatar className={classes.icon}>{nome[0]}</Avatar>
+            <Avatar className={classes.icon}>{nome[0].toUpperCase()}</Avatar>
           }
           subheader={'Professor(a) do curso'}
           classes={{
