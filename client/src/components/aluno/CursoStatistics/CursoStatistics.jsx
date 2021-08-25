@@ -10,6 +10,7 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import Rating from "@material-ui/lab/Rating";
 import moment from "moment";
 import Skeleton from "@material-ui/lab/Skeleton";
+import jsdom from "jsdom"
 function CursoStatistics({
   aulasTotal,
   duracao,

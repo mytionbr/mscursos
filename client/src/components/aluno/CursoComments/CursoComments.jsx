@@ -17,7 +17,7 @@ function CursoComments({avaliacoes,stars,curso}) {
                     Feedback dos alunos
                 </Typography>
                 <CommentsRating 
-                    ratingAverage={curso.media_avaliacao}
+                    ratingAverage={Number(curso.avaliacao_media).toFixed(1)}
                     totalRating={curso.avaliacao_total}
                     ratingStars={stars}
                 />

@@ -43,7 +43,7 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
           <Rating name="read-only" value={starValue} readOnly />
         </Grid>
         <Grid item xs={1}>
-          <Typography variant="subtitle1">{percent}%</Typography>
+          <Typography variant="subtitle1">{Number(percent).toFixed(0)}%</Typography>
         </Grid>
       </Grid>
     );
@@ -67,7 +67,7 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
         <Typography variant="h2" style={{fontWeight: '700'}}>
           {ratingAverage}
         </Typography>
-        <Rating name="read-only" style={{fontSize: '1.7rem'}} value={ratingAverage} readOnly />
+        <Rating name="read-only" style={{fontSize: '1.7rem'}} precision={0.1}  value={ratingAverage} readOnly />
         <Typography variant="subtitle1" gutterBottom>
           {totalRating} Avaliações
         </Typography>

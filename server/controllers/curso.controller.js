@@ -588,7 +588,7 @@ export const findCursoInfo = async (req, res) => {
 
     const aulasResult = await pool.query(
       `
-            SELECT AULA.NOME, AULA.DESCRICAO, AULA.DESCRICAO FROM AULA 
+            SELECT AULA.NOME, AULA.DESCRICAO, AULA.DURACAO FROM AULA 
             INNER JOIN CURSO ON AULA.CURSO_ID = CURSO.CURSO_ID 
             WHERE CURSO.SLUG = $1;
             `,
