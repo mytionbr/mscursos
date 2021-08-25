@@ -3,7 +3,7 @@ import React from "react";
 import useStyle from './styles'
 
 function ProfessorInfo({nome,descricao}) {
-  console.log(nome,descricao)
+  
   const classes = useStyle()
   return (
     <Card>

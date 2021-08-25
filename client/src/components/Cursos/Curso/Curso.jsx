@@ -1,9 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Box,  Card, CardActions, CardContent, CardMedia, Grow, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "@material-ui/icons/";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+
 function Curso({curso}) {
   const classes = useStyles();
 
@@ -44,7 +45,8 @@ function Curso({curso}) {
   };
 
   return (
-    <div>
+    <Grow in={true}  style={{ transformOrigin: '0 0 0' }}
+                    {...({ timeout: 1000 })}> 
       <Card className={classes.card}>
         <CardMedia title={"Programação Linear"} children={<Picture />} />
         <CardContent className={classes.content}>
@@ -61,7 +63,7 @@ function Curso({curso}) {
             </Link>
           </CardActions>
       </Card>
-    </div>
+      </Grow>  
   );
 }
 

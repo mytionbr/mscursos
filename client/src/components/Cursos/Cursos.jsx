@@ -5,6 +5,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import { useDispatch } from 'react-redux';
 import { findCursos } from '../../actions/cursoActions';
 import MessageBox from '../core/MessageBox/MessageBox';
+
 function Cursos({data}) {
 
     const [state, setState] = useState(data.cursos)
@@ -25,8 +26,8 @@ function Cursos({data}) {
             {
                 state.length > 0 
                 ? (
-                    state.map((curso)=>
-                        <Curso curso={curso} />
+                    state.map((curso,index)=>
+                        <Curso curso={curso}  />
                 )   
                 ) :
                 (

@@ -65,7 +65,7 @@ function CursoPage(props) {
                 style={{
                   padding: "2rem 0",
                   justifyContent: "space-between",
-                  alignItems: "center",
+      
                 }}
               >
                 <Grid xs={8} item>
