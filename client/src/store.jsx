@@ -4,7 +4,7 @@ import { alunoFindReducer, alunoNotaCreateReducer, alunoNotaDeleteReducer, aluno
 import { assinaturaCreateReducer } from './reducers/assinaturaReducers';
 import { aulaCreateReducer, aulaDeleteReducer, aulaDetailsReducer, aulaFindReducer, aulaUpdateReducer } from './reducers/aulaReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
-import { cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
+import { cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindReducer, cursoInformaionsReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
 import { professorAssignmentsReducer, professorDetailsReducer, professorSigninReducer, professorUpdateProfileReducer } from './reducers/professorReducers';
 
 const initialState = {
@@ -45,7 +45,8 @@ const reducer = combineReducers({
     professorDetails:professorDetailsReducer,
     professorUpdateProfile:professorUpdateProfileReducer,
     alunoRegister:alunoRegisterReducer,
-    assinaturaCreate:assinaturaCreateReducer
+    assinaturaCreate:assinaturaCreateReducer,
+    cursoInfomations:cursoInformaionsReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

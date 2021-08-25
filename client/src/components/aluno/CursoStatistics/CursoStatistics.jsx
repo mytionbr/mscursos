@@ -8,13 +8,16 @@ import EventIcon from "@material-ui/icons/Event";
 import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import Rating from "@material-ui/lab/Rating";
+import moment from "moment";
+import Skeleton from "@material-ui/lab/Skeleton";
 function CursoStatistics({
-  aulas,
+  aulasTotal,
   duracao,
-  alunos,
+  alunosTotal,
   atualizado,
   avaliacao,
   progresso,
+  loading
 }) {
   const classes = useStyles();
   const Statistic = ({ icon, title, data }) => {
@@ -37,29 +40,34 @@ function CursoStatistics({
 
   return (
     <Box className={classes.container}>
-      <Statistic 
+      {
+        loading ? (
+          <Skeleton variant="rect" width={210} height={118} />
+        ) : (
+          <>
+             <Statistic 
         icon={<ClassIcon />} 
         title={"Aulas"} 
-        data={aulas.length} />
+        data={aulasTotal} />
       <Statistic
         icon={<TimelapseIcon />}
         title={"Duração"}
-        data={`${duracao} horas`}
+        data={`${Number(duracao).toFixed(2)} minutos`}
       />
       <Statistic 
         icon={<PeopleIcon />} 
         title={"alunos"} 
-        data={alunos} />
+        data={alunosTotal} />
       <Statistic
         icon={<EventIcon />}
         title={"Atualizado em"}
-        data={atualizado}
+        data={moment(atualizado).format('L')}
       />
       <Statistic
         icon={<ThumbUpAltIcon />}
         title={"Avaliação"}
         data={
-        <Rating className={classes.rating} name="read-only" value={progresso} readOnly /> 
+        <Rating className={classes.rating} name="read-only" value={Number(avaliacao).toFixed(2)} readOnly /> 
       }
       />
       {progresso && (
@@ -69,6 +77,10 @@ function CursoStatistics({
           data={`${progresso}%`}
         />
       )}
+          </>
+        ) 
+      }
+     
     </Box>
   );
 }

@@ -12,6 +12,9 @@ import {
   CURSO_FIND_FAIL,
   CURSO_FIND_REQUEST,
   CURSO_FIND_SUCCESS,
+  CURSO_INFORMATIONS_FAIL,
+  CURSO_INFORMATIONS_REQUEST,
+  CURSO_INFORMATIONS_SUCCESS,
   CURSO_LIST_FAIL,
   CURSO_LIST_REQUEST,
   CURSO_LIST_SUCCESS,
@@ -133,15 +136,15 @@ export const createCurso = (curso) => async (dispatch, getState) => {
   }
 };
 
-export const detailsCurso = (cursoId) => async (dispatch) => {
-  dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
+export const informationsCurso = (slug) => async (dispatch) => {
+  dispatch({ type: CURSO_INFORMATIONS_REQUEST, payload: slug });
   try {
-    const { data } = await Api.findCursoById(cursoId);
+    const { data } = await Api.findCursoBySlug(slug);
   
-    dispatch({ type: CURSO_DETAILS_SUCCESS, payload: data });
+    dispatch({ type: CURSO_INFORMATIONS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: CURSO_DETAILS_FAIL,
+      type: CURSO_INFORMATIONS_FAIL,
       payload: error.error || error.message
     });
   }
@@ -180,3 +183,18 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
     });
   }
 }
+
+
+export const detailsCurso = (cursoId) => async (dispatch) => {
+  dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
+  try {
+    const { data } = await Api.findCursoById(cursoId);
+  
+    dispatch({ type: CURSO_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_DETAILS_FAIL,
+      payload: error.error || error.message
+    });
+  }
+};

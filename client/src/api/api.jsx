@@ -124,6 +124,8 @@ const createAssinatura = (price, planoId,paymentResult, alunoInfo) =>
 
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
+const findCursoBySlug = (slug) => axios.get(`/api/cursos/info/${slug}`)
+
 const Api = {
   fetchCursos,
   fetchCategorias,
@@ -151,7 +153,8 @@ const Api = {
   detailsProfessor,
   updateProfessorProfile,
   registerAluno,
-  createAssinatura
+  createAssinatura,
+  findCursoBySlug
 };
 
 export default Api;

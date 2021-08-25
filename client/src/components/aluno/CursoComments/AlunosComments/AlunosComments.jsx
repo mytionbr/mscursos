@@ -9,7 +9,6 @@ import React from "react";
 import moment from "moment";
 import Rating from "@material-ui/lab/Rating";
 function AlunosComments({ comments }) {
-  moment.locale("pt-br");
 
   const CommentInfo = ({ alunoNome, date }) => {
     return (
@@ -35,7 +34,7 @@ function AlunosComments({ comments }) {
             style={{
               color: "grey"
             }}>
-           {moment().startOf(date).fromNow()}
+           {moment(date).fromNow()}
           </Typography>
           <Typography variant="body1">{alunoNome}</Typography>
         </Grid>
@@ -77,8 +76,8 @@ function AlunosComments({ comments }) {
             date={comment.data_criacao}
           />
           <CommentContent
-            rating={comment.avaliacao}
-            comment={comment.conteudo}
+            rating={comment.valor}
+            comment={comment.comentario}
           />
         </Grid>
       ))}

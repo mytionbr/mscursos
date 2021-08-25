@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AlunosComments from './AlunosComments/AlunosComments'
 import CommentsRating from './CommentsRating/CommentsRating'
 
-function CursoComments({curso}) {
+function CursoComments({avaliacoes,stars,curso}) {
     
     return (
         <Box
@@ -17,12 +17,12 @@ function CursoComments({curso}) {
                     Feedback dos alunos
                 </Typography>
                 <CommentsRating 
-                    ratingAverage={curso.avaliacao_media}
+                    ratingAverage={curso.media_avaliacao}
                     totalRating={curso.avaliacao_total}
-                    ratingStars={curso.stars}
+                    ratingStars={stars}
                 />
                  <AlunosComments
-                    comments={curso.comentarios}
+                    comments={avaliacoes}
                 />    
             </Grid>          
         </Box>

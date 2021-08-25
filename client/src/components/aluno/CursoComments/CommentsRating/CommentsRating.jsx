@@ -80,24 +80,24 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
         alignItems="center"
       >
         <RatingByStar
-          starValue={ratingStars["star5"].star}
-          percent={ratingStars["star5"].percent}
+          starValue={5}
+          percent={ratingStars["5"] ? ratingStars["5"] : 0}
         />
         <RatingByStar
-          starValue={ratingStars["star4"].star}
-          percent={ratingStars["star4"].percent}
+          starValue={4}
+          percent={ratingStars["4"] ? ratingStars["4"] : 0}
         />
         <RatingByStar
-          starValue={ratingStars["star3"].star}
-          percent={ratingStars["star3"].percent}
+          starValue={3}
+          percent={ratingStars["3"] ? ratingStars["3"] : 0}
         />
         <RatingByStar
-          starValue={ratingStars["star2"].star}
-          percent={ratingStars["star2"].percent}
+          starValue={2}
+          percent={ratingStars["2"] ? ratingStars["2"] : 0}
         />
         <RatingByStar
-          starValue={ratingStars["star1"].star}
-          percent={ratingStars["star1"].percent}
+          starValue={1}
+          percent={ratingStars["1"] ? ratingStars["1"] : 0}
         />
       </Grid>
     </Grid>
