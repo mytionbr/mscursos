@@ -11,25 +11,21 @@ import CursoStatistics from "../../../components/aluno/CursoStatistics/CursoStat
 import ProfessorInfo from "../../../components/aluno/ProfessorInfo/ProfessorInfo";
 import Skeleton from '@material-ui/lab/Skeleton';
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
-import createDOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 
 function CursoPage(props) {
   const slug = props.match.params.cursoId;
-
-  const DOMPurify = createDOMPurify(window);
 
   const dispatch = useDispatch();
   const cursoInfomations = useSelector((state) => state.cursoInfomations);
   const { loading, error,  data } = cursoInfomations;
   
-  console.log(data)
   useEffect(()=>{
       dispatch(informationsCurso(slug)); 
   },[dispatch, slug])
   
   const alunoSignin = useSelector((state)=> state.alunoSignin)
   const { alunoInfo } = alunoSignin
-  const resumo
 
   return (
     <>
@@ -79,7 +75,7 @@ function CursoPage(props) {
                 loading ? (
                   <Skeleton variant="rect" width={210} height={118} />
                 ) : (
-                  <div dangerouslySetInnerHTML={{__html:  DOMPurify.sanitize(data.curso.resumo)}} />
+                  <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.curso.resumo)}} />
                 ) 
               }
              
