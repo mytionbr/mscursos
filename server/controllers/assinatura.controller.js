@@ -43,7 +43,7 @@ export const create = async (req,res) =>{
 
         const { rows } = await pool.query(
             `INSERT INTO ASSINATURA (pago, data_criacao, preco, plano_id, aluno_id, pagamento_id)
-            VALUES($1,$2,$3,$4,$5,$6) RETURNING * ;`,
+            VALUES($1,$2,$3,$4,$5,$6) RETURNING assinatura_id,pago,plano_id,aluno_id ;`,
             [assinatura.pago, assinatura.data_criacao, assinatura.preco, assinatura.plano_id,assinatura.aluno_id, assinatura.pagamento_id]
         )
         

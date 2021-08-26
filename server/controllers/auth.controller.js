@@ -38,13 +38,28 @@ export const signinAluno = async (req,res) =>{
     try {
 
         const { rows } = await pool.query(
-            'SELECT * FROM aluno WHERE email = $1',
+            `SELECT ALUNO.aluno_id,ALUNO.nome,ALUNO.email,ALUNO.senha, 
+            ASSINATURA.ASSINATURA_ID,ASSINATURA.PAGO, ASSINATURA.PLANO_ID, ASSINATURA.ALUNO_ID AS assinatura_aluno
+            FROM aluno LEFT JOIN ASSINATURA ON ASSINATURA.ALUNO_ID = ALUNO.ALUNO_ID  
+            WHERE email = $1`,
             [req.body.email])
-           
+          
        
-        const aluno = rows[0]
+       const result = rows[0]
        
-        if(aluno){
+        if(result){
+            const aluno = {
+                nome: result.nome,
+                email: result.email,
+                senha: result.senha,
+                aluno_id: result.aluno_id,
+                assinatura: {
+                    pago: result.pago,
+                    assinatura_id: result.assinatura_id,
+                    aluno_id: result.assinatura_aluno,
+                    plano_id: result.plano_id
+                }
+            } 
             if (bcrypt.compareSync(req.body.senha, aluno.senha)){
                 aluno.token = generateToken({
                     _id: aluno.aluno_id,
@@ -59,7 +74,8 @@ export const signinAluno = async (req,res) =>{
 
         res.status(401).json({error:'Email ou senha invalidos'})  
     } catch (err){
-        return res.status(401).json({
+        console.log(err)        
+        res.status(401).json({
             error: 'Não foi possível realizar o login'
         })
     }

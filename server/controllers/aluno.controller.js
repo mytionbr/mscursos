@@ -34,7 +34,7 @@ export const register = async (req,res) => {
         const dataUpdate = dataCriacao
 
         const{ rows } = await pool.query(
-            'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf,data_criacao, data_update) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
+            'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf,data_criacao, data_update) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING aluno_id,nome, email;',
             [nome, email, data_nascimento, senhaHash, telefone, cpf, dataCriacao, dataUpdate]
         )   
 
@@ -49,7 +49,6 @@ export const register = async (req,res) => {
         usuarioResponseSuccess(res,createdAluno)
         
     } catch (err){
-            
             res.status(400).json({message: err.error})
         }
     }

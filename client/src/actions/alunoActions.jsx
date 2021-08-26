@@ -167,7 +167,7 @@ export const deleteNota = (notaId) => async (dispatch, getState) => {
 };
 
 export const register =
-  ( nome, senha, data_nascimento, telefone, cpf, email ) =>
+  ( {nome, senha, data_nascimento, telefone, cpf, email }) =>
   async (dispatch) => {
     dispatch({type: ALUNO_REGISTER_REQUEST, payload: {
       nome, senha, data_nascimento, telefone, cpf, email

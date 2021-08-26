@@ -193,7 +193,6 @@ export const enroll = async (req, res) => {
       matricula: matricula,
     });
   } catch (err) {
-    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
@@ -228,6 +227,7 @@ export const getAluno = async (req, res) => {
 
     res.status(200).json(matricula);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
@@ -561,8 +561,8 @@ export const findCursoInfo = async (req, res) => {
       `
         SELECT CURSO.CURSO_ID AS curso_id,CURSO.NOME, CURSO.SLUG,
         CATEGORIA.NOME AS categoria_nome, CURSO.DESCRICAO,
-        CATEGORIA.CATEGORIA_ID AS categoria_id, CURSO.RESUMO,
-        CURSO.DATA_ATUALIZACAO,
+        CATEGORIA.CATEGORIA_ID AS categoria_id,CATEGORIA.PLANO_ID AS plano_id,
+        CURSO.RESUMO, CURSO.DATA_ATUALIZACAO,
         PROFESSOR.NOME AS professor_nome,
         PROFESSOR.DESCRICAO AS professor_descricao,
         PROFESSOR.PROFESSOR_ID AS professor_id,
@@ -620,6 +620,7 @@ export const findCursoInfo = async (req, res) => {
     let starsPercent = calculateAverage(starsOccurrences,Number(cursoInfo.curso.avaliacao_total))
 
     cursoInfo.stars = starsPercent 
+
 
     res.status(200).json(cursoInfo)
 

@@ -18,6 +18,9 @@ import {
   CURSO_LIST_FAIL,
   CURSO_LIST_REQUEST,
   CURSO_LIST_SUCCESS,
+  CURSO_MATRICULA_FAIL,
+  CURSO_MATRICULA_REQUEST,
+  CURSO_MATRICULA_SUCCESS,
   CURSO_PROFESSOR_FAIL,
   CURSO_PROFESSOR_REQUEST,
   CURSO_PROFESSOR_SUCCESS,
@@ -185,7 +188,6 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
   }
 }
 
-
 export const detailsCurso = (cursoId) => async (dispatch) => {
   dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
   try {
@@ -195,6 +197,21 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_DETAILS_FAIL,
+      payload: error.error || error.message
+    });
+  }
+};
+
+export const matriculaCurso = (alunoId,cursoId) => async (dispatch) => {
+  dispatch({ type: CURSO_MATRICULA_REQUEST, payload: {alunoId,cursoId} });
+  try {
+    console.log('opar',alunoId,cursoId)
+    const { data } = await Api.findMatricula(alunoId,cursoId);
+  
+    dispatch({ type: CURSO_MATRICULA_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_MATRICULA_FAIL,
       payload: error.error || error.message
     });
   }

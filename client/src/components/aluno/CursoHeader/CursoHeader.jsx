@@ -3,7 +3,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import CursoActions from "../CursoActions/CursoActions";
 import useStyles from "./styles";
-function CursoHeader({ titulo, categoria, descricao, aluno,loading }) {
+function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loading }) {
   const classes = useStyles();
 
   const handleCategoriaClick = () => {
@@ -43,7 +43,7 @@ function CursoHeader({ titulo, categoria, descricao, aluno,loading }) {
           )}
         </Box>
           <Box my={1}>
-        <CursoActions aluno={aluno} />
+        <CursoActions aluno={aluno} cursoId={cursoId} planoId={planoId} />
         </Box>
       </Container>
       

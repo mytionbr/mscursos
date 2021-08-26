@@ -82,14 +82,14 @@ function FormInfoMatricula({ handleNext }) {
       alert("CPF invalido");
     }else  {
       dispatch(
-        register(
+        register({
           nome,
           email,
-          dataNascimento,
+          data_nascimento:dataNascimento,
           senha,
           cpf,
           telefone,
-        )
+        })
       );
     }
   };

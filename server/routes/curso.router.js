@@ -42,8 +42,6 @@ router.route("/categorias/:categoriaId").get(findCursoByCategoriaId);
 router
   .route("/info/:slug")
   .get(findCursoInfo)
-  
-
 
 router
   .route("/:id")

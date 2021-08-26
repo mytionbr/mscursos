@@ -46,6 +46,8 @@ function CursoPage(props) {
               titulo={data && data.curso.nome}
               categoria={data && data.curso.categoria_nome}
               descricao={data && data.curso.descricao}
+              cursoId={data && data.curso.curso_id}
+              planoId={data && data.curso.plano_id}
               aluno={alunoInfo}
               loading={loading}
             />

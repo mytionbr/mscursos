@@ -32,6 +32,8 @@ const findCursosByProfessor = (professorInfo, query) =>
 
 const findCursoById = (cursoId) => axios.get(`/api/cursos/${cursoId}`);
 
+const findMatricula = (alunoId,cursoId) => axios.get(`/api/cursos/${cursoId}/matriculas/${alunoId}`);
+
 const findAulaById = (aulaId, cursoId, professorInfo) =>
   axios.get(`/api/cursos/${cursoId}/aulas/${aulaId}`, {
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
@@ -154,7 +156,8 @@ const Api = {
   updateProfessorProfile,
   registerAluno,
   createAssinatura,
-  findCursoBySlug
+  findCursoBySlug,
+  findMatricula
 };
 
 export default Api;
