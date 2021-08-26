@@ -42,8 +42,8 @@ function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loadi
             </Typography>
           )}
         </Box>
-          <Box my={1}>
-        <CursoActions aluno={aluno} cursoId={cursoId} planoId={planoId} />
+        <Box my={1}>
+          <CursoActions aluno={aluno} cursoId={cursoId} planoId={planoId} />
         </Box>
       </Container>
       

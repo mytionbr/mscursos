@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../../core/MessageBox/MessageBox";
@@ -13,7 +13,7 @@ function CursoActions({aluno,planoId,cursoId}) {
   const dispatch = useDispatch();
   const cursoMatricula = useSelector((state) => state.cursoMatricula);
   const { loading, error, data } = cursoMatricula;
-  console.log(data,aluno,planoId,cursoId)
+  console.log(data,aluno,planoId,cursoId,isMatriculado)
   useEffect(() => {
     if(aluno){
       dispatch(matriculaCurso(aluno.aluno_id, cursoId));
@@ -21,13 +21,13 @@ function CursoActions({aluno,planoId,cursoId}) {
   }, [aluno, cursoId, dispatch]);
 
   useEffect(() => {
-    if(data){
+    if(data && data.length > 0){
       setIsMatriculado(true)
     }
   }, [ data, dispatch])
   
     return (
-     <>
+     <Grid container spacing={2}>
         {aluno && aluno.assinatura && aluno.assinatura.plano_id === planoId 
         ? loading ?(
           <LoadingBox  />
@@ -36,22 +36,35 @@ function CursoActions({aluno,planoId,cursoId}) {
             {error}
           </MessageBox>
         ) : isMatriculado ? (
-          <div className={classes.container}>
+          <>
+          <Grid item>
           <Button className={classes.button} variant="outlined" color="primary">
             Continuar
           </Button>
+          </Grid>
+          <Grid item>
           <Button className={classes.button} variant="outlined" color="primary">
             Sair do curso
           </Button>
-          </div>
+          </Grid>
+          </>
         ) : (
+          <>
+          <Grid item>
           <Button className={classes.button} variant="outlined" color="primary">
             Iniciar
           </Button>
+          </Grid>
+          <Grid item>
+          <Button className={classes.button} variant="outlined" color="primary">
+            Iniciar
+          </Button>
+          </Grid>
+          </>
         ) : (
           ''
         )}
-     </>
+     </Grid>
     );  
 }
 
