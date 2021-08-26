@@ -16,7 +16,7 @@ function Cursos({data,localization= ''}) {
     const handlePagination = (event,value) => {
         dispatch(findCursos({
             nome: data.params.nome || '',
-            categorias: Array(...data.params.categoria) || [],
+            categorias: data.params.categoria ? Array(...data.params.categoria) : [],
             pagination: value
         }))
     }
