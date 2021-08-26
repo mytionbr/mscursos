@@ -15,8 +15,7 @@ function FilterForm() {
     const dispatch = useDispatch()
     const categoriaList = useSelector((state) => state.categoriaList)
     const { loading, error, categorias } = categoriaList
-    
-   
+       
 
     const [ nome, setNome ] = useState('')
     const [ categoriasTags, setCategoriasTags ] = useState([])

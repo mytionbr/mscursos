@@ -9,12 +9,14 @@ import DashboardLayout from "../components/aluno/dashboard/DashboardLayout/Dashb
 import AlunoRoute from "../components/aluno/AlunoRoute";
 import Dashboard from "../screens/Aluno/Dashboard";
 import CursoPage from "../screens/Aluno/CursoPage/CursoPage";
+import CursoList from "../screens/Aluno/CursoList/CursoList";
 const AlunoRouter = () => {
   
   const appRoutes = () => {
     return (
       <DashboardLayout>
         <Switch>
+          <AlunoRoute path={"/aluno/app/cursos/"} component={CursoList} />
           <AlunoRoute path={"/aluno/app/curso/:cursoSlug"} component={CursoPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>

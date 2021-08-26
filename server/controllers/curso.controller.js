@@ -377,7 +377,7 @@ export const find = async (req, res) => {
     queryBuild.page = req.query.page || 1;
     queryBuild.order = req.query.order || "nome";
     queryBuild.params = req.query;
-
+    
     if (queryBuild.group.length === 0 && queryBuild.nome.length === 0) {
       const totalCursos = await pool.query(queryBuild.count());
 

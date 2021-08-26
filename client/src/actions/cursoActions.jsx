@@ -46,7 +46,7 @@ export const findCursos = (params) => async (dispatch) => {
   dispatch({ type: CURSO_FIND_REQUEST });
   try {
     const { nome, categorias, pagination } = params;
-
+    
     let queryString = "?";
 
     if (nome) {
@@ -56,6 +56,7 @@ export const findCursos = (params) => async (dispatch) => {
     if (categorias) {
       queryString += categorias
         .map((c) => {
+          console.log(c)
           return `categoria=${c.categoria_id || c}`;
         })
         .join("&");
