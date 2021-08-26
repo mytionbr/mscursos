@@ -70,7 +70,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
               <Button
                 component={NavLink}
                 className={classes.navLink}
-                to="/"
+                to="/aluno/app/dashboard"
                 color="inherit"
               >
                 <DashboardIcon className={classes.icon} />
@@ -79,7 +79,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
               <Button
                 component={NavLink}
                 className={classes.navLink}
-                to="/"
+                to="/aluno/app/cursos"
                 color="inherit"
               >
                 <ClassIcon className={classes.icon} />

@@ -9,7 +9,9 @@ import LoadingBox from '../../../components/core/LoadingBox/LoadingBox'
 import MessageBox from '../../../components/core/MessageBox/MessageBox'
 import Cursos from '../../../components/Cursos/Cursos'
 
-function CursoList() {
+function CursoList(props) {
+    const localization = "/aluno/app"
+
     const dispatch = useDispatch()
     const cursoFind = useSelector((state) => state.cursoFind)
     const { loading, error, data } = cursoFind
@@ -54,7 +56,7 @@ function CursoList() {
                                     ''
                                 )
                             }
-                                <Cursos data={data}  />
+                                <Cursos data={data} localization={localization} />
                                 </>
                             ) 
                         }

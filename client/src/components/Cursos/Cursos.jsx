@@ -7,7 +7,7 @@ import { findCursos } from '../../actions/cursoActions';
 import MessageBox from '../core/MessageBox/MessageBox';
 import { Grid } from '@material-ui/core';
 
-function Cursos({data}) {
+function Cursos({data,localization= ''}) {
 
     const [state, setState] = useState(data.cursos)
     const classes = useStyles()
@@ -29,7 +29,7 @@ function Cursos({data}) {
                 ? (
                     state.map((curso,index)=>
                     <Grid item >
-                        <Curso curso={curso}  />
+                        <Curso curso={curso} localization={localization}  />
                     </Grid>
                 )   
                 ) :

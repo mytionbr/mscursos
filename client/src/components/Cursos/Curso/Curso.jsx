@@ -5,9 +5,9 @@ import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-function Curso({curso}) {
+function Curso({curso,localization}) {
   const classes = useStyles();
-
+  
   const Picture = () => {
     let Icon
 
@@ -37,7 +37,7 @@ function Curso({curso}) {
 
     return (
      <Box>
-         <Link className={classes.picture} to={`/curso/${curso.slug}`}>
+         <Link className={classes.picture} to={`${localization}/curso/${curso.slug}`}>
             <Icon className={classes.pictureItem} />
          </Link>
       </Box>
@@ -58,7 +58,7 @@ function Curso({curso}) {
           </Typography>
         </CardContent>
         <CardActions  className={classes.actions}>
-            <Link className={classes.link} to={`/curso/${curso.slug}`}>
+            <Link className={classes.link} to={`${localization}/curso/${curso.slug}`}>
               Saiba mais <ArrowForwardIcon/>
             </Link>
           </CardActions>
