@@ -73,8 +73,7 @@ export const signinAluno = async (req,res) =>{
         }
 
         res.status(401).json({error:'Email ou senha invalidos'})  
-    } catch (err){
-        console.log(err)        
+    } catch (err){       
         res.status(401).json({
             error: 'Não foi possível realizar o login'
         })
@@ -127,3 +126,14 @@ export const hasAuthorizationCurso = async (req, res, next) =>{
    
     next()
 }
+
+export const hasAuthorizationMatricula = async (req, res, next) =>{
+    const authorized = req.body.aluno_id && req.auth && req.body.aluno_id === req.auth._id
+    if(!authorized){
+         return res.status(403).json({
+             message: "Usuário não está autorizado"
+         })
+     }
+    
+     next()
+ }

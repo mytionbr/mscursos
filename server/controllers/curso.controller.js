@@ -148,11 +148,12 @@ export const remove = async (req, res) => {
 
 export const enroll = async (req, res) => {
   try {
+    
     const curso = req.profile;
     const aluno_id = req.body.aluno_id
 
     const { rows: assinatura } = await pool.query(
-      `SELECT ASSINATURA.PAGO, ASSINATURA.PLANO_ID AS assinatura_plano, ASSINATURA.ALUNO_ID
+      `SELECT ASSINATURA.PAGO, ASSINATURA.PLANO_ID AS plano_id, ASSINATURA.ALUNO_ID
       FROM ASSINATURA WHERE ASSINATURA.ALUNO_ID = $1`,
       [aluno_id])
 
@@ -187,11 +188,7 @@ export const enroll = async (req, res) => {
         message: "A matricula já existe",
       });
     }
-
-    res.status(200).json({
-      message: "matricula realizada com sucesso",
-      matricula: matricula,
-    });
+    res.status(200).json(matricula);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -223,11 +220,10 @@ export const getAluno = async (req, res) => {
       [curso.curso_id, aluno_id]
     );
 
-    const matricula = rows;
+    const matricula = rows[0];
 
     res.status(200).json(matricula);
   } catch (err) {
-    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };

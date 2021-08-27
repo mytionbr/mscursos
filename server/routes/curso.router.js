@@ -1,6 +1,7 @@
 import express from "express";
 import {
   hasAuthorizationCurso,
+  hasAuthorizationMatricula,
   isAuth,
 } from "../controllers/auth.controller.js";
 import {
@@ -51,10 +52,10 @@ router
 
 router.route("/:id/matriculas/")
   .get(listMatriculas)
-  .post(enroll)
+  .post(isAuth,hasAuthorizationMatricula,enroll)
 
 router.route("/:id/avaliacoes")
-  .post(addRating)
+  .post(isAuth,addRating)
 
 router
   .route("/:id/matriculas/:alunoId")

@@ -73,6 +73,15 @@ const createNota = (nota, curso, aluno, professorInfo) =>
     }
   );
 
+const createMatricula = (matricula,alunoInfo)=>
+  axios.post(
+  `/api/cursos/${matricula.curso_id}/matriculas`,
+  matricula,
+  {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  }
+);
+
 const updateCurso = (curso, professorInfo) =>
   axios.put(`/api/cursos/${curso.curso_id}`, curso, {
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
@@ -157,7 +166,8 @@ const Api = {
   registerAluno,
   createAssinatura,
   findCursoBySlug,
-  findMatricula
+  findMatricula,
+  createMatricula
 };
 
 export default Api;

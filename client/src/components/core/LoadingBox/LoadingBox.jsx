@@ -1,10 +1,10 @@
 import { CircularProgress } from '@material-ui/core'
 import React from 'react'
 
-function LoadingBox() {
+function LoadingBox({color}) {
     return (
         <div>
-            <CircularProgress color={"secondary"} />
+            <CircularProgress color={color? color : "secondary"} />
         </div>
     )
 }
