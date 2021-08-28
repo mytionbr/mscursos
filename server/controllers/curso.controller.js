@@ -171,15 +171,16 @@ export const enroll = async (req, res) => {
       return res.status(400).json({message: 'O plano do usuário não cobre esse curso'})
     }
 
+    const data_criacao = moment().format('L')
+
     const { rows } = await pool.query(
-      `
-            INSERT INTO curso_aluno (curso_id, aluno_id)
-            SELECT $1, $2
-            WHERE  NOT EXISTS (
-               SELECT 1 FROM curso_aluno
-               WHERE (curso_id, aluno_id) = ($3, $4)) RETURNING *;
+      `INSERT INTO matricula (curso_id, aluno_id,data_criacao)
+        SELECT $1, $2, $3
+        WHERE  NOT EXISTS (
+            SELECT 1 FROM matricula
+            WHERE (curso_id, aluno_id) = ($1, $2)) RETURNING *;
             `,
-      [curso.curso_id, aluno_id, curso.curso_id, aluno_id]
+      [curso.curso_id, aluno_id, data_criacao]
     );
 
     const matricula = rows[0];
@@ -199,7 +200,7 @@ export const listMatriculas = async (req, res) => {
   try {
     const curso = req.profile;
     const { rows } = await pool.query(
-      "SELECT * FROM curso_aluno WHERE curso_id = $1",
+      "SELECT * FROM matricula WHERE curso_id = $1",
       [curso.curso_id]
     );
 
@@ -217,7 +218,7 @@ export const getAluno = async (req, res) => {
     const aluno_id = req.params["alunoId"];
 
     const { rows } = await pool.query(
-      "SELECT * FROM curso_aluno WHERE curso_id = $1 AND aluno_id = $2",
+      "SELECT * FROM matricula WHERE curso_id = $1 AND aluno_id = $2",
       [curso.curso_id, aluno_id]
     );
 
@@ -235,7 +236,7 @@ export const unenroll = async (req, res) => {
     const aluno_id = req.params["alunoId"];
 
     await pool.query(
-      "DELETE FROM curso_aluno WHERE curso_id = $1 AND aluno_id = $2",
+      "DELETE FROM matricula WHERE curso_id = $1 AND aluno_id = $2",
       [curso.curso_id, aluno_id]
     );
 

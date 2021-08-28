@@ -118,11 +118,11 @@ ALTER TABLE assinatura ADD CONSTRAINT assinatura_aluno_id_fkey
 ALTER TABLE assinatura ADD CONSTRAINT assinatura_pagamento_id_fkey
 	FOREIGN KEY (pagamento_id) REFERENCES pagamento (pagamento_id);
 
-ALTER TABLE curso_aluno ADD CONSTRAINT curso_aluno_aluno_id_fkey
+ALTER TABLE matricula ADD CONSTRAINT matricula_aluno_id_fkey
 	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE
 ;
 
-ALTER TABLE curso_aluno ADD CONSTRAINT curso_aluno_curso_id_fkey
+ALTER TABLE matricula ADD CONSTRAINT matricula_curso_id_fkey
 	FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE
 ;
 
