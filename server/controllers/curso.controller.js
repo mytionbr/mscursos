@@ -171,7 +171,7 @@ export const enroll = async (req, res) => {
       return res.status(400).json({message: 'O plano do usuário não cobre esse curso'})
     }
 
-    const data_criacao = moment().format('L')
+    const data_criacao = moment().format('YYYY-MM-DD')
 
     const { rows } = await pool.query(
       `INSERT INTO matricula (curso_id, aluno_id,data_criacao)
@@ -182,7 +182,7 @@ export const enroll = async (req, res) => {
             `,
       [curso.curso_id, aluno_id, data_criacao]
     );
-
+  
     const matricula = rows[0];
 
     if (!matricula) {
@@ -192,6 +192,7 @@ export const enroll = async (req, res) => {
     }
     res.status(200).json(matricula);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
@@ -226,6 +227,7 @@ export const getAluno = async (req, res) => {
 
     res.status(200).json(matricula);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
@@ -660,13 +662,31 @@ export const addRating = async (req,res)=>{
 
 export const findCursosByAluno = async (req, res) => {
   try {
+    console.log('opaaa')
     const alunoId = req.params.alunoId
-    
+    console.log(alunoId)
     const { rows } = await pool.query(
-      `SELECT * FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = CURSO.CURSO_ID
-      INNER JOIN ALUNO ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1
-      ORDER BY MATRICULA.DATA_CRIACAO`,
+      `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
+      (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
+        INNER JOIN CURSO ON VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID 
+         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+        as aulas_vistas,
+      (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
+      FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = CURSO.CURSO_ID
+            INNER JOIN ALUNO ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1
+            ORDER BY MATRICULA.DATA_CRIACAO`,
       [alunoId])
+    console.log(rows)
+    let matriculas =  rows
+    
+    matriculas.forEach(item =>{
+      item.progresso = (item.aulas_vistas * 100) / item.aulas_total 
+    })
+
+    console.log(matriculas)
+    
+    res.status(200).json(matriculas)
+
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

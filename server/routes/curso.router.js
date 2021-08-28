@@ -21,7 +21,8 @@ import {
   findAlunosByCurso,
   findNotaByCurso,
   findCursoInfo,
-  addRating
+  addRating,
+  findCursosByAluno
 } from "../controllers/curso.controller.js";
 import {
   remove as removeAula,
@@ -43,6 +44,10 @@ router.route("/categorias/:categoriaId").get(findCursoByCategoriaId);
 router
   .route("/info/:slug")
   .get(findCursoInfo)
+
+router
+  .route("/aluno/:alunoId")
+  .get(isAuth, hasAuthorizationMatricula ,findCursosByAluno)
 
 router
   .route("/:id")

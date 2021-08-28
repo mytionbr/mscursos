@@ -13,7 +13,6 @@ function DashboardLayout(props) {
     const handleSignout = () => {
        alert('opa')
     } 
-    console.log(props.children)
 
     return (
         <div className={classes.dashboardLayoutRoot}>

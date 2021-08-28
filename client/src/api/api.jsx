@@ -126,6 +126,12 @@ const detailsProfessor = (professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
+const findCursosByAluno = (alunoInfo)=>
+  axios.get(`/api/cursos/aluno/${alunoInfo.aluno_id}`,
+  {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
 const updateProfessorProfile = (professor, professorInfo) =>
   axios.put(`/api/professores/${professorInfo.professor_id}`, professor, {
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
@@ -177,7 +183,8 @@ const Api = {
   findCursoBySlug,
   findMatricula,
   createMatricula,
-  deleteMatricula
+  deleteMatricula,
+  findCursosByAluno
 };
 
 export default Api;

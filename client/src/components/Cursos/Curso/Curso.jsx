@@ -1,39 +1,14 @@
 import { Box,  Card, CardActions, CardContent, CardMedia, Grow, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "@material-ui/icons/";
+import { getIconByCategoria } from "../../../utils/getIconByCategoria";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-
 function Curso({curso,localization}) {
   const classes = useStyles();
   
   const Picture = () => {
-    let Icon
-
-    switch (curso.categoria_id) {
-      case 1:
-          Icon = (props) => <Code {...props}/>
-        break;
-      case 2:
-          Icon = (props) => <DeveloperMode  {...props}/>
-        break;
-      case 3:
-          Icon = (props) => <FilterBAndW  {...props}/>
-        break;
-      case 4:
-          Icon = (props) => <PieChart  {...props}/>
-        break;
-      case 5:
-          Icon = (props) => <Translate  {...props}/>
-        break;
-      case 6:
-          Icon = (props) => <AllInclusive  {...props}/>
-        break;
-      default:
-          Icon = (props) => <Code {...props}/>
-        break;
-    }
+    let Icon = getIconByCategoria(curso.categoria_id)
 
     return (
      <Box>

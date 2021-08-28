@@ -15,11 +15,11 @@ function ListCursoSecondary(props) {
                 cursos.map(curso =>(
                     <Grid item xs={6}>
                         <CursoCard 
-                            name={curso.name}
-                            percent={curso.percent}
-                            icon={curso.icon}
-                            action={curso.action}
-                            size='tertiary'
+                           name={curso.nome}
+                           percent={curso.progresso}
+                           size='tertiary'
+                           categoriaId={curso.categoria_id}
+                           slug={curso.slug}
                         />
                     </Grid>
                 ))

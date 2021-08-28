@@ -1,4 +1,7 @@
 import {
+  ALUNO_FIND_CURSOS_FAIL,
+  ALUNO_FIND_CURSOS_REQUEST,
+  ALUNO_FIND_CURSOS_SUCCESS,
   ALUNO_FIND_FAIL,
   ALUNO_FIND_REQUEST,
   ALUNO_FIND_SUCCESS,
@@ -184,4 +187,24 @@ export const register =
       });
     }
 
+  };
+
+
+  export const findCursos = () => async (dispatch, getState) => {
+    dispatch({ type: ALUNO_FIND_CURSOS_REQUEST });
+    const {
+     alunoSignin: { alunoInfo },
+    } = getState();
+    try {
+      console.log('opa')
+      const { data } = await Api.findCursosByAluno(alunoInfo);
+      console.log(data)
+      dispatch({ type: ALUNO_FIND_CURSOS_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: ALUNO_FIND_CURSOS_FAIL,
+        payload: error.error || error.message,
+      });
+    }
   };

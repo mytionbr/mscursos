@@ -23,17 +23,16 @@ function ListCursosDashboard(props) {
                     cursos.map(curso =>(
                         <Grid item xs={4}>
                         <CursoCard 
-                        name={curso.name}
-                        percent={curso.percent}
-                        icon={curso.icon}
-                        action={curso.action}
-                        size="secondary"
+                            name={curso.nome}
+                            percent={curso.progresso}
+                            size='secondary'
+                            categoriaId={curso.categoria_id}
+                            slug={curso.slug}
                     />
                     </Grid>
                     ))
                 }
                 </Grid>
-            
             </AccordionDetails>
         </Accordion>
       </div>

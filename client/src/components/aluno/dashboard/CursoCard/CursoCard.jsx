@@ -11,9 +11,16 @@ import {
 import React from "react";
 import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import { getIconByCategoria } from "../../../../utils/getIconByCategoria";
+import { useHistory } from "react-router";
 
 function CursoCard(props) {
-  const { name, percent, icon, action, size } = props;
+  const { name, percent, size, categoriaId, slug } = props;
+  const history = useHistory();
+  
+  const action = ()=>{
+    history.push(`/aluno/app/curso/${slug}`)
+  }
 
   const handleSize = (size)=>{
     switch(size){
@@ -45,8 +52,9 @@ function CursoCard(props) {
     },
   }))(LinearProgress);
 
-
- 
+  const Icon = ({categoriaId})=>{
+    return getIconByCategoria(categoriaId)
+  }
 
   return (
     <Fade appear={true} in={true} timeout={700}>
@@ -62,7 +70,7 @@ function CursoCard(props) {
                 "& > svg ": {
                   fontSize: cardSize.avatar.svg,
                 },
-              }}>{icon}</Avatar>
+              }}>{<Icon categoriaId={categoriaId} />}</Avatar>
           </Grid>
         
         <Grid item xs={8} className={classes.gridPercent}>
