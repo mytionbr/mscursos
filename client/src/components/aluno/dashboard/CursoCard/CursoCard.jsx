@@ -2,6 +2,7 @@ import {
   Avatar,
   Card,
   CardContent,
+  Fade,
   Grid,
   LinearProgress,
   Paper,
@@ -48,6 +49,7 @@ function CursoCard(props) {
  
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
     <Card className={classes.card} onClick={action} {...props}>
       <CardContent>
         <Grid container className={classes.gridContainer}>
@@ -81,6 +83,7 @@ function CursoCard(props) {
         </Grid>
       </CardContent>
     </Card>
+    </Fade>
   );
 }
 
