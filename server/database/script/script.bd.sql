@@ -59,11 +59,12 @@ CREATE TABLE IF NOT EXISTS aula (
     CONTEUDO TEXT
 );
 
-CREATE TABLE IF NOT EXISTS curso_aluno (
-    curso_id INT NOT NULL,
-    aluno_id INT NOT NULL
-);
-
+CREATE TABLE IF NOT EXISTS matricula  (
+	matricula_id SERIAL PRIMARY KEY,
+	aluno_id INT NOT NULL,
+	curso_id INT NOT NULL,
+	data_criacao DATE NOT NULL
+) 
 CREATE TABLE IF NOT EXISTS nota (
     nota_id serial PRIMARY KEY,
     valor FLOAT NOT NULL,

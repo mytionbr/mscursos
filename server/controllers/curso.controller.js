@@ -657,4 +657,16 @@ export const addRating = async (req,res)=>{
   }
 }
 
+export const findCursosByAluno = async (req, res) => {
+  try {
+    const alunoId = req.params.alunoId
+    
+    const { rows } = await pool.query(
+      `SELECT * FROM CURSO INNER JOIN CURSO_ALUNO ON CURSO.CURSO_ID = CURSO.CURSO_ID
+      INNER JOIN ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1`,
+      [alunoId])
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
 
