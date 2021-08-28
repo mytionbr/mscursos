@@ -97,13 +97,14 @@ function Dashboard() {
                 percent={cursos[0].percent}
                 icon={cursos[0].icon}
                 action={cursos[0].action}
+                size='primary'
               />
             </Grid>
             <Grid
               item
-              lg={5}
+              lg={6}
               sm={12}
-              xl={5}
+              xl={6}
               xs={12}
               spacing={1}
               direction="column"

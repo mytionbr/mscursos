@@ -8,18 +8,18 @@ function ListCursoSecondary(props) {
     return (
         <Grid
             container
-            direction="column"
             spacing={1}
             {...props}
         >
             {
                 cursos.map(curso =>(
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <CursoCard 
                             name={curso.name}
                             percent={curso.percent}
                             icon={curso.icon}
                             action={curso.action}
+                            size='tertiary'
                         />
                     </Grid>
                 ))

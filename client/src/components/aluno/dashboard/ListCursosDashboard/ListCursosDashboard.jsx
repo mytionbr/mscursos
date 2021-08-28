@@ -27,6 +27,7 @@ function ListCursosDashboard(props) {
                         percent={curso.percent}
                         icon={curso.icon}
                         action={curso.action}
+                        size="secondary"
                     />
                     </Grid>
                     ))
