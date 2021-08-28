@@ -82,6 +82,15 @@ const createMatricula = (matricula,alunoInfo)=>
   }
 );
 
+const deleteMatricula = (matricula,alunoInfo)=>
+  axios.delete(
+  `/api/cursos/${matricula.curso_id}/matriculas/${matricula.aluno_id}`,
+  {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  }
+);
+
+
 const updateCurso = (curso, professorInfo) =>
   axios.put(`/api/cursos/${curso.curso_id}`, curso, {
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
@@ -167,7 +176,8 @@ const Api = {
   createAssinatura,
   findCursoBySlug,
   findMatricula,
-  createMatricula
+  createMatricula,
+  deleteMatricula
 };
 
 export default Api;

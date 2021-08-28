@@ -48,7 +48,7 @@ function CursoPage(props) {
               descricao={data && data.curso.descricao}
               cursoId={data && data.curso.curso_id}
               planoId={data && data.curso.plano_id}
-              aluno={alunoInfo}
+              aluno={data && alunoInfo}
               loading={loading}
             />
             <CursoStatistics

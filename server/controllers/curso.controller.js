@@ -64,6 +64,7 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res, next, id) => {
   try {
+    console.log(id)
     const { rows } = await pool.query(
       "SELECT * FROM curso WHERE curso_id = $1",
       [id]

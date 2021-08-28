@@ -128,7 +128,10 @@ export const hasAuthorizationCurso = async (req, res, next) =>{
 }
 
 export const hasAuthorizationMatricula = async (req, res, next) =>{
-    const authorized = req.body.aluno_id && req.auth && req.body.aluno_id === req.auth._id
+
+    const alunoId = req.body.aluno_id || req.params['alunoId']
+    const authorized = alunoId && req.auth && Number(alunoId) === req.auth._id
+    
     if(!authorized){
          return res.status(403).json({
              message: "Usuário não está autorizado"

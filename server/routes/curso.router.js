@@ -60,7 +60,7 @@ router.route("/:id/avaliacoes")
 router
   .route("/:id/matriculas/:alunoId")
   .get(getAluno)
-  .delete(unenroll);
+  .delete(isAuth,hasAuthorizationMatricula,unenroll);
 
 router
   .route("/:id/aulas")

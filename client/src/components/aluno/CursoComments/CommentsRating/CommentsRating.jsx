@@ -21,7 +21,7 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
   }))(LinearProgress);
 
   const RatingByStar = ({ starValue, percent }) => {
-    console.log(percent)
+    
     return (
       <Grid
         container
