@@ -52,10 +52,8 @@ function CursoCard(props) {
     },
   }))(LinearProgress);
 
-  const Icon = ({categoriaId})=>{
-    return getIconByCategoria(categoriaId)
-  }
-
+  const Icon = getIconByCategoria(categoriaId)
+ 
   return (
     <Fade appear={true} in={true} timeout={700}>
     <Card className={classes.card} onClick={action} {...props}>
@@ -70,7 +68,7 @@ function CursoCard(props) {
                 "& > svg ": {
                   fontSize: cardSize.avatar.svg,
                 },
-              }}>{<Icon categoriaId={categoriaId} />}</Avatar>
+              }}>{ <Icon />}</Avatar>
           </Grid>
         
         <Grid item xs={8} className={classes.gridPercent}>

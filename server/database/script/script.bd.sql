@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS matricula  (
 	matricula_id SERIAL PRIMARY KEY,
 	aluno_id INT NOT NULL,
 	curso_id INT NOT NULL,
-	data_criacao DATE NOT NULL
+	data_criacao timestamp NOT NULL
 ) 
 CREATE TABLE IF NOT EXISTS nota (
     nota_id serial PRIMARY KEY,

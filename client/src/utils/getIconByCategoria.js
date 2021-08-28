@@ -2,6 +2,7 @@ import {Code, DeveloperMode, FilterBAndW,PieChart,Translate,AllInclusive} from "
 
 export function getIconByCategoria(categoriaId) {
     const categoria = Number(categoriaId)
+    
     switch (categoria) {
         case 1:
             return (props) => <Code {...props}/>
