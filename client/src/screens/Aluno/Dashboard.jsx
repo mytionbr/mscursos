@@ -75,7 +75,7 @@ function Dashboard() {
                       Últimos cursos:
                     </Typography>
                     <ListCursoSecondary
-                      cursos={data.slice(1, cursos.length - 1)}
+                      cursos={data.slice(1,5)}
                     />
                   </>
                 ) : (

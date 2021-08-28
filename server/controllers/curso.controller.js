@@ -672,7 +672,7 @@ export const findCursosByAluno = async (req, res) => {
          WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
-      FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = CURSO.CURSO_ID
+      FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = MATRICULA.CURSO_ID
             INNER JOIN ALUNO ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1
             ORDER BY MATRICULA.DATA_CRIACAO`,
       [alunoId])
@@ -680,7 +680,7 @@ export const findCursosByAluno = async (req, res) => {
     let matriculas =  rows
     
     matriculas.forEach(item =>{
-      item.progresso = (item.aulas_vistas * 100) / item.aulas_total 
+      item.progresso = (Number(item.aulas_vistas) * 100) / Number(item.aulas_total) || 0
     })
 
     console.log(matriculas)
