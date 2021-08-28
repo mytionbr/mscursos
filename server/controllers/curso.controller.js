@@ -469,7 +469,7 @@ export const findByProfessor = async (req, res) => {
 
     let query = `SELECT CURSO.*,
         CATEGORIA.NOME AS CATEGORIA_NOME,
-        (SELECT COUNT (*) FROM CURSO_ALUNO WHERE CURSO.CURSO_ID = CURSO_ALUNO.CURSO_ID) as alunos, 
+        (SELECT COUNT (*) FROM MATRICULA WHERE CURSO.CURSO_ID = MATRICULA.CURSO_ID) as alunos, 
         (SELECT COUNT (*) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas
         FROM CURSO
         INNER JOIN PROFESSOR  ON CURSO.PROFESSOR_ID = PROFESSOR.PROFESSOR_ID
@@ -511,8 +511,8 @@ export const findAlunosByCurso = async (req, res) => {
 
     const { rows } = await pool.query(
       `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,
-            NOTA.VALOR as nota, NOTA.NOTA_ID as nota_id FROM ALUNO INNER JOIN CURSO_ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID
-            INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID 
+            NOTA.VALOR as nota, NOTA.NOTA_ID as nota_id FROM ALUNO INNER JOIN MATRICULA ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID
+            INNER JOIN CURSO ON MATRICULA.CURSO_ID = CURSO.CURSO_ID 
             LEFT JOIN NOTA ON ALUNO.ALUNO_ID = NOTA.ALUNO_ID 
             WHERE CURSO.CURSO_ID = $1 ${query}`,
       [...values]
@@ -567,7 +567,7 @@ export const findCursoInfo = async (req, res) => {
         (SELECT COUNT(*) FROM AULA WHERE CURSO.CURSO_ID = AULA.CURSO_ID) AS aulas_total,
         (SELECT AVG(AULA.DURACAO) FROM AULA WHERE CURSO.CURSO_ID = AULA.CURSO_ID) AS duracao,
         (SELECT COUNT(AVALIACAO.AVALIACAO_ID) FROM AVALIACAO INNER JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID) AS avaliacao_total,
-        (SELECT COUNT(CURSO_ALUNO.ALUNO_ID) FROM CURSO_ALUNO INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID) AS alunos_total,
+        (SELECT COUNT(MATRICULA.ALUNO_ID) FROM MATRICULA INNER JOIN CURSO ON MATRICULA.CURSO_ID = CURSO.CURSO_ID) AS alunos_total,
         (SELECT AVG(AVALIACAO.VALOR) FROM AVALIACAO INNER JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID)
         AS avaliacao_media
         FROM CURSO 
@@ -636,7 +636,7 @@ export const addRating = async (req,res)=>{
       const data_criacao = moment().format('YYYY-MM-DD')
 
       const {rows: matricula} = await pool.query(
-        `SELECT * FROM CURSO_ALUNO WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,
+        `SELECT * FROM MATRICULA WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,
         [aluno_id, curso.curso_id]
       )
 
@@ -663,8 +663,9 @@ export const findCursosByAluno = async (req, res) => {
     const alunoId = req.params.alunoId
     
     const { rows } = await pool.query(
-      `SELECT * FROM CURSO INNER JOIN CURSO_ALUNO ON CURSO.CURSO_ID = CURSO.CURSO_ID
-      INNER JOIN ALUNO ON CURSO_ALUNO.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1`,
+      `SELECT * FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = CURSO.CURSO_ID
+      INNER JOIN ALUNO ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1
+      ORDER BY MATRICULA.DATA_CRIACAO`,
       [alunoId])
   } catch (err) {
     res.status(400).json({ message: err.message });
