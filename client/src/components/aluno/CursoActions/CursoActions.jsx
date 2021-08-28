@@ -5,15 +5,22 @@ import MessageBox from "../../core/MessageBox/MessageBox";
 import LoadingBox from "../../core/LoadingBox/LoadingBox";
 import useStyles from "./styles";
 import { createMatricula, deleteMatricula, findMatricula } from "../../../actions/matriculaActions";
-import { MATRICULA_CREATE_RESET, MATRICULA_DELETE_RESET, MATRICULA_FIND_RESET } from "../../../constants/matriculaConstants";
+import { MATRICULA_CREATE_RESET, MATRICULA_DELETE_RESET } from "../../../constants/matriculaConstants";
 
-function CursoActions({ aluno, planoId, cursoId }) {
+function CursoActions(props) {
   const classes = useStyles();
   const [isMatriculado, setIsMatriculado] = useState(false);
 
+  const alunoSignin = useSelector((state) => state.alunoSignin);
+  const { alunoInfo: aluno } = alunoSignin;
+
+  const cursoInfomations = useSelector((state) => state.cursoInfomations);
+  const { data: {curso} } = cursoInfomations;
+
+
   const dispatch = useDispatch();
   const matriculaFind = useSelector((state) => state.matriculaFind);
-  const { loading, error, data } = matriculaFind;
+  const { loading: loadingFind, error: errorFind, data } = matriculaFind;
 
   const matriculaCreate = useSelector((state) => state.matriculaCreate);
   const { 
@@ -27,15 +34,14 @@ function CursoActions({ aluno, planoId, cursoId }) {
     error: errorDelete, 
     success: successDelete } = matriculaDelete;
   
-  console.log(cursoId)
-  console.log( error, errorCreate, errorDelete)
- 
+
   useEffect(()=>{
-    if (aluno) {
+    if (aluno && curso) {
+      console.log('Eai meu chapa',curso)
       dispatch({type:MATRICULA_DELETE_RESET})
-      dispatch(findMatricula(aluno.aluno_id, cursoId));
+      dispatch(findMatricula(aluno.aluno_id, curso.curso_id));
     }
-  },[aluno, cursoId, dispatch])
+  },[aluno, curso,dispatch])
 
   useEffect(()=>{
     if(successDelete){
@@ -56,20 +62,20 @@ function CursoActions({ aluno, planoId, cursoId }) {
   },[data])
 
   const handleMatricula = ()=>{
-    dispatch(createMatricula({aluno_id:aluno.aluno_id, curso_id:cursoId}))
+    dispatch(createMatricula({aluno_id:aluno.aluno_id, curso_id:curso.curso_id}))
   }
 
   const handleDesmatricula = ()=>{
-    dispatch(deleteMatricula({aluno_id:aluno.aluno_id, curso_id:cursoId}))
+    dispatch(deleteMatricula({aluno_id:aluno.aluno_id, curso_id:curso.curso_id}))
   }
 
   return (
     <Grid container spacing={2}>
-      {aluno && aluno.assinatura && aluno.assinatura.plano_id === planoId ? (
-        loading || loadingCreate || loadingDelete ? (
+      {aluno && aluno.assinatura && aluno.assinatura.plano_id === curso.plano_id ? (
+        loadingFind || loadingCreate || loadingDelete ? (
           <LoadingBox color="primary" />
-        ) : error ? (
-          <MessageBox type="error">{error}</MessageBox>
+        ) : errorFind ? (
+          <MessageBox type="error">{errorFind}</MessageBox>
         ) : errorCreate ? (
           <MessageBox type="error">{errorCreate}</MessageBox>
         ) : errorDelete ? (

@@ -42,15 +42,7 @@ function CursoPage(props) {
               minHeight: "100%",
             }}
           >
-            <CursoHeader
-              titulo={data && data.curso.nome}
-              categoria={data && data.curso.categoria_nome}
-              descricao={data && data.curso.descricao}
-              cursoId={data && data.curso.curso_id}
-              planoId={data && data.curso.plano_id}
-              aluno={data && alunoInfo}
-              loading={loading}
-            />
+            <CursoHeader />
             <CursoStatistics
               aulasTotal={data && data.curso.aulas_total}
               duracao={data && data.curso.duracao}

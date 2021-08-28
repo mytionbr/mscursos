@@ -1,10 +1,16 @@
 import { Box, Chip, Container, Typography } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
+import { useSelector } from "react-redux";
 import CursoActions from "../CursoActions/CursoActions";
 import useStyles from "./styles";
-function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loading }) {
+function CursoHeader(props) {
   const classes = useStyles();
+
+  const cursoInfomations = useSelector((state) => state.cursoInfomations);
+  const { loading, data } = cursoInfomations;
+  
+  const curso = data && data.curso
 
   const handleCategoriaClick = () => {
     alert("oi");
@@ -18,7 +24,7 @@ function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loadi
           loading ? (
             <Skeleton variant="rect" width={'10rem'} height={20} />
           ) : (
-            <Chip label={categoria} onClick={handleCategoriaClick} />
+            <Chip label={curso.categoria_nome} onClick={handleCategoriaClick} />
           )
         }
         </Box>
@@ -28,7 +34,7 @@ function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loadi
             <Skeleton variant="rect" width={'30rem'} height={118} />
           ) : (
             <Typography className={classes.title} variant="h1" >
-              {titulo}
+              {curso.nome}
             </Typography>
           )}
         </Box> 
@@ -38,13 +44,19 @@ function CursoHeader({ titulo, categoria, descricao, aluno,cursoId,planoId,loadi
             <Skeleton variant="rect" width={'60rem'} height={50} />
           ) : (
             <Typography  align="center" variant="subtitle1" >
-              {descricao}
+              {curso.descricao}
             </Typography>
           )}
         </Box>
-        <Box my={1}>
-          <CursoActions aluno={aluno} cursoId={cursoId} planoId={planoId} />
-        </Box>
+        {
+          loading ? (
+            ''
+          ) : (
+            <Box my={1}>
+              <CursoActions  />
+          </Box>
+          )
+        }
       </Container>
       
     </Box>
