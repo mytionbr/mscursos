@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS aula (
     descricao VARCHAR (255) NOT NULL,
     curso_id INT NOT NULL,
     duracao INT NOT NULL,
+    slug VARCHAR (255) NOT NULL,
+    video_id VARCHAR(255),
     CONTEUDO TEXT
 );
 

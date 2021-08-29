@@ -690,3 +690,16 @@ export const findCursosByAluno = async (req, res) => {
   }
 }
 
+export const findAulasInfoByCurso = async (req,res) => {
+  try{
+    const curso = req.profile;
+
+    const { rows } = await pool.query(
+      `SELECT AULA.NOME, AULA.AULA_ID, `,
+      []
+    )
+
+  }catch (err){
+    res.status(400).json({ message: err.message });
+  }
+}
