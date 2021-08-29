@@ -695,9 +695,14 @@ export const findAulasInfoByCurso = async (req,res) => {
     const curso = req.profile;
 
     const { rows } = await pool.query(
-      `SELECT AULA.NOME, AULA.AULA_ID, `,
-      []
+      `SELECT AULA.NOME, AULA.AULA_ID, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO
+      FROM AULA WHERE AULA.CURSO_ID = $1`,
+      [curso.curso_id]
     )
+
+    const aulas = rows 
+
+    res.status(200).json(aulas)
 
   }catch (err){
     res.status(400).json({ message: err.message });

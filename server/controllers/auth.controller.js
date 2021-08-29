@@ -140,3 +140,29 @@ export const hasAuthorizationMatricula = async (req, res, next) =>{
     
      next()
  }
+
+
+ export const hasAuthorizationAssinatura = async (req, res, next) =>{
+
+    const alunoId = req.auth && req.auth.aluno_id
+    const curso = req.profile
+
+    const { rows } = await pool.query(
+        `SELECT CURSO.CURSO_ID FROM CURSO INNER JOIN 
+        CATEGORIA ON CATEGORIA.CATEGORIA_ID = CURSO.CATEGORIA_ID
+        INNER JOIN ASSINATURA ON ASSINATURA.PLANO_ID = CATEGORIA.PLANO_ID
+        WHERE CURSO.CURSO_ID = $1 AND ASSINATURA.ALUNO_ID = $2`,
+        [curso.curso_id, alunoId]
+    )
+
+            
+    const authorized = rows && rows.length > 0
+    
+    if(!authorized){
+         return res.status(403).json({
+             message: "Usuário não está autorizado a realizar essa ação"
+         })
+     }
+    
+     next()
+ }

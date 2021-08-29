@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  hasAuthorizationAssinatura,
   hasAuthorizationCurso,
   hasAuthorizationMatricula,
   isAuth,
@@ -22,7 +23,8 @@ import {
   findNotaByCurso,
   findCursoInfo,
   addRating,
-  findCursosByAluno
+  findCursosByAluno,
+  findAulasInfoByCurso
 } from "../controllers/curso.controller.js";
 import {
   remove as removeAula,
@@ -70,6 +72,7 @@ router
 router
   .route("/:id/aulas")
   .get(getAulas)
+  .get(isAuth,hasAuthorizationAssinatura,findAulasInfoByCurso)
   .post(isAuth, hasAuthorizationCurso, createAula);
 
 router
