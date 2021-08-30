@@ -19,7 +19,6 @@ const AlunoRouter = () => {
       <DashboardLayout>
         <Switch>
           <AlunoRoute path={"/aluno/app/cursos/"} component={CursoList} />
-          <AlunoRoute path={"/aluno/app/curso/:cursoSlug/aulas/:aulaId"} component={aulaRoutes} />
           <AlunoRoute path={"/aluno/app/curso/:cursoSlug"} component={CursoPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
@@ -27,10 +26,10 @@ const AlunoRouter = () => {
     );
   };
 
-  const aulaRoutes = ()=>{
+  const aulaRoutes = (props)=>{
    
     return (
-      <AulaLayout>
+      <AulaLayout {...props}>
         <Switch>
           <Route path={"/aluno/app/curso/:cursoSlug/aulas/:aulaId"} component={AulaPage} />
         </Switch>
@@ -59,6 +58,7 @@ const AlunoRouter = () => {
   return (
     <div>
       <Switch>
+        <AlunoRoute path={"/aluno/app/curso/:cursoSlug/aulas/:aulaId"} component={aulaRoutes} />
         <AlunoRoute path={"/aluno/app"} component={appRoutes} />
         <Route path="/" component={homeRoutes} />
       </Switch>

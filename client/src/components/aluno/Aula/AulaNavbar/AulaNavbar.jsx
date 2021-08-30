@@ -5,10 +5,9 @@ import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
-
+import useStyles from './styles'
 function AulaNavbar({onMobileNavOpen, ...rest}) {
-    
-    const dispatch = useDispatch()
+    const classes = useStyles()
     const aulaInfomations = useSelector((state) => state.aulaInfomations);
     const { loading, error, data:aula } = aulaInfomations;
 
@@ -20,12 +19,9 @@ function AulaNavbar({onMobileNavOpen, ...rest}) {
         <AppBar
             elevation={0}
             {...rest}
+            position="static"
         >
-            <Toolbar
-                style={{
-                backgroundColor: '#29292E',
-                color:'#fff'
-            }}>
+            <Toolbar className={classes.toolbar}>
                  <Hidden mdUp>
                     <IconButton 
                         color="inherit"
@@ -33,7 +29,7 @@ function AulaNavbar({onMobileNavOpen, ...rest}) {
                             <MenuIcon />
                     </IconButton>
                    </Hidden>
-                <Box style={{flexGrow: 1}}/>
+               
                 {
                     loading ? (
                         <>
@@ -51,8 +47,12 @@ function AulaNavbar({onMobileNavOpen, ...rest}) {
                          <Typography variant='h4'>
                             {aula.nome}
                         </Typography>
+                        <Box style={{flexGrow: 1}}/>
+
                         <Button
+                            variant="contained"
                             onClick={handleFinishAula}
+                            color="secondary"
                         >
                             Finalizar aula
                         </Button>

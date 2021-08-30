@@ -22,8 +22,16 @@ function AulaSidebar({onMobileClose, openMobile}) {
         }
     }, [])
 
-
-    const Icon = ()=> getIconByCategoria(data.curso.categoria_id)
+    const Picture = () => {
+        let Icon = getIconByCategoria(data.curso.categoria_id)
+    
+        return (
+         <Box>
+             <Icon style={{fontSize:'2.5rem'}}  />
+          </Box>
+        );
+      };
+    
 
     function Content(){ 
         return (
@@ -50,16 +58,18 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     }}
                     to="/aluno/app"
                 >
-                    <Icon />
+                    <Picture />
                 </Avatar>
                 <Typography
-                    color="textPrimary"
                     variant="h5"
+                    style={{
+                        color: "#fff"
+                    }}
                 >
                     {data.curso.nome}
                 </Typography>
             </Box>
-            <Divider />
+            <Divider style={{background:"#fff"}} />
             <Box style={{padding:'1rem'}}>
                 <List>
                     {
@@ -68,6 +78,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                                 href={`/aluno/app/curso/${data.curso.slug}/aulas/${aula.aula_id}`}
                                 key={aula.slug}
                                 title={aula.nome}
+                                visualization={aula.visualizacao_id}
                                 />
                         ))
                     }
@@ -87,7 +98,8 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 variant="temporary"
                 PaperProps={{
                     style:{
-                        width: 256
+                        width: 256,
+                        background: "#19191C"
                     }
                 }}
             >
@@ -113,8 +125,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 PaperProps={{
                     style: {
                         width: 256,
-                        top: 64,
-                        height: 'calc(100% - 64px)'
+                        background: "#212121"
                     }
                 }}
             >

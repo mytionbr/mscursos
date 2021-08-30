@@ -10,6 +10,7 @@ export default makeStyles((theme) =>({
     },
     dashboardLayoutWrapper:{
         display: 'flex',
+        flexDirection: 'column',
         flex: '1 1 auto',
         overflow: 'hidden',
         [theme.breakpoints.up('lg')]: {
@@ -17,7 +18,6 @@ export default makeStyles((theme) =>({
         }
     },
     dashboardLayoutContainer:{
-        paddingTop: 64,
         display: 'flex',
         flex: '1 1 auto',
         overflow: 'hidden'

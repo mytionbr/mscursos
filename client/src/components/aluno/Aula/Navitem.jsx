@@ -1,9 +1,8 @@
 import { Button, ListItem } from '@material-ui/core'
 import React from 'react'
 import { matchPath, NavLink, useLocation } from 'react-router-dom'
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-function Navitem({href,title, ...rest}) {
+function Navitem({href,title,visualization, ...rest}) {
     const location = useLocation()
 
     const active = href ? !!matchPath({
@@ -11,8 +10,6 @@ function Navitem({href,title, ...rest}) {
         end: false
     }, location.pathname) : false
     
-    const Icon = ()=> <CheckBoxOutlineBlankIcon /> 
-
     return (
         <ListItem
             disableGutters
@@ -25,41 +22,38 @@ function Navitem({href,title, ...rest}) {
             <Button
                 component={NavLink}
                 style={{
-                    color: 'text.secondary',
-                    fontWeight: 'medium',
+                    fontWeight: '600',
                     justifyContent: 'flex-start',
                     letterSpacing: 0,
                     textTransform: 'none',
                     width: '100%',
-                    ...(active && {
-                        color: '#fff'
-                    }),
-                    '& svg':{
-                      
+                    backgroundColor: '#2c2d2e',
+                    "&:hover":{
+                        backgroundColor:'#adb4be',
                     }
                 }}
                 to={href}
             >
-                {
-                    Icon && (
-                        <Icon 
-                            
-                            style={{
-                                marginRight:'0.3rem',
-                                color:'#fff',
-                                fontSize: '1.6rem'
-                            }}
-                            />
-                    )
-                }
+                
                 <span
                     style={{
-                        color:'#fff',
+                        color: !visualization ? '#fff': '#1ab359',
                         fontSize: '1.2rem'
                     }}
                 >
                     {title}
                 </span>
+                {
+                    visualization && (
+                        <CheckBoxIcon 
+                            style={{
+                                marginRight:'0.3rem',
+                                color: '#1ab359',
+                                fontSize: '1.6rem',
+                            }}
+                            />
+                    )
+                }
             </Button>
         </ListItem>
     )

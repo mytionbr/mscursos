@@ -265,7 +265,6 @@ export const getAulas = async (req, res) => {
     const { rows } = await pool.query(query, [...values]);
 
     const aulas = rows;
-    console.log(aulas)
     res.status(200).json(aulas);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -741,7 +740,6 @@ export const getAulasByCursoSlug = async (req,res) => {
     res.status(200).json(aulasInfo)
 
   } catch (err) {
-    console.log(err)
     res.status(400).json({ message: err.message });
   }
 }

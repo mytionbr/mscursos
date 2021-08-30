@@ -67,9 +67,7 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res) => {
     try {
-        console.log('ooa')
         const aulaId = req.params.aulaId || req.params.id
-        console.log(aulaId)
         const { rows } = await pool.query(
             'SELECT * FROM AULA  WHERE AULA.AULA_ID = $1',
             [aulaId])
@@ -81,7 +79,6 @@ export const findById = async (req, res) => {
         }
         res.status(200).json(aula)
     } catch (err) {
-        console.log(err)
         res.status(400).json({message: err.message})
     }
 }
