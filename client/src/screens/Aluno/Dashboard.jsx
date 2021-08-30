@@ -21,8 +21,6 @@ function Dashboard() {
 
   const cursos = data || [];
 
-  console.log(data);
-
   useEffect(() => {
     dispatch(findCursos());
   }, [dispatch]);

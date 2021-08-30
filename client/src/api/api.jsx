@@ -148,6 +148,17 @@ const createAssinatura = (price, planoId,paymentResult, alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   })
 
+const findAulasInfoByCurso = (cursoSlug,alunoInfo) => 
+  axios.get(`/api/curso/aulas/${cursoSlug}`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  })
+
+const findAulaInfoById = (aulaId,alunoInfo) => 
+axios.get(`/api/aulas/${aulaId}`, {
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+})
+
+
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
 const findCursoBySlug = (slug) => axios.get(`/api/cursos/info/${slug}`)
@@ -184,7 +195,9 @@ const Api = {
   findMatricula,
   createMatricula,
   deleteMatricula,
-  findCursosByAluno
+  findCursosByAluno,
+  findAulasInfoByCurso,
+  findAulaInfoById
 };
 
 export default Api;

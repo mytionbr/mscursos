@@ -24,7 +24,9 @@ import {
   findCursoInfo,
   addRating,
   findCursosByAluno,
-  findAulasInfoByCurso
+  finishAula,
+  getAulasByCursoSlug,
+
 } from "../controllers/curso.controller.js";
 import {
   remove as removeAula,
@@ -37,11 +39,15 @@ import { create as createNota } from '../controllers/nota.controller.js'
 
 const router = express.Router();
 
-router.route("/").post(create).get(find);
+router.route("/").post(isAuth,create).get(find);
 
 router.route("/professor/:professorId").get(findByProfessor);
 
 router.route("/categorias/:categoriaId").get(findCursoByCategoriaId);
+
+router
+  .route("/aulas/:slug")
+  .get(getAulasByCursoSlug)
 
 router
   .route("/info/:slug")
@@ -69,10 +75,10 @@ router
   .get(getAluno)
   .delete(isAuth,hasAuthorizationMatricula,unenroll);
 
+
 router
   .route("/:id/aulas")
   .get(getAulas)
-  .get(isAuth,hasAuthorizationAssinatura,findAulasInfoByCurso)
   .post(isAuth, hasAuthorizationCurso, createAula);
 
 router
@@ -80,6 +86,11 @@ router
   .get(isAuth, hasAuthorizationCurso, findAulaById)
   .delete(isAuth, hasAuthorizationCurso, removeAula)
   .put(isAuth, hasAuthorizationCurso, updateAula);
+
+router
+  .route("/:id/aulas/finish")
+  .post(isAuth, hasAuthorizationAssinatura, finishAula)
+
 
 router
   .route("/:id/alunos/:alunoId/notas")

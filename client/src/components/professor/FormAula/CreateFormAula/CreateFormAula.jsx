@@ -18,6 +18,7 @@ import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import { useHistory } from 'react-router-dom'
 import { AULA_CREATE_RESET } from "../../../../constants/aulaConstantes";
 import { createAula } from "../../../../actions/aulaActions";
+import MDEditor from "@uiw/react-md-editor";
 function CreateFormAula(props) {
   const classes = useStyles();
   const history = useHistory()
@@ -52,7 +53,8 @@ function CreateFormAula(props) {
   const [descricao, setDescricao] = useState("");
   const [curso, setCurso] = useState(null);
   const [duracao, setDuracao] = useState(0)
-
+  const [conteudo, setConteudo] = useState('')
+  
   const handlerChangeNome = (event) => {
     const value = event.target.value;
     setNome(value);
@@ -83,7 +85,8 @@ function CreateFormAula(props) {
             nome: nome,
             descricao: descricao, 
             curso_id: curso,
-            duracao: duracao
+            duracao: duracao,
+            conteudo: conteudo
         }))
   };
 
@@ -149,6 +152,11 @@ function CreateFormAula(props) {
           helperText="O valor está em minutos"
           type='number'
         />
+        <InputLabel id="cursos">Conteudo da aula</InputLabel>
+        <MDEditor
+          value={conteudo}
+          onChange={setConteudo}
+      />
         <Button
           type="submit"
           className={classes.button}

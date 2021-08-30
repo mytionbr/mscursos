@@ -255,7 +255,7 @@ export const getAulas = async (req, res) => {
     const curso = req.profile;
     const nome = req.query.nome || "";
 
-    let query = "SELECT * FROM aula WHERE curso_id = $1";
+    let query = "SELECT AULA.NOME, AULA.AULA_ID, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.DESCRICAO FROM aula WHERE curso_id = $1";
     values.push(curso.curso_id);
 
     if (nome) {
@@ -265,7 +265,7 @@ export const getAulas = async (req, res) => {
     const { rows } = await pool.query(query, [...values]);
 
     const aulas = rows;
-
+    console.log(aulas)
     res.status(200).json(aulas);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -690,21 +690,57 @@ export const findCursosByAluno = async (req, res) => {
   }
 }
 
-export const findAulasInfoByCurso = async (req,res) => {
+
+export const finishAula = async (req,res)=>{
   try{
-    const curso = req.profile;
+    const alunoId = req.auth._id
+    const aulaId = req.body.aula_id
+    const cursoId = req.body.curso_id
+    const data_criacao = moment().format('YYYY-MM-DD')
 
     const { rows } = await pool.query(
-      `SELECT AULA.NOME, AULA.AULA_ID, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO
-      FROM AULA WHERE AULA.CURSO_ID = $1`,
-      [curso.curso_id]
+      `INSERT INTO VISUALIZACAO (ALUNO_ID, AULA_ID, DATA_CRIACAO, CURSO_ID)
+      VALUES($1,$2,$3,$4) RETURNING *;`,
+      [alunoId,aulaId,cursoId,data_criacao]
     )
 
-    const aulas = rows 
+    const visualizacao = rows[0]
 
-    res.status(200).json(aulas)
+    res.status(200).json(visualizacao)
 
-  }catch (err){
+  } catch (err){
+    res.status(400).json({ message: err.message });
+  }
+}
+
+
+export const getAulasByCursoSlug = async (req,res) => {
+  try{
+    const slug = req.params.slug;
+
+    const aulasInfo = {}
+
+    const { rows: cursoRows } = await pool.query(
+      `SELECT CURSO.NOME as curso_nome, CURSO.CURSO_ID, CURSO.SLUG as curso_slug, CURSO.CATEGORIA_ID
+      FROM CURSO WHERE CURSO.SLUG = $1`,
+      [slug]
+    )
+
+    aulasInfo.curso = cursoRows[0]
+
+    const { rows: aulasRows } = await pool.query(
+      `AULA.NOME, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.aula_id, VISUALIZACAO.VISUALIZACAO_ID FROM AULA
+      INNER JOIN CURSO ON AULA.CURSO_ID = CURSO.CURSO_ID 
+      LEFT JOIN VISUALIZACAO ON AULA.AULA_ID = VISUALIZACAO.AULA_ID
+      WHERE CURSO.SLUG = $1`,
+      [slug]
+    )
+
+    aulasInfo.aulas = aulasRows
+
+    res.status(200).json(aulasInfo)
+
+  } catch (err) {
     res.status(400).json({ message: err.message });
   }
 }

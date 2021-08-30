@@ -1,5 +1,6 @@
 import express from 'express'
 import { create, findById, list, read, remove, update } from '../controllers/aula.controller.js'
+import { isAuth } from '../controllers/auth.controller.js'
 
 const router = express.Router()
 
@@ -8,9 +9,9 @@ router.route('/')
     .post( create )
 
 router.route('/:id')
-    .get( read )
+    .get( isAuth,read )
     .put( update )
-    .delete( remove )
+    .delete( remove )  
 
 router.param('id', findById)
 

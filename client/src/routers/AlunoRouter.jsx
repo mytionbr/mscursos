@@ -10,6 +10,8 @@ import AlunoRoute from "../components/aluno/AlunoRoute";
 import Dashboard from "../screens/Aluno/Dashboard";
 import CursoPage from "../screens/Aluno/CursoPage/CursoPage";
 import CursoList from "../screens/Aluno/CursoList/CursoList";
+import AulaLayout from "../components/aluno/Aula/AulaLayout/AulaLayout";
+import AulaPage from "../screens/Aluno/AulaPage/AulaPage";
 const AlunoRouter = () => {
   
   const appRoutes = () => {
@@ -17,12 +19,24 @@ const AlunoRouter = () => {
       <DashboardLayout>
         <Switch>
           <AlunoRoute path={"/aluno/app/cursos/"} component={CursoList} />
+          <AlunoRoute path={"/aluno/app/curso/:cursoSlug/aulas/:aulaId"} component={aulaRoutes} />
           <AlunoRoute path={"/aluno/app/curso/:cursoSlug"} component={CursoPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>
     );
   };
+
+  const aulaRoutes = ()=>{
+   
+    return (
+      <AulaLayout>
+        <Switch>
+          <Route path={"/aluno/app/curso/:cursoSlug/aulas/:aulaId"} component={AulaPage} />
+        </Switch>
+      </AulaLayout>
+    )
+  }
 
   const homeRoutes = () =>{
     return (

@@ -123,7 +123,7 @@ export const findAssignments = async (req,res)=>{
                 CURSO WHERE CURSO.PROFESSOR_ID = $1)
                 UNION ALL
             (SELECT COUNT(*) FROM 
-                (CURSO_ALUNO INNER JOIN CURSO ON CURSO_ALUNO.CURSO_ID = CURSO.CURSO_ID)
+                (MATRICULA INNER JOIN CURSO ON MATRICULA.CURSO_ID = CURSO.CURSO_ID)
                 WHERE CURSO.PROFESSOR_ID = $1)
                 UNION ALL
             (SELECT COUNT(*) FROM

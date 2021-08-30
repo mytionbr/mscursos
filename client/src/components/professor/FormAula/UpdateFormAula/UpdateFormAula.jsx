@@ -19,6 +19,7 @@ import { findCursosByProfessor } from "../../../../actions/cursoActions";
 import { useHistory } from "react-router-dom";
 import { detailsAula, updateAula } from "../../../../actions/aulaActions";
 import { AULA_UPDATE_RESET } from "../../../../constants/aulaConstantes";
+import MDEditor from "@uiw/react-md-editor";
 
 function UpdateFormAula({aulaId,cursoId,...rest}) {
   const classes = useStyles();
@@ -65,6 +66,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
       setCurso(aula.curso_id);
       setDescricao(aula.descricao);
       setDuracao(aula.duracao)
+      setConteudo(aula.conteudo)
     }
   }, [aula, aulaId, cursoId, dispatch, history, successUpdate]);
 
@@ -72,6 +74,8 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
   const [descricao, setDescricao] = useState("");
   const [curso, setCurso] = useState("");
   const [duracao, setDuracao] = useState(0);
+  const [conteudo, setConteudo] = useState('')
+
   const handlerChangeNome = (event) => {
     const value = event.target.value;
     setNome(value);
@@ -113,7 +117,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox type="error">{error}</MessageBox>
       ) : (
         <Box className={classes.boxContainer}>
           <Typography variant="h6">AULA ID: {aulaId}</Typography>
@@ -174,6 +178,11 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
               </Select>
             </FormControl>
           )}
+
+          <MDEditor
+            value={conteudo}
+            onChange={setConteudo}
+          />
 
           <Button
             type="submit"

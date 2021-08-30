@@ -1,14 +1,35 @@
 import pool from "../database/pool.js";
 import extend from "lodash/extend.js";
 import moment from "moment";
+import slugify from "slugify";
+import marked from 'marked'
+import createDomPurify from 'dompurify'
+import jsdom from 'jsdom'
+
+const { JSDOM } = jsdom
+const dompurify = createDomPurify(new JSDOM().window)
 
 export const create = async (req,res) => {
     try {
-        const { nome, descricao,duracao, curso_id } = req.body
+        const { nome, descricao,duracao, conteudo, curso_id } = req.body
+
+        const slug = slugify(
+            nome,
+            {
+              lower: true,
+              strict: true
+            }
+        )
+
+        let sanitizedConteudo;
+
+        if(conteudo){
+            sanitizedConteudo = dompurify.sanitize(marked(conteudo)) 
+        }
 
         const { rows } = await pool.query(
-            'INSERT INTO aula (nome, descricao,duracao, curso_id) VALUES ($1, $2, $3, $4) RETURNING *;',
-            [nome, descricao,duracao, curso_id])
+            'INSERT INTO aula (nome, descricao,duracao,conteudo,slug, curso_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
+            [nome, descricao,duracao,sanitizedConteudo, slug, curso_id])
         
         const data_atualizacao = moment().format('YYYY-MM-DD')
 
@@ -46,21 +67,21 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res) => {
     try {
-       
-        const curso = req.profile
-        const aulaId = req.params.aulaId
+        console.log('ooa')
+        const aulaId = req.params.aulaId || req.params.id
+        console.log(aulaId)
         const { rows } = await pool.query(
-            'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
-            [aulaId,curso.curso_id])
+            'SELECT * FROM AULA  WHERE AULA.AULA_ID = $1',
+            [aulaId])
 
         const aula = rows[0]
         
         if(!aula){
             return res.status(400).json('Aula não encontrada')
         }
-
         res.status(200).json(aula)
     } catch (err) {
+        console.log(err)
         res.status(400).json({message: err.message})
     }
 }
