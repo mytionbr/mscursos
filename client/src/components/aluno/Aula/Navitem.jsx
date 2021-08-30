@@ -11,7 +11,7 @@ function Navitem({href,title, ...rest}) {
         end: false
     }, location.pathname) : false
     
-    const Icon = <CheckBoxOutlineBlankIcon /> 
+    const Icon = ()=> <CheckBoxOutlineBlankIcon /> 
 
     return (
         <ListItem

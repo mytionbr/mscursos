@@ -149,7 +149,7 @@ const createAssinatura = (price, planoId,paymentResult, alunoInfo) =>
   })
 
 const findAulasInfoByCurso = (cursoSlug,alunoInfo) => 
-  axios.get(`/api/curso/aulas/${cursoSlug}`, {
+  axios.get(`/api/cursos/aulas/${cursoSlug}`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   })
 

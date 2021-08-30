@@ -721,7 +721,7 @@ export const getAulasByCursoSlug = async (req,res) => {
     const aulasInfo = {}
 
     const { rows: cursoRows } = await pool.query(
-      `SELECT CURSO.NOME as curso_nome, CURSO.CURSO_ID, CURSO.SLUG as curso_slug, CURSO.CATEGORIA_ID
+      `SELECT CURSO.NOME, CURSO.CURSO_ID, CURSO.SLUG, CURSO.CATEGORIA_ID
       FROM CURSO WHERE CURSO.SLUG = $1`,
       [slug]
     )
@@ -729,7 +729,7 @@ export const getAulasByCursoSlug = async (req,res) => {
     aulasInfo.curso = cursoRows[0]
 
     const { rows: aulasRows } = await pool.query(
-      `AULA.NOME, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.aula_id, VISUALIZACAO.VISUALIZACAO_ID FROM AULA
+      `SELECT AULA.NOME, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.aula_id, VISUALIZACAO.VISUALIZACAO_ID FROM AULA
       INNER JOIN CURSO ON AULA.CURSO_ID = CURSO.CURSO_ID 
       LEFT JOIN VISUALIZACAO ON AULA.AULA_ID = VISUALIZACAO.AULA_ID
       WHERE CURSO.SLUG = $1`,
@@ -741,6 +741,7 @@ export const getAulasByCursoSlug = async (req,res) => {
     res.status(200).json(aulasInfo)
 
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 }

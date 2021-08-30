@@ -22,7 +22,10 @@ function AulaSidebar({onMobileClose, openMobile}) {
         }
     }, [])
 
-    const Content = ()=>{ 
+
+    const Icon = ()=> getIconByCategoria(data.curso.categoria_id)
+
+    function Content(){ 
         return (
         <Box
             style={{
@@ -47,7 +50,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     }}
                     to="/aluno/app"
                 >
-                    {getIconByCategoria(data.curso.categoria_id)}
+                    <Icon />
                 </Avatar>
                 <Typography
                     color="textPrimary"
@@ -62,7 +65,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     {
                         data.aulas.map((aula)=>(
                             <Navitem
-                                href={`/aluno/app/curso/${data.curso.slug}/aula/${aula.aula_id}`}
+                                href={`/aluno/app/curso/${data.curso.slug}/aulas/${aula.aula_id}`}
                                 key={aula.slug}
                                 title={aula.nome}
                                 />
@@ -72,7 +75,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
             </Box>
             <Box style={{flexGrow: 1}} />
         </Box>
-    )}
+    )}  
 
     return (
         <>
