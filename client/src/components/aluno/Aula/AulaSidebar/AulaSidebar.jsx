@@ -14,8 +14,6 @@ function AulaSidebar({onMobileClose, openMobile}) {
     const aulaInfoList = useSelector((state) => state.aulaInfoList);
     const { loading, error, data } = aulaInfoList;
 
-    console.log(data)
-
     useEffect(() =>{
         if (openMobile && onMobileClose) {
             onMobileClose()

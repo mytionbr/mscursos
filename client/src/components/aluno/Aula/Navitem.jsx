@@ -4,11 +4,8 @@ import { matchPath, NavLink, useLocation } from 'react-router-dom'
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 function Navitem({href,title,visualization, ...rest}) {
     const location = useLocation()
-
-    const active = href ? !!matchPath({
-        path: href,
-        end: false
-    }, location.pathname) : false
+   
+    const active = location.pathname === href
     
     return (
         <ListItem
@@ -27,7 +24,7 @@ function Navitem({href,title,visualization, ...rest}) {
                     letterSpacing: 0,
                     textTransform: 'none',
                     width: '100%',
-                    backgroundColor: '#2c2d2e',
+                    backgroundColor: active ? '#506198' : '#2c2d2e',
                     "&:hover":{
                         backgroundColor:'#adb4be',
                     }
