@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { findAulasInfo } from '../../../../actions/aulaActions';
 import AulaNavbar from '../AulaNavbar/AulaNavbar'
 import AulaSidebar from '../AulaSidebar/AulaSidebar'
@@ -8,9 +8,14 @@ function AulaLayout(props) {
     const cursoSlug = props.match.params.cursoSlug;
     const dispatch = useDispatch()
 
+    const aulaInfoList = useSelector((state) => state.aulaInfoList);
+    const { data } = aulaInfoList;
+
     useEffect(() => {
-        dispatch(findAulasInfo(cursoSlug));
-    }, [dispatch, cursoSlug]);
+        if(!data || data.curso.slug !== cursoSlug){
+            dispatch(findAulasInfo(cursoSlug));
+        }
+    }, [dispatch, cursoSlug, data]);
     
     const classes = useStyles()
     const [isMobileNavOpen, setMobileNavOpen] = useState(false)
