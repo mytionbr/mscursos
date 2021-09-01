@@ -40,7 +40,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
     <div>
       <AppBar elevation={0} position="absolute" {...rest}>
         <Toolbar className={classes.toolbar}>
-          <Link to="/" className={classes.brandLink}>
+          <Link to="/aluno/app" className={classes.brandLink}>
             <MenuBookIcon className={classes.brandIcon} />
             <Typography className={classes.brand} variant="h5" noWrap>
               Mscursos

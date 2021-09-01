@@ -29,7 +29,6 @@ function AulaSidebar({onMobileClose, openMobile}) {
           </Box>
         );
       };
-    
 
     function Content(){ 
         return (
@@ -54,7 +53,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                         height: 64,
                         background:'#506198'
                     }}
-                    to="/aluno/app"
+                    to={`/aluno/app/curso/${data.curso.slug}`}
                 >
                     <Picture />
                 </Avatar>

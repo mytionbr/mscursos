@@ -6,9 +6,11 @@ import LoadingBox from "../../core/LoadingBox/LoadingBox";
 import useStyles from "./styles";
 import { createMatricula, deleteMatricula, findMatricula } from "../../../actions/matriculaActions";
 import { MATRICULA_CREATE_RESET, MATRICULA_DELETE_RESET } from "../../../constants/matriculaConstants";
+import { Link,useHistory } from "react-router-dom";
 
 function CursoActions(props) {
   const classes = useStyles();
+  const history = useHistory()
   const [isMatriculado, setIsMatriculado] = useState(false);
 
   const alunoSignin = useSelector((state) => state.alunoSignin);
@@ -16,7 +18,6 @@ function CursoActions(props) {
 
   const cursoInfomations = useSelector((state) => state.cursoInfomations);
   const { data: {curso} } = cursoInfomations;
-
 
   const dispatch = useDispatch();
   const matriculaFind = useSelector((state) => state.matriculaFind);
@@ -37,7 +38,6 @@ function CursoActions(props) {
 
   useEffect(()=>{
     if (aluno && curso) {
-      console.log('Eai meu chapa',curso)
       dispatch({type:MATRICULA_DELETE_RESET})
       dispatch(findMatricula(aluno.aluno_id, curso.curso_id));
     }
@@ -50,8 +50,9 @@ function CursoActions(props) {
     }
     if (dataCreate) {
       dispatch({type:MATRICULA_CREATE_RESET})
+      history.push(`/aluno/app/curso/${curso.slug}/aulas`)
     }
-  },[dataCreate, dispatch, successDelete])
+  },[curso.slug, dataCreate, dispatch, history, successDelete])
   
   useEffect(()=>{
     if(data){
@@ -87,6 +88,8 @@ function CursoActions(props) {
                 className={classes.button}
                 variant="outlined"
                 color="primary"
+                component={Link}
+                to={`/aluno/app/curso/${curso.slug}/aulas`}
               >
                 Continuar
               </Button>
