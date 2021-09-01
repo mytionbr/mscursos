@@ -14,10 +14,13 @@ function AulaPage(props) {
     const aulaInfomations = useSelector((state) => state.aulaInfomations);
     const { loading, error, data:aula } = aulaInfomations;
     
+    useEffect(()=>{
+        dispatch({type:AULA_INFORMATIONS_RESET})
+    },[dispatch])
+
     useEffect(() => {
         if(aulaId){
             dispatch({type:AULA_FINISH_RESET})
-            dispatch({type:AULA_INFORMATIONS_RESET})
             dispatch(informationsAula(aulaId));
         }
        
