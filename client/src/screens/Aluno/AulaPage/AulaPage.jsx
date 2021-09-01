@@ -16,7 +16,7 @@ function AulaPage(props) {
 
     useEffect(() => {
         dispatch({type:AULA_INFORMATIONS_RESET})
-        dispatch({type:AULA_INFORMATIONS_RESET})
+        dispatch({type:AULA_FINISH_RESET})
         if(aulaId){
             dispatch(informationsAula(aulaId));
         }

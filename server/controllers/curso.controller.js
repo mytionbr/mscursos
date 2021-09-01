@@ -667,7 +667,6 @@ export const findCursosByAluno = async (req, res) => {
     const { rows } = await pool.query(
       `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
       (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
-        INNER JOIN CURSO ON VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID 
          WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
@@ -697,8 +696,7 @@ export const getAulasByCursoSlug = async (req,res) => {
 
     const { rows: cursoRows } = await pool.query(
       `SELECT
-      (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
-        INNER JOIN CURSO ON VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID 
+      (SELECT COUNT(*) FROM VISUALIZACAO  
          WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total, 
@@ -723,7 +721,6 @@ export const getAulasByCursoSlug = async (req,res) => {
     aulasInfo.aulas = aulasRows
 
     res.status(200).json(aulasInfo)
-
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
