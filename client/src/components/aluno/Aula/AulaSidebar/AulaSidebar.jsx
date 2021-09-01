@@ -39,11 +39,30 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 height: '100%'
             }}
         >
+              <Box style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'flex-start',
+                padding:'0.5rem 1rem',
+            }}>
+                <Link 
+                to={`/aluno/app/curso/${data.curso.slug}`}
+                style={{textDecoration:'none'}}>
+                <Typography
+                    variant="h6"
+                    style={{
+                        color: "#fff"
+                    }}
+                >
+                    Voltar
+                </Typography>
+                </Link>
+            </Box>
             <Box style={{
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                padding:'2rem',
+                padding:'1rem',
             }}>
                 <Avatar
                     component={Link}

@@ -679,9 +679,9 @@ export const findCursosByAluno = async (req, res) => {
     let matriculas =  rows
     
     matriculas.forEach(item =>{
-      item.progresso = (Number(item.aulas_vistas) * 100) / Number(item.aulas_total) || 0
+      const result = (Number(item.aulas_vistas) * 100) / Number(item.aulas_total)
+      item.progresso =  result > 0 && isFinite(result) && !isNaN(result) ? Number(result).toFixed(0) : 0 
     })
-    
     res.status(200).json(matriculas)
 
   } catch (err) {

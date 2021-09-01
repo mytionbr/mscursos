@@ -8,7 +8,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import { getIconByCategoria } from "../../../../utils/getIconByCategoria";
@@ -53,10 +53,14 @@ function CursoCard(props) {
   }))(LinearProgress);
 
   const Icon = getIconByCategoria(categoriaId)
- 
+  
+
   return (
     <Fade appear={true} in={true} timeout={700}>
-    <Card className={classes.card} onClick={action} {...props}>
+    <Card 
+      className={classes.card} 
+      onClick={action}
+      {...props}>
       <CardContent>
         <Grid container className={classes.gridContainer}>
           <Grid item className={classes.gridHeader} xs={4}>
