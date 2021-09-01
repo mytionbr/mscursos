@@ -7,6 +7,7 @@ import {getIconByCategoria} from '../../../../utils/getIconByCategoria'
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
 import { findAulasInfo } from '../../../../actions/aulaActions';
+import ProgressBar from '../../../ProgressBar/ProgressBar';
 
 function AulaSidebar({onMobileClose, openMobile}) {
             
@@ -62,7 +63,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                padding:'1rem',
+                padding:'0.5rem 1rem',
             }}>
                 <Avatar
                     component={Link}
@@ -85,6 +86,30 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     {data.curso.nome}
                 </Typography>
             </Box>
+            <Box style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                padding:'1rem',
+            }}>
+                <Typography
+                    variant="body1"
+                    style={{
+                        color: "#fff"
+                    }}
+                >
+                    {data.curso.progresso}%
+                </Typography>
+                <ProgressBar
+             percent={data.curso.progresso}
+             color={'#1a90ff'}
+             style={{
+               width: '100%',
+             }}
+          />
+                
+            </Box>
+            
             <Divider style={{background:"#fff"}} />
             <Box style={{padding:'1rem'}}>
                 <List>

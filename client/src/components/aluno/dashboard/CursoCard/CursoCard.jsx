@@ -4,7 +4,6 @@ import {
   CardContent,
   Fade,
   Grid,
-  LinearProgress,
   Paper,
   Typography,
 } from "@material-ui/core";
@@ -13,6 +12,7 @@ import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import { getIconByCategoria } from "../../../../utils/getIconByCategoria";
 import { useHistory } from "react-router";
+import ProgressBar from "../../../ProgressBar/ProgressBar";
 
 function CursoCard(props) {
   const { name, percent, size, categoriaId, slug } = props;
@@ -37,24 +37,9 @@ function CursoCard(props) {
 
   const cardSize = handleSize(size)
   const classes = useStyles();
-  
-  const BorderLinearProgress = withStyles((theme) => ({
-    root: {
-      height: '1rem',
-      borderRadius: '0.5rem',
-    },
-    colorPrimary: {
-      backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
-    },
-    bar: {
-      borderRadius: '0.5rem',
-      backgroundColor: '#1a90ff',
-    },
-  }))(LinearProgress);
 
   const Icon = getIconByCategoria(categoriaId)
   
-
   return (
     <Fade appear={true} in={true} timeout={700}>
     <Card 
@@ -82,11 +67,9 @@ function CursoCard(props) {
           <Typography align={'right'} color="textSecondary" gutterBottom variant="h5">
             {percent}%
           </Typography>
-          <BorderLinearProgress
-             thickness={4}
-             variant="determinate"
-             size={100}
-             value={percent}
+          <ProgressBar
+             percent={percent}
+             color={'#1a90ff'}
              className={classes.percent}
           />
         </Grid>

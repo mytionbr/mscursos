@@ -696,12 +696,21 @@ export const getAulasByCursoSlug = async (req,res) => {
     const aulasInfo = {}
 
     const { rows: cursoRows } = await pool.query(
-      `SELECT CURSO.NOME, CURSO.CURSO_ID, CURSO.SLUG, CURSO.CATEGORIA_ID
+      `SELECT
+      (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
+        INNER JOIN CURSO ON VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID 
+         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+        as aulas_vistas,
+      (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total, 
+      CURSO.NOME, CURSO.CURSO_ID, CURSO.SLUG, CURSO.CATEGORIA_ID
       FROM CURSO WHERE CURSO.SLUG = $1`,
       [slug]
     )
 
     aulasInfo.curso = cursoRows[0]
+    
+    const progresso = (Number(aulasInfo.curso.aulas_vistas) * 100) / Number(aulasInfo.curso.aulas_total)
+    aulasInfo.curso.progresso =  progresso > 0 && isFinite(progresso) && !isNaN(progresso) ? Number(progresso).toFixed(0) : 0 
 
     const { rows: aulasRows } = await pool.query(
       `SELECT AULA.NOME, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.aula_id, VISUALIZACAO.VISUALIZACAO_ID FROM AULA
