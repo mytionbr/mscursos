@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  hasAuthorizationAssinatura,
   hasAuthorizationCurso,
   hasAuthorizationMatricula,
   isAuth,
@@ -24,7 +23,6 @@ import {
   findCursoInfo,
   addRating,
   findCursosByAluno,
-  finishAula,
   getAulasByCursoSlug,
 
 } from "../controllers/curso.controller.js";
@@ -87,10 +85,6 @@ router
   .delete(isAuth, hasAuthorizationCurso, removeAula)
   .put(isAuth, hasAuthorizationCurso, updateAula);
 
-router
-  .route("/:id/aulas/finish")
-  .post(isAuth, hasAuthorizationAssinatura, finishAula)
-
 
 router
   .route("/:id/alunos/:alunoId/notas")
@@ -103,7 +97,6 @@ router
 router
   .route("/:id/notas/:notaId")
   .get(isAuth, hasAuthorizationCurso, findNotaByCurso)
-
 
 router.param("id", findById);
 

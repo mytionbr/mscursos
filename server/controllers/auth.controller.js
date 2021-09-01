@@ -142,19 +142,19 @@ export const hasAuthorizationMatricula = async (req, res, next) =>{
  }
 
 
- export const hasAuthorizationAssinatura = async (req, res, next) =>{
-
-    const alunoId = req.auth && req.auth.aluno_id
-    const curso = req.profile
-
+ export const hasAuthorizationAula = async (req, res, next) =>{
+    try{
+    const alunoId = req.auth && req.auth._id
+    const aulaId = req.body.aula_id || req.params.id || req.params.aula_id 
+ 
     const { rows } = await pool.query(
-        `SELECT CURSO.CURSO_ID FROM CURSO INNER JOIN 
-        CATEGORIA ON CATEGORIA.CATEGORIA_ID = CURSO.CATEGORIA_ID
+        `SELECT CURSO.CURSO_ID FROM CURSO 
+        INNER JOIN AULA ON AULA.CURSO_ID = CURSO.CURSO_ID
+        INNER JOIN CATEGORIA ON CATEGORIA.CATEGORIA_ID = CURSO.CATEGORIA_ID
         INNER JOIN ASSINATURA ON ASSINATURA.PLANO_ID = CATEGORIA.PLANO_ID
-        WHERE CURSO.CURSO_ID = $1 AND ASSINATURA.ALUNO_ID = $2`,
-        [curso.curso_id, alunoId]
+        WHERE AULA.AULA_ID = $1 AND ASSINATURA.ALUNO_ID = $2`,
+        [aulaId, alunoId]
     )
-
             
     const authorized = rows && rows.length > 0
     
@@ -165,4 +165,9 @@ export const hasAuthorizationMatricula = async (req, res, next) =>{
      }
     
      next()
+    }catch(err){
+        return res.status(403).json({
+            message: err.message
+        })
+    }
  }

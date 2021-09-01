@@ -83,6 +83,34 @@ export const findById = async (req, res) => {
     }
 }
 
+
+export const findByIdAndAluno = async (req, res) => {
+    try {
+        const aulaId = req.params.aulaId || req.params.id
+        const alunoId = req.auth._id
+        
+        const { rows } = await pool.query(
+            `SELECT AULA.*,
+            (SELECT VISUALIZACAO.VISUALIZACAO_ID FROM VISUALIZACAO 
+                INNER JOIN AULA ON AULA.AULA_ID = VISUALIZACAO.AULA_ID 
+                INNER JOIN ALUNO ON ALUNO.ALUNO_ID = VISUALIZACAO.ALUNO_ID 
+                WHERE ALUNO.ALUNO_ID = $1 AND AULA.AULA_ID = $2 ) AS VISUALIZACAO_ID FROM AULA 
+            LEFT JOIN VISUALIZACAO ON VISUALIZACAO.AULA_ID = AULA.AULA_ID 
+            WHERE AULA.AULA_ID = $2`,
+            [alunoId,aulaId])
+
+        const aula = rows[0]
+
+        if(!aula){
+            return res.status(400).json('Aula não encontrada')
+        }
+        res.status(200).json(aula)
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
+}
+
+
 export const read = async (req, res) => {
     const aula = req.aula
     res.status(200).json(aula)
@@ -128,3 +156,25 @@ export const remove = async (req, res) =>{
         res.status(400).json({message: err.message})
     }
 }
+
+export const finishAula = async (req,res)=>{
+    try{
+      
+      const alunoId = req.auth._id
+      const aula = req.body
+      const data_criacao = moment().format('YYYY-MM-DD')
+
+      const { rows } = await pool.query(
+        `INSERT INTO VISUALIZACAO (ALUNO_ID, AULA_ID, DATA_CRIACAO, CURSO_ID)
+        VALUES($1,$2,$3,$4) RETURNING *;`,
+        [alunoId,aula.aula_id,data_criacao,aula.curso_id]
+      )
+        
+      const visualizacao = rows[0]
+  
+      res.status(201).json(visualizacao)
+  
+    } catch (err){
+      res.status(400).json({ message: err.message });
+    }
+  }

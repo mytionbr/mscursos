@@ -158,6 +158,19 @@ axios.get(`/api/aulas/${aulaId}`, {
   headers: { Authorization: `Bearer ${alunoInfo?.token}` },
 })
 
+const findAulaInfoByIdAndAluno = (aulaId,alunoInfo) => 
+axios.get(`/api/aulas/${aulaId}/aluno`, {
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+})
+
+
+const finishAula =  (aula,alunoInfo) => 
+  axios.post(`/api/aulas/${aula.aula_id}/finish`,
+    aula  
+  , {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+})
+
 
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
@@ -197,7 +210,9 @@ const Api = {
   deleteMatricula,
   findCursosByAluno,
   findAulasInfoByCurso,
-  findAulaInfoById
+  findAulaInfoById,
+  finishAula,
+  findAulaInfoByIdAndAluno
 };
 
 export default Api;

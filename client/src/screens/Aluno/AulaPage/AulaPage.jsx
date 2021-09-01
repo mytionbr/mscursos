@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { findAulasInfo, informationsAula } from '../../../actions/aulaActions';
 import LoadingBox from '../../../components/core/LoadingBox/LoadingBox';
 import MessageBox from '../../../components/core/MessageBox/MessageBox';
+import { AULA_FINISH_RESET } from '../../../constants/aulaConstantes';
 
 function AulaPage(props) {
     const aulaId = props.match.params.aulaId
@@ -12,11 +13,10 @@ function AulaPage(props) {
     const dispatch = useDispatch()
     const aulaInfomations = useSelector((state) => state.aulaInfomations);
     const { loading, error, data:aula } = aulaInfomations;
-    console.log( loading, error, aula )
     
     useEffect(() => {
-        console.log()
         if(aulaId){
+            dispatch({type:AULA_FINISH_RESET})
             dispatch(informationsAula(aulaId));
         }
        

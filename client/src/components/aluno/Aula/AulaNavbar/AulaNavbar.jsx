@@ -1,71 +1,97 @@
-import { AppBar, Box, Button, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
-import React, { useEffect } from 'react'
-import MenuIcon from '@material-ui/icons/Menu';
-import LoadingBox from '../../../core/LoadingBox/LoadingBox';
-import MessageBox from '../../../core/MessageBox/MessageBox';
-import Skeleton from '@material-ui/lab/Skeleton';
-import { useDispatch, useSelector } from 'react-redux';
-import useStyles from './styles'
-function AulaNavbar({onMobileNavOpen, ...rest}) {
-    const classes = useStyles()
-    const aulaInfomations = useSelector((state) => state.aulaInfomations);
-    const { loading, error, data:aula } = aulaInfomations;
+import {
+  AppBar,
+  Box,
+  Button,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import React, { useEffect } from "react";
+import MenuIcon from "@material-ui/icons/Menu";
+import LoadingBox from "../../../core/LoadingBox/LoadingBox";
+import MessageBox from "../../../core/MessageBox/MessageBox";
+import Skeleton from "@material-ui/lab/Skeleton";
+import { useDispatch, useSelector } from "react-redux";
+import useStyles from "./styles";
+import { findAulasInfo, finishAula, informationsAula } from "../../../../actions/aulaActions";
+import { AULA_FINISH_RESET } from "../../../../constants/aulaConstantes";
+function AulaNavbar({ onMobileNavOpen, ...rest }) {
+  const classes = useStyles();
 
-    const handleFinishAula = ()=>{
-        console.log('oi')
-    }
+  const dispatch = useDispatch();
 
-    return (
-        <AppBar
-            elevation={0}
-            {...rest}
-            position="static"
-        >
-            <Toolbar className={classes.toolbar}>
-                 <Hidden mdUp>
-                    <IconButton 
-                        color="inherit"
-                        onClick={onMobileNavOpen}>
-                            <MenuIcon />
-                    </IconButton>
-                   </Hidden>
-               
-                {
-                    loading ? (
-                        <>
-                            <Box mx={1}>
-                                <Skeleton variant="rect" width={'10rem'} height={20} />
-                            </Box>
-                            <Box mx={1}>
-                                <Skeleton variant="rect" width={'5rem'} height={20} />
-                            </Box>
-                        </>
-                    ) : error ? (
-                        <MessageBox type='error'>{error}</MessageBox>
-                    ) : aula ? (
-                    <>
-                         <Typography variant='h4'>
-                            {aula.nome}
-                        </Typography>
-                        <Box style={{flexGrow: 1}}/>
+  const aulaInfomations = useSelector((state) => state.aulaInfomations);
+  const { loading, error, data: aula } = aulaInfomations;
 
-                        <Button
-                            variant="contained"
-                            onClick={handleFinishAula}
-                            color="secondary"
-                        >
-                            Finalizar aula
-                        </Button>
-                    </>
-                    ) : (
-                        ''
-                    ) 
-                }
-               
-                
-            </Toolbar>            
-        </AppBar>
-    )
+  const aulaFinish = useSelector((state) => state.aulaFinish);
+  const {
+    loading: loadingFinish,
+    error: errorFinish,
+    data: dataFinish,
+  } = aulaFinish;
+
+  const handleFinishAula = () => {
+    dispatch(finishAula(aula))
+  };
+
+
+  return (
+    <AppBar elevation={0} {...rest} position="static">
+      <Toolbar className={classes.toolbar}>
+        <Hidden mdUp>
+          <IconButton color="inherit" onClick={onMobileNavOpen}>
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+
+        {loading ? (
+          <>
+            <Box mx={1}>
+              <Skeleton variant="rect" width={"10rem"} height={20} />
+            </Box>
+            <Box mx={1}>
+              <Skeleton variant="rect" width={"5rem"} height={20} />
+            </Box>
+          </>
+        ) : error ? (
+          <MessageBox type="error">{error}</MessageBox>
+        ) : aula ? (
+          <>
+            <Typography variant="h4">{aula.nome}</Typography>
+            <Box style={{ flexGrow: 1 }} />
+            {loadingFinish ? (
+              <LoadingBox />
+            ) : errorFinish ? (
+              <MessageBox type="error">{errorFinish}</MessageBox>
+            ) : dataFinish || aula.visualizacao_id ? (
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled
+                style={{
+                    backgroundColor: "#35ca42",
+                    color:"#fff"
+                }}
+              >
+                Aula concluída
+              </Button>
+            ) : (
+                <Button
+                variant="contained"
+                onClick={handleFinishAula}
+                color="secondary"
+              >
+                Finalizar aula
+              </Button>
+            )}
+          </>
+        ) : (
+          ""
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default AulaNavbar
+export default AulaNavbar;

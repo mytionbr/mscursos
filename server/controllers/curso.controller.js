@@ -689,30 +689,6 @@ export const findCursosByAluno = async (req, res) => {
   }
 }
 
-
-export const finishAula = async (req,res)=>{
-  try{
-    const alunoId = req.auth._id
-    const aulaId = req.body.aula_id
-    const cursoId = req.body.curso_id
-    const data_criacao = moment().format('YYYY-MM-DD')
-
-    const { rows } = await pool.query(
-      `INSERT INTO VISUALIZACAO (ALUNO_ID, AULA_ID, DATA_CRIACAO, CURSO_ID)
-      VALUES($1,$2,$3,$4) RETURNING *;`,
-      [alunoId,aulaId,cursoId,data_criacao]
-    )
-
-    const visualizacao = rows[0]
-
-    res.status(200).json(visualizacao)
-
-  } catch (err){
-    res.status(400).json({ message: err.message });
-  }
-}
-
-
 export const getAulasByCursoSlug = async (req,res) => {
   try{
     const slug = req.params.slug;

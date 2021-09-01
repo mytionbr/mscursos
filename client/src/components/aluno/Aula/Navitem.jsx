@@ -1,12 +1,12 @@
 import { Button, ListItem } from '@material-ui/core'
 import React from 'react'
-import { matchPath, NavLink, useLocation } from 'react-router-dom'
+import {  NavLink, useLocation } from 'react-router-dom'
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 function Navitem({href,title,visualization, ...rest}) {
     const location = useLocation()
-   
+
     const active = location.pathname === href
-    
+
     return (
         <ListItem
             disableGutters
