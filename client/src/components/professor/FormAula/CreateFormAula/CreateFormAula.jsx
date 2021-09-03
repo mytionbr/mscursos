@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   FormControl,
+  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -54,6 +55,7 @@ function CreateFormAula(props) {
   const [curso, setCurso] = useState(null);
   const [duracao, setDuracao] = useState(0)
   const [conteudo, setConteudo] = useState('')
+  const [video, setVideo] = useState(null)
   
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -68,6 +70,11 @@ function CreateFormAula(props) {
   const handlerChangeCurso = (event) => {
     const value = event.target.value;
     setCurso(value);
+  };
+
+  const handlerChangeVideo = (event) => {
+    const value = event.target.files[0];
+    setVideo(value);
   };
 
   const handlerChangeDuracao = (event) => {
@@ -86,7 +93,9 @@ function CreateFormAula(props) {
             descricao: descricao, 
             curso_id: curso,
             duracao: duracao,
-            conteudo: conteudo
+            conteudo: conteudo,
+            video:video
+
         }))
   };
 
@@ -157,6 +166,10 @@ function CreateFormAula(props) {
           value={conteudo}
           onChange={setConteudo}
       />
+
+      <InputLabel style={{marginLeft:'0.8rem'}} id="video">Video</InputLabel>
+      <Input type="file" name="video" onChange={handlerChangeVideo}  />
+
         <Button
           type="submit"
           className={classes.button}

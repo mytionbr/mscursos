@@ -48,7 +48,17 @@ export const createAula = (aula) => async (dispatch, getState) => {
     professorSignin: { professorInfo },
   } = getState();
   try {
-    const { data } = await Api.createAula(aula, professorInfo);
+
+    const formData = new FormData()
+
+    formData.append("nome",aula.nome)
+    formData.append("descricao", aula.descricao)
+    formData.append("duracao", aula.duracao)
+    formData.append("conteudo", aula.conteudo)
+    formData.append("curso_id", aula.curso_id)
+    formData.append("video", aula.video)
+    
+    const { data } = await Api.createAula(formData, professorInfo);
     dispatch({
       type: AULA_CREATE_SUCCESS,
       payload: data,
@@ -155,3 +165,6 @@ export const finishAula = (aula) => async (dispatch,getState) => {
     });
   }
 };
+
+
+

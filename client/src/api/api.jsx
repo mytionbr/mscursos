@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import httpAdapter from "axios/lib/adapters/http"
 const fetchCursos = () => axios.get("/api/cursos");
 
 const fetchCategorias = () => axios.get("/api/categorias");
@@ -59,9 +59,12 @@ const createCurso = (curso, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const createAula = (aula, professorInfo) =>
-  axios.post(`/api/cursos/${aula.curso_id}/aulas`, aula, {
-    headers: { Authorization: `Bearer ${professorInfo?.token}` },
+const createAula = (formData, professorInfo) =>
+  axios.post(`/api/cursos/${formData.get('curso_id')}/aulas`, formData, {
+    headers: { 
+      Authorization: `Bearer ${professorInfo?.token}`,
+      'Content-Type': 'multipart/form-data' 
+    },
   });
 
 const createNota = (nota, curso, aluno, professorInfo) =>
@@ -212,7 +215,8 @@ const Api = {
   findAulasInfoByCurso,
   findAulaInfoById,
   finishAula,
-  findAulaInfoByIdAndAluno
+  findAulaInfoByIdAndAluno,
+  streamVideo
 };
 
 export default Api;

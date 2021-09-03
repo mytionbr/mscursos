@@ -14,6 +14,10 @@ function AulaPage(props) {
     const aulaInfomations = useSelector((state) => state.aulaInfomations);
     const { loading, error, data:aula } = aulaInfomations;
 
+    if(aula){
+        console.log(aula)
+    }
+
     useEffect(() => {
         dispatch({type:AULA_INFORMATIONS_RESET})
         dispatch({type:AULA_FINISH_RESET})
@@ -35,13 +39,22 @@ function AulaPage(props) {
                     <Box style={{minWidth: '100%', minHeigth: '100%',padding:"1rem"}}>
                         <Container>
                             {aula ? (
+                                <>
+                                {
+                                    aula.video && (
+                                        <video id="videoPlayer" width="650" height="650" controls muted="muted">
+                                        <source src={`/api/aulas/${aula.aula_id}/video`} type="video/mp4" />
+                                      </video>
+                                    )
+                                } 
+                            
                         <Typography>
                             <div
                                 dangerouslySetInnerHTML={{
                                 __html: DOMPurify.sanitize(aula.conteudo),
                                 }}/> 
                         </Typography>
-                            ) : (
+                            </>) : (
                                 <Typography variant="h3">
                                     Bem vindo ao curso
                                 </Typography>

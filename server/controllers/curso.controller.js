@@ -608,18 +608,15 @@ export const findCursoInfo = async (req, res) => {
 
     cursoInfo.avaliacoes = avaliacaoResult.rows;
     
-    
     let starList = cursoInfo.avaliacoes.map(avaliacao =>{
       return avaliacao.valor
     })
-
     
     let starsOccurrences = countOccurrences(starList)
     
     let starsPercent = calculateAverage(starsOccurrences,Number(cursoInfo.curso.avaliacao_total))
 
     cursoInfo.stars = starsPercent 
-
 
     res.status(200).json(cursoInfo)
 

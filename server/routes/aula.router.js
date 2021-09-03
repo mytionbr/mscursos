@@ -1,5 +1,5 @@
 import express from 'express'
-import { create, findById,  findByIdAndAluno,  finishAula,  list,  remove, update } from '../controllers/aula.controller.js'
+import { create, findById,  findByIdAndAluno,  finishAula,  getVideo,  list,  remove, update } from '../controllers/aula.controller.js'
 import { hasAuthorizationAula, isAuth } from '../controllers/auth.controller.js'
 
 const router = express.Router()
@@ -16,6 +16,10 @@ router.route('/:id')
 router
     .route("/:id/finish")
     .post(isAuth, hasAuthorizationAula, finishAula)
+
+router
+    .route("/:id/video")
+    .get( getVideo)
 
 router
     .route("/:id/aluno")
