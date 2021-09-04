@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
   Button,
-  Chip
+  Chip,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
@@ -26,7 +26,6 @@ import { findCursos } from "../../actions/cursoActions";
 import MessageBox from "../core/MessageBox/MessageBox";
 import LoadingBox from "../core/LoadingBox/LoadingBox";
 function CategoriaSelector() {
-
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
   const { loading, error, categorias } = categoriaList;
@@ -50,13 +49,13 @@ function CategoriaSelector() {
       setChecked(categoria_id);
       dispatch(
         findCursos({
-          categorias: Array({categoria_id:categoria_id}),
+          categorias: Array({ categoria_id: categoria_id }),
         })
       );
     }
   };
 
-  const handleClean = ()=>{
+  const handleClean = () => {
     dispatch(
       findCursos({
         nome: "",
@@ -64,7 +63,7 @@ function CategoriaSelector() {
       })
     );
     setChecked(null);
-  }
+  };
 
   const getIcon = (categoria_id) => {
     let Icon;
@@ -93,17 +92,17 @@ function CategoriaSelector() {
         break;
     }
 
-    return <Icon style={{color:"#506198" }} />;
+    return <Icon style={{ color: "#506198" }} />;
   };
 
   const CategoriaItem = ({ categoria_id, nome }) => {
     const [active, setActive] = useState(false);
 
-    useEffect(()=>{
-      if(checked === categoria_id){
-        setActive(true)
+    useEffect(() => {
+      if (checked === categoria_id) {
+        setActive(true);
       }
-    },[categoria_id])
+    }, [categoria_id]);
 
     return (
       <ListItem
@@ -129,17 +128,20 @@ function CategoriaSelector() {
           }}
           onClick={() => handleAction(categoria_id)}
         >
-          <Grid container alignItems="center">
-            <Grid item xs={2}>
-              {getIcon(categoria_id)}
-            </Grid>
-            <Grid item xs={8}>
-              {nome}
-            </Grid>
-            <Grid item xs={2}>
-              {active ? <CheckBoxIcon /> : ""}
-            </Grid>
-          </Grid>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              width: "100%",
+            }}
+          >
+            {getIcon(categoria_id)}
+            <Box style={{ width: "1rem" }} />
+            <Typography variant="body1">{nome}</Typography>
+            <Box style={{ flexGrow: 1 }} />
+            {active ? <CheckBoxIcon /> : ""}
+          </Box>
         </Button>
       </ListItem>
     );
@@ -167,10 +169,8 @@ function CategoriaSelector() {
               }}
             >
               <Typography color="textPrimary" variant="h5">
-                Categorias {
-                    checked ? <Chip label="Limpar" onClick={handleClean} />
-                    : ''
-                }
+                Categorias{" "}
+                {checked ? <Chip label="Limpar" onClick={handleClean} /> : ""}
               </Typography>
             </Box>
             <Divider />
