@@ -1,5 +1,4 @@
 import axios from "axios";
-import httpAdapter from "axios/lib/adapters/http"
 const fetchCursos = () => axios.get("/api/cursos");
 
 const fetchCategorias = () => axios.get("/api/categorias");
@@ -216,7 +215,6 @@ const Api = {
   findAulaInfoById,
   finishAula,
   findAulaInfoByIdAndAluno,
-  streamVideo
 };
 
 export default Api;

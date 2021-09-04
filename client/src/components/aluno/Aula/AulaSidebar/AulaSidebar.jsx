@@ -2,7 +2,7 @@ import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@materia
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import Navitem from '../Navitem'
+import Navitem from '../NavItem/NavItem'
 import {getIconByCategoria} from '../../../../utils/getIconByCategoria'
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
 import MessageBox from '../../../core/MessageBox/MessageBox';
@@ -111,7 +111,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
             </Box>
             
             <Divider style={{background:"#fff"}} />
-            <Box style={{padding:'1rem'}}>
+            <Box style={{}}>
                 <List>
                     {
                         data.aulas.map((aula)=>(
@@ -139,7 +139,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 variant="temporary"
                 PaperProps={{
                     style:{
-                        width: 256,
+                        width: 310,
                         background: "#19191C"
                     }
                 }}
@@ -165,7 +165,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                 variant="persistent"
                 PaperProps={{
                     style: {
-                        width: 256,
+                        width: 310,
                         background: "#212121"
                     }
                 }}

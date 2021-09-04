@@ -14,10 +14,6 @@ function AulaPage(props) {
     const aulaInfomations = useSelector((state) => state.aulaInfomations);
     const { loading, error, data:aula } = aulaInfomations;
 
-    if(aula){
-        console.log(aula)
-    }
-
     useEffect(() => {
         dispatch({type:AULA_INFORMATIONS_RESET})
         dispatch({type:AULA_FINISH_RESET})
@@ -36,18 +32,24 @@ function AulaPage(props) {
                         {error}
                     </MessageBox>
                 ) : (
-                    <Box style={{minWidth: '100%', minHeigth: '100%',padding:"1rem"}}>
+                    <Box style={{minWidth: '100%', minHeigth: '100%',padding:"1rem 2rem"}}>
                         <Container>
                             {aula ? (
                                 <>
                                 {
                                     aula.video && (
-                                        <video id="videoPlayer" width="650" height="650" controls muted="muted">
-                                        <source src={`/api/aulas/${aula.aula_id}/video`} type="video/mp4" />
-                                      </video>
+                                        <div style={{height:"400px", width:'100%'}}>
+                                            <video id="videoPlayer" width="100%" height="100%" controls >
+                                                <source src={`/api/aulas/${aula.aula_id}/video`} type="video/mp4" />
+                                            </video>
+                                      </div>
                                     )
                                 } 
-                            
+                        <Box style={{display: 'flex', alignItems: 'center', margin: '1rem 0'}}>
+                            <span style={{flexGrow:1, borderBottom: '0.3rem solid #000'}}></span>
+                            <Typography variant="h5" style={{margin:'0 1rem'}}>Conteúdo</Typography>
+                            <span style={{flexGrow:1, borderBottom: '0.3rem solid #000'}}></span>
+                        </Box>
                         <Typography>
                             <div
                                 dangerouslySetInnerHTML={{

@@ -14,7 +14,7 @@ export default makeStyles((theme) =>({
         flex: '1 1 auto',
         overflow: 'hidden',
         [theme.breakpoints.up('lg')]: {
-            paddingLeft: 256
+            paddingLeft: 310
         }
     },
     dashboardLayoutContainer:{
