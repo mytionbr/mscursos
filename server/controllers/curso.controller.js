@@ -656,6 +656,35 @@ export const addRating = async (req,res)=>{
   }
 }
 
+export const getRating = async (req,res)=>{
+  try{
+      const curso = req.profile;
+      const aluno_id = req.params.alunoId
+
+      const {rows: matricula} = await pool.query(
+        `SELECT * FROM MATRICULA WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,
+        [aluno_id, curso.curso_id]
+      )
+
+      if(!matricula || matricula.length === 0){
+        return res.status(400).json({message:'Essa operação não é permitida a esse usuário'})
+      }
+
+      const { rows } = await pool.query(
+        'SELECT * FROM AVALIACAO WHERE AVALIACAO.CURSO_ID AND AVALIACAO.ALUNO_ID',
+        [curso.curso_id,aluno_id]
+      )
+      
+      res.status(201).json(rows)
+
+  } catch(err){
+      res.status(400).json({
+          message: err.message
+      })
+  }
+}
+
+
 export const findCursosByAluno = async (req, res) => {
   try {
     

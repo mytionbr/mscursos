@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, Divider, Drawer, Hidden, List, ListItem, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -123,6 +123,25 @@ function AulaSidebar({onMobileClose, openMobile}) {
                                 />
                         ))
                     }
+                    <Box style={{flexGrow: 1}} />
+                    <ListItem
+                        disableGutters
+                    >
+                        <Button 
+                            component={Link} 
+                            to={`/aluno/app/curso/${data.curso.slug}/comentario`}
+                            style={{
+                                fontWeight: '600',
+                                justifyContent: 'flex-start',
+                                letterSpacing: 0,
+                                textTransform: 'none',
+                                width: '100%',
+                                backgroundColor:'#506198',
+                                padding: '0.6rem',
+                            }}>
+                            Avaliar o curso
+                        </Button>
+                    </ListItem>
                 </List>
             </Box>
             <Box style={{flexGrow: 1}} />

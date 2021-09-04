@@ -1,5 +1,8 @@
 import Api from "../api/api";
 import {
+  CURSO_AVALIACAO_DETAILS_FAIL,
+  CURSO_AVALIACAO_DETAILS_REQUEST,
+  CURSO_AVALIACAO_DETAILS_SUCCESS,
   CURSO_CREATE_FAIL,
   CURSO_CREATE_REQUEST,
   CURSO_CREATE_SUCCESS,
@@ -205,13 +208,29 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
 export const matriculaCurso = (alunoId,cursoId) => async (dispatch) => {
   dispatch({ type: CURSO_MATRICULA_REQUEST, payload: {alunoId,cursoId} });
   try {
-    console.log('opar',alunoId,cursoId)
     const { data } = await Api.findMatricula(alunoId,cursoId);
   
     dispatch({ type: CURSO_MATRICULA_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: CURSO_MATRICULA_FAIL,
+      payload: error.error || error.message
+    });
+  }
+};
+
+export const findAvaliacao = (alunoId,cursoId) => async (dispatch,getState) => {
+  dispatch({ type: CURSO_AVALIACAO_DETAILS_REQUEST, payload: {alunoId,cursoId} });
+  const {
+    professorSignin: { professorInfo }
+  } = getState()
+  try {
+    const { data } = await Api.findAvaliacao(alunoId,cursoId,professorInfo);
+  
+    dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_AVALIACAO_DETAILS_FAIL,
       payload: error.error || error.message
     });
   }

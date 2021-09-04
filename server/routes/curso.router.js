@@ -24,6 +24,7 @@ import {
   addRating,
   findCursosByAluno,
   getAulasByCursoSlug,
+  getRating,
 
 } from "../controllers/curso.controller.js";
 import {
@@ -67,6 +68,9 @@ router.route("/:id/matriculas/")
 
 router.route("/:id/avaliacoes")
   .post(isAuth,addRating)
+
+router.route("/:id/avaliacoes/:alunoId")
+  .get(isAuth,hasAuthorizationMatricula,getRating)
 
 router
   .route("/:id/matriculas/:alunoId")

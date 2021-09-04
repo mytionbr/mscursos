@@ -165,6 +165,12 @@ axios.get(`/api/aulas/${aulaId}/aluno`, {
   headers: { Authorization: `Bearer ${alunoInfo?.token}` },
 })
 
+const findAvaliacao = (alunoId, cursoId, alunoInfo)=>
+axios.get(`/${cursoId}/avaliacoes/${alunoId}`,
+{
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+})
+
 
 const finishAula =  (aula,alunoInfo) => 
   axios.post(`/api/aulas/${aula.aula_id}/finish`,
