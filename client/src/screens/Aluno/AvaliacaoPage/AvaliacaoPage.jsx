@@ -1,11 +1,20 @@
-import { Box, Button, Container, TextField, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import Rating from "@material-ui/lab/Rating";
 import { detailsAvaliacao, saveAvaliacao } from "../../../actions/cursoActions";
-import { CURSO_AVALIACAO_DETAILS_RESET, CURSO_AVALIACAO_SAVE_RESET } from "../../../constants/cursoConstants";
+import {
+  CURSO_AVALIACAO_DETAILS_RESET,
+  CURSO_AVALIACAO_SAVE_RESET,
+} from "../../../constants/cursoConstants";
 import { AULA_INFORMATIONS_RESET } from "../../../constants/aulaConstantes";
 
 function AvaliacaoPage(props) {
@@ -19,7 +28,7 @@ function AvaliacaoPage(props) {
     loading: loadingDetails,
     error: errorDetails,
     data: dataDetails,
-    empty: dataEmpty
+    empty: dataEmpty,
   } = avaliacaoDetails;
 
   const avaliacaoSave = useSelector((state) => state.avaliacaoSave);
@@ -33,7 +42,7 @@ function AvaliacaoPage(props) {
   const [comentario, setComentario] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     dispatch(
       saveAvaliacao({
         curso_id: dataInfo.curso.curso_id,
@@ -44,104 +53,103 @@ function AvaliacaoPage(props) {
   };
 
   useEffect(() => {
+    dispatch({ type: AULA_INFORMATIONS_RESET });
 
-    dispatch({type:AULA_INFORMATIONS_RESET})
-    
     if (dataInfo && !dataDetails && !dataEmpty && !successSave) {
       dispatch(detailsAvaliacao(dataInfo.curso.curso_id));
     }
 
-    if(dataInfo && dataDetails && dataInfo.curso.curso_id !== dataDetails.curso_id){
-      dispatch({type: CURSO_AVALIACAO_DETAILS_RESET})
-      dispatch({type: CURSO_AVALIACAO_SAVE_RESET})
-    }
- 
-    if (dataDetails && !loadingSave) {
+    if (
+      dataInfo &&
+      dataDetails &&
+      dataInfo.curso.curso_id !== dataDetails.curso_id
+    ) {
+      dispatch({ type: CURSO_AVALIACAO_DETAILS_RESET });
+      dispatch({ type: CURSO_AVALIACAO_SAVE_RESET });
+    } else if (dataDetails && !loadingSave) {
       setValor(dataDetails.valor);
       setComentario(dataDetails.comentario);
+    }
+
+    if (
+      dataInfo &&
+      dataEmpty &&
+      dataInfo.curso.curso_id !== dataEmpty.currentCurso
+    ) {
+      dispatch(detailsAvaliacao(dataInfo.curso.curso_id));
     }
   }, [dataDetails, dataEmpty, dataInfo, successSave, dispatch, loadingSave]);
 
   return (
     <>
-      {loadingDetails  ? (
+      {loadingDetails ? (
         <LoadingBox />
       ) : errorDetails ? (
         <MessageBox type="error">{errorDetails}</MessageBox>
-      )  : (
+      ) : (
         <Box
           style={{ minWidth: "100%", minHeigth: "100%", padding: "1rem 2rem" }}
         >
           <Container>
-            <form 
+            <form
               onSubmit={handleSubmit}
               style={{
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
-            <Box 
-              component="fieldset" 
-              borderColor="transparent" 
-              >
-              <Typography variant="h5">Avaliação</Typography>
-              <Rating
-                name="simple-controlled"
-                value={valor}
-                onChange={(event, newValue) => {
-                  setValor(newValue);
-                }}
-                style={{
-                  fontSize: "2.5rem"
-                }}
-              />
-            </Box>
-            <Box 
-              component="fieldset" 
-              mb={1} 
-              borderColor="transparent" 
-              >
-            <TextField
-              id="outlined-multiline-static"
-              label="Comentário"
-              multiline
-              rows={4}
-              value={comentario}
-              onChange={(event) => {
-                setComentario(event.target.value);
+                display: "flex",
+                flexDirection: "column",
               }}
-              variant="outlined"
-              fullWidth
-              color="secondary"
-            />
-            </Box>
-            <Box 
-              component="fieldset" 
-              mb={1} 
-              borderColor="transparent" 
-              style={{width:"100%"}}
+            >
+              <Box component="fieldset" borderColor="transparent">
+                <Typography variant="h5">Avaliação</Typography>
+                <Rating
+                  name="simple-controlled"
+                  value={valor}
+                  onChange={(event, newValue) => {
+                    setValor(newValue);
+                  }}
+                  style={{
+                    fontSize: "2.5rem",
+                  }}
+                />
+              </Box>
+              <Box component="fieldset" mb={1} borderColor="transparent">
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Comentário"
+                  multiline
+                  rows={4}
+                  value={comentario}
+                  onChange={(event) => {
+                    setComentario(event.target.value);
+                  }}
+                  variant="outlined"
+                  fullWidth
+                  color="secondary"
+                />
+              </Box>
+              <Box
+                component="fieldset"
+                mb={1}
+                borderColor="transparent"
+                style={{ width: "100%" }}
               >
-            <Button type="submit" fullWidth variant="contained" color="secondary">
-              Salvar
-            </Button>
-            </Box>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                >
+                  Salvar
+                </Button>
+              </Box>
             </form>
-            {
-              loadingSave ? (
-                <LoadingBox/>
-              ) :              
+            {loadingSave ? (
+              <LoadingBox />
+            ) : (
               successSave && (
-                <MessageBox type="success">
-                  Comentário adicionado
-                </MessageBox>
+                <MessageBox type="success">Comentário salvo</MessageBox>
               )
-            }
-            {
-               errorSave && (
-                <MessageBox type="error">{errorSave}</MessageBox>
-              )
-            }
-            
-
+            )}
+            {errorSave && <MessageBox type="error">{errorSave}</MessageBox>}
           </Container>
         </Box>
       )}

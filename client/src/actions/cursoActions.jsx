@@ -232,7 +232,7 @@ export const detailsAvaliacao = (cursoId) => async (dispatch,getState) => {
     if(data){
       dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
     } else {
-      dispatch({ type: CURSO_AVALIACAO_DETAILS_EMPTY });
+      dispatch({ type: CURSO_AVALIACAO_DETAILS_EMPTY, payload: cursoId });
     }
   } catch (error) {
     dispatch({

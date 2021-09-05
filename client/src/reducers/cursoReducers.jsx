@@ -191,7 +191,7 @@ export const cursoFindAvaliacaoReducer = (
     case CURSO_AVALIACAO_DETAILS_FAIL:
       return { loading: false, error: action.payload, empty: false };
     case CURSO_AVALIACAO_DETAILS_EMPTY:
-      return { loading: false, data: null, empty: true };
+      return { loading: false, data: null, empty: {currentCurso: action.payload} };
     case CURSO_AVALIACAO_DETAILS_RESET:
       return {};
     default:

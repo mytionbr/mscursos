@@ -127,25 +127,33 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     <ListItem
                         disableGutters
                     >
+                        <Box style={{
+                            flexGrow: 1,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItens:'center',
+                            padding:'1rem 0'
+                        }}>
                         <Button 
                             component={Link} 
+                            variant="contained"
                             to={`/aluno/app/curso/${data.curso.slug}/avaliacao`}
                             style={{
-                                fontWeight: '600',
+                                
                                 justifyContent: 'flex-start',
                                 letterSpacing: 0,
                                 textTransform: 'none',
-                                width: '100%',
                                 backgroundColor:'#506198',
                                 color: '#fff',
-                                padding: '0.6rem',
+                                fontSize:"1.2rem"
+                                
                             }}>
-                            Avaliar o curso
+                            Avalie o curso
                         </Button>
+                        </Box>
                     </ListItem>
                 </List>
             </Box>
-            <Box style={{flexGrow: 1}} />
         </Box>
     )}  
 

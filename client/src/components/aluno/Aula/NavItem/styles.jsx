@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
         margin:0  
     },
     button:{
-        fontWeight: '600',
         justifyContent: 'flex-start',
         letterSpacing: 0,
         textTransform: 'none',
