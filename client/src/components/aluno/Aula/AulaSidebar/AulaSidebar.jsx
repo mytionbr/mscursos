@@ -129,7 +129,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                     >
                         <Button 
                             component={Link} 
-                            to={`/aluno/app/curso/${data.curso.slug}/comentario`}
+                            to={`/aluno/app/curso/${data.curso.slug}/avaliacao`}
                             style={{
                                 fontWeight: '600',
                                 justifyContent: 'flex-start',
@@ -137,6 +137,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
                                 textTransform: 'none',
                                 width: '100%',
                                 backgroundColor:'#506198',
+                                color: '#fff',
                                 padding: '0.6rem',
                             }}>
                             Avaliar o curso

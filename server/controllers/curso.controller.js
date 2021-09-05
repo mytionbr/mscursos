@@ -625,8 +625,7 @@ export const findCursoInfo = async (req, res) => {
   }
 };
 
-
-export const addRating = async (req,res)=>{
+export const saveRating = async (req,res)=>{
   try{
       const curso = req.profile;
       const {aluno_id,valor, comentario } = req.body
@@ -642,14 +641,31 @@ export const addRating = async (req,res)=>{
         return res.status(400).json({message:'Essa operação não é permitida a esse usuário'})
       }
 
-      const { rows } = await pool.query(
-        'INSERT INTO avaliacao (valor, comentario, data_criacao, aluno_id, curso_id) VALUES ($1,$2,$3,$4,$5) RETURNING *;',
-        [valor, comentario, data_criacao, aluno_id, curso.curso_id]
-      )
+      const { rows: avaliacaoRows } = await pool.query(
+        `SELECT * FROM AVALIACAO WHERE AVALIACAO.ALUNO_ID = $1 AND AVALIACAO.CURSO_ID = $2`,
+        [aluno_id, curso.curso_id])
       
-      res.status(201).json(rows)
+      let result
 
-  } catch(err){
+      if(avaliacaoRows.length === 0){
+        const { rows } = await pool.query(
+          'INSERT INTO avaliacao (valor, comentario, data_criacao, aluno_id, curso_id) VALUES ($1,$2,$3,$4,$5) RETURNING *;',
+          [valor, comentario, data_criacao, aluno_id, curso.curso_id]
+        )
+
+        result = rows[0]
+
+      }else {
+        const { rows } = await pool.query(
+          'UPDATE avaliacao  SET valor = $1, comentario = $2, data_criacao = $3 WHERE aluno_id = $4 AND curso_id = $5 RETURNING *;',
+          [valor, comentario, data_criacao, aluno_id, curso.curso_id]
+        )
+        result = rows[0]
+      } 
+
+      res.status(201).json(result)
+
+ } catch(err){
       res.status(400).json({
           message: err.message
       })
@@ -671,11 +687,13 @@ export const getRating = async (req,res)=>{
       }
 
       const { rows } = await pool.query(
-        'SELECT * FROM AVALIACAO WHERE AVALIACAO.CURSO_ID AND AVALIACAO.ALUNO_ID',
+        'SELECT * FROM AVALIACAO WHERE AVALIACAO.CURSO_ID = $1 AND AVALIACAO.ALUNO_ID = $2',
         [curso.curso_id,aluno_id]
       )
-      
-      res.status(201).json(rows)
+
+      const result = rows[0]
+
+      res.status(201).json(result)
 
   } catch(err){
       res.status(400).json({

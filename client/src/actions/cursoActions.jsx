@@ -1,8 +1,12 @@
 import Api from "../api/api";
 import {
+  CURSO_AVALIACAO_DETAILS_EMPTY,
   CURSO_AVALIACAO_DETAILS_FAIL,
   CURSO_AVALIACAO_DETAILS_REQUEST,
   CURSO_AVALIACAO_DETAILS_SUCCESS,
+  CURSO_AVALIACAO_SAVE_FAIL,
+  CURSO_AVALIACAO_SAVE_REQUEST,
+  CURSO_AVALIACAO_SAVE_SUCCESS,
   CURSO_CREATE_FAIL,
   CURSO_CREATE_REQUEST,
   CURSO_CREATE_SUCCESS,
@@ -62,7 +66,6 @@ export const findCursos = (params) => async (dispatch) => {
     if (categorias) {
       queryString += categorias
         .map((c) => {
-          console.log(c)
           return `categoria=${c.categoria_id || c}`;
         })
         .join("&");
@@ -219,18 +222,43 @@ export const matriculaCurso = (alunoId,cursoId) => async (dispatch) => {
   }
 };
 
-export const findAvaliacao = (alunoId,cursoId) => async (dispatch,getState) => {
-  dispatch({ type: CURSO_AVALIACAO_DETAILS_REQUEST, payload: {alunoId,cursoId} });
+export const detailsAvaliacao = (cursoId) => async (dispatch,getState) => {
+  dispatch({ type: CURSO_AVALIACAO_DETAILS_REQUEST, payload: cursoId });
   const {
-    professorSignin: { professorInfo }
+    alunoSignin: { alunoInfo }
   } = getState()
   try {
-    const { data } = await Api.findAvaliacao(alunoId,cursoId,professorInfo);
-  
-    dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
+    const { data } = await Api.findAvaliacao(cursoId,alunoInfo);
+    if(data){
+      dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
+    } else {
+      dispatch({ type: CURSO_AVALIACAO_DETAILS_EMPTY });
+    }
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_DETAILS_FAIL,
+      payload: error.error || error.message
+    });
+  }
+};
+
+
+export const saveAvaliacao = (avaliacao) => async (dispatch,getState) => {
+  dispatch({ type: CURSO_AVALIACAO_SAVE_REQUEST, payload: avaliacao });
+  const {
+    alunoSignin: { alunoInfo }
+  } = getState()
+  try {
+    avaliacao.aluno_id = alunoInfo.aluno_id
+  
+    const { data } = await Api.saveAvaliacao(avaliacao, alunoInfo);
+   
+    dispatch({ type: CURSO_AVALIACAO_SAVE_SUCCESS });
+    dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({
+      type: CURSO_AVALIACAO_SAVE_FAIL,
       payload: error.error || error.message
     });
   }

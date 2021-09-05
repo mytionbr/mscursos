@@ -21,10 +21,10 @@ import {
   findAlunosByCurso,
   findNotaByCurso,
   findCursoInfo,
-  addRating,
   findCursosByAluno,
   getAulasByCursoSlug,
   getRating,
+  saveRating,
 
 } from "../controllers/curso.controller.js";
 import {
@@ -67,7 +67,7 @@ router.route("/:id/matriculas/")
   .post(isAuth,hasAuthorizationMatricula,enroll)
 
 router.route("/:id/avaliacoes")
-  .post(isAuth,addRating)
+  .post(isAuth,hasAuthorizationMatricula,saveRating)
 
 router.route("/:id/avaliacoes/:alunoId")
   .get(isAuth,hasAuthorizationMatricula,getRating)

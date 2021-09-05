@@ -4,7 +4,7 @@ import { alunoFindCursosReducer, alunoFindReducer, alunoNotaCreateReducer, aluno
 import { assinaturaCreateReducer } from './reducers/assinaturaReducers';
 import { aulaCreateReducer, aulaDeleteReducer, aulaDetailsReducer, aulaFindReducer, aulaFinishReducer, aulaInfoListReducer, aulaInformationReducer, aulaUpdateReducer } from './reducers/aulaReducers';
 import { categoriaListReducer } from './reducers/categoriaReducers';
-import { cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindAvaliacaoReducer, cursoFindReducer, cursoInformaionsReducer, cursoListReducer, cursoProfessorReducer, cursoUpdateReducer } from './reducers/cursoReducers';
+import { cursoCreateAvaliacaoReducer, cursoCreateReducer, cursoDeleteReducer, cursoDetailsReducer, cursoFindAvaliacaoReducer, cursoFindReducer, cursoInformaionsReducer, cursoListReducer, cursoProfessorReducer, cursoSaveAvaliacaoReducer, cursoUpdateReducer } from './reducers/cursoReducers';
 import { matriculaCreateReducer, matriculaDeleteReducer, matriculaFindReducer } from './reducers/matriculaReducers';
 import { professorAssignmentsReducer, professorDetailsReducer, professorSigninReducer, professorUpdateProfileReducer } from './reducers/professorReducers';
 
@@ -55,7 +55,8 @@ const reducer = combineReducers({
     aulaInfoList:aulaInfoListReducer,
     aulaInfomations:aulaInformationReducer,
     aulaFinish:aulaFinishReducer,
-    cursoFindAvaliacao:cursoFindAvaliacaoReducer
+    avaliacaoDetails:cursoFindAvaliacaoReducer,
+    avaliacaoSave:cursoSaveAvaliacaoReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

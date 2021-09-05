@@ -165,12 +165,18 @@ axios.get(`/api/aulas/${aulaId}/aluno`, {
   headers: { Authorization: `Bearer ${alunoInfo?.token}` },
 })
 
-const findAvaliacao = (alunoId, cursoId, alunoInfo)=>
-axios.get(`/${cursoId}/avaliacoes/${alunoId}`,
+const findAvaliacao = ( cursoId, alunoInfo)=>
+axios.get(`/api/cursos/${cursoId}/avaliacoes/${alunoInfo.aluno_id}`,
 {
   headers: { Authorization: `Bearer ${alunoInfo?.token}` },
 })
 
+const saveAvaliacao = (avaliacao, alunoInfo)=>
+axios.post(`/api/cursos/${avaliacao.curso_id}/avaliacoes/`,
+  avaliacao,
+{
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+})
 
 const finishAula =  (aula,alunoInfo) => 
   axios.post(`/api/aulas/${aula.aula_id}/finish`,
@@ -221,6 +227,8 @@ const Api = {
   findAulaInfoById,
   finishAula,
   findAulaInfoByIdAndAluno,
+  findAvaliacao,
+  saveAvaliacao
 };
 
 export default Api;
