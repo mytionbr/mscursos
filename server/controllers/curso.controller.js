@@ -769,3 +769,21 @@ export const getAulasByCursoSlug = async (req,res) => {
     res.status(400).json({ message: err.message });
   }
 }
+
+export const findCursosAsCategory = async (req,res)=>{
+  try {
+    const categoriaId = req.params.categoriaId
+    
+    const { rows } = await pool.query(
+      `SELECT CURSO.CURSO_ID, CURSO.NOME FROM CURSO WHERE CURSO.CATEGORIA_ID = $1`,
+      [categoriaId]
+    )
+
+    const result = rows
+
+    res.status(200).json(result)   
+
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}

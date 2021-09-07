@@ -25,6 +25,7 @@ import {
   getAulasByCursoSlug,
   getRating,
   saveRating,
+  findCursosAsCategory,
 
 } from "../controllers/curso.controller.js";
 import {
@@ -48,6 +49,10 @@ router
   .route("/aulas/:slug")
   .get(getAulasByCursoSlug)
 
+router
+  .route("/categorias/:categoriaId")
+  .get(findCursosAsCategory)
+  
 router
   .route("/info/:slug")
   .get(findCursoInfo)

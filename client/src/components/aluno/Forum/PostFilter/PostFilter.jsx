@@ -1,13 +1,6 @@
 import {
-  Box,
-  Button,
-  FormControl,
   Grid,
-  IconButton,
-  InputBase,
-  InputLabel,
-  Paper,
-  Select,
+  Paper
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
@@ -18,13 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import { findCursosAsCategory } from "../../../../actions/cursoActions";
+import { findPosts } from "../../../../actions/postActions";
 
 function PostFilter() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const postFind = useSelector((state) => state.postFind);
-  const { loading, error, data } = postFind;
 
   const cursoAsCategoria = useSelector((state) => state.cursoAsCategoria);
   const { loading: cursosLoading, error: cursosError, data: cursosData } = cursoAsCategoria;
@@ -32,20 +24,17 @@ function PostFilter() {
   const categoriaList = useSelector((state) => state.categoriaList)
   const { loading: categoriaLoading, error: categoriaError, categorias: categoriasData } = categoriaList
 
-  const [categorias, setCategorias] = useState([]);
-  const [cursos, setCursos] = useState([]);
-
-  const [categoria, setCategoria] = useState(null);
-  const [curso, setCurso] = useState(null);
-
-  const [title, setTitle] = useState(null)
-
   const TODOS = "TODOS";
   const SEM_RESPOSTA = "SEM_RESPOSTA";
   const SOLUCIONADOS = "SOLUCIONADOS";
 
-  const [option, setOption] = useState(TODOS);
-
+  const [categorias, setCategorias] = useState([]);
+  const [cursos, setCursos] = useState([]);
+  const [categoria, setCategoria] = useState(null);
+  const [curso, setCurso] = useState(null);
+  const [titulo, setTitulo] = useState(null)
+  const [opcao, setOpcao] = useState(TODOS);
+  
   const handleChangeCategoria = (event) => {
     const value = event.target.value;
     setCategoria(value);
@@ -57,33 +46,40 @@ function PostFilter() {
   };
 
   const handleSelectOption = (value) => {
-    setOption(value);
+    setOpcao(value);
   };
 
   const handleSearch = (event)=>{
       event.preventDefault()
-      findPosts({
-        titulo: title || "",
-        categoria: categoria
-          ? Array(...categoria)
-          : [],
-        curso: curso || '',
-        opcao: option || ''
-      })
+      
+      dispatch(
+        findPosts({
+          titulo: titulo || "",
+          categoria: categoria || "",
+          curso:curso || "",
+          opcao: opcao || "",       
+        }))
   }
 
   useEffect(()=>{
-    if(categoriasData){
+    if(categoriasData && !categorias){
       const categoriaObjects = categoriasData.map(c=>({
         name: c.nome,
         value: c.categoria_id
       }))
       setCategorias(categoriaObjects)
     }
-    if(categoria){
+    if(categoria && !curso){
       dispatch(findCursosAsCategory(categoria.value))
     }
-  },[categoria, categoriasData, dispatch])
+    if(cursosData && !cursos){
+      const cursosbjects = cursosData.map(c=>({
+        name: c.nome,
+        value: c.curso_id
+      }))
+      setCursos(cursosbjects)
+    }
+  },[categoria, categorias, categoriasData, curso, cursos, cursosData, dispatch])
 
   return (
     <Paper className={classes.box}>
@@ -133,7 +129,7 @@ function PostFilter() {
               <ButtonOption
                 title={"Todos"}
                 value={TODOS}
-                state={option}
+                state={opcao}
                 handleClick={() => handleSelectOption(TODOS)}
               />
             </Grid>
@@ -141,7 +137,7 @@ function PostFilter() {
               <ButtonOption
                 title={"Sem resposta"}
                 value={SEM_RESPOSTA}
-                state={option}
+                state={opcao}
                 handleClick={() => handleSelectOption(SEM_RESPOSTA)}
               />
             </Grid>
@@ -149,14 +145,14 @@ function PostFilter() {
               <ButtonOption
                 title={"Solucionados"}
                 value={SOLUCIONADOS}
-                state={option}
+                state={opcao}
                 handleClick={() => handleSelectOption(SOLUCIONADOS)}
               />
             </Grid>
           </Grid>
         </Grid>
         <Grid>
-            <InputFilter handleSearch={handleSearch} setState={setTitle} state={title} />
+            <InputFilter handleSearch={handleSearch} setState={setTitulo} state={titulo} />
         </Grid>
       </Grid>
     </Paper>
