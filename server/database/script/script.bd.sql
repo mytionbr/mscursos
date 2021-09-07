@@ -112,6 +112,35 @@ CREATE TABLE IF NOT EXISTS visualizacao(
     CURSO_ID INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS post (
+    post_id serial PRIMARY KEY,
+    titulo VARCHAR (255) NOT NULL,
+    conteudo TEXT,
+	categoria_id int NOT NULL,
+	curso_id int, 
+	aluno_id int NOT NULL,
+	data_criacao TIMESTAMP NOT NULL,
+	data_atualizacao TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS resposta (
+    resposta_id serial PRIMARY KEY,
+	conteudo TEXT NOT NULL,
+	data_criacao TIMESTAMP NOT NULL,
+	data_atualizacao TIMESTAMP NOT NULL,
+	solucionado BOOLEAN NOT NULL,
+	post_id int not null,
+	aluno_id int,
+	professor_id int
+);
+
+CREATE TABLE IF NOT EXISTS resposta_avaliacao (
+    resposta_avaliacao_id serial PRIMARY KEY,
+	avaliacao BOOLEAN NOT NULL,
+	aluno_id int not null,
+	resposta_id int not null
+);
+
 ALTER TABLE assinatura ADD CONSTRAINT assinatura_plano_id_fkey
 	FOREIGN KEY (plano_id) REFERENCES plano (plano_id);
 	
@@ -162,6 +191,29 @@ ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_curso_id_fkey
 ALTER TABLE categoria ADD CONSTRAINT categoria_plano_id_fkey 
     FOREIGN KEY (plano_id) REFERENCES plano (plano_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE post ADD CONSTRAINT post_categoria_id_fkey 
+    FOREIGN KEY (categoria_id) REFERENCES categoria (categoria_id) ON UPDATE CASCADE;
+
+ALTER TABLE post ADD CONSTRAINT post_curso_id_fkey 
+    FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE SET NULL;
+	
+ALTER TABLE post ADD CONSTRAINT post_aluno_id_fkey 
+    FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE resposta ADD CONSTRAINT resposta_post_id_fkey 
+    FOREIGN KEY (post_id) REFERENCES post (post_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE resposta ADD CONSTRAINT resposta_aluno_id_fkey 
+    FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+ALTER TABLE resposta ADD CONSTRAINT resposta_professor_id_fkey 
+    FOREIGN KEY (professor_id) REFERENCES professor (professor_id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+ALTER TABLE resposta_avaliacao ADD CONSTRAINT resposta_id_aluno_id_fkey 
+    FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE resposta_avaliacao ADD CONSTRAINT resposta_id_resposta_id_fkey 
+    FOREIGN KEY (resposta_id) REFERENCES resposta (resposta_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 INSERT INTO aluno(nome, email, data_nascimento, senha) 
 	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
