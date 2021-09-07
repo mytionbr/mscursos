@@ -32,7 +32,6 @@ export const create = async (req,res) => {
     
             res.status(200).json(updatedNota)
         }
-       
         
     } catch (err) {
         res.status(409).json({message: err.message})

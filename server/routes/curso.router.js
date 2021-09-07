@@ -82,7 +82,6 @@ router
   .get(getAluno)
   .delete(isAuth,hasAuthorizationMatricula,unenroll);
 
-
 router
   .route("/:id/aulas")
   .get(getAulas)
@@ -93,7 +92,6 @@ router
   .get(isAuth, hasAuthorizationCurso, findAulaById)
   .delete(isAuth, hasAuthorizationCurso, removeAula)
   .put(isAuth, hasAuthorizationCurso, updateAula);
-
 
 router
   .route("/:id/alunos/:alunoId/notas")

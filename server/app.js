@@ -10,7 +10,7 @@ import aulaRouter from './routes/aula.router.js'
 import categoriaRouter from './routes/categoria.router.js'
 import authRouter from './routes/auth.router.js'
 import assinaturaRouter from './routes/assinatura.router.js'
-
+import postRouter from './routes/post.router.js'
 const app = express()
 
 app.use(express.json())
@@ -26,6 +26,7 @@ app.use('/api/aulas', aulaRouter)
 app.use('/api/categorias', categoriaRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/assinaturas', assinaturaRouter)
+app.use('/api/posts', postRouter)
 app.get('/api/config/paypal',(req,res)=>{
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 })

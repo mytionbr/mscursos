@@ -29,7 +29,7 @@ export const findPosts = (params) => async (dispatch, getState) => {
         }
 
         if(pagination){
-            queryString += `pagination=${pagination}&`;
+            queryString += `page=${pagination}&`;
         }
 
         const { data } = await Api.findPosts(queryString,alunoInfo);
