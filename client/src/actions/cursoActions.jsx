@@ -1,5 +1,8 @@
 import Api from "../api/api";
 import {
+  CURSO_AS_CATEGORY_FIND_FAIL,
+  CURSO_AS_CATEGORY_FIND_REQUEST,
+  CURSO_AS_CATEGORY_FIND_SUCCESS,
   CURSO_AVALIACAO_DETAILS_EMPTY,
   CURSO_AVALIACAO_DETAILS_FAIL,
   CURSO_AVALIACAO_DETAILS_REQUEST,
@@ -259,6 +262,22 @@ export const saveAvaliacao = (avaliacao) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_SAVE_FAIL,
+      payload: error.error || error.message
+    });
+  }
+};
+
+
+export const findCursosAsCategory = (categoriaId) => async (dispatch,getState) => {
+  dispatch({ type: CURSO_AS_CATEGORY_FIND_REQUEST });
+  try {
+ 
+    const { data } = await Api.findCursosAsCategory(categoriaId);
+
+    dispatch({ type: CURSO_AS_CATEGORY_FIND_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_AS_CATEGORY_FIND_FAIL,
       payload: error.error || error.message
     });
   }

@@ -1,4 +1,8 @@
 import {
+  CURSO_AS_CATEGORY_FIND_FAIL,
+  CURSO_AS_CATEGORY_FIND_REQUEST,
+  CURSO_AS_CATEGORY_FIND_RESET,
+  CURSO_AS_CATEGORY_FIND_SUCCESS,
   CURSO_AVALIACAO_DETAILS_EMPTY,
   CURSO_AVALIACAO_DETAILS_FAIL,
   CURSO_AVALIACAO_DETAILS_REQUEST,
@@ -208,6 +212,21 @@ export const cursoSaveAvaliacaoReducer = (state = {}, action) => {
     case CURSO_AVALIACAO_SAVE_FAIL:
       return { loading: false, error: action.payload };
     case CURSO_AVALIACAO_SAVE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const cursoAsCategoriaReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CURSO_AS_CATEGORY_FIND_REQUEST:
+      return { loading: true };
+    case CURSO_AS_CATEGORY_FIND_SUCCESS:
+      return { loading: false, success: true };
+    case CURSO_AS_CATEGORY_FIND_FAIL:
+      return { loading: false, error: action.payload };
+    case CURSO_AS_CATEGORY_FIND_RESET:
       return {};
     default:
       return state;

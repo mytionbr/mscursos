@@ -5,6 +5,13 @@ const fetchCategorias = () => axios.get("/api/categorias");
 
 const findCursos = (query) => axios.get("/api/cursos/" + query);
 
+const findPosts = (query,alunoInfo) => axios.get("/api/posts/" + query,
+{
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+});
+
+const findCursosAsCategory = (categoriaId) => axios.get(`/api/cursos/categoria/${categoriaId}`)
+
 const findAulas = (cursoId, query) =>
   axios.get(`/api/cursos/${cursoId}/aulas${query}`);
 
@@ -228,7 +235,9 @@ const Api = {
   finishAula,
   findAulaInfoByIdAndAluno,
   findAvaliacao,
-  saveAvaliacao
+  saveAvaliacao,
+  findPosts,
+  findCursosAsCategory
 };
 
 export default Api;

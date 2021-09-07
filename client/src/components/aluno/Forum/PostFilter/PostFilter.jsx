@@ -14,9 +14,23 @@ import useStyles from "./styles";
 import Selector from "./Selector/Selector";
 import ButtonOption from "./ButtonOption/ButtonOption";
 import InputFilter from "./InputFilter/InputFilter";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from "../../../core/LoadingBox/LoadingBox";
+import MessageBox from "../../../core/MessageBox/MessageBox";
+import { findCursosAsCategory } from "../../../../actions/cursoActions";
 
 function PostFilter() {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const postFind = useSelector((state) => state.postFind);
+  const { loading, error, data } = postFind;
+
+  const cursoAsCategoria = useSelector((state) => state.cursoAsCategoria);
+  const { loading: cursosLoading, error: cursosError, data: cursosData } = cursoAsCategoria;
+
+  const categoriaList = useSelector((state) => state.categoriaList)
+  const { loading: categoriaLoading, error: categoriaError, categorias: categoriasData } = categoriaList
 
   const [categorias, setCategorias] = useState([]);
   const [cursos, setCursos] = useState([]);
@@ -24,7 +38,7 @@ function PostFilter() {
   const [categoria, setCategoria] = useState(null);
   const [curso, setCurso] = useState(null);
 
-  const [search, setSearch] = useState(null)
+  const [title, setTitle] = useState(null)
 
   const TODOS = "TODOS";
   const SEM_RESPOSTA = "SEM_RESPOSTA";
@@ -48,7 +62,28 @@ function PostFilter() {
 
   const handleSearch = (event)=>{
       event.preventDefault()
+      findPosts({
+        titulo: title || "",
+        categoria: categoria
+          ? Array(...categoria)
+          : [],
+        curso: curso || '',
+        opcao: option || ''
+      })
   }
+
+  useEffect(()=>{
+    if(categoriasData){
+      const categoriaObjects = categoriasData.map(c=>({
+        name: c.nome,
+        value: c.categoria_id
+      }))
+      setCategorias(categoriaObjects)
+    }
+    if(categoria){
+      dispatch(findCursosAsCategory(categoria.value))
+    }
+  },[categoria, categoriasData, dispatch])
 
   return (
     <Paper className={classes.box}>
@@ -56,19 +91,40 @@ function PostFilter() {
         <Grid container>
           <Grid container spacing={2}>
             <Grid item>
-              <Selector
-                items={categorias}
-                state={categoria}
-                setState={handleChangeCategoria}
-              />
+              {
+                categoriaLoading ? (
+                  <LoadingBox />
+                ) : categoriaError ? (
+                  <MessageBox type="error">
+                    {categoriaError}
+                  </MessageBox>
+                ) : (
+                    <Selector
+                    items={categorias}
+                    state={categoria}
+                    setState={handleChangeCategoria}
+                  />
+                )
+              }
               {categoria && (
                 <Grid item>
-                  <Selector
-                    items={cursos}
-                    state={curso}
-                    setState={handleChangeCurso}
-                  />
-                </Grid>
+                  {
+                    cursosLoading ? (
+                      <LoadingBox />
+                    ) : cursosError ? (
+                      <MessageBox type="error">
+                        {cursosError}
+                      </MessageBox>
+                    ) : cursos && (
+                      <Selector
+                      items={cursos}
+                      state={curso}
+                      setState={handleChangeCurso}
+                    />
+                    )
+                  }
+                   </Grid>
+                 
               )}
             </Grid>
           </Grid>
@@ -100,7 +156,7 @@ function PostFilter() {
           </Grid>
         </Grid>
         <Grid>
-            <InputFilter handleSearch={handleSearch} setState={setSearch} state={search} />
+            <InputFilter handleSearch={handleSearch} setState={setTitle} state={title} />
         </Grid>
       </Grid>
     </Paper>

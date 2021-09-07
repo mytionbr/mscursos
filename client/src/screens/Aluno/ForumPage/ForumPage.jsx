@@ -3,8 +3,11 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import ToolbarPage from "../../../components/aluno/dashboard/ToolbarPage/ToolbarPage";
 import PostFilter from "../../../components/aluno/Forum/PostFilter/PostFilter";
+import PostList from "../../../components/aluno/Forum/PostList/PostList";
 
 function ForumPage() {
+  
+  
   return (
     <>
       <Helmet>
