@@ -13,6 +13,7 @@ import CursoList from "../screens/Aluno/CursoList/CursoList";
 import AulaLayout from "../components/aluno/Aula/AulaLayout/AulaLayout";
 import AulaPage from "../screens/Aluno/AulaPage/AulaPage";
 import AvaliacaoPage from "../screens/Aluno/AvaliacaoPage/AvaliacaoPage";
+import ForumPage from "../screens/Aluno/ForumPage/ForumPage";
 const AlunoRouter = () => {
   
   const appRoutes = () => {
@@ -21,6 +22,7 @@ const AlunoRouter = () => {
         <Switch>
           <AlunoRoute path={"/aluno/app/cursos/"} component={CursoList} />
           <AlunoRoute path={"/aluno/app/curso/:cursoSlug"} component={CursoPage} />
+          <AlunoRoute path={"/aluno/app/forum"} component={ForumPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>

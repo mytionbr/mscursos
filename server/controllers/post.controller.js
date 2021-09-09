@@ -13,7 +13,7 @@ export const find = async (req,res)=>{
                 (this.page = 1),
                 (this.total = 0),
                 (this.values = []),
-                (this.order = ""),
+                (this.order = "data_criacao DESC"),
                 (this.query = "SELECT * FROM post");
               this.condicional = "";
               this.pages = 0;
@@ -22,8 +22,7 @@ export const find = async (req,res)=>{
             }
       
             selectWithOrder() {
-              return `
-                    SELECT * FROM POST ORDER BY ${this.order} 
+              return `SELECT * FROM POST ORDER BY ${this.order} 
                     ${this.pagination()} `;
             }
       
@@ -62,12 +61,12 @@ export const find = async (req,res)=>{
 
             withSemResposta() {
               this.checkIndex()
-              this.condicional += " respondido = false ";
+              this.condicional += " solucionado = false ";
             }
 
             withSolucionados() {
                 this.checkIndex()
-                this.condicional += " respondido = true ";
+                this.condicional += " solucionado = true ";
               }
 
             withAnd() {
@@ -81,14 +80,16 @@ export const find = async (req,res)=>{
       
             pagination() {
               if (this.page > 1) {
-                return `LIMIT ${this.limit} OFFSET ${(this.page - 1) * this.limit};`;
+                return ` LIMIT ${this.limit} OFFSET ${(this.page - 1) * this.limit}; `;
               } else {
-                return `LIMIT ${this.limit} ;`;
+                return ` LIMIT ${this.limit} ;`;
               }
             }
       
             build() {
-              return this.query + this.condicional;
+              let result = this.query + this.condicional;
+              
+              return result 
             }
       
             result(result) {
@@ -111,12 +112,13 @@ export const find = async (req,res)=>{
         queryBuild.curso = req.body.curso || ''
         queryBuild.opcao = req.body.opcao || ''
         queryBuild.page = req.body.page || ''
+        queryBuild.order = req.body.order || queryBuild.order
 
         if(!queryBuild.titulo && !queryBuild.categoria && !queryBuild.curso && !queryBuild.opcao ){
-            const totalPosts = await pool.query(queryBuild.count());
-            queryBuild.total = Number(totalPosts.rows[0].count);
-            
-            const { rows } = await pool.query(queryBuild.selectWithOrder());
+          const totalPosts = await pool.query(queryBuild.count());
+          queryBuild.total = Number(totalPosts.rows[0].count);
+          console.log(queryBuild.selectWithOrder())
+          const { rows } = await pool.query(queryBuild.selectWithOrder());
             const result = queryBuild.result(rows);
             return res.status(200).json(result);
         } else {
@@ -124,12 +126,12 @@ export const find = async (req,res)=>{
         }
         
         if (queryBuild.titulo) {
-            queryBuild.values.push(queryBuild.nome);
+            queryBuild.values.push(queryBuild.titulo);
             queryBuild.withTitulo();
         }
 
         if(queryBuild.curso){
-            queryBuild.values.push(queryBuild.titulo);
+            queryBuild.values.push(queryBuild.curso);
             queryBuild.withCurso();
         }
 
@@ -155,6 +157,7 @@ export const find = async (req,res)=>{
             }
         }
 
+
         const totalPosts = await pool.query(queryBuild.count());
         queryBuild.total = Number(totalPosts.rows[0].count);
         
@@ -167,6 +170,7 @@ export const find = async (req,res)=>{
         res.status(200).json(result);
 
     } catch (err) {
+        
         res.status(400).json({ message: err.message });
     }
 }

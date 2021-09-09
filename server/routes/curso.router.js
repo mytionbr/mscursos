@@ -50,7 +50,7 @@ router
   .get(getAulasByCursoSlug)
 
 router
-  .route("/categorias/:categoriaId")
+  .route("/asCategorias/:categoriaId")
   .get(findCursosAsCategory)
   
 router

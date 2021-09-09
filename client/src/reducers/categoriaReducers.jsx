@@ -2,7 +2,7 @@ import { CATEGORIA_LIST_FAIL, CATEGORIA_LIST_REQUEST, CATEGORIA_LIST_SUCCESS } f
 
 
 export const categoriaListReducer = (
-    state = {  loading: true, categorias: [] },
+    state = {  loading: true},
     action
 ) => {
     switch (action.type){

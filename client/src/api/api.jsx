@@ -10,7 +10,7 @@ const findPosts = (query,alunoInfo) => axios.get("/api/posts/" + query,
   headers: { Authorization: `Bearer ${alunoInfo?.token}` },
 });
 
-const findCursosAsCategory = (categoriaId) => axios.get(`/api/cursos/categoria/${categoriaId}`)
+const findCursosAsCategory = (categoriaId) => axios.get(`/api/cursos/asCategorias/${categoriaId}`)
 
 const findAulas = (cursoId, query) =>
   axios.get(`/api/cursos/${cursoId}/aulas${query}`);

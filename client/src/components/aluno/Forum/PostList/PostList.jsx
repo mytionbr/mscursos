@@ -12,8 +12,8 @@ function PostList(props) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const postsFind = useSelector((state) => state.postsFind);
-  const { loading, error, data } = postsFind;
+  const postFind = useSelector((state) => state.postFind);
+  const { loading, error, data } = postFind;
 
   const handlePagination = (event, value) => {
     dispatch(

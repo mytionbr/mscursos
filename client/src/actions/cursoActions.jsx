@@ -271,10 +271,16 @@ export const saveAvaliacao = (avaliacao) => async (dispatch,getState) => {
 export const findCursosAsCategory = (categoriaId) => async (dispatch,getState) => {
   dispatch({ type: CURSO_AS_CATEGORY_FIND_REQUEST });
   try {
- 
+    console.log('olllaaakf')
     const { data } = await Api.findCursosAsCategory(categoriaId);
+    console.log(data)
 
-    dispatch({ type: CURSO_AS_CATEGORY_FIND_SUCCESS, payload: data });
+    let result =  {
+      categoria: categoriaId,
+      data: data
+    }
+
+    dispatch({ type: CURSO_AS_CATEGORY_FIND_SUCCESS, payload: result});
   } catch (error) {
     dispatch({
       type: CURSO_AS_CATEGORY_FIND_FAIL,

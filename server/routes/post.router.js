@@ -5,7 +5,7 @@ import { find } from "../controllers/post.controller.js";
 const router = express.Router();
 
 router
-  .route("/find")
+  .route("/")
   .get(isAuth,find)
 
 export default router;

@@ -88,7 +88,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
               <Button
                 component={NavLink}
                 className={classes.navLink}
-                to="/"
+                to="/aluno/app/forum"
                 color="inherit"
               >
                 <LibraryBooksIcon className={classes.icon} />

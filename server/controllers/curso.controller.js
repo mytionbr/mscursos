@@ -772,6 +772,7 @@ export const getAulasByCursoSlug = async (req,res) => {
 
 export const findCursosAsCategory = async (req,res)=>{
   try {
+    console.log('ooiino')
     const categoriaId = req.params.categoriaId
     
     const { rows } = await pool.query(
@@ -784,6 +785,7 @@ export const findCursosAsCategory = async (req,res)=>{
     res.status(200).json(result)   
 
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 }

@@ -11,6 +11,7 @@ function Selector({ items, state, setState }) {
                 value={state}
                 onChange={setState}
                 label="Categoria"
+                color="secondary"
                 inputProps={{
                   name: "categoria",
                   id: "outlined-age-native-simple",

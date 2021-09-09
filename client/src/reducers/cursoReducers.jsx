@@ -223,7 +223,7 @@ export const cursoAsCategoriaReducer = (state = {}, action) => {
     case CURSO_AS_CATEGORY_FIND_REQUEST:
       return { loading: true };
     case CURSO_AS_CATEGORY_FIND_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, data: action.payload.data, categoria:action.payload.categoria  };
     case CURSO_AS_CATEGORY_FIND_FAIL:
       return { loading: false, error: action.payload };
     case CURSO_AS_CATEGORY_FIND_RESET:

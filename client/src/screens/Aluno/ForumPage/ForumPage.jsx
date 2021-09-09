@@ -6,8 +6,7 @@ import PostFilter from "../../../components/aluno/Forum/PostFilter/PostFilter";
 import PostList from "../../../components/aluno/Forum/PostList/PostList";
 
 function ForumPage() {
-  
-  
+    
   return (
     <>
       <Helmet>

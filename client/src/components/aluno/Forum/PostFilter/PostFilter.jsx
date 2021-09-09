@@ -12,6 +12,7 @@ import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import { findCursosAsCategory } from "../../../../actions/cursoActions";
 import { findPosts } from "../../../../actions/postActions";
+import { listCategoria } from "../../../../actions/categoriaActions";
 
 function PostFilter() {
   const classes = useStyles();
@@ -19,17 +20,17 @@ function PostFilter() {
   const dispatch = useDispatch();
 
   const cursoAsCategoria = useSelector((state) => state.cursoAsCategoria);
-  const { loading: cursosLoading, error: cursosError, data: cursosData } = cursoAsCategoria;
+  const { loading: cursosLoading, error: cursosError, data: cursosData, categoria: cursosCategoria } = cursoAsCategoria;
 
   const categoriaList = useSelector((state) => state.categoriaList)
-  const { loading: categoriaLoading, error: categoriaError, categorias: categoriasData } = categoriaList
+  const { loading: categoriaLoading, error: categoriaError, categorias: categoriaData } = categoriaList
 
   const TODOS = "TODOS";
   const SEM_RESPOSTA = "SEM_RESPOSTA";
   const SOLUCIONADOS = "SOLUCIONADOS";
 
-  const [categorias, setCategorias] = useState([]);
-  const [cursos, setCursos] = useState([]);
+  const [categorias, setCategorias] = useState(null);
+  const [cursos, setCursos] = useState(null);
   const [categoria, setCategoria] = useState(null);
   const [curso, setCurso] = useState(null);
   const [titulo, setTitulo] = useState(null)
@@ -62,29 +63,39 @@ function PostFilter() {
   }
 
   useEffect(()=>{
-    if(categoriasData && !categorias){
-      const categoriaObjects = categoriasData.map(c=>({
+   
+    if(!categoriaData){
+      dispatch(listCategoria())
+    }
+    if(categoriaData && !categorias){
+      const categoriaObjects = categoriaData.map(c=>({
         name: c.nome,
         value: c.categoria_id
       }))
+
       setCategorias(categoriaObjects)
     }
-    if(categoria && !curso){
-      dispatch(findCursosAsCategory(categoria.value))
-    }
-    if(cursosData && !cursos){
+ 
+    if((categoria && !curso && !cursos) || (categoria !== cursosCategoria)){
+      console.log('oiii')
+      dispatch(findCursosAsCategory(categoria))
+    } 
+  
+  },[categoria, categorias, categoriaData, curso, cursos, cursosData, dispatch, cursosCategoria])
+
+  useEffect(()=>{
+    if(cursosData){
       const cursosbjects = cursosData.map(c=>({
         name: c.nome,
         value: c.curso_id
       }))
       setCursos(cursosbjects)
     }
-  },[categoria, categorias, categoriasData, curso, cursos, cursosData, dispatch])
+  },[cursosData])
 
   return (
     <Paper className={classes.box}>
-      <Grid container spacing={2}>
-        <Grid container>
+      <Grid container spacing={2} direction='row'>
           <Grid container spacing={2}>
             <Grid item>
               {
@@ -94,7 +105,7 @@ function PostFilter() {
                   <MessageBox type="error">
                     {categoriaError}
                   </MessageBox>
-                ) : (
+                ) : categorias && (
                     <Selector
                     items={categorias}
                     state={categoria}
@@ -102,6 +113,7 @@ function PostFilter() {
                   />
                 )
               }
+              </Grid>
               {categoria && (
                 <Grid item>
                   {
@@ -120,9 +132,7 @@ function PostFilter() {
                     )
                   }
                    </Grid>
-                 
               )}
-            </Grid>
           </Grid>
           <Grid container spacing={2}>
             <Grid item>
@@ -150,7 +160,6 @@ function PostFilter() {
               />
             </Grid>
           </Grid>
-        </Grid>
         <Grid>
             <InputFilter handleSearch={handleSearch} setState={setTitulo} state={titulo} />
         </Grid>
