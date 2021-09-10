@@ -65,6 +65,11 @@ const createCurso = (curso, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
+const createPost = (post, alunoInfo) =>
+axios.post(`/api/posts`, post, {
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+});
+
 const createAula = (formData, professorInfo) =>
   axios.post(`/api/cursos/${formData.get('curso_id')}/aulas`, formData, {
     headers: { 
@@ -237,7 +242,8 @@ const Api = {
   findAvaliacao,
   saveAvaliacao,
   findPosts,
-  findCursosAsCategory
+  findCursosAsCategory,
+  createPost
 };
 
 export default Api;

@@ -166,11 +166,10 @@ export const find = async (req,res)=>{
         queryBuild.total = Number(totalPosts.rows[0].count);
         
         query = queryBuild.withPagination();
-        console.log(query)
         const { rows } = await pool.query(query, values);
 
         const result = queryBuild.result(rows);
-
+        console.log(result)
         res.status(200).json(result);
 
     } catch (err) {
@@ -212,7 +211,6 @@ export const create = async (req,res) => {
     }
 
     res.status(201).json(postCreated);
-
 
   } catch (err){
     res.status(400).json({ message: err.message });

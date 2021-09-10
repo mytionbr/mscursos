@@ -1,5 +1,5 @@
 import Api from "../api/api";
-import { POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS } from "../constants/postConstantes";
+import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS } from "../constants/postConstantes";
 
 
 export const findPosts = (params) => async (dispatch, getState) => {
@@ -31,7 +31,7 @@ export const findPosts = (params) => async (dispatch, getState) => {
         if(pagination){
             queryString += `page=${pagination}&`;
         }
-        console.log( queryString)
+        
         const { data } = await Api.findPosts(queryString,alunoInfo);
         
         dispatch({type:POST_FIND_SUCCESS, payload: data})
@@ -39,6 +39,33 @@ export const findPosts = (params) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: POST_FIND_FAIL,
+            payload: error.error || error.message
+          });
+    }
+}
+
+export const createPost = ({titulo, conteudo, curso,  categoria}) => async (dispatch, getState) => {
+    dispatch({ type: POST_CREATE_REQUEST });
+    const {
+        alunoSignin: {alunoInfo },
+      } = getState();
+    try {
+
+        let post = {
+            titulo: titulo,
+            conteudo: conteudo,
+            curso_id: curso,
+            categoria_id: categoria,
+            aluno_id: alunoInfo.aluno_id
+        }
+     
+        const { data } = await Api.createPost(post,alunoInfo);
+        
+        dispatch({type:POST_CREATE_SUCCESS, payload: data})
+
+    } catch (error) {
+        dispatch({
+            type: POST_CREATE_FAIL,
             payload: error.error || error.message
           });
     }

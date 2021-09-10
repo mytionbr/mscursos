@@ -108,9 +108,9 @@ function PostFilter() {
 
   return (
     <Paper className={classes.paper}>
-      <Box className={classes.container}>
-        <Box className={classes.container}>
-          <Box>
+      <Box className={[classes.container,classes.space]}>
+        <Box className={[classes.container,classes.space]}>
+          <Box >
             {categoriaLoading ? (
               <LoadingBox />
             ) : categoriaError ? (
