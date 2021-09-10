@@ -9,7 +9,7 @@ export const findPosts = (params) => async (dispatch, getState) => {
       } = getState();
     try {
         const {  titulo, categoria, curso, opcao, pagination} = params;
-        
+        console.log( params)
         let queryString = "?"
 
         if(titulo){
@@ -31,7 +31,7 @@ export const findPosts = (params) => async (dispatch, getState) => {
         if(pagination){
             queryString += `page=${pagination}&`;
         }
-
+        console.log( queryString)
         const { data } = await Api.findPosts(queryString,alunoInfo);
         
         dispatch({type:POST_FIND_SUCCESS, payload: data})

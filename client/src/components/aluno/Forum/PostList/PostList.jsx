@@ -32,7 +32,7 @@ function PostList(props) {
       titulo: '',
       categoria: '',
       curso: '',
-      opcao: '',}))
+      opcao: 'TODOS',}))
   },[dispatch])
 
   return (

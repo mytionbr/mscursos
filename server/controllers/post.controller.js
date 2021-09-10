@@ -1,23 +1,27 @@
 import pool from '../database/pool.js'
+import moment from 'moment'
+import slugify from 'slugify'
+import marked from 'marked'
+import createDomPurify from 'dompurify'
+import jsdom from 'jsdom'
 
+const { JSDOM } = jsdom
+const dompurify = createDomPurify(new JSDOM().window)
 
 export const find = async (req,res)=>{
     try {
         class QueryBuild {
             constructor() {
-                (this.categoria = ""),
-                (this.curso = ""),
-                (this.opcao = ""),
-                (this.nome = ""),
-                (this.limit = 10),
-                (this.page = 1),
-                (this.total = 0),
-                (this.values = []),
-                (this.order = "data_criacao DESC"),
-                (this.query = "SELECT * FROM post");
+              this.limit = 10;
+              this.page = 1;
+              this.total = 0;
+              this.values = [];
+              this.order = "data_criacao DESC";
+              this.query = "SELECT * FROM post";
               this.condicional = "";
               this.pages = 0;
-              this.params = [];
+              this.queryParams = [];
+              this.params = {}
               this.condicionals = []
             }
       
@@ -32,50 +36,24 @@ export const find = async (req,res)=>{
             }
       
             count() {
-              if (this.condicional.length > 0) {
+              if (this.isCondicional) {
                 return ` SELECT COUNT(*) FROM POST ${this.condicional} `;
               }
               return "SELECT COUNT(*) FROM POST";
             }
-      
-            withTitulo() {
-              this.checkIndex()
-              this.condicional += ` titulo iLIKE '%'||$${this.values.length}||'%' `;
-            }
-
-            withCurso() {
-                this.checkIndex()
-                this.condicional += ` curso_id = $${this.values.length} `;
-            }
-
-            withCategoria() {
-                this.checkIndex()
-                this.condicional += ` categoria_id = $${this.values.length} `;
-            }
             
-            checkIndex(){
-                if(this.values.length > 0){
+            checkIndex(index){
+                if(index > 0){
                     this.withAnd()
                 }
             }
 
-            withSemResposta() {
-              this.checkIndex()
-              this.condicional += " solucionado = false ";
-            }
-
-            withSolucionados() {
-                this.checkIndex()
-                this.condicional += " solucionado = true ";
-              }
-
             withAnd() {
                 this.condicional += " AND ";
             }
-            
       
             withPagination() {
-              this.condicional += this.pagination();
+             return  this.query += this.pagination();
             }
       
             pagination() {
@@ -87,6 +65,48 @@ export const find = async (req,res)=>{
             }
       
             build() {
+              let index = 0
+
+              const isMyObjectEmpty = !Object.keys(this.params).length
+
+              if (!isMyObjectEmpty){
+                this.withWhere()
+              }
+
+              for(let param in this.params){
+                this.checkIndex(index)
+                if(this.params[param] && param !== 'opcao'){
+                  this.values.push(this.params[param])
+                }
+                index ++
+                switch (param){
+                  case 'titulo':
+                    this.condicional += ` titulo iLIKE '%'||$${index}||'%' `
+                    break
+                  case 'curso':
+                    this.condicional += ` curso_id = $${index}`
+                    break
+                  case 'opcao':
+                    switch(this.params[param]){
+                      case 'TODOS':
+                        this.condicional += ` solucionado = true OR solucionado = false `
+                        break
+                      case 'SEM_RESPOSTA':
+                        this.condicional += ` solucionado = false `
+                        break
+                      case 'SOLUCIONADOS':
+                        this.condicional += ` solucionado = true `
+                        break
+                      }
+                    break
+                  case 'categoria':
+                    this.condicional += ` cateogoria_id = $${index}`
+                    break
+                  default: 
+                      break
+                }
+              }
+
               let result = this.query + this.condicional;
               
               return result 
@@ -100,77 +120,101 @@ export const find = async (req,res)=>{
                 totalItems: Number(this.total),
                 totalPages: Math.ceil(Number(this.total / this.limit)),
                 order: this.order,
-                params: this.params,
+                params: this.queryParams,
               };
             }
           }
         
         let queryBuild = new QueryBuild();
 
-        queryBuild.titulo = req.body.titulo || ''
-        queryBuild.categoria = req.body.categoria || ''
-        queryBuild.curso = req.body.curso || ''
-        queryBuild.opcao = req.body.opcao || ''
-        queryBuild.page = req.body.page || ''
-        queryBuild.order = req.body.order || queryBuild.order
-
-        if(!queryBuild.titulo && !queryBuild.categoria && !queryBuild.curso && !queryBuild.opcao ){
-          const totalPosts = await pool.query(queryBuild.count());
-          queryBuild.total = Number(totalPosts.rows[0].count);
-          console.log(queryBuild.selectWithOrder())
-          const { rows } = await pool.query(queryBuild.selectWithOrder());
-            const result = queryBuild.result(rows);
-            return res.status(200).json(result);
-        } else {
-            queryBuild.withWhere();
+        const titulo = req.query.titulo || ''
+        const curso = req.query.curso || ''
+        const categoria = req.query.categoria || ''
+        const opcao = req.query.opcao || ''
+        queryBuild.page = req.query.page || ''
+        queryBuild.order = req.query.order || queryBuild.order
+        queryBuild.queryParams = req.query
+                
+        if (titulo) {
+          queryBuild.params.titulo = titulo;
         }
         
-        if (queryBuild.titulo) {
-            queryBuild.values.push(queryBuild.titulo);
-            queryBuild.withTitulo();
+        if(curso){
+          queryBuild.params.curso = curso
         }
 
-        if(queryBuild.curso){
-            queryBuild.values.push(queryBuild.curso);
-            queryBuild.withCurso();
+        if(categoria){
+          queryBuild.params.categoria = categoria
         }
 
-        if(queryBuild.categoria){
-            queryBuild.values.push(queryBuild.categoria);
-            queryBuild.withCategoria();
+        if(opcao){
+          queryBuild.params.opcao = opcao
         }
 
-        if(queryBuild.opcao){
-            queryBuild.values.push(queryBuild.opcao);
+        let query = queryBuild.build()
+        let count = queryBuild.count()
+        let totalPosts
+        let values = queryBuild.values
 
-            switch(queryBuild.opcao){
-                case 'TODOS':
-                break
-                case 'SEM_RESPOSTA':
-                    queryBuild.withSemResposta()
-                break
-                case 'SOLUCIONADOS':
-                    queryBuild.withSolucionados()
-                break
-                default:
-                    break
-            }
+        if(queryBuild.values.length > 0){
+          totalPosts = await pool.query(count,values);
         }
-
-
-        const totalPosts = await pool.query(queryBuild.count());
+        else {
+          totalPosts = await pool.query(count)
+        }
+       
         queryBuild.total = Number(totalPosts.rows[0].count);
         
-        queryBuild.withPagination();
-
-        const { rows } = await pool.query(queryBuild.build(), queryBuild.values);
+        query = queryBuild.withPagination();
+        console.log(query)
+        const { rows } = await pool.query(query, values);
 
         const result = queryBuild.result(rows);
 
         res.status(200).json(result);
 
     } catch (err) {
-        
+        console.log(err)
         res.status(400).json({ message: err.message });
     }
+}
+
+export const create = async (req,res) => {
+  try{
+    const { titulo, conteudo, categoria_id, curso_id, aluno_id } = req.body
+
+    const data_criacao = moment().format('YYYY-MM-DD')
+    const data_atualizacao = data_criacao
+    const solucionado = false
+    const slug = slugify(
+      titulo,
+      {
+        lower: true,
+        strict: true
+      }
+    )
+
+    let sanitizedConteudo;
+
+    if(conteudo){
+      sanitizedConteudo = dompurify.sanitize(marked(conteudo)) 
+    }
+
+    const { rows } = await pool.query(
+      "INSERT INTO post (titulo, conteudo, slug,solucionado, categoria_id, curso_id, aluno_id, data_criacao, data_atualizacao  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 )  RETURNING *;",
+      [titulo, sanitizedConteudo, slug, solucionado, categoria_id,curso_id, aluno_id,data_criacao, data_atualizacao  ]
+    );
+
+    const postCreated = rows[0];
+
+    if (!postCreated) {
+      return res.status(400).json({ message: "Erro ao criar o post" });
+    }
+
+    res.status(201).json(postCreated);
+
+
+  } catch (err){
+    res.status(400).json({ message: err.message });
+  }
 }

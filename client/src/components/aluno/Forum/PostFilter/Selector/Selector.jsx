@@ -3,8 +3,7 @@ import React from 'react'
 import useStyles from './styles'
 function Selector({ items, state, setState, name }) {
   const classes = useStyles()  
-  console.log(state)
-    
+      
     const id = `label-${name}`
     
     const inputLabel = React.useRef(null);

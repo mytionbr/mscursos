@@ -116,6 +116,8 @@ CREATE TABLE IF NOT EXISTS post (
     post_id serial PRIMARY KEY,
     titulo VARCHAR (255) NOT NULL,
     conteudo TEXT,
+    solucionado BOOLEAN NOT NULL,
+    slug VARCHAR (255) NOT NULL,
 	categoria_id int NOT NULL,
 	curso_id int, 
 	aluno_id int NOT NULL,
@@ -128,7 +130,7 @@ CREATE TABLE IF NOT EXISTS resposta (
 	conteudo TEXT NOT NULL,
 	data_criacao TIMESTAMP NOT NULL,
 	data_atualizacao TIMESTAMP NOT NULL,
-	solucionado BOOLEAN NOT NULL,
+	solucao BOOLEAN NOT NULL,
 	post_id int not null,
 	aluno_id int,
 	professor_id int
