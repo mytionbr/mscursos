@@ -82,7 +82,7 @@ function PostFilter() {
       setCategorias(categoriaObjects);
     }
 
-    if ((categoria && !curso && !cursos) || categoria !== cursosCategoria) {
+    if ((categoria && !curso && !cursos) || (categoria && categoria !== cursosCategoria)) {
       dispatch(findCursosAsCategory(categoria));
     }
   }, [

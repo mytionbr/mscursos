@@ -272,6 +272,7 @@ export const findCursosAsCategory = (categoriaId) => async (dispatch,getState) =
   dispatch({ type: CURSO_AS_CATEGORY_FIND_REQUEST });
   try {
     console.log('olllaaakf')
+
     const { data } = await Api.findCursosAsCategory(categoriaId);
     console.log(data)
 
