@@ -5,7 +5,9 @@ export default makeStyles((theme) => ({
         padding: '2px 4px',
         display: 'flex',
         alignItems:'center',
-        width: 400
+        width: 400,
+        backgroundColor:'#D7D7D7'
+
     },
     input:{
         marginLeft: theme.spacing(1),

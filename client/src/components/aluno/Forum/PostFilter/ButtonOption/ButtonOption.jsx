@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 
 function ButtonOption({ title, handleClick, state, value }) {
     const [select, setSelect] = useState(false);
-
+   
     useEffect(() => {
       if (state === value) {
         setSelect(true);
+      }else {
+        setSelect(false)
       }
     }, [state, value]);
 
