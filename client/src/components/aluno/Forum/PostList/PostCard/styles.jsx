@@ -1,27 +1,42 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
-    title: {
-        textDecoration: 'none'
+    card:{
+        width:'100%',
+        height: '9rem',
+        padding:'1rem',
+        margin: '1rem 0',
+        
     },
-    answered: {
-        backgroundColor: '#aaa',
-        width:'2rem',
-        height:'2rem',
-    },
-    notAnswered: {
-        backgroundColor: '#42c742',
-        width:'2rem',
-        height:'2rem',
-    },
-    icon:{
-        color: '#fff',
-        fontSize: '1.5rem',
+    rootContainer:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%'
     },
     descriptionContainer:{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
+    },
+    title: {
+        textDecoration: 'none',
+        color: theme.palette.secondary.main,
+        "&:hover":{
+            textDecoration: 'underline',
+            cursor: 'pointer'
+        }
+    },
+    iconContainer:{
+        padding: '1rem'
+    },
+    responsesContainer:{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& > *': {
+            margin: theme.spacing(0.1),
+          },
     },
     tagsContainer:{
         display: 'flex',
@@ -30,16 +45,35 @@ export default makeStyles((theme) => ({
             margin: theme.spacing(0.5),
           },
     },
-    responsesContainer:{
+    informationsContainer:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '& > *': {
+            margin: '0 1rem',
+          },
+    },
+    userContainer:{
         display: 'flex',
         flexDirection: 'column',
-        '& > *': {
-            margin: theme.spacing(0.1),
-          },
+
+    },
+    avatarIcon:{
+        width:'4rem',
+        height:'4rem',
+    },
+    answered: {
+        backgroundColor: '#42c742',
+    },
+    notAnswered: {
+        backgroundColor: '#aaa',
+    },
+    icon:{
+        color: '#fff',
+        fontSize: '2.5rem',
     },
     avatarUser:{
         backgroundColor: theme.palette.secondary.main,
-        color: "#fff" 
     },
     row:{
        display:'flex',
@@ -51,6 +85,14 @@ export default makeStyles((theme) => ({
    pagination:{
        margin: 'auto',
        marginTop:'0.5rem',
+   },
+   detailsContainer:{
+       display: 'flex',
+       justifyContent: 'space-between',
+       alignItens: 'center'
+   },
+   userName:{
+       fontWeight: '600'
    }
     
 

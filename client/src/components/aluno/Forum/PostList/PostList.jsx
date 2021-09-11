@@ -54,7 +54,7 @@ function PostList(props) {
                 title={post.titulo}
                 isAnswered={post.respondido}
                 tags={post.tags}
-                totalResponses={post.respostas}
+                totalResponses={post.total_respostas}
                 user={post.aluno}
                 dateUpdate={post.update_date}
                 postId={post.post_id}

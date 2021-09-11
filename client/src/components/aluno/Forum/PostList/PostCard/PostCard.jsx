@@ -1,5 +1,5 @@
-import { Avatar, Box, Chip, Grid, Link, Typography } from '@material-ui/core'
-import React from 'react'
+import { Avatar, Box, Card, Chip, Grid, Link, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import useStyles from './styles'
 import CheckIcon from '@material-ui/icons/Check';
 import moment from 'moment'
@@ -9,7 +9,7 @@ function PostCard({title,totalResponses,isAnswered,tags,dateUpdate, postId, user
     const Title = ({title, href})=>{
         return (
             <Link className={classes.title} to={href}>
-                <Typography variant="h5">
+                <Typography variant="h6">
                     {title}
                 </Typography>
             </Link>
@@ -18,8 +18,19 @@ function PostCard({title,totalResponses,isAnswered,tags,dateUpdate, postId, user
 
 
     const AsnweredIcon = ({isAnswered})=>{
+        
+        const [style,setStyle] = useState({})
+
+        useEffect(()=>{
+            if(isAnswered){
+                setStyle(classes.answered)
+            }else {
+                setStyle(classes.notAsnwered)
+            }
+        },[isAnswered])
+
         return (
-            <Avatar className={ isAnswered ? classes.answered : classes.notAsnwered}>
+            <Avatar className={ [style, classes.avatarIcon]}>
                 <CheckIcon className={classes.icon} />
             </Avatar>
         )
@@ -53,49 +64,53 @@ function PostCard({title,totalResponses,isAnswered,tags,dateUpdate, postId, user
 
     const Description = ({title,tags})=>{
         return (
-            <Grid Container className={classes.descriptionContainer}>
+            <Box className={classes.descriptionContainer}>
                 <Title title={title} href={`/aluno/app/forum/post/${postId}`}/>
                 <Tags tags={tags}  />
-            </Grid>
+            </Box>
         )
     }
 
     const Informations = ({user,dateUpdate})=>{
         return (
-            <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item>
-                    <Avatar className={classes.avatarUser}>
-                        {user.nome[0]}
+            <Box className={classes.informationsContainer}>
+                <Box item>
+                    <Avatar className={[classes.avatarIcon,classes.icon,classes.avatarUser]}>
+                        {user.nome[0].toUpperCase()}
                     </Avatar>
-                </Grid>
-                <Grid item direction='column'>
-                   <Typography variant='h5'>
+                </Box>
+                <Box className={classes.userContainer}>
+                   <Typography variant='h6' className={classes.userName}>
                         {user.nome}
                    </Typography>
-                   <Typography variant='h5'>
+                   <Typography variant='body2'>
                       atualizado em  {moment().startOf(dateUpdate).fromNow()}
                    </Typography>
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
         )
     }
     
     return (
-        <Grid container>
-            <Grid item>
-                <AsnweredIcon isAnswered={isAnswered} />
-            </Grid>
-            <Grid item>
-                <Description title={title} tags={tags} />
-            </Grid>
-            <Box style={{flexGrow: 1}} />
-            <Grid item>
-                <TotalResponses total={totalResponses} />
-            </Grid>
-            <Grid item>
-                <Informations user={user} dateUpdate={date}/>
-            </Grid>
-        </Grid>
+        <Card className={classes.card}>
+            <Box className={classes.rootContainer}>
+                <Box className={classes.iconContainer}>
+                    <AsnweredIcon isAnswered={isAnswered} />
+                </Box>
+                <Box>
+                    <Description title={title} tags={tags} />
+                </Box>
+                <Box style={{flexGrow: 1}} />
+                <Box className={classes.detailsContainer}>
+                    <Box>
+                        <TotalResponses total={totalResponses} />
+                    </Box>
+                    <Box>
+                        <Informations user={user} dateUpdate={date}/>
+                    </Box>
+                </Box>
+            </Box>
+        </Card>
     )
 }
 
