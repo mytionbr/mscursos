@@ -17,7 +17,7 @@ export const find = async (req, res) => {
         this.total = 0;
         this.values = [];
         this.order = "data_criacao DESC";
-        this.query = `SELECT post.*,aluno.nome as aluno_nome, categoria.nome as categoria_nome, curso.curso_id as curso_nome, (SELECT COUNT(*) FROM RESPOSTA INNER JOIN POST ON POST.POST_ID = RESPOSTA.POST_ID) as total_respostas FROM post inner join aluno on aluno.aluno_id = post.aluno_id left join categoria on categoria.categoria_id = post.categoria_id left join curso on curso.curso_id = post.curso_id `;
+        this.query = `SELECT post.*,aluno.nome as aluno_nome, categoria.nome as categoria_nome, curso.nome as curso_nome, (SELECT COUNT(*) FROM RESPOSTA INNER JOIN POST ON POST.POST_ID = RESPOSTA.POST_ID) as total_respostas FROM post inner join aluno on aluno.aluno_id = post.aluno_id left join categoria on categoria.categoria_id = post.categoria_id left join curso on curso.curso_id = post.curso_id `;
         this.condicional = "";
         this.pages = 0;
         this.queryParams = [];
@@ -133,7 +133,7 @@ export const find = async (req, res) => {
     const curso = req.query.curso || "";
     const categoria = req.query.categoria || "";
     const opcao = req.query.opcao || "";
-    queryBuild.page = req.query.page || "";
+    queryBuild.page = req.query.page || 1;
     queryBuild.order = req.query.order || queryBuild.order;
     queryBuild.queryParams = req.query;
 
@@ -199,9 +199,11 @@ export const find = async (req, res) => {
 
       return post
     })
+    console.log(result)
 
     res.status(200).json(result);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };

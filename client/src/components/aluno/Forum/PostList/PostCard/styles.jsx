@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         width:'100%',
         height: '9rem',
         padding:'1rem',
-        margin: '1rem 0',
+        margin: '0.5rem 0',
         
     },
     rootContainer:{
@@ -14,10 +14,21 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         height: '100%'
     },
+    presentationContainer:{
+        display: 'flex',
+        width: '65%'
+    },
+    detailsContainer:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItens: 'center',
+        width: '35%'
+    },
     descriptionContainer:{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly',  
+        height: '100%'
     },
     title: {
         textDecoration: 'none',
@@ -52,6 +63,7 @@ export default makeStyles((theme) => ({
         '& > *': {
             margin: '0 1rem',
           },
+        
     },
     userContainer:{
         display: 'flex',
@@ -86,11 +98,7 @@ export default makeStyles((theme) => ({
        margin: 'auto',
        marginTop:'0.5rem',
    },
-   detailsContainer:{
-       display: 'flex',
-       justifyContent: 'space-between',
-       alignItens: 'center'
-   },
+   
    userName:{
        fontWeight: '600'
    }
