@@ -12,9 +12,14 @@ import useStyles from "./styles";
 import moment from "moment";
 import CheckIcon from "@material-ui/icons/Check";
 import DOMPurify from 'dompurify';
+import { useDispatch, useSelector } from "react-redux";
 
-function MainQuestion({title, dataCriacao, tags, conteudo,respostas, solucionado, respostaId }) {
+function MainQuestion() {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const postInfomations = useSelector((state) => state.postInfomations);
+  const { loading, error, data } = postInfomations;
 
   const Tags = ({ tags }) => {
     return (
@@ -101,8 +106,8 @@ function MainQuestion({title, dataCriacao, tags, conteudo,respostas, solucionado
   return (
     <Card>
       <Box className={classes.rootContainer}>
-        <Title title={title}  dataCriacao={dataCriacao} tags={tags} />
-        <Corpo respostas={respostas} solucionado={solucionado} respostaId={respostaId} conteudo={conteudo} />
+        <Title title={data.post.titulo}  dataCriacao={data.post.data_atualizacao} tags={data.post.tags} />
+        <Corpo respostas={data.post.total_respostas} solucionado={data.post.solucionado} respostaId={data.post.resposta_id} conteudo={data.post.conteudo} aluno={data.post.aluno} />
       </Box>
     </Card>
   );

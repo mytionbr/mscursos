@@ -158,7 +158,6 @@ export const find = async (req, res) => {
     let totalPosts;
     let values = queryBuild.values;
 
-
     if (queryBuild.values.length > 0) {
       totalPosts = await pool.query(count, values);
     } else {
@@ -169,41 +168,43 @@ export const find = async (req, res) => {
 
     query = queryBuild.withPagination();
     const { rows } = await pool.query(query, values);
-    
+
     let result = queryBuild.result(rows);
 
-    result.posts = result.posts.map(post =>{
-      let tags = []
+    result.posts = result.posts.map((post) => {
+      let tags = [];
 
-      if(post.categoria_id){
+      if (post.categoria_id) {
         tags.push({
           categoria_id: post.categoria_id,
-          nome: post.categoria_nome})
-        post.categoria_nome = undefined
+          nome: post.categoria_nome,
+        });
+        post.categoria_nome = undefined;
       }
 
-      if(post.curso_id){
+      if (post.curso_id) {
         tags.push({
           curso_id: post.curso_id,
-          nome: post.curso_nome})
-          post.categoria_nome = undefined
+          nome: post.curso_nome,
+        });
+        post.categoria_nome = undefined;
       }
 
-      post.tags = tags
+      post.tags = tags;
 
       post.aluno = {
         nome: post.aluno_nome,
-        aluno_id: post.aluno_id
-      }
-      post.aluno_nome = undefined
+        aluno_id: post.aluno_id,
+      };
+      post.aluno_nome = undefined;
 
-      return post
-    })
-    console.log(result)
+      return post;
+    });
+    console.log(result);
 
     res.status(200).json(result);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };
@@ -248,6 +249,40 @@ export const create = async (req, res) => {
     }
 
     res.status(201).json(postCreated);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+export const findById = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+
+    let result = {};
+
+    const { rows: postRows } = await pool.query(
+      `SELECT POST.*, ALUNO.NOME AS ALUNO_NOME, ALUNO.ALUNO_ID AS ALUNO_ID,
+      CATEGORIA.CATEGORIA_ID AS CATEGORIA_ID, CATEGORIA.NOME AS CATEGORIA_NOME,
+      CURSO.CURSO_ID AS CURSO_ID, CURSO.NOME AS CURSO_NOME
+      FROM POST INNER JOIN ALUNO ON ALUNO.ALUNO_ID = POST.ALUNO_ID
+      LEFT JOIN CATEGORIA ON CATEGORIA.CATEGORIA_ID = POST.CATEGORIA_ID
+      LEFT JOIN CURSO ON CURSO.CURSO_ID = POST.CURSO_ID
+      WHERE POST.POST_ID = $1`,
+      [postId]
+    );
+
+    result.post = postRows[0];
+
+    const { rows: respostasRows } = await pool.query(
+      `SELECT RESPOSTA.*, RESPOSTA_AVALIACAO.* FROM RESPOSTA
+      LEFT JOIN RESPOSTA_AVALIACAO ON RESPOSTA.RESPOSTA_ID = RESPOSTA_AVALIACAO.RESPOSTA_ID
+      WHERE RESPOSTA.POST_ID = $1`,
+      [postId]
+    );
+
+    result.respostas = respostasRows;
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

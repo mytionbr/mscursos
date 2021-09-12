@@ -1,11 +1,26 @@
 import { Box, Container, Grid, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import ToolbarPage from "../../../components/aluno/dashboard/ToolbarPage/ToolbarPage";
 import MainQuestion from "../../../components/aluno/Forum/MainQuestion/MainQuestion";
 import Respostas from "../../../components/aluno/Forum/Respostas/Respostas";
+import { useDispatch, useSelector } from "react-redux";
+import { informationsPost } from "../../../actions/postActions";
+import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
+import MessageBox from "../../../components/core/MessageBox/MessageBox";
 
-function PostPage() {
+function PostPage(props) {
+  
+  const postId = props.match.params.postId;
+  
+  const dispatch = useDispatch();
+  const postInfomations = useSelector((state) => state.postInfomations);
+  const { loading, error, data } = postInfomations;
+
+  useEffect(() => {
+    dispatch(informationsPost(postId));
+  }, [dispatch, postId]);
+  
   return (
     <>
       <Helmet>
@@ -26,15 +41,46 @@ function PostPage() {
             justifyContent={"space-between"}
             >
               <Grid item>
-                <MainQuestion />
+                {
+                  loading ? (
+                    <LoadingBox />
+                  ) : error ? (
+                    <MessageBox type='error'>
+                        {error}
+                    </MessageBox>
+                  ) : (
+                    <MainQuestion />
+                  )
+                }
+                
               </Grid>
               <Grid item>
-                <Typography variant="h6">
-                  {respostas} respostas
-                </Typography>
+              {
+                  loading ? (
+                    <LoadingBox />
+                  ) : error ? (
+                    <MessageBox type='error'>
+                        {error}
+                    </MessageBox>
+                  ) : (
+                    <Typography variant="h6">
+                      {data.total_respostas} respostas
+                    </Typography>
+                  )
+                }
               </Grid>
               <Grid item>
-                 <Respostas />   
+              {
+                  loading ? (
+                    <LoadingBox />
+                  ) : error ? (
+                    <MessageBox type='error'>
+                        {error}
+                    </MessageBox>
+                  ) : (
+                    <Respostas />   
+                  )
+                }
               </Grid>
           </Grid>
         </Container>

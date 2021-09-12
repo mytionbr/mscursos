@@ -1,5 +1,5 @@
 import Api from "../api/api";
-import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS } from "../constants/postConstantes";
+import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS, POST_INFORMATIONS_FAIL, POST_INFORMATIONS_REQUEST, POST_INFORMATIONS_SUCCESS } from "../constants/postConstantes";
 
 
 export const findPosts = (params) => async (dispatch, getState) => {
@@ -66,6 +66,25 @@ export const createPost = ({titulo, conteudo, curso,  categoria}) => async (disp
     } catch (error) {
         dispatch({
             type: POST_CREATE_FAIL,
+            payload: error.error || error.message
+          });
+    }
+}
+
+
+export const informationsPost = (id) => async (dispatch, getState) =>{
+    dispatch({ type: POST_INFORMATIONS_REQUEST });
+    const {
+        alunoSignin: {alunoInfo },
+      } = getState();
+    try {
+        
+        const { data } = await Api.findPostById(id,alunoInfo);
+        dispatch({type:POST_INFORMATIONS_SUCCESS, payload: data})
+    
+    } catch (error){
+        dispatch({
+            type: POST_INFORMATIONS_FAIL,
             payload: error.error || error.message
           });
     }

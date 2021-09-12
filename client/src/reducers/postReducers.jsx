@@ -6,6 +6,10 @@ import {
   POST_FIND_FAIL,
   POST_FIND_REQUEST,
   POST_FIND_SUCCESS,
+  POST_INFORMATIONS_FAIL,
+  POST_INFORMATIONS_REQUEST,
+  POST_INFORMATIONS_RESET,
+  POST_INFORMATIONS_SUCCESS,
 } from "../constants/postConstantes";
 
 export const postFindReducer = (
@@ -36,6 +40,24 @@ export const postCreateReducer = (
     case POST_CREATE_FAIL:
       return { loading: false, error: action.payload };
     case POST_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const postInformationsReducer = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case POST_INFORMATIONS_REQUEST:
+      return { loading: true };
+    case POST_INFORMATIONS_SUCCESS:
+      return { loading: false, data: action.payload };
+    case POST_INFORMATIONS_FAIL:
+      return { loading: false, error: action.payload };
+    case POST_INFORMATIONS_RESET:
       return {};
     default:
       return state;

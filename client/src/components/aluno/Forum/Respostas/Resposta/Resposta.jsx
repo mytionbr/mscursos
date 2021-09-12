@@ -73,8 +73,8 @@ function Resposta({resposta}) {
       <InsideColumn feedback={resposta.feedback} />
       <Corpo
         conteudo={resposta.conteudo}
-        date={resposta.date}
-        user={resposta.user}
+        date={resposta.data_update}
+        user={resposta.usuario}
       />
     </Card>
   );
