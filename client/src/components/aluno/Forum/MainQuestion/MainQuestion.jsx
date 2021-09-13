@@ -95,11 +95,13 @@ function MainQuestion() {
   const Conteudo = ({ conteudo }) => {
     return (
       <Box className={classes.conteudo}>
+        <Typography>
         <div
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(conteudo),
           }}
         />
+        </Typography>
       </Box>
     );
   };

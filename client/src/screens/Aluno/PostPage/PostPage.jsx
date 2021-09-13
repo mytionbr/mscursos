@@ -10,19 +10,17 @@ import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 
 function PostPage(props) {
-  
   const postId = props.match.params.postId;
-  
+
   const dispatch = useDispatch();
   const postInformations = useSelector((state) => state.postInformations);
   const { loading, error, data } = postInformations;
 
-  console.log(loading, error, data)
-  console.log(postId)
+  console.log(loading, error, data);
+  console.log(postId);
   useEffect(() => {
     dispatch(informationsPost(postId));
   }, [dispatch, postId]);
-  
 
   return (
     <>
@@ -37,55 +35,32 @@ function PostPage(props) {
         }}
       >
         <Container>
-          <Grid 
-            container
-            spacing={1}
-            direction="column"
-            justifyContent={"space-between"}
-            >
-              <Grid item>
-                {
-                  loading ? (
-                    <LoadingBox />
-                  ) : error ? (
-                    <MessageBox type='error'>
-                        {error}
-                    </MessageBox>
-                  ) : data && (
-                    <MainQuestion />
-                  )
-                }
-                
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox type="error">{error}</MessageBox>
+          ) : (
+            data && (
+              <Grid
+                container
+                spacing={1}
+                direction="column"
+                justifyContent={"space-between"}
+              >
+                <Grid item>
+                  <MainQuestion />
+                </Grid>
+                <Grid item>
+                  <Typography variant="h6">
+                    {data.post.total_respostas} respostas
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Respostas />
+                </Grid>
               </Grid>
-              <Grid item>
-              {
-                  loading ? (
-                    <LoadingBox />
-                  ) : error ? (
-                    <MessageBox type='error'>
-                        {error}
-                    </MessageBox>
-                  ) : data &&(
-                    <Typography variant="h6">
-                      {data.post.total_respostas} respostas
-                    </Typography>
-                  )
-                }
-              </Grid>
-              <Grid item>
-              {
-                  loading ? (
-                    <LoadingBox />
-                  ) : error ? (
-                    <MessageBox type='error'>
-                        {error}
-                    </MessageBox>
-                  ) : data && (
-                    <Respostas />   
-                  )
-                }
-              </Grid>
-          </Grid>
+            )
+          )}
         </Container>
       </Box>
     </>

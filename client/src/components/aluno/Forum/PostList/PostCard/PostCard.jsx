@@ -4,13 +4,13 @@ import {
   Card,
   Chip,
   Grid,
-  Link,
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import CheckIcon from "@material-ui/icons/Check";
 import moment from "moment";
+import {Link } from 'react-router-dom'
 function PostCard({
   title,
   totalResponses,
