@@ -47,7 +47,7 @@ export const postCreateReducer = (
 };
 
 export const postInformationsReducer = (
-  state = {},
+  state = {loading: true},
   action
 ) => {
   switch (action.type) {

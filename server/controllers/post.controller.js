@@ -263,7 +263,8 @@ export const findById = async (req, res) => {
     const { rows: postRows } = await pool.query(
       `SELECT POST.*, ALUNO.NOME AS ALUNO_NOME, ALUNO.ALUNO_ID AS ALUNO_ID,
       CATEGORIA.CATEGORIA_ID AS CATEGORIA_ID, CATEGORIA.NOME AS CATEGORIA_NOME,
-      CURSO.CURSO_ID AS CURSO_ID, CURSO.NOME AS CURSO_NOME
+      CURSO.CURSO_ID AS CURSO_ID, CURSO.NOME AS CURSO_NOME,
+      (SELECT COUNT(*) FROM RESPOSTA WHERE RESPOSTA.POST_ID = POST.POST_ID) AS TOTAL_RESPOSTAS
       FROM POST INNER JOIN ALUNO ON ALUNO.ALUNO_ID = POST.ALUNO_ID
       LEFT JOIN CATEGORIA ON CATEGORIA.CATEGORIA_ID = POST.CATEGORIA_ID
       LEFT JOIN CURSO ON CURSO.CURSO_ID = POST.CURSO_ID
@@ -274,14 +275,24 @@ export const findById = async (req, res) => {
     result.post = postRows[0];
 
     const { rows: respostasRows } = await pool.query(
-      `SELECT RESPOSTA.*, RESPOSTA_AVALIACAO.* FROM RESPOSTA
-      LEFT JOIN RESPOSTA_AVALIACAO ON RESPOSTA.RESPOSTA_ID = RESPOSTA_AVALIACAO.RESPOSTA_ID
-      WHERE RESPOSTA.POST_ID = $1`,
+      `SELECT RESPOSTA.* FROM RESPOSTA WHERE RESPOSTA.POST_ID = $1`,
       [postId]
     );
 
     result.respostas = respostasRows;
 
+    result.post.resposta_id = respostasRows.filter(resposta=>{
+      if(resposta.solucao){
+        return resposta.resposta_id
+      }
+    })
+
+    result.post.aluno = {
+      nome: result.post.aluno_nome,
+      aluno_id: result.post.aluno_id
+    }
+      
+    console.log(result)
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ message: err.message });

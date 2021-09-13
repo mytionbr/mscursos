@@ -11,15 +11,27 @@ import React from "react";
 import useStyles from "./styles";
 import moment from "moment";
 import CheckIcon from "@material-ui/icons/Check";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
 
 function MainQuestion() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const postInfomations = useSelector((state) => state.postInfomations);
-  const { loading, error, data } = postInfomations;
+  const postInformations = useSelector((state) => state.postInformations);
+  const { loading, error, data } = postInformations;
+  
+  
+  const getTags = (curso, categoria) => {
+    let tags = [];
+    if (curso.curso_id) {
+      tags.push(curso);
+    }
+    if (categoria.categoria_id) {
+      tags.push(categoria);
+    }
+    return tags;
+  };
 
   const Tags = ({ tags }) => {
     return (
@@ -31,32 +43,32 @@ function MainQuestion() {
     );
   };
 
-  const User = ({aluno})=>{
+  const User = ({ aluno }) => {
     return (
       <Box className={classes.userContainer}>
-          <Avatar className={classes.avatarIcon}>
-             {aluno.nome[0]}
-          </Avatar>
-          por {aluno.nome}
+        <Avatar className={classes.avatarUser}>{aluno.nome[0]}</Avatar>
+        <Typography variant="body1"> por {aluno.nome}</Typography>
       </Box>
-    )
-  }
+    );
+  };
 
   const Title = ({ title, dataCriacao, tags, aluno }) => {
-    return () => {
+    return (
       <Box className={classes.titleContainer}>
         <Box className={classes.title}>
-          <Typography variant="h6">{title}</Typography>
+          <Typography variant="h4">{title}</Typography>
         </Box>
-        <Typography variant="body2">
-          <span className={classes.emphasis}>Perguntado</span>
-          {moment().startOf(dataCriacao).fromNow()}
+       
+        <Box className={classes.detailsContainer}>
+          <Tags tags={tags} />
+          <User aluno={aluno} />
+          <Box style={{flexGrow: 1}} />
+          <Typography variant="body1" className={classes.time}>
+          {moment(dataCriacao).startOf().fromNow()}
         </Typography>
-        <Tags tags={tags} />
-        <User aluno={aluno}  />
-        <Divider />
-      </Box>;
-    };
+        </Box>
+      </Box>
+    )
   };
 
   const InsideColumn = ({ solucionado, respostaId, respostas }) => {
@@ -67,18 +79,20 @@ function MainQuestion() {
             <Avatar className={classes.avatarIcon}>
               <CheckIcon className={classes.icon} />
             </Avatar>
-            <Link className={classes.linkResposta} to={`#${respostaId}`}>Ver resposta</Link>
+            <Link className={classes.linkResposta} to={`#${respostaId}`}>
+              Ver resposta
+            </Link>
           </Box>
         )}
-        <Typography variant="h6" className={classes.respostas}>
+        <Typography variant="h5" className={classes.respostas}>
           {respostas}
         </Typography>
-        <Typography variant="body1">respostas</Typography>
+        <Typography variant="h6">respostas</Typography>
       </Box>
     );
   };
 
-  const Conteudo = ({conteudo}) => {
+  const Conteudo = ({ conteudo }) => {
     return (
       <Box className={classes.conteudo}>
         <div
@@ -103,11 +117,29 @@ function MainQuestion() {
     );
   };
 
+  const tags = getTags(
+    { curso_id: data.post.curso_id, nome: data.post.curso_nome },
+    { categoria_id: data.post.categoria_id, nome: data.post.categoria_nome }
+  )
+
+  console.log(tags)
+
   return (
     <Card>
       <Box className={classes.rootContainer}>
-        <Title title={data.post.titulo}  dataCriacao={data.post.data_atualizacao} tags={data.post.tags} />
-        <Corpo respostas={data.post.total_respostas} solucionado={data.post.solucionado} respostaId={data.post.resposta_id} conteudo={data.post.conteudo} aluno={data.post.aluno} />
+        <Title
+          title={data.post.titulo}
+          dataCriacao={data.post.data_criacao}
+          tags={tags}
+          aluno={data.post.aluno}
+
+        />
+        <Corpo
+          respostas={data.post.total_respostas}
+          solucionado={data.post.solucionado}
+          respostaId={data.post.resposta_id}
+          conteudo={data.post.conteudo}
+        />
       </Box>
     </Card>
   );

@@ -79,9 +79,10 @@ export const informationsPost = (id) => async (dispatch, getState) =>{
       } = getState();
     try {
         
-        const { data } = await Api.findPostById(id,alunoInfo);
+        const { data }  = await Api.findPostById(id,alunoInfo);
+        
+        console.log(data)    
         dispatch({type:POST_INFORMATIONS_SUCCESS, payload: data})
-    
     } catch (error){
         dispatch({
             type: POST_INFORMATIONS_FAIL,

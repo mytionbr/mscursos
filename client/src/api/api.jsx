@@ -60,11 +60,11 @@ const findNotaByIdAndCurso = (nota, curso, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const findPostById = (postId, alunoInfo) =>{
+const findPostById = (postId, alunoInfo) =>
   axios.get(`/api/posts/info/${postId}`,{
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   })
-}
+
 
 const createCurso = (curso, professorInfo) =>
   axios.post(`/api/cursos`, curso, {

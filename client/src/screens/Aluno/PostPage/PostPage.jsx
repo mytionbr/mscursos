@@ -14,13 +14,16 @@ function PostPage(props) {
   const postId = props.match.params.postId;
   
   const dispatch = useDispatch();
-  const postInfomations = useSelector((state) => state.postInfomations);
-  const { loading, error, data } = postInfomations;
+  const postInformations = useSelector((state) => state.postInformations);
+  const { loading, error, data } = postInformations;
 
+  console.log(loading, error, data)
+  console.log(postId)
   useEffect(() => {
     dispatch(informationsPost(postId));
   }, [dispatch, postId]);
   
+
   return (
     <>
       <Helmet>
@@ -48,7 +51,7 @@ function PostPage(props) {
                     <MessageBox type='error'>
                         {error}
                     </MessageBox>
-                  ) : (
+                  ) : data && (
                     <MainQuestion />
                   )
                 }
@@ -62,9 +65,9 @@ function PostPage(props) {
                     <MessageBox type='error'>
                         {error}
                     </MessageBox>
-                  ) : (
+                  ) : data &&(
                     <Typography variant="h6">
-                      {data.total_respostas} respostas
+                      {data.post.total_respostas} respostas
                     </Typography>
                   )
                 }
@@ -77,7 +80,7 @@ function PostPage(props) {
                     <MessageBox type='error'>
                         {error}
                     </MessageBox>
-                  ) : (
+                  ) : data && (
                     <Respostas />   
                   )
                 }

@@ -4,8 +4,8 @@ import Resposta from "./Resposta/Resposta";
 function Respostas() {
   
   const dispatch = useDispatch();
-  const postInfomations = useSelector((state) => state.postInfomations);
-  const { loading, error, data } = postInfomations;
+  const postInformations = useSelector((state) => state.postInformations);
+  const { loading, error, data } = postInformations;
   
   return (
       <>

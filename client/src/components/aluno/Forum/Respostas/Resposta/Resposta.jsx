@@ -2,39 +2,9 @@ import { Avatar, Box, Card, IconButton, Typography } from "@material-ui/core";
 import DOMPurify from "dompurify";
 import moment from "moment";
 import React from "react";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import useStyles from "./styles";
 function Resposta({resposta}) {
   const classes = useStyles();
-
-  const handlePositiveFeedback = () => {
-    alert("Positivo");
-  };
-
-  const handleNegativeFeedback = () => {
-    alert("Positivo");
-  };
-
-  const InsideColumn = ({ feedback }) => {
-    return (
-      <Box className={classes.insideColumn}>
-        <IconButton
-          className={classes.feedback}
-          onClick={handlePositiveFeedback}
-        >
-          <ArrowDropUpIcon />
-        </IconButton>
-        <Typography variant="h6">{feedback}</Typography>
-        <IconButton
-          className={classes.feedback}
-          onClick={handleNegativeFeedback}
-        >
-          <ArrowDropDownIcon />
-        </IconButton>
-      </Box>
-    );
-  };
 
   const Informations = ({ date, user }) => {
     return (
@@ -70,10 +40,9 @@ function Resposta({resposta}) {
 
   return (
     <Card className={classes.rootContainer}>
-      <InsideColumn feedback={resposta.feedback} />
       <Corpo
         conteudo={resposta.conteudo}
-        date={resposta.data_update}
+        date={resposta.data_atualizacao}
         user={resposta.usuario}
       />
     </Card>
