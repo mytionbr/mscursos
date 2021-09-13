@@ -49,7 +49,8 @@ export default makeStyles((theme) => ({
         color: theme.palette.secondary.main,
         '&:hover':{
             textDecoration: 'underline'
-        }
+        },
+        cursor: 'pointer'
     },
     respostas:{
         color: '#525050',
@@ -75,6 +76,11 @@ export default makeStyles((theme) => ({
         display:'flex',
         alignItems: 'center',
         width: '100%'
+    },
+    answered:{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
     }
 
 }));

@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import ToolbarPage from "../../../components/aluno/dashboard/ToolbarPage/ToolbarPage";
 import MainQuestion from "../../../components/aluno/Forum/MainQuestion/MainQuestion";
@@ -36,6 +36,8 @@ function PostPage(props) {
     dispatch(listResponse(postId));
   }, [dispatch, postId]);
 
+  const refToResponse = useRef(null)
+
   return (
     <>
       <Helmet>
@@ -62,7 +64,7 @@ function PostPage(props) {
             ) : (
               dataPost && (
                 <Grid item>
-                  <MainQuestion />
+                  <MainQuestion refToResponse={refToResponse} />
                 </Grid>
               )
             )}
@@ -78,7 +80,7 @@ function PostPage(props) {
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Respostas />
+                  <Respostas refToResponse={refToResponse} />
                 </Grid>
               </>
             )}

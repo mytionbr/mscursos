@@ -52,7 +52,7 @@ function PostList(props) {
             {data.posts.map((post) => (
               <PostCard
                 title={post.titulo}
-                isAnswered={post.respondido}
+                isAnswered={post.solucionado}
                 tags={post.tags}
                 totalResponses={post.total_respostas}
                 user={post.aluno}

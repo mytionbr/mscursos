@@ -33,7 +33,10 @@ export default makeStyles((theme) => ({
        alignItems: 'center',
        width: '100%',
        padding: '0.2rem',
-       borderBottom: '0.1rem solid #aaa'
+       borderBottom: '0.1rem solid #aaa',
+       '& > *':{
+           margin: '0 0.2rem'
+       }
    },
    user:{
        display: 'flex',
@@ -45,5 +48,9 @@ export default makeStyles((theme) => ({
    avatarIcon:{
        padding: '1rem',
        backgroundColor: theme.palette.secondary.main
+   },
+   solutionChip:{
+       backgroundColor: '#39cf4d',
+       color: '#fff'
    }
 }));

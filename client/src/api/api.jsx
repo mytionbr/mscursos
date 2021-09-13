@@ -206,6 +206,11 @@ const finishAula = (aula, alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
+const markSolution = (resposta,alunoInfo) =>
+  axios.patch(`/api/posts/solucao`, resposta, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
 const findCursoBySlug = (slug) => axios.get(`/api/cursos/info/${slug}`);
@@ -254,7 +259,8 @@ const Api = {
   createPost,
   findPostById,
   saveResponse,
-  listResponse
+  listResponse,
+  markSolution
 };
 
 export default Api;

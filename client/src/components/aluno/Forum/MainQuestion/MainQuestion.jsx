@@ -4,18 +4,17 @@ import {
   Card,
   Chip,
   Divider,
-  Link,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useRef } from "react";
 import useStyles from "./styles";
 import moment from "moment";
 import CheckIcon from "@material-ui/icons/Check";
 import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
-
-function MainQuestion() {
+import {Link} from 'react-router-dom'
+function MainQuestion({refToResponse}) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -28,6 +27,11 @@ function MainQuestion() {
     error: errorResponse,
     data: dataResponse,
   } = postListResponse;
+
+  
+  const handleScroll = ()=>{
+    refToResponse.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const getTags = (curso, categoria) => {
     let tags = [];
@@ -87,13 +91,13 @@ function MainQuestion() {
           dataResponse && (
             <>
               {solucionado && (
-                <Box>
+                <Box className={classes.answered}>
                   <Avatar className={classes.avatarIcon}>
                     <CheckIcon className={classes.icon} />
                   </Avatar>
-                  <Link className={classes.linkResposta} to={`#${dataResponse.solucao_id}`}>
+                  <p className={classes.linkResposta} onClick={()=>handleScroll(data.solucao_id)}>
                     Ver resposta
-                  </Link>
+                  </p>
                 </Box>
               )}
               <Typography variant="h5" className={classes.respostas}>
@@ -146,7 +150,7 @@ function MainQuestion() {
           tags={tags}
           aluno={data.post.aluno}
         />
-        <Corpo conteudo={data.post.conteudo} />
+        <Corpo solucionado={data.post.solucionado} conteudo={data.post.conteudo} />
       </Box>
     </Card>
   );

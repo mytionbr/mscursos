@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Resposta from "./Resposta/Resposta";
-function Respostas() {
+function Respostas({refToResponse}) {
   
   const postListResponse = useSelector((state) => state.postListResponse);
   const {
@@ -12,7 +12,7 @@ function Respostas() {
       <>
         {
             data.respostas.map(resposta =>(
-               <Resposta resposta={resposta}/>
+               <Resposta refToResponse={refToResponse} resposta={resposta}/>
             ))
         }
       </>

@@ -17,7 +17,7 @@ export const find = async (req, res) => {
         this.total = 0;
         this.values = [];
         this.order = "data_criacao DESC";
-        this.query = `SELECT post.*,aluno.nome as aluno_nome, categoria.nome as categoria_nome, curso.nome as curso_nome, (SELECT COUNT(*) FROM RESPOSTA INNER JOIN POST ON POST.POST_ID = RESPOSTA.POST_ID) as total_respostas FROM post inner join aluno on aluno.aluno_id = post.aluno_id left join categoria on categoria.categoria_id = post.categoria_id left join curso on curso.curso_id = post.curso_id `;
+        this.query = `SELECT post.*,aluno.nome as aluno_nome, categoria.nome as categoria_nome, curso.nome as curso_nome, (SELECT COUNT(*) FROM RESPOSTA WHERE POST.POST_ID = RESPOSTA.POST_ID) as total_respostas FROM post inner join aluno on aluno.aluno_id = post.aluno_id left join categoria on categoria.categoria_id = post.categoria_id left join curso on curso.curso_id = post.curso_id `;
         this.condicional = "";
         this.pages = 0;
         this.queryParams = [];
@@ -290,7 +290,7 @@ export const findResponses = async (req,res)=>{
     const result = {}
 
     const { rows } = await pool.query(
-      `SELECT RESPOSTA.*, ALUNO.ALUNO_ID AS ALUNO_ID, ALUNO.NOME AS ALUNO_NOME, PROFESSOR.PROFESSOR_ID AS PROFESSOR_ID, PROFESSOR.NOME AS PROFESSOR_NOME FROM RESPOSTA LEFT JOIN ALUNO ON RESPOSTA.ALUNO_ID = ALUNO.ALUNO_ID LEFT JOIN PROFESSOR ON PROFESSOR.PROFESSOR_ID = RESPOSTA.PROFESSOR_ID WHERE RESPOSTA.POST_ID = $1 ORDER BY RESPOSTA.DATA_CRIACAO DESC`,
+      `SELECT RESPOSTA.*, ALUNO.ALUNO_ID AS ALUNO_ID, ALUNO.NOME AS ALUNO_NOME, PROFESSOR.PROFESSOR_ID AS PROFESSOR_ID, PROFESSOR.NOME AS PROFESSOR_NOME FROM RESPOSTA LEFT JOIN ALUNO ON RESPOSTA.ALUNO_ID = ALUNO.ALUNO_ID LEFT JOIN PROFESSOR ON PROFESSOR.PROFESSOR_ID = RESPOSTA.PROFESSOR_ID WHERE RESPOSTA.POST_ID = $1 ORDER BY RESPOSTA.DATA_CRIACAO ASC`,
       [postId]
     );
 
@@ -309,12 +309,15 @@ export const findResponses = async (req,res)=>{
       resposta.usuario = usuario
       return resposta
     })
+    let solucao_id
 
-    result.solucao_id = result.respostas.filter(resposta=>{
+     result.respostas.map(resposta=>{
       if(resposta.solucao){
-        return resposta.resposta_id
+        solucao_id = resposta.resposta_id
       }
     })
+
+    result.solucao_id = solucao_id
 
     console.log(result)
     res.status(200).json(result);
@@ -327,7 +330,6 @@ export const findResponses = async (req,res)=>{
 
 export const saveResponse = async (req, res) => {
   try {
-    console.log('msdofknajofnsjdin')
     const { resposta, post_id ,aluno_id } = req.body;
 
     const data_criacao = moment().format("YYYY-MM-DD");
@@ -360,6 +362,39 @@ export const saveResponse = async (req, res) => {
     res.status(201).json(respostaCreated);
   } catch (err) {
     console.log(err)
+    res.status(400).json({ message: err.message });
+  }
+};
+
+export const markSolution = async (req, res) => {
+  try {
+    const { resposta_id, post_id, aluno_id } = req.body;
+    const auth = req.auth
+
+    if(Number(auth._id) !== Number(aluno_id)){
+      return res.status(401).json({message: 'O usuário não pode realiazar essa ação'})
+    }
+
+    const solucao = true
+    const solucionado = true
+    
+    const result = {}
+
+    const { rows: rowsResposta } = await pool.query(
+      "UPDATE RESPOSTA SET solucao = $1 WHERE RESPOSTA.RESPOSTA_ID = $2  RETURNING *;",
+      [solucao, resposta_id]
+    );
+
+    const { rows: rowsPost } = await pool.query(
+      "UPDATE POST SET solucionado = $1 WHERE POST.POST_ID = $2 RETURNING *;",
+      [solucionado, post_id]
+    )
+
+    result.resposta = rowsResposta[0]
+    result.post = rowsPost[0]
+
+    res.status(201).json(result);
+  } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };

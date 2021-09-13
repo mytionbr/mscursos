@@ -1,6 +1,6 @@
 import express from "express";
 import { isAuth } from "../controllers/auth.controller.js";
-import { create, find, findById, findResponses, saveResponse } from "../controllers/post.controller.js";
+import { create, find, findById, findResponses, markSolution, saveResponse } from "../controllers/post.controller.js";
 
 const router = express.Router();
 
@@ -12,6 +12,10 @@ router
 router
   .route("/respostas")
   .post(isAuth, saveResponse)
+
+router
+  .route("/solucao")
+  .patch(isAuth,markSolution)
   
 router
   .route("/:postId/respostas")

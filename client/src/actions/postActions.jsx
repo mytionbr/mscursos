@@ -1,5 +1,5 @@
 import Api from "../api/api";
-import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS, POST_INFORMATIONS_FAIL, POST_INFORMATIONS_REQUEST, POST_INFORMATIONS_SUCCESS, POST_RESPONSE_LIST_FAIL, POST_RESPONSE_LIST_REQUEST, POST_RESPONSE_LIST_SUCCESS, POST_SAVE_RESPONSE_FAIL, POST_SAVE_RESPONSE_REQUEST, POST_SAVE_RESPONSE_SUCCESS } from "../constants/postConstantes";
+import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS, POST_INFORMATIONS_FAIL, POST_INFORMATIONS_REQUEST, POST_INFORMATIONS_SUCCESS, POST_RESPONSE_LIST_FAIL, POST_RESPONSE_LIST_REQUEST, POST_RESPONSE_LIST_SUCCESS, POST_SAVE_RESPONSE_FAIL, POST_SAVE_RESPONSE_REQUEST, POST_SAVE_RESPONSE_SUCCESS, POST_SOLUTION_FAIL, POST_SOLUTION_REQUEST, POST_SOLUTION_SUCCESS } from "../constants/postConstantes";
 
 
 export const findPosts = (params) => async (dispatch, getState) => {
@@ -127,6 +127,30 @@ export const saveResposta = (resposta,postId) => async (dispatch, getState) =>{
     } catch (error){
         dispatch({
             type: POST_SAVE_RESPONSE_FAIL,
+            payload: error.error || error.message
+          });
+    }
+}
+
+export const  markResponseAsSolution = ({resposta_id,post_id,aluno_id}) => async (dispatch, getState) =>{
+    dispatch({ type: POST_SOLUTION_REQUEST });
+    const {
+        alunoSignin: {alunoInfo },
+      } = getState();
+    try {
+        
+        const submit = {
+            resposta_id,
+            post_id,
+            aluno_id: aluno_id
+        }
+
+        const { data }  = await Api.markSolution(submit,alunoInfo);
+       
+        dispatch({type:POST_SOLUTION_SUCCESS, payload: data})
+    } catch (error){
+        dispatch({
+            type: POST_SOLUTION_FAIL,
             payload: error.error || error.message
           });
     }

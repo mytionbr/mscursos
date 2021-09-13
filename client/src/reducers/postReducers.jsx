@@ -18,6 +18,10 @@ import {
   POST_SAVE_RESPONSE_REQUEST,
   POST_SAVE_RESPONSE_RESET,
   POST_SAVE_RESPONSE_SUCCESS,
+  POST_SOLUTION_FAIL,
+  POST_SOLUTION_REQUEST,
+  POST_SOLUTION_RESET,
+  POST_SOLUTION_SUCCESS,
 } from "../constants/postConstantes";
 
 export const postFindReducer = (
@@ -103,6 +107,24 @@ export const postSaveResponseReducer = (
     case POST_SAVE_RESPONSE_FAIL:
       return { loading: false, error: action.payload };
     case POST_SAVE_RESPONSE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const postMarkSolutionReducer = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case POST_SOLUTION_REQUEST:
+      return { loading: true };
+    case POST_SOLUTION_SUCCESS:
+      return { loading: false, data: action.payload };
+    case POST_SOLUTION_FAIL:
+      return { loading: false, error: action.payload };
+    case POST_SOLUTION_RESET:
       return {};
     default:
       return state;
