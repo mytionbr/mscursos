@@ -10,6 +10,14 @@ import {
   POST_INFORMATIONS_REQUEST,
   POST_INFORMATIONS_RESET,
   POST_INFORMATIONS_SUCCESS,
+  POST_RESPONSE_LIST_FAIL,
+  POST_RESPONSE_LIST_REQUEST,
+  POST_RESPONSE_LIST_RESET,
+  POST_RESPONSE_LIST_SUCCESS,
+  POST_SAVE_RESPONSE_FAIL,
+  POST_SAVE_RESPONSE_REQUEST,
+  POST_SAVE_RESPONSE_RESET,
+  POST_SAVE_RESPONSE_SUCCESS,
 } from "../constants/postConstantes";
 
 export const postFindReducer = (
@@ -58,6 +66,43 @@ export const postInformationsReducer = (
     case POST_INFORMATIONS_FAIL:
       return { loading: false, error: action.payload };
     case POST_INFORMATIONS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const postListResponseReducer = (
+  state = {loading: true},
+  action
+) => {
+  switch (action.type) {
+    case POST_RESPONSE_LIST_REQUEST:
+      return { loading: true };
+    case POST_RESPONSE_LIST_SUCCESS:
+      return { loading: false, data: action.payload };
+    case POST_RESPONSE_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    case POST_RESPONSE_LIST_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+
+export const postSaveResponseReducer = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case POST_SAVE_RESPONSE_REQUEST:
+      return { loading: true };
+    case POST_SAVE_RESPONSE_SUCCESS:
+      return { loading: false, data: action.payload };
+    case POST_SAVE_RESPONSE_FAIL:
+      return { loading: false, error: action.payload };
+    case POST_SAVE_RESPONSE_RESET:
       return {};
     default:
       return state;

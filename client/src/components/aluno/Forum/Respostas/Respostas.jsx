@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Resposta from "./Resposta/Resposta";
 function Respostas() {
   
-  const dispatch = useDispatch();
-  const postInformations = useSelector((state) => state.postInformations);
-  const { loading, error, data } = postInformations;
+  const postListResponse = useSelector((state) => state.postListResponse);
+  const {
+    data,
+  } = postListResponse;
   
   return (
       <>

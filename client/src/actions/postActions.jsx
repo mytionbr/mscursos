@@ -1,5 +1,5 @@
 import Api from "../api/api";
-import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS, POST_INFORMATIONS_FAIL, POST_INFORMATIONS_REQUEST, POST_INFORMATIONS_SUCCESS } from "../constants/postConstantes";
+import { POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, POST_FIND_FAIL, POST_FIND_REQUEST, POST_FIND_SUCCESS, POST_INFORMATIONS_FAIL, POST_INFORMATIONS_REQUEST, POST_INFORMATIONS_SUCCESS, POST_RESPONSE_LIST_FAIL, POST_RESPONSE_LIST_REQUEST, POST_RESPONSE_LIST_SUCCESS, POST_SAVE_RESPONSE_FAIL, POST_SAVE_RESPONSE_REQUEST, POST_SAVE_RESPONSE_SUCCESS } from "../constants/postConstantes";
 
 
 export const findPosts = (params) => async (dispatch, getState) => {
@@ -81,11 +81,52 @@ export const informationsPost = (id) => async (dispatch, getState) =>{
         
         const { data }  = await Api.findPostById(id,alunoInfo);
         
-        console.log(data)    
         dispatch({type:POST_INFORMATIONS_SUCCESS, payload: data})
     } catch (error){
         dispatch({
             type: POST_INFORMATIONS_FAIL,
+            payload: error.error || error.message
+          });
+    }
+}
+
+export const listResponse = (postId) => async (dispatch, getState) =>{
+    dispatch({ type: POST_RESPONSE_LIST_REQUEST });
+    const {
+        alunoSignin: {alunoInfo },
+      } = getState();
+    try {
+
+        const { data }  = await Api.listResponse(postId,alunoInfo);
+       
+        dispatch({type:POST_RESPONSE_LIST_SUCCESS, payload: data})
+    } catch (error){
+        dispatch({
+            type: POST_RESPONSE_LIST_FAIL,
+            payload: error.error || error.message
+          });
+    }
+}
+
+export const saveResposta = (resposta,postId) => async (dispatch, getState) =>{
+    dispatch({ type: POST_SAVE_RESPONSE_REQUEST });
+    const {
+        alunoSignin: {alunoInfo },
+      } = getState();
+    try {
+        
+        const submit = {
+            resposta: resposta,
+            aluno_id:alunoInfo.aluno_id,
+            post_id: postId
+        }
+
+        const { data }  = await Api.saveResponse(submit,alunoInfo);
+       
+        dispatch({type:POST_SAVE_RESPONSE_SUCCESS, payload: data})
+    } catch (error){
+        dispatch({
+            type: POST_SAVE_RESPONSE_FAIL,
             payload: error.error || error.message
           });
     }

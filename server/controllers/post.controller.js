@@ -200,11 +200,9 @@ export const find = async (req, res) => {
 
       return post;
     });
-    console.log(result);
 
     res.status(200).json(result);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };
@@ -263,8 +261,7 @@ export const findById = async (req, res) => {
     const { rows: postRows } = await pool.query(
       `SELECT POST.*, ALUNO.NOME AS ALUNO_NOME, ALUNO.ALUNO_ID AS ALUNO_ID,
       CATEGORIA.CATEGORIA_ID AS CATEGORIA_ID, CATEGORIA.NOME AS CATEGORIA_NOME,
-      CURSO.CURSO_ID AS CURSO_ID, CURSO.NOME AS CURSO_NOME,
-      (SELECT COUNT(*) FROM RESPOSTA WHERE RESPOSTA.POST_ID = POST.POST_ID) AS TOTAL_RESPOSTAS
+      CURSO.CURSO_ID AS CURSO_ID, CURSO.NOME AS CURSO_NOME
       FROM POST INNER JOIN ALUNO ON ALUNO.ALUNO_ID = POST.ALUNO_ID
       LEFT JOIN CATEGORIA ON CATEGORIA.CATEGORIA_ID = POST.CATEGORIA_ID
       LEFT JOIN CURSO ON CURSO.CURSO_ID = POST.CURSO_ID
@@ -273,28 +270,96 @@ export const findById = async (req, res) => {
     );
 
     result.post = postRows[0];
+    
+    result.post.aluno = {
+      nome: result.post.aluno_nome,
+      aluno_id: result.post.aluno_id
+    }
+    res.status(200).json(result);
+  } catch (err) {
+    console.log('eita', err)
+    res.status(400).json({ message: err.message });
+  }
+};
 
-    const { rows: respostasRows } = await pool.query(
-      `SELECT RESPOSTA.* FROM RESPOSTA WHERE RESPOSTA.POST_ID = $1`,
+export const findResponses = async (req,res)=>{
+  try{
+    console.log('ooijiojiojio')
+    const postId = req.params.postId;
+
+    const result = {}
+
+    const { rows } = await pool.query(
+      `SELECT RESPOSTA.*, ALUNO.ALUNO_ID AS ALUNO_ID, ALUNO.NOME AS ALUNO_NOME, PROFESSOR.PROFESSOR_ID AS PROFESSOR_ID, PROFESSOR.NOME AS PROFESSOR_NOME FROM RESPOSTA LEFT JOIN ALUNO ON RESPOSTA.ALUNO_ID = ALUNO.ALUNO_ID LEFT JOIN PROFESSOR ON PROFESSOR.PROFESSOR_ID = RESPOSTA.PROFESSOR_ID WHERE RESPOSTA.POST_ID = $1 ORDER BY RESPOSTA.DATA_CRIACAO DESC`,
       [postId]
     );
 
-    result.respostas = respostasRows;
+    result.respostas = rows
+    result.total_respostas = rows.length
 
-    result.post.resposta_id = respostasRows.filter(resposta=>{
+    result.respostas = result.respostas.map(resposta =>{
+      let usuario = {}
+      if(resposta.aluno_id){
+        usuario.aluno_id = resposta.aluno_id
+        usuario.nome = resposta.aluno_nome
+      }else if(resposta.professor_id){
+        usuario.professor = resposta.professor_id
+        usuario.nome = resposta.professor_nome
+      }
+      resposta.usuario = usuario
+      return resposta
+    })
+
+    result.solucao_id = result.respostas.filter(resposta=>{
       if(resposta.solucao){
         return resposta.resposta_id
       }
     })
 
-    result.post.aluno = {
-      nome: result.post.aluno_nome,
-      aluno_id: result.post.aluno_id
-    }
-      
     console.log(result)
     res.status(200).json(result);
+  }catch (err){
+    console.log('opa', err)
+    res.status(400).json({ message: err.message });
+  }
+}
+
+
+export const saveResponse = async (req, res) => {
+  try {
+    console.log('msdofknajofnsjdin')
+    const { resposta, post_id ,aluno_id } = req.body;
+
+    const data_criacao = moment().format("YYYY-MM-DD");
+    const data_atualizacao = data_criacao;
+    const solucao = false
+    let sanitizedConteudo;
+
+    if (resposta) {
+      sanitizedConteudo = dompurify.sanitize(marked(resposta));
+    }
+
+    const { rows } = await pool.query(
+      "INSERT INTO resposta (conteudo, post_id, aluno_id, data_criacao, data_atualizacao, solucao  ) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *;",
+      [
+        sanitizedConteudo,
+        post_id,
+        aluno_id,
+        data_criacao,
+        data_atualizacao,
+        solucao
+      ]
+    );
+
+    const respostaCreated = rows[0];
+
+    if (!respostaCreated) {
+      return res.status(400).json({ message: "Erro ao salvar a resposta" });
+    }
+
+    res.status(201).json(respostaCreated);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };

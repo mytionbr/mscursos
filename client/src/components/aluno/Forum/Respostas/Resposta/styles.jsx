@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
    rootContainer: {
        display: 'flex',
-       padding: '1rem'
+       padding: '0.5rem',
+       margin: '1rem 0'
    },
    insideColumn:{
        display: 'flex',
@@ -21,26 +22,28 @@ export default makeStyles((theme) => ({
    },
    corpo:{
        display: 'flex',
-       flexColumn: 'column'
+       flexDirection: 'column',
+       width: '100%'
    },
    content:{
-       padding: '1rem'
+       padding: '0.5rem'
    },
    informations:{
        display: 'flex',
+       alignItems: 'center',
        width: '100%',
-   },
-   detailsContainer:{
-       display: 'flex',
-       flexDirection: 'column'
+       padding: '0.2rem',
+       borderBottom: '0.1rem solid #aaa'
    },
    user:{
        display: 'flex',
+       alignItems: 'center',
+       '& > *':{
+        margin: '0 0.2rem'
+       }
    },
    avatarIcon:{
        padding: '1rem',
-       '& > svg':{
-           backgroundColor: theme.palette.secondary.main
-       }
+       backgroundColor: theme.palette.secondary.main
    }
 }));

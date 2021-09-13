@@ -13,6 +13,7 @@ import moment from "moment";
 import CheckIcon from "@material-ui/icons/Check";
 import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 
 function MainQuestion() {
   const classes = useStyles();
@@ -20,8 +21,14 @@ function MainQuestion() {
   const dispatch = useDispatch();
   const postInformations = useSelector((state) => state.postInformations);
   const { loading, error, data } = postInformations;
-  
-  
+
+  const postListResponse = useSelector((state) => state.postListResponse);
+  const {
+    loading: loadingResponse,
+    error: errorResponse,
+    data: dataResponse,
+  } = postListResponse;
+
   const getTags = (curso, categoria) => {
     let tags = [];
     if (curso.curso_id) {
@@ -58,36 +65,44 @@ function MainQuestion() {
         <Box className={classes.title}>
           <Typography variant="h4">{title}</Typography>
         </Box>
-       
+
         <Box className={classes.detailsContainer}>
           <Tags tags={tags} />
           <User aluno={aluno} />
-          <Box style={{flexGrow: 1}} />
+          <Box style={{ flexGrow: 1 }} />
           <Typography variant="body1" className={classes.time}>
-          {moment(dataCriacao).startOf().fromNow()}
-        </Typography>
+            {moment(dataCriacao).startOf().fromNow()}
+          </Typography>
         </Box>
       </Box>
-    )
+    );
   };
 
-  const InsideColumn = ({ solucionado, respostaId, respostas }) => {
+  const InsideColumn = ({ solucionado }) => {
     return (
       <Box className={classes.sideColumn}>
-        {solucionado && (
-          <Box>
-            <Avatar className={classes.avatarIcon}>
-              <CheckIcon className={classes.icon} />
-            </Avatar>
-            <Link className={classes.linkResposta} to={`#${respostaId}`}>
-              Ver resposta
-            </Link>
-          </Box>
+        {loadingResponse ? (
+          <LoadingBox />
+        ) : (
+          dataResponse && (
+            <>
+              {solucionado && (
+                <Box>
+                  <Avatar className={classes.avatarIcon}>
+                    <CheckIcon className={classes.icon} />
+                  </Avatar>
+                  <Link className={classes.linkResposta} to={`#${dataResponse.solucao_id}`}>
+                    Ver resposta
+                  </Link>
+                </Box>
+              )}
+              <Typography variant="h5" className={classes.respostas}>
+                {dataResponse && dataResponse.total_respostas}
+              </Typography>
+              <Typography variant="h6">respostas</Typography>
+            </>
+          )
         )}
-        <Typography variant="h5" className={classes.respostas}>
-          {respostas}
-        </Typography>
-        <Typography variant="h6">respostas</Typography>
       </Box>
     );
   };
@@ -96,24 +111,20 @@ function MainQuestion() {
     return (
       <Box className={classes.conteudo}>
         <Typography>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(conteudo),
-          }}
-        />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(conteudo),
+            }}
+          />
         </Typography>
       </Box>
     );
   };
 
-  const Corpo = ({ respostas, solucionado, respostaId, conteudo }) => {
+  const Corpo = ({ solucionado, conteudo }) => {
     return (
       <Box className={classes.corpoContainer}>
-        <InsideColumn
-          respostas={respostas}
-          solucionado={solucionado}
-          respostaId={respostaId}
-        />
+        <InsideColumn solucionado={solucionado} />
         <Conteudo conteudo={conteudo} />
       </Box>
     );
@@ -122,9 +133,9 @@ function MainQuestion() {
   const tags = getTags(
     { curso_id: data.post.curso_id, nome: data.post.curso_nome },
     { categoria_id: data.post.categoria_id, nome: data.post.categoria_nome }
-  )
+  );
 
-  console.log(tags)
+  console.log(tags);
 
   return (
     <Card>
@@ -134,14 +145,8 @@ function MainQuestion() {
           dataCriacao={data.post.data_criacao}
           tags={tags}
           aluno={data.post.aluno}
-
         />
-        <Corpo
-          respostas={data.post.total_respostas}
-          solucionado={data.post.solucionado}
-          respostaId={data.post.resposta_id}
-          conteudo={data.post.conteudo}
-        />
+        <Corpo conteudo={data.post.conteudo} />
       </Box>
     </Card>
   );

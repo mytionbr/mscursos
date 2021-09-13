@@ -5,12 +5,13 @@ const fetchCategorias = () => axios.get("/api/categorias");
 
 const findCursos = (query) => axios.get("/api/cursos/" + query);
 
-const findPosts = (query,alunoInfo) => axios.get("/api/posts/" + query,
-{
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-});
+const findPosts = (query, alunoInfo) =>
+  axios.get("/api/posts/" + query, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
 
-const findCursosAsCategory = (categoriaId) => axios.get(`/api/cursos/asCategorias/${categoriaId}`)
+const findCursosAsCategory = (categoriaId) =>
+  axios.get(`/api/cursos/asCategorias/${categoriaId}`);
 
 const findAulas = (cursoId, query) =>
   axios.get(`/api/cursos/${cursoId}/aulas${query}`);
@@ -38,7 +39,8 @@ const findCursosByProfessor = (professorInfo, query) =>
 
 const findCursoById = (cursoId) => axios.get(`/api/cursos/${cursoId}`);
 
-const findMatricula = (alunoId,cursoId) => axios.get(`/api/cursos/${cursoId}/matriculas/${alunoId}`);
+const findMatricula = (alunoId, cursoId) =>
+  axios.get(`/api/cursos/${cursoId}/matriculas/${alunoId}`);
 
 const findAulaById = (aulaId, cursoId, professorInfo) =>
   axios.get(`/api/cursos/${cursoId}/aulas/${aulaId}`, {
@@ -61,26 +63,30 @@ const findNotaByIdAndCurso = (nota, curso, professorInfo) =>
   });
 
 const findPostById = (postId, alunoInfo) =>
-  axios.get(`/api/posts/info/${postId}`,{
+  axios.get(`/api/posts/info/${postId}`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-  })
-
+  });
 
 const createCurso = (curso, professorInfo) =>
   axios.post(`/api/cursos`, curso, {
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
+const saveResponse = (submit, alunoInfo) =>
+  axios.post(`/api/posts/respostas`, submit, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
 const createPost = (post, alunoInfo) =>
-axios.post(`/api/posts`, post, {
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-});
+  axios.post(`/api/posts`, post, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
 
 const createAula = (formData, professorInfo) =>
-  axios.post(`/api/cursos/${formData.get('curso_id')}/aulas`, formData, {
-    headers: { 
+  axios.post(`/api/cursos/${formData.get("curso_id")}/aulas`, formData, {
+    headers: {
       Authorization: `Bearer ${professorInfo?.token}`,
-      'Content-Type': 'multipart/form-data' 
+      "Content-Type": "multipart/form-data",
     },
   });
 
@@ -93,23 +99,18 @@ const createNota = (nota, curso, aluno, professorInfo) =>
     }
   );
 
-const createMatricula = (matricula,alunoInfo)=>
-  axios.post(
-  `/api/cursos/${matricula.curso_id}/matriculas`,
-  matricula,
-  {
+const createMatricula = (matricula, alunoInfo) =>
+  axios.post(`/api/cursos/${matricula.curso_id}/matriculas`, matricula, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-  }
-);
+  });
 
-const deleteMatricula = (matricula,alunoInfo)=>
+const deleteMatricula = (matricula, alunoInfo) =>
   axios.delete(
-  `/api/cursos/${matricula.curso_id}/matriculas/${matricula.aluno_id}`,
-  {
-    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-  }
-);
-
+    `/api/cursos/${matricula.curso_id}/matriculas/${matricula.aluno_id}`,
+    {
+      headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+    }
+  );
 
 const updateCurso = (curso, professorInfo) =>
   axios.put(`/api/cursos/${curso.curso_id}`, curso, {
@@ -146,9 +147,8 @@ const detailsProfessor = (professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const findCursosByAluno = (alunoInfo)=>
-  axios.get(`/api/cursos/aluno/${alunoInfo.aluno_id}`,
-  {
+const findCursosByAluno = (alunoInfo) =>
+  axios.get(`/api/cursos/aluno/${alunoInfo.aluno_id}`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
@@ -157,56 +157,58 @@ const updateProfessorProfile = (professor, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const createAssinatura = (price, planoId,paymentResult, alunoInfo) =>
-  axios.post(`/api/assinaturas/`,
-  {
-    price,
-    planoId,
-    paymentResult,
-    alunoId: alunoInfo.aluno_id
-  }, {
-    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-  })
+const createAssinatura = (price, planoId, paymentResult, alunoInfo) =>
+  axios.post(
+    `/api/assinaturas/`,
+    {
+      price,
+      planoId,
+      paymentResult,
+      alunoId: alunoInfo.aluno_id,
+    },
+    {
+      headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+    }
+  );
 
-const findAulasInfoByCurso = (cursoSlug,alunoInfo) => 
+const findAulasInfoByCurso = (cursoSlug, alunoInfo) =>
   axios.get(`/api/cursos/aulas/${cursoSlug}`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-  })
+  });
 
-const findAulaInfoById = (aulaId,alunoInfo) => 
-axios.get(`/api/aulas/${aulaId}`, {
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-})
-
-const findAulaInfoByIdAndAluno = (aulaId,alunoInfo) => 
-axios.get(`/api/aulas/${aulaId}/aluno`, {
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-})
-
-const findAvaliacao = ( cursoId, alunoInfo)=>
-axios.get(`/api/cursos/${cursoId}/avaliacoes/${alunoInfo.aluno_id}`,
-{
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-})
-
-const saveAvaliacao = (avaliacao, alunoInfo)=>
-axios.post(`/api/cursos/${avaliacao.curso_id}/avaliacoes/`,
-  avaliacao,
-{
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-})
-
-const finishAula =  (aula,alunoInfo) => 
-  axios.post(`/api/aulas/${aula.aula_id}/finish`,
-    aula  
-  , {
+const listResponse = (postId, alunoInfo) =>
+  axios.get(`/api/posts/${postId}/respostas`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-})
+  });
 
+const findAulaInfoById = (aulaId, alunoInfo) =>
+  axios.get(`/api/aulas/${aulaId}`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
+const findAulaInfoByIdAndAluno = (aulaId, alunoInfo) =>
+  axios.get(`/api/aulas/${aulaId}/aluno`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
+const findAvaliacao = (cursoId, alunoInfo) =>
+  axios.get(`/api/cursos/${cursoId}/avaliacoes/${alunoInfo.aluno_id}`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
+const saveAvaliacao = (avaliacao, alunoInfo) =>
+  axios.post(`/api/cursos/${avaliacao.curso_id}/avaliacoes/`, avaliacao, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
+const finishAula = (aula, alunoInfo) =>
+  axios.post(`/api/aulas/${aula.aula_id}/finish`, aula, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
 
 const registerAluno = (aluno) => axios.post(`/api/alunos`, aluno);
 
-const findCursoBySlug = (slug) => axios.get(`/api/cursos/info/${slug}`)
+const findCursoBySlug = (slug) => axios.get(`/api/cursos/info/${slug}`);
 
 const Api = {
   fetchCursos,
@@ -250,7 +252,9 @@ const Api = {
   findPosts,
   findCursosAsCategory,
   createPost,
-  findPostById
+  findPostById,
+  saveResponse,
+  listResponse
 };
 
 export default Api;
