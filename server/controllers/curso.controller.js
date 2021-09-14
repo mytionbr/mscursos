@@ -630,7 +630,7 @@ export const saveRating = async (req,res)=>{
       const curso = req.profile;
       const {aluno_id,valor, comentario } = req.body
 
-      const data_criacao = moment().format('YYYY-MM-DD')
+      const data_criacao = moment().format('YYYY-MM-DD HH:mm')
 
       const {rows: matricula} = await pool.query(
         `SELECT * FROM MATRICULA WHERE ALUNO_ID = $1 AND CURSO_ID = $2`,

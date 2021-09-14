@@ -16,7 +16,7 @@ export const find = async (req, res) => {
         this.page = 1;
         this.total = 0;
         this.values = [];
-        this.order = "data_criacao DESC";
+        this.order = "DATA_CRIACAO DESC";
         this.query = `SELECT post.*,aluno.nome as aluno_nome, categoria.nome as categoria_nome, curso.nome as curso_nome, (SELECT COUNT(*) FROM RESPOSTA WHERE POST.POST_ID = RESPOSTA.POST_ID) as total_respostas FROM post inner join aluno on aluno.aluno_id = post.aluno_id left join categoria on categoria.categoria_id = post.categoria_id left join curso on curso.curso_id = post.curso_id `;
         this.condicional = "";
         this.pages = 0;
@@ -25,9 +25,8 @@ export const find = async (req, res) => {
         this.condicionals = [];
       }
 
-      selectWithOrder() {
-        return `SELECT * FROM POST ORDER BY ${this.order} 
-                    ${this.pagination()} `;
+      selectWithOrderAndPagination() {
+        return ` ORDER BY ${this.order} ${this.pagination()} `;
       }
 
       withWhere() {
@@ -109,7 +108,7 @@ export const find = async (req, res) => {
           }
         }
 
-        let result = this.query + this.condicional;
+        let result = this.query + this.condicional ;
 
         return result;
       }
@@ -166,7 +165,7 @@ export const find = async (req, res) => {
 
     queryBuild.total = Number(totalPosts.rows[0].count);
 
-    query = queryBuild.withPagination();
+    query += queryBuild.selectWithOrderAndPagination();
     const { rows } = await pool.query(query, values);
 
     let result = queryBuild.result(rows);
@@ -200,7 +199,6 @@ export const find = async (req, res) => {
 
       return post;
     });
-
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -211,7 +209,7 @@ export const create = async (req, res) => {
   try {
     const { titulo, conteudo, categoria_id, curso_id, aluno_id } = req.body;
 
-    const data_criacao = moment().format("YYYY-MM-DD");
+    const data_criacao = moment().format("YYYY-MM-DD HH:mm:ss");
     const data_atualizacao = data_criacao;
     const solucionado = false;
     const slug = slugify(titulo, {
@@ -277,26 +275,24 @@ export const findById = async (req, res) => {
     }
     res.status(200).json(result);
   } catch (err) {
-    console.log('eita', err)
     res.status(400).json({ message: err.message });
   }
 };
 
 export const findResponses = async (req,res)=>{
   try{
-    console.log('ooijiojiojio')
     const postId = req.params.postId;
 
     const result = {}
 
     const { rows } = await pool.query(
-      `SELECT RESPOSTA.*, ALUNO.ALUNO_ID AS ALUNO_ID, ALUNO.NOME AS ALUNO_NOME, PROFESSOR.PROFESSOR_ID AS PROFESSOR_ID, PROFESSOR.NOME AS PROFESSOR_NOME FROM RESPOSTA LEFT JOIN ALUNO ON RESPOSTA.ALUNO_ID = ALUNO.ALUNO_ID LEFT JOIN PROFESSOR ON PROFESSOR.PROFESSOR_ID = RESPOSTA.PROFESSOR_ID WHERE RESPOSTA.POST_ID = $1 ORDER BY RESPOSTA.DATA_CRIACAO ASC`,
+      `SELECT RESPOSTA.*, ALUNO.ALUNO_ID AS ALUNO_ID, ALUNO.NOME AS ALUNO_NOME, PROFESSOR.PROFESSOR_ID AS PROFESSOR_ID, PROFESSOR.NOME AS PROFESSOR_NOME FROM RESPOSTA LEFT JOIN ALUNO ON RESPOSTA.ALUNO_ID = ALUNO.ALUNO_ID LEFT JOIN PROFESSOR ON PROFESSOR.PROFESSOR_ID = RESPOSTA.PROFESSOR_ID WHERE RESPOSTA.POST_ID = $1 ORDER BY RESPOSTA.DATA_CRIACAO  ASC`,
       [postId]
     );
 
     result.respostas = rows
     result.total_respostas = rows.length
-
+    
     result.respostas = result.respostas.map(resposta =>{
       let usuario = {}
       if(resposta.aluno_id){
@@ -318,11 +314,9 @@ export const findResponses = async (req,res)=>{
     })
 
     result.solucao_id = solucao_id
-
-    console.log(result)
+  
     res.status(200).json(result);
   }catch (err){
-    console.log('opa', err)
     res.status(400).json({ message: err.message });
   }
 }
@@ -332,7 +326,7 @@ export const saveResponse = async (req, res) => {
   try {
     const { resposta, post_id ,aluno_id } = req.body;
 
-    const data_criacao = moment().format("YYYY-MM-DD");
+    const data_criacao = moment().format("YYYY-MM-DD HH:mm:ss");
     const data_atualizacao = data_criacao;
     const solucao = false
     let sanitizedConteudo;
@@ -361,7 +355,6 @@ export const saveResponse = async (req, res) => {
 
     res.status(201).json(respostaCreated);
   } catch (err) {
-    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
