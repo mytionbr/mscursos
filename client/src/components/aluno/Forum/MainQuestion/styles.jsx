@@ -14,11 +14,6 @@ export default makeStyles((theme) => ({
         justifyContent: 'space-between',
         borderBottom: '0.1rem solid #aaa'
     },
-    time:{
-        fontWeight: '700',
-        color: '#797373',
-        marginLeft: '0.2rem'
-    },
     tagsContainer:{
         display: 'flex',
         '& > *':{

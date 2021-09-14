@@ -35,7 +35,7 @@ function Selector({ items, state, setState, name }) {
                   />
                 }
               >
-                  <MenuItem  value={null}><em>Nenhum</em></MenuItem >
+                  <MenuItem  value={null}><em>Todos</em></MenuItem >
                 {items.map((item) => (
                   <MenuItem  value={item.value}>{item.name}</MenuItem >
                 ))}

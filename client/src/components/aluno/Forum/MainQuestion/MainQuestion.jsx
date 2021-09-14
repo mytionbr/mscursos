@@ -74,7 +74,7 @@ function MainQuestion({refToResponse}) {
           <Tags tags={tags} />
           <User aluno={aluno} />
           <Box style={{ flexGrow: 1 }} />
-          <Typography variant="body1" className={classes.time}>
+          <Typography variant="body1" >
             {moment(dataCriacao).startOf().fromNow()}
           </Typography>
         </Box>
