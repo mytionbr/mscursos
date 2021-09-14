@@ -133,4 +133,55 @@ export const remove = async (req, res) =>{
     }
 }
 
+export const findDetails = async (req,res)=>{
+    try{
+        let alunoId = req.params.alunoId
 
+        let result = {}
+
+        const { rows: alunoRows } = await pool.query(
+            `SELECT ALUNO.NOME, ALUNO.ALUNO_ID FROM ALUNO WHERE ALUNO.ALUNO_ID = $1`,
+            [alunoId])
+        
+        result.aluno = alunoRows[0]
+
+        const { rows: matriculasRows } = await pool.query(
+            `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
+            (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
+               WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+              as aulas_vistas,
+            (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
+            FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = MATRICULA.CURSO_ID
+                  INNER JOIN ALUNO ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID WHERE ALUNO.ALUNO_ID = $1
+                  ORDER BY MATRICULA.DATA_CRIACAO DESC`,
+            [alunoId])
+        
+        let matriculas = matriculasRows
+
+        let cursos_completos = [] 
+        matriculas.forEach(item =>{
+            const result = (Number(item.aulas_vistas) * 100) / Number(item.aulas_total)
+            if(result === 100){
+                cursos_completos.push(item)
+            }
+          })
+        
+        result.aluno.total_cursos = cursos_completos.length
+        
+        result.cursos_completos = cursos_completos
+
+        const { rows: postRows } = await pool.query(
+            `SELECT COUNT(*) FROM POST WHERE POST.ALUNO_ID = $1`,
+            [alunoId])
+        
+        result.aluno.total_posts = postRows[0].count
+        console.log(result)
+        res.status(200).json(result)
+
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}

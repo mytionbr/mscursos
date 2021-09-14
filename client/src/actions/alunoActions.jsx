@@ -1,4 +1,7 @@
 import {
+  ALUNO_DETAILS_FAIL,
+  ALUNO_DETAILS_REQUEST,
+  ALUNO_DETAILS_SUCCESS,
   ALUNO_FIND_CURSOS_FAIL,
   ALUNO_FIND_CURSOS_REQUEST,
   ALUNO_FIND_CURSOS_SUCCESS,
@@ -208,3 +211,21 @@ export const register =
       });
     }
   };
+
+export const detailsAluno = (alunoId) => async (dispatch, getState) => {
+  dispatch({ type: ALUNO_DETAILS_REQUEST });
+  const {
+   alunoSignin: { alunoInfo },
+  } = getState();
+  try {
+    const { data } = await Api.findAlunoDetails(alunoId,alunoInfo);
+   
+    dispatch({ type: ALUNO_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ALUNO_DETAILS_FAIL,
+      payload: error.error || error.message,
+    });
+  }
+};

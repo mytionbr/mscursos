@@ -4,13 +4,17 @@ export default makeStyles((theme) => ({
    rootContainer: {
        display: 'flex',
        padding: '1rem',
+       flexDirection: 'column',
        justifyContent: 'center',
        alignItems: 'center'
    },
    avatar:{
-       padding: '1rem',
-       '& > svg':{
-           fontSize: '1rem'
-       }
+    height: "6rem",
+    width: "6rem",
+    backgroundColor:theme.palette.secondary.main,
+    "& > * ": {
+      fontSize: "3rem",
+    },
+       
     }
 }));

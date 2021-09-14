@@ -16,7 +16,7 @@ import { useHistory } from "react-router";
 import ProgressBar from "../../../ProgressBar/ProgressBar";
 
 function CursoCard(props) {
-  const { name, percent, size, categoriaId, slug } = props;
+  const { name, percent, size, categoriaId, slug, hasProgress = true } = props;
   const history = useHistory();
 
   const action = () => {
@@ -82,7 +82,10 @@ function CursoCard(props) {
                 >
                   {name}
                 </Typography>
-                <Typography
+                {
+                  hasProgress && (
+                    <>
+                      <Typography
                   align={"right"}
                   color="textSecondary"
                   gutterBottom
@@ -95,6 +98,10 @@ function CursoCard(props) {
                   color={"#1a90ff"}
                   className={classes.percent}
                 />
+                    </>
+                  )
+                }
+                
               </Grid>
             </Grid>
           </CardContent>

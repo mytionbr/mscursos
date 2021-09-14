@@ -16,6 +16,7 @@ import AvaliacaoPage from "../screens/Aluno/AvaliacaoPage/AvaliacaoPage";
 import ForumPage from "../screens/Aluno/ForumPage/ForumPage";
 import CreatePost from "../screens/Aluno/CreatePost/CreatePost";
 import PostPage from "../screens/Aluno/PostPage/PostPage";
+import PerfilPage from "../screens/Aluno/PerfilPage/PerfilPage";
 const AlunoRouter = () => {
   
   const appRoutes = () => {
@@ -27,6 +28,7 @@ const AlunoRouter = () => {
           <AlunoRoute path={"/aluno/app/forum/post/:postId"} component={PostPage} />
           <AlunoRoute path={"/aluno/app/forum/novo"} component={CreatePost} />
           <AlunoRoute path={"/aluno/app/forum"} component={ForumPage} />
+          <AlunoRoute path={"/aluno/app/perfil/:alunoId"} component={PerfilPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>

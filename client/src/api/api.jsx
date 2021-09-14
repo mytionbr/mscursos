@@ -10,6 +10,11 @@ const findPosts = (query, alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
+const findAlunoDetails = (alunoId,alunoInfo) =>
+  axios.get(`/api/alunos/details/${alunoId}`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
+
 const findCursosAsCategory = (categoriaId) =>
   axios.get(`/api/cursos/asCategorias/${categoriaId}`);
 
@@ -260,7 +265,8 @@ const Api = {
   findPostById,
   saveResponse,
   listResponse,
-  markSolution
+  markSolution,
+  findAlunoDetails
 };
 
 export default Api;
