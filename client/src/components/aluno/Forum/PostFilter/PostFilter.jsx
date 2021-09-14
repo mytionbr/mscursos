@@ -106,6 +106,22 @@ function PostFilter() {
     }
   }, [cursosData]);
 
+  useEffect(()=>{
+    if(!categoria){
+      setCurso(null)
+    }
+  },[categoria])
+
+  useEffect(()=>{
+    dispatch(
+      findPosts({
+        categoria: categoria || "",
+        curso: curso || "",
+        opcao: opcao || "",
+      })
+    );
+  },[categoria, curso, dispatch, opcao])
+
   return (
     <Paper className={classes.paper}>
       <Box className={[classes.container,classes.space]}>

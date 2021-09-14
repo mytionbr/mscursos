@@ -49,7 +49,9 @@ function PostList(props) {
           <MessageBox>{error}</MessageBox>
         ) : (
           <>
-            {data.posts.map((post) => (
+            {
+            data.posts.length > 0 
+            ? data.posts.map((post) => (
               <PostCard
                 title={post.titulo}
                 isAnswered={post.solucionado}
@@ -59,7 +61,12 @@ function PostList(props) {
                 dateUpdate={post.update_date}
                 postId={post.post_id}
               />
-            ))}
+            ))
+          : (
+            <MessageBox type="info" >
+              Nenhuma pergunta encontrada
+            </MessageBox>
+          )}
 
             <div className={classes.row}>
               <Pagination

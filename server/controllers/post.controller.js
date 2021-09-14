@@ -82,26 +82,26 @@ export const find = async (req, res) => {
           index++;
           switch (param) {
             case "titulo":
-              this.condicional += ` titulo iLIKE '%'||$${index}||'%' `;
+              this.condicional += ` post.titulo iLIKE '%'||$${index}||'%' `;
               break;
             case "curso":
-              this.condicional += ` curso_id = $${index}`;
+              this.condicional += ` post.curso_id = $${index}`;
               break;
             case "opcao":
               switch (this.params[param]) {
                 case "TODOS":
-                  this.condicional += ` solucionado = true OR solucionado = false `;
+                  this.condicional += ` (post.solucionado = true OR solucionado = false) `;
                   break;
                 case "SEM_RESPOSTA":
-                  this.condicional += ` solucionado = false `;
+                  this.condicional += ` post.solucionado = false `;
                   break;
                 case "SOLUCIONADOS":
-                  this.condicional += ` solucionado = true `;
+                  this.condicional += ` post.solucionado = true `;
                   break;
               }
               break;
             case "categoria":
-              this.condicional += ` cateogoria_id = $${index}`;
+              this.condicional += ` post.categoria_id = $${index}`;
               break;
             default:
               break;
@@ -199,8 +199,10 @@ export const find = async (req, res) => {
 
       return post;
     });
+    console.log(queryBuild)
     res.status(200).json(result);
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: err.message });
   }
 };
