@@ -20,10 +20,15 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ClassIcon from "@material-ui/icons/Class";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
+import { useSelector } from "react-redux";
+
 function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const menuId = "primary-search-account-menu";
+
+  const alunoSignin = useSelector((state) => state.alunoSignin);
+  const {  alunoInfo } = alunoSignin;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(onMobileNavOpen);
@@ -115,7 +120,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                   open={isMenuOpen}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                  <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/perfil/${alunoInfo.aluno_id}`}>Perfil</MenuItem>
                   <MenuItem onClick={handleMenuClose}>Editar</MenuItem>
                   <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
                 </Menu>
