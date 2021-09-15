@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   Paper,
   TextField,
@@ -18,6 +19,7 @@ function Signin({setEmail, setPassword, handleSubmit}) {
       </Avatar>
       <Typography variant="h5">Login</Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
+      <Box className={classes.inputs}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -45,6 +47,7 @@ function Signin({setEmail, setPassword, handleSubmit}) {
           color={"secondary"}
           onChange={(e)=> setPassword(e.target.value)}
         />
+        </Box>
         <Button
           type="submit"
           fullWidth

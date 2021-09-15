@@ -269,10 +269,11 @@ export const updateAluno = (aluno) => async (dispatch, getState) => {
   try {
     aluno.aluno_id = alunoInfo.aluno_id
     const { data } = await Api.updateAluno(aluno,alunoInfo);
-   console.log(data)
+   
+   localStorage.setItem('alunoInfo', JSON.stringify(data));
+    dispatch({ type: ALUNO_SIGNIN_SUCCESS, payload: data });
     dispatch({ type: ALUNO_UPDATE_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error)
     dispatch({
       type: ALUNO_UPDATE_FAIL,
       payload: error.error || error.message,

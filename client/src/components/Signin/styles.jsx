@@ -11,6 +11,12 @@ export default makeStyles((theme) =>({
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main
     },
+    inputs:{
+        marginBottom: '1rem'
+    },
+    submit:{
+        padding: '0.5rem'
+    }
 
    
 }))

@@ -98,9 +98,14 @@ export const update = async (req, res) => {
     try {
         
         let aluno = req.profile
+        const senha = aluno.senha
         aluno = extend(aluno, req.body)
-       
-        aluno.senha = bcrypt.hashSync(aluno.senha,8)
+
+        if(req.body.senha && req.body.senha !== ''){
+            aluno.senha = bcrypt.hashSync(aluno.senha,8)
+        } else {
+            aluno.senha = senha
+        }
 
         const { rows } = await pool.query(
             'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',

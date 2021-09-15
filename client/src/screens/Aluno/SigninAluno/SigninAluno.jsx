@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Container, Grid, Typography } from '@material-ui/core'
+import {Container, Divider, Grid, Typography } from '@material-ui/core'
 import LoadingBox from '../../../components/core/LoadingBox/LoadingBox'
 import MessageBox from '../../../components/core/MessageBox/MessageBox'
 

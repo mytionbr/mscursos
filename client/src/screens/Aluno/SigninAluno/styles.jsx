@@ -8,6 +8,7 @@ export default makeStyles((theme) =>({
     illustration:{
         width: '500px',
         height: '500px',
+        marginTop: '1rem'
     },
     presentationContainer:{
         height:' 100%',
@@ -20,7 +21,8 @@ export default makeStyles((theme) =>({
     presentation:{
         position: 'absolute',
         zIndex: '5',
-        top: '90px'
+        top: '90px',
+       
     }
 
     
