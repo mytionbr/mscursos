@@ -121,7 +121,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                   onClose={handleMenuClose}
                 >
                   <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/perfil/${alunoInfo.aluno_id}`}>Perfil</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Editar</MenuItem>
+                  <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/info/${alunoInfo.aluno_id}`}>Seus dados</MenuItem>
                   <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
                 </Menu>
               </div>

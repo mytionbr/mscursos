@@ -64,7 +64,7 @@ function PostList(props) {
             ))
           : (
             <MessageBox type="info" >
-              Nenhuma pergunta encontrada
+              Nenhum post encontrada
             </MessageBox>
           )}
 

@@ -15,6 +15,11 @@ const findAlunoDetails = (alunoId,alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
+const findAlunoInformations = (alunoId,alunoInfo) =>
+axios.get(`/api/alunos/${alunoId}/informations`, {
+  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+});
+
 const findCursosAsCategory = (categoriaId) =>
   axios.get(`/api/cursos/asCategorias/${categoriaId}`);
 
@@ -116,6 +121,11 @@ const deleteMatricula = (matricula, alunoInfo) =>
       headers: { Authorization: `Bearer ${alunoInfo?.token}` },
     }
   );
+
+const updateAluno = (aluno, alunoInfo)=>
+  axios.put(`/api/alunos/${aluno.aluno_id}`,{
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
 
 const updateCurso = (curso, professorInfo) =>
   axios.put(`/api/cursos/${curso.curso_id}`, curso, {
@@ -266,7 +276,9 @@ const Api = {
   saveResponse,
   listResponse,
   markSolution,
-  findAlunoDetails
+  findAlunoDetails,
+  findAlunoInformations,
+  updateAluno
 };
 
 export default Api;

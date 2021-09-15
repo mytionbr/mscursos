@@ -25,9 +25,9 @@ import { listCategoria } from "../../actions/categoriaActions";
 import { findCursos } from "../../actions/cursoActions";
 import MessageBox from "../core/MessageBox/MessageBox";
 import LoadingBox from "../core/LoadingBox/LoadingBox";
-import useStyles from './styles'
+
 function CategoriaSelector() {
-  const classes = useStyles()
+
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
   const { loading, error, categorias } = categoriaList;
@@ -123,10 +123,6 @@ function CategoriaSelector() {
             letterSpacing: 0,
             textTransform: "none",
             width: "100%",
-            ...(checked && {
-              color: "#506198",
-            }),
-            "& svg": {},
           }}
           onClick={() => handleAction(categoria_id)}
         >
@@ -142,7 +138,7 @@ function CategoriaSelector() {
             <Box style={{ width: "1rem" }} />
             <Typography variant="body1">{nome}</Typography>
             <Box style={{ flexGrow: 1 }} />
-            {active ? <CheckBoxIcon /> : ""}
+            {active ? <CheckBoxIcon style={{color: "#506198"}} /> : ""}
           </Box>
         </Button>
       </ListItem>
@@ -156,7 +152,7 @@ function CategoriaSelector() {
       ) : error ? (
         <MessageBox type="error">{error}</MessageBox>
       ) : (
-        <Paper className={classes.sticky} position="static">
+        <Paper>
           <Box
             style={{
               display: "flex",
@@ -167,7 +163,7 @@ function CategoriaSelector() {
               style={{
                 alignItems: "center",
                 display: "flex",
-                padding: "1.2rem 2rem",
+                padding: "1.5rem 2rem",
               }}
             >
               <Typography color="textPrimary" variant="h5">
@@ -176,7 +172,7 @@ function CategoriaSelector() {
               </Typography>
             </Box>
             <Divider />
-            <Box style={{ padding: "0.2rem 1rem" }}>
+            <Box style={{ padding: "1rem" }}>
               <List>
                 {categorias.map((item) => (
                   <CategoriaItem

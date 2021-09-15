@@ -8,6 +8,9 @@ import {
   ALUNO_FIND_FAIL,
   ALUNO_FIND_REQUEST,
   ALUNO_FIND_SUCCESS,
+  ALUNO_INFORMATIONS_FAIL,
+  ALUNO_INFORMATIONS_REQUEST,
+  ALUNO_INFORMATIONS_SUCCESS,
   ALUNO_NOTA_CREATE_FAIL,
   ALUNO_NOTA_CREATE_REQUEST,
   ALUNO_NOTA_CREATE_SUCCESS,
@@ -26,6 +29,9 @@ import {
   ALUNO_SIGNIN_FAIL,
   ALUNO_SIGNIN_REQUEST,
   ALUNO_SIGNIN_SUCCESS,
+  ALUNO_UPDATE_FAIL,
+  ALUNO_UPDATE_REQUEST,
+  ALUNO_UPDATE_SUCCESS,
 } from "../constants/alunoConstantes";
 import Api from "../api/api";
 
@@ -225,6 +231,43 @@ export const detailsAluno = (alunoId) => async (dispatch, getState) => {
     console.log(error)
     dispatch({
       type: ALUNO_DETAILS_FAIL,
+      payload: error.error || error.message,
+    });
+  }
+};
+
+export const informationAluno = (alunoId) => async (dispatch, getState) => {
+  dispatch({ type: ALUNO_INFORMATIONS_REQUEST });
+  const {
+   alunoSignin: { alunoInfo },
+  } = getState();
+  try {
+    const { data } = await Api.findAlunoInformations(alunoId,alunoInfo);
+   
+    dispatch({ type: ALUNO_INFORMATIONS_SUCCESS, payload: data });
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ALUNO_INFORMATIONS_FAIL,
+      payload: error.error || error.message,
+    });
+  }
+};
+
+export const updateAluno = (aluno) => async (dispatch, getState) => {
+  dispatch({ type: ALUNO_UPDATE_REQUEST });
+  const {
+   alunoSignin: { alunoInfo },
+  } = getState();
+  try {
+    aluno.aluno_id = alunoInfo.aluno_id
+    const { data } = await Api.updateAluno(aluno,alunoInfo);
+   
+    dispatch({ type: ALUNO_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ALUNO_UPDATE_FAIL,
       payload: error.error || error.message,
     });
   }

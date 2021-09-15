@@ -179,7 +179,35 @@ export const findDetails = async (req,res)=>{
         res.status(200).json(result)
 
     } catch (err) {
-        console.log(err)
+        res.status(400).json({
+            message: err.message
+        })
+    }
+}
+
+
+export const findInformations = async (req,res)=>{
+    try {
+        const aluno = req.profile
+
+        const { rows: rowsAssinatura } = await pool.query(
+            `SELECT ASSINATURA.ASSINATURA_ID, ASSINATURA.PAGO AS STATUS, ASSINATURA.DATA_CRIACAO AS DATA_INICIO, ASSINATURA.PLANO_ID, PLANO.NOME AS PLANO_NOME,
+            ASSINATURA.PRECO, ASSINATURA.ALUNO_ID FROM ASSINATURA INNER JOIN PLANO ON ASSINATURA.PLANO_ID = PLANO.PLANO_ID WHERE ASSINATURA.ALUNO_ID = $1`,
+            [aluno.aluno_id])
+        
+        const assinatura = rowsAssinatura[0]
+
+        aluno.senha = undefined
+        aluno.data_update = undefined
+        
+        let result = {
+            aluno,
+            assinatura
+        }
+
+        res.status(200).json(result)
+        
+    } catch (err) {
         res.status(400).json({
             message: err.message
         })
