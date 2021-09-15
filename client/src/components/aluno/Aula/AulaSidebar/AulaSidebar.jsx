@@ -111,7 +111,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
             </Box>
             
             <Divider style={{background:"#fff"}} />
-            <Box style={{}}>
+            <Box >
                 <List>
                     {
                         data.aulas.map((aula)=>(

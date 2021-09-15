@@ -1,4 +1,4 @@
-import { Box, Button, ListItem } from '@material-ui/core'
+import { Box, Button, Collapse, ListItem } from '@material-ui/core'
 import React, { useState } from 'react'
 import {  NavLink, useLocation } from 'react-router-dom'
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -24,11 +24,13 @@ function Navitem({href,title,visualization, ...rest}) {
                 component={NavLink}
                 className={classes.button}
                 to={href}
-            >
-                 <span  style={{
-                    borderLeft: `0.5rem solid ${active ? '#506198' : '#212121'}`,
-                    height: '2.5rem'
-                }}>'</span>
+            >   
+                 <Collapse  appear={true} in={true} timeout={700}>
+                    <span  style={{
+                        borderLeft: `0.7rem solid ${active ? '#506198' : '#212121'}`,
+                        fontSize: '1.2rem',
+                    }}>'</span>
+                </Collapse>
                 <Box style={{margin:'0.3rem'}}/>
                 <span
                     style={{
