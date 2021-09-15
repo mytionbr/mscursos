@@ -1,4 +1,4 @@
-import { Box, Button, Card, FormHelperText, InputLabel, Typography } from "@material-ui/core";
+import { Box, Button, Card, Fade, FormHelperText, InputLabel, Typography } from "@material-ui/core";
 import MDEditor from "@uiw/react-md-editor";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,6 +39,7 @@ function RespostaForm() {
   };
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
     <Box>
         <Typography variant="h6" gutterBottom>Sua Resposta</Typography>
     
@@ -67,6 +68,7 @@ function RespostaForm() {
       }
     </Card>
     </Box>
+    </Fade>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Chip, Typography } from "@material-ui/core";
+import { Avatar, Box, Button, Card, Chip, Fade, Typography } from "@material-ui/core";
 import DOMPurify from "dompurify";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
@@ -59,6 +59,7 @@ function Resposta({resposta,refToResponse}) {
 
   const Informations = ({ date, user }) => {
     return (
+      
       <Box className={classes.informations}>
         <Box className={classes.user}>
             <Avatar className={classes.avatarIcon}>{user.nome[0].toUpperCase()}</Avatar>
@@ -115,6 +116,7 @@ function Resposta({resposta,refToResponse}) {
   };
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
     <Card className={classes.rootContainer} ref={resposta && resposta.solucao ? refToResponse : ref}>
       <Corpo
         conteudo={resposta.conteudo}
@@ -122,6 +124,7 @@ function Resposta({resposta,refToResponse}) {
         user={resposta.usuario}
       />
     </Card>
+    </Fade>
   );
 }
 

@@ -3,6 +3,7 @@ import {
   Box,
   Card,
   Chip,
+  Fade,
   Grid,
   Typography,
 } from "@material-ui/core";
@@ -109,6 +110,8 @@ function PostCard({
   };
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
+
     <Card className={classes.card}>
       <Box className={classes.rootContainer}>
         <Box className={classes.presentationContainer}>
@@ -130,6 +133,7 @@ function PostCard({
         </Box>
       </Box>
     </Card>
+    </Fade>
   );
 }
 

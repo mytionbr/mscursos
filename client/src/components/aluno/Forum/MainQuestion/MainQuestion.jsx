@@ -5,6 +5,7 @@ import {
   Chip,
   Divider,
   Typography,
+  Fade
 } from "@material-ui/core";
 import React, { useRef } from "react";
 import useStyles from "./styles";
@@ -143,6 +144,7 @@ function MainQuestion({refToResponse}) {
   console.log(tags);
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
     <Card>
       <Box className={classes.rootContainer}>
         <Title
@@ -154,6 +156,7 @@ function MainQuestion({refToResponse}) {
         <Corpo solucionado={data.post.solucionado} conteudo={data.post.conteudo} />
       </Box>
     </Card>
+    </Fade>
   );
 }
 
