@@ -5,6 +5,7 @@ import {
   Container,
   Grid,
   TextField,
+  Fade
 } from "@material-ui/core";
 import MDEditor from "@uiw/react-md-editor";
 import React, { useEffect, useState } from "react";
@@ -131,6 +132,8 @@ function CreateFormPost() {
   };
 
   return (
+    <Fade appear={true} in={true} timeout={700}>
+
     <Container>
       <Card>
         <form onSubmit={handleSubmit} className={classes.boxContainer}>
@@ -218,6 +221,7 @@ function CreateFormPost() {
         }
       </Card>
     </Container>
+    </Fade>
   );
 }
 
