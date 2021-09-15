@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Fade,
   Grid,
   Typography,
 } from "@material-ui/core";
@@ -20,6 +21,7 @@ function PerfilCompletedCursos() {
   return (
     <div>
       {data.cursos_completos.length ? (
+      <Fade appear={true} in={true} timeout={700}>
         <Accordion className={classes.details}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon className={classes.icon} />}
@@ -27,7 +29,7 @@ function PerfilCompletedCursos() {
             id="panel1a-header"
           >
             <Typography className={classes.heading}>
-              Todos os meus cursos
+              Cursos concluídos
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -46,6 +48,7 @@ function PerfilCompletedCursos() {
             </Grid>
           </AccordionDetails>
         </Accordion>
+        </Fade>
       ) : ('')}
     </div>
   );

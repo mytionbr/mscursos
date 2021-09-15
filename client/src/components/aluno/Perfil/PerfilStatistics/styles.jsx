@@ -8,10 +8,9 @@ export default makeStyles((theme) => ({
    },
    card:{
         display: 'flex',
-        padding: '0;5rem',
+        padding: '0.5rem',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.palette.secondary.main,
    }
   
 }));

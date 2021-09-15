@@ -4,9 +4,8 @@ import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsAluno } from '../../../actions/alunoActions';
 import ToolbarPage from "../../../components/aluno/dashboard/ToolbarPage/ToolbarPage";
+import PerfilCard from '../../../components/aluno/Perfil/PerfilCard/PerfilCard';
 import PerfilCompletedCursos from '../../../components/aluno/Perfil/PerfilCompletedCursos/PerfilCompletedCursos';
-import PerfilHeader from '../../../components/aluno/Perfil/PerfilHeader/PerfilHeader';
-import PerfilStatistics from '../../../components/aluno/Perfil/PerfilStatistics/PerfilStatistics';
 import LoadingBox from '../../../components/core/LoadingBox/LoadingBox';
 import MessageBox from '../../../components/core/MessageBox/MessageBox';
 import { ALUNO_DETAILS_RESET } from '../../../constants/alunoConstantes';
@@ -55,10 +54,7 @@ function PerfilPage(props) {
                                         justifyContent={"space-between"}
                                     >
                                          <Grid item xs="12">
-                                            <PerfilHeader />
-                                        </Grid>
-                                        <Grid item xs="12">
-                                            <PerfilStatistics />
+                                             <PerfilCard />
                                         </Grid>
                                         <Grid item xs="12">
                                             <PerfilCompletedCursos />

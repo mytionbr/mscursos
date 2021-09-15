@@ -12,7 +12,7 @@ function PerfilStatistics() {
 
     return (
         <Container className={classes.rootContainer}>
-            <Card className={classes.card}>
+            <Card className={classes.card} elevation={0}>
                 <Statistic 
                     icon={<SchoolIcon />} 
                     info={data.aluno.total_cursos} 

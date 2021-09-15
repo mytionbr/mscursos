@@ -1,16 +1,17 @@
-import { grey } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
-   rootContainer: {
+    container:{
        display: 'flex',
-       padding: '1rem',
+       justifyContent: 'center',
+    },
+    card: {
+       display: 'flex',
+       padding: '0.5rem',
+       flexDirection: 'column',
        justifyContent: 'center',
        alignItems: 'center',
-       flexDirection: 'column',
-       '& > *':{
-            color: grey[700],
-       }
+       maxWidth: '26rem'
    },
-  
+   
 }));

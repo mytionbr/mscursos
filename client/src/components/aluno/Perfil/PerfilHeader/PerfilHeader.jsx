@@ -15,7 +15,7 @@ function PerfilHeader() {
                 {data.aluno.nome[0].toUpperCase()}
             </Typography>
             </Avatar>
-            <Typography variant="h3">
+            <Typography className={classes.name} variant="h3">
                 {data.aluno.nome}
             </Typography>
         </Container>
