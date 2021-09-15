@@ -80,7 +80,7 @@ function FilterForm() {
     }
 
     return (
-        <Paper elevation={2} className={classes.paper} position="static">
+        <Paper elevation={2} className={classes.paper}>
             <div className={classes.form}>
                 <Typography variant="h6">
                     Filtre por um curso

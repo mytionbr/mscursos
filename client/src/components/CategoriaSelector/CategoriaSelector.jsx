@@ -25,7 +25,9 @@ import { listCategoria } from "../../actions/categoriaActions";
 import { findCursos } from "../../actions/cursoActions";
 import MessageBox from "../core/MessageBox/MessageBox";
 import LoadingBox from "../core/LoadingBox/LoadingBox";
+import useStyles from './styles'
 function CategoriaSelector() {
+  const classes = useStyles()
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
   const { loading, error, categorias } = categoriaList;
@@ -154,7 +156,7 @@ function CategoriaSelector() {
       ) : error ? (
         <MessageBox type="error">{error}</MessageBox>
       ) : (
-        <Paper>
+        <Paper className={classes.sticky} position="static">
           <Box
             style={{
               display: "flex",
@@ -165,7 +167,7 @@ function CategoriaSelector() {
               style={{
                 alignItems: "center",
                 display: "flex",
-                padding: "2rem",
+                padding: "1.2rem 2rem",
               }}
             >
               <Typography color="textPrimary" variant="h5">
@@ -174,7 +176,7 @@ function CategoriaSelector() {
               </Typography>
             </Box>
             <Divider />
-            <Box style={{ padding: "1rem" }}>
+            <Box style={{ padding: "0.2rem 1rem" }}>
               <List>
                 {categorias.map((item) => (
                   <CategoriaItem
