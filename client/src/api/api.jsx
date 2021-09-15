@@ -123,7 +123,7 @@ const deleteMatricula = (matricula, alunoInfo) =>
   );
 
 const updateAluno = (aluno, alunoInfo)=>
-  axios.put(`/api/alunos/${aluno.aluno_id}`,{
+  axios.put(`/api/alunos/${aluno.aluno_id}`,aluno,{
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 

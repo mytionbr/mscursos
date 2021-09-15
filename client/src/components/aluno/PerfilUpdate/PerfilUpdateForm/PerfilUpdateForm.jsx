@@ -52,12 +52,11 @@ function PerfilUpdateForm() {
 
   useEffect(()=>{
     if(dataUpdate){
-      dispatch({type: ALUNO_UPDATE_RESET})
       setSuccessUpdate(true)
     } else {
       setSuccessUpdate(false)
     }
-  },[dispatch])
+  },[dataUpdate, dispatch])
 
   const handleChangeNome = (event) => {
     const { value } = event.target;
@@ -95,7 +94,7 @@ function PerfilUpdateForm() {
     let cpfFormatado = cpf.replace( /\D/g , "") 
     setCpf(cpfFormatado)
 
-    if(senha.length !== 0 || senha.length < 6){
+    if(senha.length !== 0 && senha.length < 6){
       alert("A senha deve ter o tamanho mínimo de 6 caracteres");
     } else if(cpf.length < 11){ 
       alert("O CPF deve ter 11 caracteres");

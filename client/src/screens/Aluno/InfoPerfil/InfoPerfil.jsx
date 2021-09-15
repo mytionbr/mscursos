@@ -6,6 +6,7 @@ import { informationAluno } from "../../../actions/alunoActions";
 import ToolbarPage from "../../../components/aluno/dashboard/ToolbarPage/ToolbarPage";
 import AssinaturaCard from "../../../components/aluno/PerfilUpdate/AssinaturaCard/AssinaturaCard";
 import PerfilUpdateForm from "../../../components/aluno/PerfilUpdate/PerfilUpdateForm/PerfilUpdateForm";
+import { ALUNO_UPDATE_RESET } from "../../../constants/alunoConstantes";
 
 function InfoPerfil(props) {
   const alunoId = props.match.params.alunoId
@@ -13,6 +14,7 @@ function InfoPerfil(props) {
   const dispatch = useDispatch();
 
   useEffect(()=>{
+    dispatch({type: ALUNO_UPDATE_RESET})
     dispatch(informationAluno(alunoId))
   },[alunoId, dispatch])
 

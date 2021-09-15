@@ -96,6 +96,7 @@ export const read =  async (req, res) => {
 
 export const update = async (req, res) => {
     try {
+        
         let aluno = req.profile
         aluno = extend(aluno, req.body)
        
@@ -108,7 +109,6 @@ export const update = async (req, res) => {
         let updatedAluno = rows[0]
 
         usuarioResponseSuccess(res,updatedAluno)
-
     } catch (err) {
         res.status(400).json({
             message: err.message
@@ -175,7 +175,7 @@ export const findDetails = async (req,res)=>{
             [alunoId])
         
         result.aluno.total_posts = postRows[0].count
-        console.log(result)
+        
         res.status(200).json(result)
 
     } catch (err) {

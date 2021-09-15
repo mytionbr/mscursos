@@ -262,7 +262,7 @@ export const updateAluno = (aluno) => async (dispatch, getState) => {
   try {
     aluno.aluno_id = alunoInfo.aluno_id
     const { data } = await Api.updateAluno(aluno,alunoInfo);
-   
+   console.log(data)
     dispatch({ type: ALUNO_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     console.log(error)
