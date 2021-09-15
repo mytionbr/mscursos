@@ -14,12 +14,13 @@ import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import {Link} from 'react-router-dom'
+import LinkPerfil from "../../LinkPerfil/LinkPerfil";
 function MainQuestion({refToResponse}) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
   const postInformations = useSelector((state) => state.postInformations);
-  const { loading, error, data } = postInformations;
+  const {  data } = postInformations;
 
   const postListResponse = useSelector((state) => state.postListResponse);
   const {
@@ -58,7 +59,7 @@ function MainQuestion({refToResponse}) {
     return (
       <Box className={classes.userContainer}>
         <Avatar className={classes.avatarUser}>{aluno.nome[0]}</Avatar>
-        <Typography variant="body1"> por {aluno.nome}</Typography>
+        <Typography variant="body1"> por <LinkPerfil alunoId={aluno.aluno_id}>{aluno.nome}</LinkPerfil></Typography>
       </Box>
     );
   };

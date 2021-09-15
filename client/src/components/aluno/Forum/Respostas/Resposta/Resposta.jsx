@@ -7,6 +7,7 @@ import { findPosts, informationsPost, listResponse, markResponseAsSolution } fro
 import { POST_SOLUTION_RESET } from "../../../../../constants/postConstantes";
 import LoadingBox from "../../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../../core/MessageBox/MessageBox";
+import LinkPerfil from "../../../LinkPerfil/LinkPerfil";
 import useStyles from "./styles";
 function Resposta({resposta,refToResponse}) {
   const classes = useStyles();
@@ -61,7 +62,7 @@ function Resposta({resposta,refToResponse}) {
       <Box className={classes.informations}>
         <Box className={classes.user}>
             <Avatar className={classes.avatarIcon}>{user.nome[0].toUpperCase()}</Avatar>
-            <Typography variant="body1">{user.nome}</Typography>
+            <Typography variant="body1"><LinkPerfil alunoId={user.aluno_id}>{user.nome}</LinkPerfil></Typography>
         </Box>
           {
             solucao && (

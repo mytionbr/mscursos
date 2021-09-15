@@ -8,9 +8,10 @@ import {
 import React from "react";
 import moment from "moment";
 import Rating from "@material-ui/lab/Rating";
+import LinkPerfil from "../../LinkPerfil/LinkPerfil";
 function AlunosComments({ comments }) {
 
-  const CommentInfo = ({ alunoNome, date }) => {
+  const CommentInfo = ({ alunoNome,alunoId, date }) => {
     return (
       <Grid container xs={3}>
         <Grid
@@ -36,7 +37,11 @@ function AlunosComments({ comments }) {
             }}>
            {moment(date).fromNow()}
           </Typography>
-          <Typography variant="body1">{alunoNome}</Typography>
+          <Typography variant="body1">
+            <LinkPerfil alunoId={alunoId}>
+              {alunoNome}
+            </LinkPerfil>
+            </Typography>
         </Grid>
       </Grid>
     );
@@ -74,6 +79,7 @@ function AlunosComments({ comments }) {
           <CommentInfo
             alunoNome={comment.aluno_nome}
             date={comment.data_criacao}
+            alunoId={comment.aluno_id}
           />
           <CommentContent
             rating={comment.valor}

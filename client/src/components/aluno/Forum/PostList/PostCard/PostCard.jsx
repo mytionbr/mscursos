@@ -11,6 +11,7 @@ import useStyles from "./styles";
 import CheckIcon from "@material-ui/icons/Check";
 import moment from "moment";
 import {Link } from 'react-router-dom'
+import LinkPerfil from "../../../LinkPerfil/LinkPerfil";
 function PostCard({
   title,
   totalResponses,
@@ -94,7 +95,10 @@ function PostCard({
         </Box>
         <Box className={classes.userContainer}>
           <Typography variant="h6" className={classes.userName}>
+           <LinkPerfil alunoId={user.aluno_id}>
             {user.nome}
+           </LinkPerfil>
+           
           </Typography>
           <Typography variant="body2">
             atualizado em {moment().startOf(dateUpdate).fromNow()}
