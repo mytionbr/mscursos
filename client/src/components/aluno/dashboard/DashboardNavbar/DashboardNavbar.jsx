@@ -20,12 +20,15 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ClassIcon from "@material-ui/icons/Class";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../../../../actions/alunoActions";
 
 function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const menuId = "primary-search-account-menu";
+
+  const dispatch = useDispatch()
 
   const alunoSignin = useSelector((state) => state.alunoSignin);
   const {  alunoInfo } = alunoSignin;
@@ -40,6 +43,10 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleSignout = () => {
+    dispatch(signout())
+  }
 
   return (
     <div>
@@ -122,7 +129,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                 >
                   <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/perfil/${alunoInfo.aluno_id}`}>Perfil</MenuItem>
                   <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/info/${alunoInfo.aluno_id}`}>Seus dados</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
+                  <MenuItem onClick={handleSignout}>Sair</MenuItem>
                 </Menu>
               </div>
             </div>

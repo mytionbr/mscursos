@@ -29,6 +29,7 @@ import {
   ALUNO_SIGNIN_FAIL,
   ALUNO_SIGNIN_REQUEST,
   ALUNO_SIGNIN_SUCCESS,
+  ALUNO_SIGNOUT,
   ALUNO_UPDATE_FAIL,
   ALUNO_UPDATE_REQUEST,
   ALUNO_UPDATE_SUCCESS,
@@ -48,6 +49,12 @@ export const signin = (email, password) => async (dispatch) => {
     });
   }
 };
+
+export const signout = () => (dispatch) => {
+  localStorage.removeItem('alunoInfo')
+  dispatch({type:ALUNO_SIGNOUT})
+  document.location.href = '/aluno/signin'
+}
 
 export const findAlunos = (params) => async (dispatch, getState) => {
   dispatch({ type: ALUNO_FIND_REQUEST });
