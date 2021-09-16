@@ -22,13 +22,15 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../../../actions/alunoActions";
-
+import { useHistory } from 'react-router-dom'
 function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [search, setSearch] = useState('')
   const menuId = "primary-search-account-menu";
-
   const dispatch = useDispatch()
+
+  const history = useHistory()
 
   const alunoSignin = useSelector((state) => state.alunoSignin);
   const {  alunoInfo } = alunoSignin;
@@ -48,6 +50,16 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
     dispatch(signout())
   }
 
+  const handleChange = (event) =>{
+    const { value } = event.target
+    setSearch(value)
+  }
+
+  const handleSearch = () =>{
+    history.push(`/aluno/app/busca/query?nome=${search}`)
+    setSearch('')
+  }
+
   return (
     <div>
       <AppBar elevation={0} position="absolute" {...rest}>
@@ -61,9 +73,13 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
           <Box style={{ flexGrow: 1 }} />
           <Hidden smDown>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
+            <IconButton 
+                    type="submit" 
+                    className={classes.iconButton} 
+                    aria-label="pesquisar" 
+                    onClick={handleSearch}>
+                    <SearchIcon />
+                </IconButton>
               <div>
                 <InputBase
                   placeholder="Buscar..."
@@ -72,6 +88,8 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
+                  onChange={handleChange}
+                  value={search}
                 />
               </div>
             </div>

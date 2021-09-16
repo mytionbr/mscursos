@@ -59,7 +59,7 @@ export const findCursos = (params) => async (dispatch) => {
   dispatch({ type: CURSO_FIND_REQUEST });
   try {
     const { nome, categorias, pagination } = params;
-    
+    console.log('kmfkdsomf', nome)
     let queryString = "?";
 
     if (nome) {

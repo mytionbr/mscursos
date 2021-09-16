@@ -37,24 +37,17 @@ export default makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center'
   },
   inputRoot: {
     color: 'inherit',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    height: '100%',
     [theme.breakpoints.up('md')]: {
       width: '20ch',
     },
@@ -80,5 +73,8 @@ export default makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     fontSize: '2rem',
     marginRight: '0.2rem'
+  },
+  iconButton: {
+    padding: '0.5rem'  
   }
 }));
