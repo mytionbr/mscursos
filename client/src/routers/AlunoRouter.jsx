@@ -32,7 +32,7 @@ const AlunoRouter = () => {
           <AlunoRoute path={"/aluno/app/forum"} component={ForumPage} />
           <AlunoRoute path={"/aluno/app/perfil/:alunoId"} component={PerfilPage} />
           <AlunoRoute path={"/aluno/app/info/:alunoId"} component={InfoPerfil} />
-          <AlunoRoute path={"/aluno/app/busca/query"} component={SearchPage} />
+          <AlunoRoute path={"/aluno/app/busca/:query"} component={SearchPage} />
           <AlunoRoute path={"/aluno/app"} component={Dashboard} />
         </Switch>
       </DashboardLayout>

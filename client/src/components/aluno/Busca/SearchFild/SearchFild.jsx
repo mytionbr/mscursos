@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { findCursos } from "../../../../actions/alunoActions";
 import { useQuery } from "../../../../utils/hooks/useQuery";
 import useStyles from "./styles";
-function SearchFild() {
-  let query = useQuery();
+function SearchFild({query}) {
   
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ function SearchFild() {
 
   useEffect(() => {
     if(query){
-        setNome(query.get('nome'))
+        setNome(query)
     }
   }, [dispatch, query]);
 

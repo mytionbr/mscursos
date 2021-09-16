@@ -22,11 +22,10 @@ function SearchCursoCard({ name, categoriaId, description, slug }) {
   return (
     <Fade appear={true} in={true} timeout={700}>
       <Card
-        className={classes.rootContainer}
         elevation={6}
         onClick={handleClick}
       >
-        <CardActionArea>
+        <CardActionArea  className={classes.rootContainer}>
           <Box className={classes.avatarContainer}>
             <Avatar className={classes.avatar}>{<Icon />}</Avatar>
           </Box>

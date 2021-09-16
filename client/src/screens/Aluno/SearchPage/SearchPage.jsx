@@ -9,23 +9,25 @@ import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import { useQuery } from "../../../utils/hooks/useQuery";
 import { findCursos } from "../../../actions/cursoActions"
-function SearchPage() {
-  let query = useQuery();
+import * as qs from 'query-string' 
+function SearchPage(props) {
+  
+  const query = useQuery().nome
 
   const dispatch = useDispatch();
   const cursoFind = useSelector((state) => state.cursoFind);
   const { loading, error, data } = cursoFind;
   console.log(loading, error, data)
-  console.log(query.get("nome"))
   
   useEffect(() => {
-    console.log('eieiei')
-    dispatch(
-      findCursos({
-        nome: query.get("nome"),
-        categorias: [],
-      })
-    );
+    console.log(query)
+     dispatch(
+        findCursos({
+          nome: query,
+          categorias: [],
+        })
+      );
+    
   }, [dispatch, query]);
 
   return (
@@ -53,7 +55,7 @@ function SearchPage() {
               justifyContent={"space-between"}
             >
               <Grid item xs="12">
-                <SearchFild />
+                <SearchFild query={query}/>
               </Grid>
               <Grid item xs="12">
                 <SearchCursoList />

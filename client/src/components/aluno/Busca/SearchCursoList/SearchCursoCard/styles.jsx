@@ -4,23 +4,27 @@ export default makeStyles((theme) => ({
     rootContainer:{
         padding: '1rem',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     avatarContainer:{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginRight: '1rem'
     },
     avatar:{
-        padding: '1rem',
+        width: '3rem',
+        height: '3rem',
         backgroundColor: theme.palette.secondary.main,
         "& > *":{
-            fontSize:'1rem',
+            fontSize:'2rem',
             color: '#fff'
         }
     },
     detailsContainer:{
         display: 'flex',
+        flexDirection:'column',
         alignItems: 'flex-start',
         justifyContent: 'center',
         "& > *":{
