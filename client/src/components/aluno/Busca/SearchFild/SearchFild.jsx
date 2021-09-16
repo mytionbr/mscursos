@@ -37,7 +37,7 @@ function SearchFild({query}) {
         variant="outlined"
         color="secondary"
       />
-      <Button type="submit" color="secondary" variant="contained">
+      <Button className={classes.btn} type="submit" color="secondary" variant="contained">
         Buscar
       </Button>
     </form>
