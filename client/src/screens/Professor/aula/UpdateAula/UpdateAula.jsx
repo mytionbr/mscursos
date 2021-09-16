@@ -10,7 +10,7 @@ function UpdateAula(props) {
   const cursoId = props.match.params.cursoId
   console.log('curso' + cursoId, 'aula' + aulaId)
   const history = useHistory()
-
+  console.log(aulaId, cursoId)
   const links = [
     {
       name: "dashboard",

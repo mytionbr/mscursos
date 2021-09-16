@@ -54,6 +54,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log(aula,aulaId,successUpdate)
     if (successUpdate) {
       dispatch({ type: AULA_UPDATE_RESET });
       history.push("/professor/app/aulas");

@@ -80,9 +80,10 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res) => {
     try {
+        console.log('oiii')
         const aulaId = req.params.aulaId || req.params.id
         const { rows } = await pool.query(
-            'SELECT AULA FROM AULA  WHERE AULA.AULA_ID = $1',
+            'SELECT * FROM AULA  WHERE AULA.AULA_ID = $1',
             [aulaId])
 
         const aula = rows[0]
@@ -91,9 +92,10 @@ export const findById = async (req, res) => {
             return res.status(400).json('Aula não encontrada')
         }
        
-
+        console.log(aula)
         res.status(200).json(aula)
     } catch (err) {
+        console.log(err)
         res.status(400).json({message: err.message})
     }
 }
