@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { findAulasInfo } from '../../../../actions/aulaActions';
+import { AULA_INFO_LIST_RESET } from '../../../../constants/aulaConstantes';
 import AulaNavbar from '../AulaNavbar/AulaNavbar'
 import AulaSidebar from '../AulaSidebar/AulaSidebar'
 import useStyles from './styles'
@@ -13,6 +14,7 @@ function AulaLayout(props) {
 
     useEffect(() => {
         if(!data || data.curso.slug !== cursoSlug){
+            dispatch({type:AULA_INFO_LIST_RESET})
             dispatch(findAulasInfo(cursoSlug));
         }
     }, [dispatch, cursoSlug, data]);

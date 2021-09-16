@@ -711,7 +711,7 @@ export const findCursosByAluno = async (req, res) => {
     const { rows } = await pool.query(
       `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
       (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
-         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID AND VISUALIZACAO.ALUNO_ID = ALUNO.ALUNO_ID)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
       FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = MATRICULA.CURSO_ID
@@ -732,21 +732,21 @@ export const findCursosByAluno = async (req, res) => {
   }
 }
 
-export const getAulasByCursoSlug = async (req,res) => {
+export const findAulasByAluno = async (req,res) => {
   try{
     const slug = req.params.slug;
-
+    const alunoId = req.params.alunoId
     const aulasInfo = {}
 
     const { rows: cursoRows } = await pool.query(
       `SELECT
       (SELECT COUNT(*) FROM VISUALIZACAO  
-         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+         WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID AND VISUALIZACAO.ALUNO_ID = $1)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total, 
       CURSO.NOME, CURSO.CURSO_ID, CURSO.SLUG, CURSO.CATEGORIA_ID
-      FROM CURSO WHERE CURSO.SLUG = $1`,
-      [slug]
+      FROM CURSO WHERE CURSO.SLUG = $2`,
+      [alunoId,slug]
     )
 
     aulasInfo.curso = cursoRows[0]
@@ -757,13 +757,13 @@ export const getAulasByCursoSlug = async (req,res) => {
     const { rows: aulasRows } = await pool.query(
       `SELECT AULA.NOME, AULA.CURSO_ID, AULA.SLUG, AULA.DURACAO, AULA.aula_id, VISUALIZACAO.VISUALIZACAO_ID FROM AULA
       INNER JOIN CURSO ON AULA.CURSO_ID = CURSO.CURSO_ID 
-      LEFT JOIN VISUALIZACAO ON AULA.AULA_ID = VISUALIZACAO.AULA_ID
-      WHERE CURSO.SLUG = $1`,
-      [slug]
+      LEFT JOIN VISUALIZACAO ON AULA.AULA_ID = VISUALIZACAO.AULA_ID AND
+      VISUALIZACAO.ALUNO_ID = $1
+      WHERE CURSO.SLUG = $2`,
+      [alunoId,slug]
     )
 
     aulasInfo.aulas = aulasRows
-
     res.status(200).json(aulasInfo)
   } catch (err) {
     res.status(400).json({ message: err.message });

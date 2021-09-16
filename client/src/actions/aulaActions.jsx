@@ -115,7 +115,7 @@ export const findAulasInfo = (cursoSlug) => async (dispatch,getState) => {
     alunoSignin: { alunoInfo }
   } = getState()
   try {
-    const { data } = await Api.findAulasInfoByCurso(cursoSlug,alunoInfo);
+    const { data } = await Api.findAulasInfoByCursoAndAluno(cursoSlug,alunoInfo);
   
     dispatch({ type: AULA_INFO_LIST_SUCCESS, payload: data });
 

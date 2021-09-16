@@ -22,10 +22,10 @@ import {
   findNotaByCurso,
   findCursoInfo,
   findCursosByAluno,
-  getAulasByCursoSlug,
   getRating,
   saveRating,
   findCursosAsCategory,
+  findAulasByAluno,
 
 } from "../controllers/curso.controller.js";
 import {
@@ -46,8 +46,8 @@ router.route("/professor/:professorId").get(findByProfessor);
 router.route("/categorias/:categoriaId").get(findCursoByCategoriaId);
 
 router
-  .route("/aulas/:slug")
-  .get(getAulasByCursoSlug)
+  .route("/:slug/aulas/aluno/:alunoId")
+  .get(isAuth,hasAuthorizationMatricula,findAulasByAluno)
 
 router
   .route("/asCategorias/:categoriaId")

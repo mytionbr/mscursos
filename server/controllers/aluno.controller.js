@@ -153,7 +153,7 @@ export const findDetails = async (req,res)=>{
         const { rows: matriculasRows } = await pool.query(
             `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
             (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
-               WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID)
+               WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID AND ALUNO.ALUNO_ID = VISUALIZACAO.ALUNO_ID)
               as aulas_vistas,
             (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
             FROM CURSO INNER JOIN MATRICULA ON CURSO.CURSO_ID = MATRICULA.CURSO_ID
