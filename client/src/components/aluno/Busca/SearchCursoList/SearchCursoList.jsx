@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
+import MessageBox from "../../../core/MessageBox/MessageBox";
 import SearchCursoCard from "./SearchCursoCard/SearchCursoCard";
 import useStyles from "./styles";
 function SearchCursoList() {
@@ -11,7 +12,9 @@ function SearchCursoList() {
 
   return (
     <Grid container spacing={2} direction="column">
-      {data.cursos.map((curso) => (
+
+      {data.cursos.length > 0 ? 
+        data.cursos.map((curso) => (
         <Grid item>
           <SearchCursoCard
             name={curso.nome}
@@ -20,7 +23,12 @@ function SearchCursoList() {
             description={curso.descricao}
           />
         </Grid>
-      ))}
+      ))
+      : (
+        <MessageBox type="info">
+          Nenhum curso encontrado
+        </MessageBox>
+      )}
     </Grid>
   );
 }

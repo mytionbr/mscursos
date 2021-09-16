@@ -22,18 +22,18 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../../../actions/alunoActions";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
   const menuId = "primary-search-account-menu";
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const history = useHistory()
+  const history = useHistory();
 
   const alunoSignin = useSelector((state) => state.alunoSignin);
-  const {  alunoInfo } = alunoSignin;
+  const { alunoInfo } = alunoSignin;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(onMobileNavOpen);
@@ -47,18 +47,18 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
   };
 
   const handleSignout = () => {
-    dispatch(signout())
-  }
+    dispatch(signout());
+  };
 
-  const handleChange = (event) =>{
-    const { value } = event.target
-    setSearch(value)
-  }
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
 
-  const handleSearch = () =>{
-    history.push(`/aluno/app/busca/query?nome=${search}`)
-    setSearch('')
-  }
+  const handleSearch = () => {
+    history.push(`/aluno/app/busca/query?nome=${search}`);
+    setSearch("");
+  };
 
   return (
     <div>
@@ -72,14 +72,15 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
           </Link>
           <Box style={{ flexGrow: 1 }} />
           <Hidden smDown>
-            <div className={classes.search}>
-            <IconButton 
-                    type="submit" 
-                    className={classes.iconButton} 
-                    aria-label="pesquisar" 
-                    onClick={handleSearch}>
-                    <SearchIcon />
-                </IconButton>
+            <form className={classes.search}>
+              <IconButton
+                type="submit"
+                className={classes.iconButton}
+                aria-label="pesquisar"
+                onClick={handleSearch}
+              >
+                <SearchIcon />
+              </IconButton>
               <div>
                 <InputBase
                   placeholder="Buscar..."
@@ -92,7 +93,7 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                   value={search}
                 />
               </div>
-            </div>
+            </form>
           </Hidden>
           <Box style={{ flexGrow: 1 }} />
           <Hidden smDown>
@@ -145,8 +146,20 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
                   open={isMenuOpen}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/perfil/${alunoInfo.aluno_id}`}>Perfil</MenuItem>
-                  <MenuItem onClick={handleMenuClose} component={Link} to={`/aluno/app/info/${alunoInfo.aluno_id}`}>Seus dados</MenuItem>
+                  <MenuItem
+                    onClick={handleMenuClose}
+                    component={Link}
+                    to={`/aluno/app/perfil/${alunoInfo.aluno_id}`}
+                  >
+                    Perfil
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleMenuClose}
+                    component={Link}
+                    to={`/aluno/app/info/${alunoInfo.aluno_id}`}
+                  >
+                    Seus dados
+                  </MenuItem>
                   <MenuItem onClick={handleSignout}>Sair</MenuItem>
                 </Menu>
               </div>

@@ -9,7 +9,7 @@ import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import { useQuery } from "../../../utils/hooks/useQuery";
 import { findCursos } from "../../../actions/cursoActions"
-import * as qs from 'query-string' 
+
 function SearchPage(props) {
   
   const query = useQuery().nome
@@ -35,7 +35,7 @@ function SearchPage(props) {
       <Helmet>
         <title> Busca | mscursos </title>
       </Helmet>
-      <ToolbarPage title={`BUSCAR`} />
+      <ToolbarPage title={`BUSCA`} />
       <Box
         style={{
           minHeight: "100%",
@@ -43,25 +43,25 @@ function SearchPage(props) {
         }}
       >
         <Container>
-          {loading ? (
-            <LoadingBox />
-          ) : error ? (
-            <MessageBox type="error">{error}</MessageBox>
-          ) : (
-            <Grid
+        <Grid
               container
               spacing={4}
               direction="column"
               justifyContent={"space-between"}
             >
-              <Grid item xs="12">
-                <SearchFild query={query}/>
-              </Grid>
+            <Grid item xs="12">
+              <SearchFild query={query}/>
+            </Grid>
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox type="error">{error}</MessageBox>
+          ) : (              
               <Grid item xs="12">
                 <SearchCursoList />
               </Grid>
-            </Grid>
           )}
+           </Grid>
         </Container>
       </Box>
     </>

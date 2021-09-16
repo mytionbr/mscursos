@@ -1,11 +1,11 @@
 import { Box, Button, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { findCursos } from "../../../../actions/alunoActions";
-import { useQuery } from "../../../../utils/hooks/useQuery";
 import useStyles from "./styles";
 function SearchFild({query}) {
-  
+  const history = useHistory()
   const classes = useStyles();
   const dispatch = useDispatch();
   const [nome, setNome] = useState("");
@@ -23,11 +23,7 @@ function SearchFild({query}) {
 
   const handleSubmit = (event)=>{
       event.preventDefault()
-
-      dispatch( findCursos({
-        nome: nome,
-        categorias: [],
-      }))
+      history.push(`/aluno/app/busca/query?nome=${nome}`)
   }
 
   return (
