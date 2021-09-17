@@ -125,45 +125,78 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
           <Box className={classes.boxContainer}>
             <div className={classes.boxContent}>
               <div className={classes.boxInformation}>
-                <Typography variant="h6">
-                  <span className={classes.labelInformation}>ID da Nota:</span>{" "}
-                  {notaId}
-                </Typography>
+              <TextField
+            name="notaId"
+            variant="outlined"
+            label="ID da nota"
+            color="secondary"
+            fullWidth
+            value={notaId}
+            inputProps={
+              { readOnly: true, }
+            }
+          />
+
               </div>
             </div>
             <div className={classes.boxContent}>
               <div className={classes.boxInformation}>
-                <Typography variant="h6">
-                  <span className={classes.labelInformation}>ID do Aluno:</span>{" "}
-                  {nota.aluno_id}
-                </Typography>
-               
+                  <TextField
+                    name="alunoId"
+                    variant="outlined"
+                    label="ID do aluno"
+                    color="secondary"
+                    fullWidth
+                    value={nota.aluno_id}
+                    inputProps={
+                      { readOnly: true, }
+                    }
+                  />               
               </div>
               <div className={classes.boxInformation}>
-                <Typography variant="h6">
-                  <span className={classes.labelInformation}>Nome do Aluno:</span>{" "}
-                  {nota.aluno_nome}
-                </Typography>
-              
+                <TextField
+                    name="alunoNome"
+                    variant="outlined"
+                    label="Nome do aluno"
+                    color="secondary"
+                    fullWidth
+                    value={nota.aluno_nome}
+                    inputProps={
+                      { readOnly: true, }
+                    }
+                  />    
               </div>
             </div>
            
             <div className={classes.boxContent}>
               <div className={classes.boxInformation}>
-                <Typography variant="h6">
-                  <span className={classes.labelInformation}>ID do Curso:</span>{" "}
-                  {nota.curso_id}
-                </Typography>
+                <TextField
+                    name="cursoId"
+                    variant="outlined"
+                    label="ID do curso"
+                    color="secondary"
+                    fullWidth
+                    value={nota.curso_id}
+                    inputProps={
+                      { readOnly: true, }
+                    }
+                  />  
                 <Divider />
               </div>
               <div className={classes.boxInformation}>
-                <Typography variant="h6">
-                  <span className={classes.labelInformation}>Nome do Curso:</span>{" "}
-                  {nota.curso_nome}
-                </Typography>
+                <TextField
+                    name="cursoNome"
+                    variant="outlined"
+                    label="Nome do Curso"
+                    color="secondary"
+                    fullWidth
+                    value={nota.curso_nome}
+                    inputProps={
+                      { readOnly: true, }
+                    }
+                  />  
                 <Divider />
               </div>
-             
             </div>
 
             <TextField

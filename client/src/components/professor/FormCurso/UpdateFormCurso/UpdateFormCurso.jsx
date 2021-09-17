@@ -106,7 +106,17 @@ function UpdateFormCurso({cursoId,...rest}) {
         <MessageBox variant="error">{error}</MessageBox>
       ) : (
         <Box className={classes.boxContainer}>
-          <Typography variant="h6">CURSO ID: {cursoId}</Typography>
+           <TextField
+            name="id"
+            variant="outlined"
+            label="id"
+            color="secondary"
+            fullWidth
+            value={cursoId}
+            inputProps={
+              { readOnly: true, }
+            }
+          />
           <TextField
             name="nome"
             variant="outlined"

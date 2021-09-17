@@ -133,7 +133,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
       ) : (
         <Box className={classes.boxContainer}>
           <TextField
-            name="nome"
+            name="id"
             variant="outlined"
             label="id"
             color="secondary"
