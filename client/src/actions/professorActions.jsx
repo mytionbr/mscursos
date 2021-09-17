@@ -11,7 +11,7 @@ export const signin = (email, password) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PROFESSOR_SIGNIN_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
         })
     }
 }
@@ -31,7 +31,7 @@ export const findAssignments = (id) => async (dispatch,getState) => {
     } catch (error) {
         dispatch({
             type:PROFESSOR_ASSIGNMENTS_FAIL, 
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
         })
     }
 }
@@ -45,7 +45,7 @@ export const detailsProfessor = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type:PROFESSOR_DETAILS_FAIL, 
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
         })
     }
   };
@@ -57,13 +57,13 @@ export const detailsProfessor = () => async (dispatch, getState) => {
       const { data } = await Api.updateProfessorProfile(professor,professorInfo)
       dispatch({ type: PROFESSOR_UPDATE_PROFILE_SUCCESS, payload: data });
       dispatch({ type: PROFESSOR_SIGNIN_SUCCESS, payload: data });
-      console.log(data)
+
       localStorage.setItem('professorInfo', JSON.stringify(data));
     } catch (error) {
         console.log(error)
         dispatch({
             type: PROFESSOR_UPDATE_PROFILE_FAIL, 
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
         })
     }
   };

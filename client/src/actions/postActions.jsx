@@ -39,7 +39,7 @@ export const findPosts = (params) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: POST_FIND_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -66,7 +66,7 @@ export const createPost = ({titulo, conteudo, curso,  categoria}) => async (disp
     } catch (error) {
         dispatch({
             type: POST_CREATE_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -85,7 +85,7 @@ export const informationsPost = (id) => async (dispatch, getState) =>{
     } catch (error){
         dispatch({
             type: POST_INFORMATIONS_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -103,7 +103,7 @@ export const listResponse = (postId) => async (dispatch, getState) =>{
     } catch (error){
         dispatch({
             type: POST_RESPONSE_LIST_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -127,7 +127,7 @@ export const saveResposta = (resposta,postId) => async (dispatch, getState) =>{
     } catch (error){
         dispatch({
             type: POST_SAVE_RESPONSE_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -151,7 +151,7 @@ export const  markResponseAsSolution = ({resposta_id,post_id,aluno_id}) => async
     } catch (error){
         dispatch({
             type: POST_SOLUTION_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }

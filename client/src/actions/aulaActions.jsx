@@ -19,7 +19,7 @@ export const findAulas = (params) => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: AULA_FIND_FAIL,
-        payload: error.error || error.message
+        payload: error.response.data.message || error.message
       });
     }
   };
@@ -37,7 +37,7 @@ export const findAulas = (params) => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: AULA_DELETE_FAIL,
-        payload: error.error || error.message
+        payload: error.response.data.message || error.message
      });
     }
 }
@@ -68,7 +68,7 @@ export const createAula = (aula) => async (dispatch, getState) => {
     console.log(error)
     dispatch({
       type: AULA_CREATE_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -87,7 +87,7 @@ export const detailsAula = (aulaId,cursoId) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: AULA_DETAILS_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -114,7 +114,7 @@ export const updateAula = (aula) => async(dispatch, getState) => {
   } catch (error) {
       dispatch({
           type: AULA_UPDATE_FAIL,
-          payload: error.error || error.message
+          payload: error.response.data.message || error.message
         });
   }
 }
@@ -133,7 +133,7 @@ export const findAulasInfo = (cursoSlug) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: AULA_INFO_LIST_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -151,7 +151,7 @@ export const informationsAula = (aulaId) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: AULA_INFORMATIONS_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -172,7 +172,7 @@ export const finishAula = (aula) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: AULA_FINISH_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };

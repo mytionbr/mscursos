@@ -158,7 +158,7 @@ export const informationsCurso = (slug) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_INFORMATIONS_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -174,7 +174,7 @@ export const updateCurso = (curso) => async(dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: CURSO_UPDATE_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
           });
     }
 }
@@ -192,7 +192,7 @@ export const deleteCurso = (cursoId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_DELETE_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 }
@@ -206,7 +206,7 @@ export const detailsCurso = (cursoId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_DETAILS_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -220,7 +220,7 @@ export const matriculaCurso = (alunoId,cursoId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_MATRICULA_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -240,7 +240,7 @@ export const detailsAvaliacao = (cursoId) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_DETAILS_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -262,7 +262,7 @@ export const saveAvaliacao = (avaliacao) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_SAVE_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -283,7 +283,7 @@ export const findCursosAsCategory = (categoriaId) => async (dispatch,getState) =
   } catch (error) {
     dispatch({
       type: CURSO_AS_CATEGORY_FIND_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };

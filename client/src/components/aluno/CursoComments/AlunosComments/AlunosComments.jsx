@@ -37,7 +37,7 @@ function AlunosComments({ comments }) {
             style={{
               color: "grey"
             }}>
-           {moment(date).startOf().fromNow()}
+           {moment().startOf(date).fromNow()}
           </Typography>
           <Typography variant="body1">
             {

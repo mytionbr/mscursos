@@ -45,7 +45,7 @@ export const signin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALUNO_SIGNIN_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -84,7 +84,7 @@ export const findAlunos = (params) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_FIND_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -101,7 +101,7 @@ export const findAlunosById = (alunoId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_FIND_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -122,7 +122,7 @@ export const createNota =
     } catch (error) {
       dispatch({
         type: ALUNO_NOTA_CREATE_FAIL,
-        payload: error.error || error.message,
+        payload: error.response.data.message || error.message
       });
     }
   };
@@ -147,7 +147,7 @@ export const detailsNota =
     } catch (error) {
       dispatch({
         type: ALUNO_NOTA_DETAILS_FAIL,
-        payload: error.error || error.message,
+        payload: error.response.data.message || error.message
       });
     }
   };
@@ -163,7 +163,7 @@ export const updateNota = (nota) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_NOTA_UPDATE_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -180,7 +180,7 @@ export const deleteNota = (notaId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_NOTA_DELETE_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -199,7 +199,7 @@ export const register =
     } catch (error) {
       dispatch({
         type: ALUNO_REGISTER_FAIL,
-        payload: error.error || error.message,
+        payload: error.response.data.message || error.message
       });
     }
 
@@ -220,7 +220,7 @@ export const register =
       console.log(error)
       dispatch({
         type: ALUNO_FIND_CURSOS_FAIL,
-        payload: error.error || error.message,
+        payload: error.response.data.message || error.message
       });
     }
   };
@@ -238,7 +238,7 @@ export const detailsAluno = (alunoId) => async (dispatch, getState) => {
     console.log(error)
     dispatch({
       type: ALUNO_DETAILS_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -256,7 +256,7 @@ export const informationAluno = (alunoId) => async (dispatch, getState) => {
     console.log(error)
     dispatch({
       type: ALUNO_INFORMATIONS_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -276,7 +276,7 @@ export const updateAluno = (aluno) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_UPDATE_FAIL,
-      payload: error.error || error.message,
+      payload: error.response.data.message || error.message
     });
   }
 };

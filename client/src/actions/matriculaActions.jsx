@@ -26,7 +26,7 @@ export const createMatricula = (matricula) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: MATRICULA_CREATE_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };
@@ -44,7 +44,7 @@ export const deleteMatricula = (matricula) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: MATRICULA_DELETE_FAIL,
-      payload: error.error || error.message
+      payload: error.response.data.message || error.message
     });
   }
 };

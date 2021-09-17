@@ -92,7 +92,7 @@ function Resposta({resposta,refToResponse}) {
           }
         <Box style={{flexGrow: 1}} />
         <Typography variant="body1">
-            {moment(date).startOf().fromNow()}
+            {moment().startOf(date).fromNow()}
         </Typography>
       </Box>
     );

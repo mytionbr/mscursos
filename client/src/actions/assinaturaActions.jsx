@@ -19,7 +19,7 @@ export const createAssinatura = (plan, paymentResult) => async (dispatch,getStat
     } catch(error){
         dispatch({
             type:ASSINATURA_CREATE_FAIL,
-            payload: error.error || error.message
+            payload: error.response.data.message || error.message
          });
         }
     }
