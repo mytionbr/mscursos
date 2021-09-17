@@ -1,30 +1,32 @@
-import { Box, Container } from '@material-ui/core';
-import React, { useState } from 'react'
-import Helmet from 'react-helmet';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import AlunoListResult from '../../../../components/professor/alunoList/AlunoListResult/AlunoListResult';
-import FormAlunoFilter from '../../../../components/professor/alunoList/FormAlunoFilter/FormAlunoFilter';
-import CursosTabs from '../../../../components/professor/CursosTabs/CursosTabs';
-import ModalFilter from '../../../../components/professor/ModalFilter/ModalFilter';
-import ToolbarPage from '../../../../components/professor/ToolbarPage/ToolbarPage';
+import { Box, Container } from "@material-ui/core";
+import React, { useState } from "react";
+import Helmet from "react-helmet";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import AlunoListResult from "../../../../components/professor/alunoList/AlunoListResult/AlunoListResult";
+import FormAlunoFilter from "../../../../components/professor/alunoList/FormAlunoFilter/FormAlunoFilter";
+import CursosTabs from "../../../../components/professor/CursosTabs/CursosTabs";
+import ModalFilter from "../../../../components/professor/ModalFilter/ModalFilter";
+import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPage";
 
 function AlunoList() {
-    const history = useHistory();
-  
+  const history = useHistory();
+
   const [openModal, setOpenModal] = useState(false);
-  const [currentCurso, setCurrentCurso] = useState(null)
+  const [currentCurso, setCurrentCurso] = useState(null);
+
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
 
   const handleChangeCurso = (newValue) => {
-    if(typeof newValue === 'object'){
+    if (typeof newValue === "object") {
       setCurrentCurso(newValue.target.value);
     } else {
       setCurrentCurso(newValue);
     }
-    
   };
 
   const links = [
@@ -49,7 +51,16 @@ function AlunoList() {
     },
   ];
 
-  const filter = <FormAlunoFilter onModalClose={handleOpenModal} currentCurso={currentCurso} />
+  const filter = (
+    <FormAlunoFilter
+      nome={nome}
+      setNome={setNome}
+      email={email}
+      setEmail={setEmail}
+      onModalClose={handleOpenModal}
+      currentCurso={currentCurso}
+    />
+  );
 
   return (
     <>
@@ -66,17 +77,21 @@ function AlunoList() {
         <Container maxWidth={false}>
           <ToolbarPage title={"Alunos"} links={links} btns={btns} />
           <Box style={{ padding: "1rem 0" }}>
-            <CursosTabs currentCurso={currentCurso} handleChangeCurso={handleChangeCurso} />
+            <CursosTabs
+              currentCurso={currentCurso}
+              handleChangeCurso={handleChangeCurso}
+            />
             <AlunoListResult currentCurso={currentCurso} />
           </Box>
         </Container>
       </Box>
       <ModalFilter
-        openModal={openModal} 
-        onModalClose={handleOpenModal} 
-        form={filter} />
+        openModal={openModal}
+        onModalClose={handleOpenModal}
+        form={filter}
+      />
     </>
   );
 }
 
-export default AlunoList
+export default AlunoList;

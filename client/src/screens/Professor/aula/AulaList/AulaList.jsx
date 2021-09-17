@@ -17,6 +17,7 @@ function AulaList() {
   
   const [openModal, setOpenModal] = useState(false);
   const [currentCurso, setCurrentCurso] = useState(null)
+  const [nome, setNome] = useState("");
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -53,7 +54,7 @@ function AulaList() {
     },
   ];
 
-  const filter = <FormAulaFilter onModalClose={handleOpenModal} curso={currentCurso} />
+  const filter = <FormAulaFilter onModalClose={handleOpenModal} nome={nome} setNome={setNome} curso={currentCurso} />
 
   return (
     <>

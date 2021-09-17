@@ -5,12 +5,10 @@ import useStyles from './styles'
 
 import { findAulas } from '../../../../actions/aulaActions'
 
-function FormAulaFilter({ onModalClose, curso}) {
+function FormAulaFilter({ onModalClose, curso,nome, setNome}) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
-
-  const [nome, setNome] = useState("");
 
   const handleInput = (e) => {
     const { value } = e.target;

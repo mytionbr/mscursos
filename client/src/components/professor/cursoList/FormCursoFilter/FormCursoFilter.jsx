@@ -8,15 +8,12 @@ import { listCategoria } from "../../../../actions/categoriaActions"
 import { findCursosByProfessor } from '../../../../actions/cursoActions'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-function FormCursoFilter({ onModalClose, openModal }) {
+function FormCursoFilter({ onModalClose, openModal,nome, setNome, categoriasTags, setCategoriasTags }) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
   const categoriaList = useSelector((state) => state.categoriaList);
   const { loading, error, categorias } = categoriaList;
-
-  const [nome, setNome] = useState("");
-  const [categoriasTags, setCategoriasTags] = useState([]);
 
   useEffect(() => {
     dispatch(listCategoria());

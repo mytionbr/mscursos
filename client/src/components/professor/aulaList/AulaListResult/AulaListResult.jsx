@@ -20,7 +20,6 @@ function AulaListResult({currentCurso,...rest}) {
  
   const aulaDelete = useSelector((state) => state.aulaDelete);
   
-  console.log(data)
 
   const {
     loading: loadingDelete,

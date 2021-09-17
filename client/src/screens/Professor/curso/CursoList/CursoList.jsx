@@ -11,6 +11,9 @@ function CursoList() {
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
 
+  const [nome, setNome] = useState("");
+  const [categoriasTags, setCategoriasTags] = useState([]);
+
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -38,6 +41,7 @@ function CursoList() {
     },
   ];
   
+  const filter = <FormCursoFilter nome={nome} setNome={setNome} categoriasTags={categoriasTags} setCategoriasTags={setCategoriasTags} onModalClose={handleOpenModal}/>
 
   return (
     <>
@@ -60,7 +64,7 @@ function CursoList() {
         </Container>
       </Box>
       <ModalFilter 
-        form={<FormCursoFilter  onModalClose={handleOpenModal}/>} 
+        form={filter} 
         openModal={openModal} 
         onModalClose={handleOpenModal} />
     </>

@@ -3,16 +3,12 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import useStyles from './styles'
 
-import { findAulas } from '../../../../actions/aulaActions'
 import { findAlunos } from '../../../../actions/alunoActions'
 
-function FormAlunoFilter({ onModalClose, currentCurso}) {
+function FormAlunoFilter({ onModalClose, currentCurso, nome, setNome, email, setEmail}) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
-
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleInputName = (e) => {
     const { value } = e.target;
