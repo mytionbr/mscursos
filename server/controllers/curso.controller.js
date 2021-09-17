@@ -514,7 +514,7 @@ export const findAlunosByCurso = async (req, res) => {
       `SELECT ALUNO.ALUNO_ID,ALUNO.NOME, ALUNO.EMAIL,
             NOTA.VALOR as nota, NOTA.NOTA_ID as nota_id FROM ALUNO INNER JOIN MATRICULA ON MATRICULA.ALUNO_ID = ALUNO.ALUNO_ID
             INNER JOIN CURSO ON MATRICULA.CURSO_ID = CURSO.CURSO_ID 
-            LEFT JOIN NOTA ON ALUNO.ALUNO_ID = NOTA.ALUNO_ID 
+            LEFT JOIN NOTA ON ALUNO.ALUNO_ID = NOTA.ALUNO_ID AND CURSO.CURSO_ID = NOTA.CURSO_ID
             WHERE CURSO.CURSO_ID = $1 ${query}`,
       [...values]
     );
@@ -662,7 +662,7 @@ export const saveRating = async (req,res)=>{
         )
         result = rows[0]
       } 
-
+    
       res.status(201).json(result)
 
  } catch(err){

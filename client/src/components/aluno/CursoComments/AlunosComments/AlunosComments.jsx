@@ -35,7 +35,7 @@ function AlunosComments({ comments }) {
             style={{
               color: "grey"
             }}>
-           {moment(date).fromNow()}
+           {moment(date).startOf().fromNow()}
           </Typography>
           <Typography variant="body1">
             <LinkPerfil alunoId={alunoId}>
