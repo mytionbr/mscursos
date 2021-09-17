@@ -111,7 +111,14 @@ export const update = async (req, res) => {
             'UPDATE aluno SET nome = $1, email = $2, data_nascimento = $3, senha = $4 WHERE aluno_id = $5 RETURNING *;',
             [aluno.nome, aluno.email, aluno.data_nascimento, aluno.senha, aluno.aluno_id])
         
+            
         let updatedAluno = rows[0]
+
+        updatedAluno.token = generateToken({
+            _id: updatedAluno.aluno_id,
+            nome: updatedAluno.nome,
+            email: updatedAluno.email
+        })
 
         usuarioResponseSuccess(res,updatedAluno)
     } catch (err) {

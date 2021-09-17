@@ -25,11 +25,11 @@ export const signinProfessor = async (req, res) =>{
                 }
             }   
             
-            res.status(401).json({error:'Email ou senha invalidos'})
+            res.status(401).json({message:'Email ou senha inválidos'})
         
     } catch (err) {
         return res.status(401).json({
-            error: 'Não foi possível realizar o login'
+            message: 'Não foi possível realizar o login'
         })
     }
 }
@@ -72,10 +72,10 @@ export const signinAluno = async (req,res) =>{
             }
         }
 
-        res.status(401).json({error:'Email ou senha invalidos'})  
+        res.status(401).json({message:'Email ou senha inválidos'})  
     } catch (err){       
         res.status(401).json({
-            error: 'Não foi possível realizar o login'
+            message: 'Não foi possível realizar o login'
         })
     }
 }

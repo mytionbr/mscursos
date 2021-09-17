@@ -46,7 +46,7 @@ function PostList(props) {
         {loading ? (
           <LoadingBox />
         ) : error ? (
-          <MessageBox>{error}</MessageBox>
+          <MessageBox type="error">{error}</MessageBox>
         ) : (
           <>
             {

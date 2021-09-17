@@ -138,6 +138,19 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
           />
 
               </div>
+              <div className={classes.boxInformation}>
+                <TextField
+                    name="alunoNome"
+                    variant="outlined"
+                    label="Nome do aluno"
+                    color="secondary"
+                    fullWidth
+                    value={nota.aluno_nome}
+                    inputProps={
+                      { readOnly: true, }
+                    }
+                  />    
+              </div>
             </div>
             <div className={classes.boxContent}>
               <div className={classes.boxInformation}>
@@ -155,16 +168,17 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
               </div>
               <div className={classes.boxInformation}>
                 <TextField
-                    name="alunoNome"
+                    name="alunoEmail"
                     variant="outlined"
-                    label="Nome do aluno"
+                    label="Email do aluno"
                     color="secondary"
                     fullWidth
-                    value={nota.aluno_nome}
+                    value={nota.aluno_email}
                     inputProps={
                       { readOnly: true, }
                     }
-                  />    
+                  />  
+                <Divider />
               </div>
             </div>
            
