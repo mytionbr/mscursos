@@ -20,7 +20,6 @@ function AulaListResult({currentCurso,...rest}) {
  
   const aulaDelete = useSelector((state) => state.aulaDelete);
   
-
   const {
     loading: loadingDelete,
     error: errorDelete,
@@ -73,7 +72,6 @@ const handleModalDelete = (id) => {
   setIdDelete(id)
   handleOpenModal()  
 }
-
 
     return (
         <>

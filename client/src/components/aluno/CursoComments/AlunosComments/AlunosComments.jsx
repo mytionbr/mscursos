@@ -5,11 +5,13 @@ import {
   Container,
   Divider,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Rating from "@material-ui/lab/Rating";
 import LinkPerfil from "../../LinkPerfil/LinkPerfil";
+import { useHistory } from "react-router";
 function AlunosComments({ comments }) {
+  const history = useHistory()
 
   const CommentInfo = ({ alunoNome,alunoId, date }) => {
     return (
@@ -38,9 +40,16 @@ function AlunosComments({ comments }) {
            {moment(date).startOf().fromNow()}
           </Typography>
           <Typography variant="body1">
-            <LinkPerfil alunoId={alunoId}>
-              {alunoNome}
-            </LinkPerfil>
+            {
+              history.location.pathname === '/professor/app/comentarios' ? (
+                alunoNome
+              ) : (
+                <LinkPerfil alunoId={alunoId}>
+                {alunoNome}
+              </LinkPerfil>
+              )
+            }
+           
             </Typography>
         </Grid>
       </Grid>

@@ -15,6 +15,7 @@ import CreateNota from "../screens/Professor/aluno/CreateNota/CreateNota";
 import UpdateNota from "../screens/Professor/aluno/UpdateNota/UpdateNota";
 import AlunoList from "../screens/Professor/aluno/AlunoList/AlunoList";
 import Perfil from "../screens/Professor/Perfil/Perfil";
+import ComentarioList from "../screens/Professor/comentario/ComentarioList/ComentarioList";
 
 const ProfessorRouter = () => {
   const routes = () => {
@@ -60,6 +61,11 @@ const ProfessorRouter = () => {
             exact
             path={"/professor/app/alunos"}
             component={AlunoList}
+          />
+          <ProfessorRoute
+            exact
+            path={"/professor/app/comentarios"}
+            component={ComentarioList}
           />
 
           <ProfessorRoute

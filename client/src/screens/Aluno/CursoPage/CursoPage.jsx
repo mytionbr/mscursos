@@ -25,8 +25,7 @@ function CursoPage(props) {
     dispatch(informationsCurso(slug));
   }, [dispatch, slug]);
 
-  const alunoSignin = useSelector((state) => state.alunoSignin);
-  const { alunoInfo } = alunoSignin;
+
 
   return (
     <>

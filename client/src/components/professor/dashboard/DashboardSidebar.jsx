@@ -9,7 +9,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Avatar, Box, Divider, Drawer, Hidden, List, Typography } from '@material-ui/core';
 import Navitem from './Navitem';
 import { useSelector } from 'react-redux';
-
+import InsertCommentIcon from '@material-ui/icons/InsertComment';
 function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
    
     const location = useLocation()
@@ -42,6 +42,11 @@ function DashboardSidebar({onMobileClose,handleSignout, openMobile}) {
             href: '/professor/app/alunos',
             icon: PeopleIcon,
             title: 'Alunos'
+        },
+        {
+            href: '/professor/app/comentarios',
+            icon: InsertCommentIcon,
+            title: 'Comentários'
         },
         {
             href: '/professor/app/perfil',
