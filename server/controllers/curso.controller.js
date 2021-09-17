@@ -167,7 +167,7 @@ export const enroll = async (req, res) => {
       [curso.categoria_id]
     )
 
-    if(categoria[0] && categoria[0].plano_id !== assinatura[0].plano_id){
+    if(categoria[0] && !categoria[0].plano_id >= assinatura[0].plano_id){
       return res.status(400).json({message: 'O plano do usuário não cobre esse curso'})
     }
 

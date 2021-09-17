@@ -132,9 +132,10 @@ const updateCurso = (curso, professorInfo) =>
     headers: { Authorization: `Bearer ${professorInfo?.token}` },
   });
 
-const updateAula = (aula, professorInfo) =>
-  axios.put(`/api/cursos/${aula.curso_id}/aulas/${aula.aula_id}`, aula, {
-    headers: { Authorization: `Bearer ${professorInfo?.token}` },
+const updateAula = (formData, professorInfo) =>
+  axios.put(`/api/cursos/${formData.get('curso_id')}/aulas/${formData.get('aula_id')}`, formData, {
+    headers: { Authorization: `Bearer ${professorInfo?.token}`,
+    "Content-Type": "multipart/form-data", },
   });
 
 const updateNota = (nota, professorInfo) =>

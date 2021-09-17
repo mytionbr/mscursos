@@ -98,7 +98,18 @@ export const updateAula = (aula) => async(dispatch, getState) => {
       professorSignin: { professorInfo }
   } = getState()
   try {
-      const { data } = await Api.updateAula(aula,professorInfo)
+
+    const formData = new FormData()
+    
+    formData.append("aula_id",aula.aula_id)
+    formData.append("nome",aula.nome)
+    formData.append("descricao", aula.descricao)
+    formData.append("duracao", aula.duracao)
+    formData.append("conteudo", aula.conteudo)
+    formData.append("curso_id", aula.curso_id)
+    formData.append("video", aula.video)
+
+      const { data } = await Api.updateAula(formData,professorInfo)
       dispatch({type:AULA_UPDATE_SUCCESS, payload: data})
   } catch (error) {
       dispatch({

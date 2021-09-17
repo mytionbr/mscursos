@@ -6,7 +6,7 @@ import marked from 'marked'
 import createDomPurify from 'dompurify'
 import jsdom from 'jsdom'
 import fs from 'fs'
-
+import path from 'path'
 const { JSDOM } = jsdom
 const dompurify = createDomPurify(new JSDOM().window)
 
@@ -58,7 +58,6 @@ export const create = async (req,res) => {
         res.status(201).json(createdAula)
 
     } catch (err) {
-        console.log(err)
         res.status(409).json({message: err.message})
     }
 }
@@ -80,22 +79,23 @@ export const list = async (req, res) => {
 
 export const findById = async (req, res) => {
     try {
-        console.log('oiii')
         const aulaId = req.params.aulaId || req.params.id
         const { rows } = await pool.query(
             'SELECT * FROM AULA  WHERE AULA.AULA_ID = $1',
             [aulaId])
 
         const aula = rows[0]
-        
+
         if(!aula){
             return res.status(400).json('Aula não encontrada')
         }
+
+        if(aula.video){
+            aula.video =  path.basename(aula.video)
+        }
        
-        console.log(aula)
         res.status(200).json(aula)
     } catch (err) {
-        console.log(err)
         res.status(400).json({message: err.message})
     }
 }
@@ -140,16 +140,55 @@ export const update = async (req,res) => {
     try {
         const curso = req.profile
         const aulaId = req.params.aulaId
+        let video
+        let uploadPath = null
         
+        let sanitizedConteudo;
+
         const { rows: aulasRows } = await pool.query(
             'SELECT * FROM aula WHERE aula_id = $1 AND curso_id = $2',
             [aulaId,curso.curso_id])
-       
+            
+        let data = req.body
+
+        data.duracao = Number(data.duracao)
+
+        const slug = slugify(
+            data.nome,
+            {
+                lower: true,
+                strict: true
+            }
+        )
+
+        data.slug = slug
+        
+        if(data.conteudo){
+            sanitizedConteudo = dompurify.sanitize(marked(data.conteudo)) 
+        }
+
+        data.conteudo = sanitizedConteudo
+
+        if(req.files && Object.keys(req.files).length > 0){
+            video = req.files.video
+            uploadPath = process.cwd() + '/server/upload/' + video.name
+        
+            await video.mv(uploadPath, (err)=>{
+                if(err){
+                    return res.status(400).json({message: 'Erro ao lidar com o video'})
+                }
+            })
+        }
+
+        if(uploadPath){
+            data.video = uploadPath
+        }
+    
         let aula = extend(aulasRows[0], req.body)
         
         const { rows } = await pool.query(
-            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4 WHERE aula_id = $5 RETURNING *;',
-            [aula.nome, aula.descricao, aula.curso_id,aula.duracao, aula.aula_id])
+            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4, slug = $5, conteudo = $6 WHERE aula_id = $7 RETURNING *;',
+            [aula.nome, aula.descricao, aula.curso_id,aula.duracao,aula.slug, aula.conteudo, aula.aula_id])
         const updatedAula = rows[0]
 
         res.status(200).json(updatedAula)
@@ -237,7 +276,6 @@ export const getVideo = async (req,res)=>{
 
         videoSteam.pipe(res)
     } catch (err){
-        console.log(err)
       res.status(400).json({ message: err.message });
     }
 }

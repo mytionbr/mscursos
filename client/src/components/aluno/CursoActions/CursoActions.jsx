@@ -72,7 +72,7 @@ function CursoActions(props) {
 
   return (
     <Grid container spacing={2}>
-      {aluno && aluno.assinatura && aluno.assinatura.plano_id === curso.plano_id ? (
+      {aluno && aluno.assinatura && Number(aluno.assinatura.plano_id) >= Number(curso.plano_id)? (
         loadingFind || loadingCreate || loadingDelete ? (
           <LoadingBox color="primary" />
         ) : errorFind ? (

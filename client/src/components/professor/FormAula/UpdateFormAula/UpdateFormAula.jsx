@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   FormControl,
+  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -68,6 +69,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
       setDescricao(aula.descricao);
       setDuracao(aula.duracao)
       setConteudo(aula.conteudo)
+      setVideoName(aula.video)
     }
   }, [aula, aulaId, cursoId, dispatch, history, successUpdate]);
 
@@ -76,6 +78,8 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
   const [curso, setCurso] = useState("");
   const [duracao, setDuracao] = useState(0);
   const [conteudo, setConteudo] = useState('')
+  const [video, setVideo] = useState(null)
+  const [videoName, setVideoName] = useState(null)
 
   const handlerChangeNome = (event) => {
     const value = event.target.value;
@@ -90,6 +94,11 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
   const handlerChangeCurso = (event) => {
     const value = event.target.value;
     setCurso(value);
+  };
+
+  const handlerChangeVideo = (event) => {
+    const value = event.target.files[0];
+    setVideo(value);
   };
 
   const handlerChangeDuracao = (event) => {
@@ -108,7 +117,9 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
         nome: nome,
         descricao: descricao,
         curso_id: curso,
-        duracao:duracao
+        duracao:duracao,
+        conteudo: conteudo,
+        video:video ? video : ''
       })
     );
   };
@@ -121,7 +132,17 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
         <MessageBox type="error">{error}</MessageBox>
       ) : (
         <Box className={classes.boxContainer}>
-          <Typography variant="h6">AULA ID: {aulaId}</Typography>
+          <TextField
+            name="nome"
+            variant="outlined"
+            label="id"
+            color="secondary"
+            fullWidth
+            value={aulaId}
+            inputProps={
+              { readOnly: true, }
+            }
+          />
           <TextField
             name="nome"
             variant="outlined"
@@ -184,7 +205,10 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
             value={conteudo}
             onChange={setConteudo}
           />
-
+           <InputLabel style={{marginLeft:'0.8rem'}} id="video">Video</InputLabel>
+           {videoName ? <Typography variant="body1"> Aula: {videoName} </Typography> : '' }
+         
+          <Input type="file" name="video" onChange={handlerChangeVideo}  />
           <Button
             type="submit"
             className={classes.button}

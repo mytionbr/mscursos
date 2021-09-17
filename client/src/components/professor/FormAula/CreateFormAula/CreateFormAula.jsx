@@ -95,7 +95,6 @@ function CreateFormAula(props) {
             duracao: duracao,
             conteudo: conteudo,
             video:video
-
         }))
   };
 
