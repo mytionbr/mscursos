@@ -37,7 +37,7 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
 
 
   return (
-    <AppBar elevation={0} {...rest} position="static">
+    <AppBar  elevation={0} {...rest} position="static">
       <Toolbar className={classes.toolbar}>
         <Hidden mdUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
@@ -57,8 +57,8 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
         ) : error ? (
           <MessageBox type="error">{error}</MessageBox>
         ) : aula ? (
-          <>
-            <Typography variant="h4">{aula.nome}</Typography>
+          <Box className={classes.infoContainer}>
+            <Typography variant="h4" className={classes.title}>{aula.nome}</Typography>
             <Box style={{ flexGrow: 1 }} />
             {loadingFinish ? (
               <LoadingBox />
@@ -85,7 +85,7 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
                 Finalizar aula
               </Button>
             )}
-          </>
+          </Box>
         ) : (
           ""
         )}

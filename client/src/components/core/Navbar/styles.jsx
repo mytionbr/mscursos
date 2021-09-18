@@ -8,7 +8,6 @@ export default makeStyles((theme) =>({
         padding: '10px 50px',
         [theme.breakpoints.down('xs')]:{
            flexDirection: 'column' ,
-
         },
     
     },
