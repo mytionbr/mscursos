@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Divider, Drawer, Hidden, List, ListItem, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link,useLocation } from 'react-router-dom'
 import Navitem from '../NavItem/NavItem'
 import {getIconByCategoria} from '../../../../utils/getIconByCategoria'
 import LoadingBox from '../../../core/LoadingBox/LoadingBox';
@@ -10,7 +10,7 @@ import { findAulasInfo } from '../../../../actions/aulaActions';
 import ProgressBar from '../../../ProgressBar/ProgressBar';
 
 function AulaSidebar({onMobileClose, openMobile}) {
-            
+    const location = useLocation()
     const dispatch = useDispatch();
     const aulaInfoList = useSelector((state) => state.aulaInfoList);
     const { loading, error, data } = aulaInfoList;
@@ -19,7 +19,7 @@ function AulaSidebar({onMobileClose, openMobile}) {
         if (openMobile && onMobileClose) {
             onMobileClose()
         }
-    }, [])
+    }, [location.pathname])
 
     const Picture = () => {
         let Icon = getIconByCategoria(data.curso.categoria_id)

@@ -25,10 +25,12 @@ function AulaLayout(props) {
     return (
         <div className={classes.dashboardLayoutRoot}>
             <AulaSidebar
-                onMobileNavOpen={() => setMobileNavOpen(true)}  />
+                onMobileClose={() => setMobileNavOpen(false)}
+                openMobile={isMobileNavOpen}  />
             <div className={classes.dashboardLayoutWrapper}>
                 <AulaNavbar 
-                    onMobileNavOpen={() => setMobileNavOpen(true)} />
+                    onMobileNavOpen={() => setMobileNavOpen(true)} 
+                    />
                 <div className={classes.dashboardLayoutContainer}>
                     <div className={classes.dashboardLayoutContent}>
                         {props.children}
