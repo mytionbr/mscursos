@@ -133,8 +133,8 @@ function CreateFormCurso(props) {
         <Button
           type="submit"
           className={classes.button}
-          variant="outlined"
-          color="secundary"
+          variant="contained"
+          color="secondary"
           size="large"
           onClick={handlerSubmit}
           fullWidth

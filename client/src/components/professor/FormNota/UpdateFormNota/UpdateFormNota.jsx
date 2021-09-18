@@ -235,8 +235,8 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
             <Button
               type="submit"
               className={classes.button}
-              variant="outlined"
-              color="secundary"
+              variant="contained"
+              color="secondary"
               size="large"
               onClick={handleSubmit}
               fullWidth
@@ -246,8 +246,8 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
             <Button
               type="submit"
               className={classes.button}
-              variant="outlined"
-              color="secundary"
+              variant="contained"
+              color="secondary"
               size="large"
               onClick={handleDelete}
               fullWidth

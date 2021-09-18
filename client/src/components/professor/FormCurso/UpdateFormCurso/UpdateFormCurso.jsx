@@ -45,6 +45,9 @@ function UpdateFormCurso({cursoId,...rest}) {
     error: errorCategorias,
   } = categoriaList;
 
+  console.log(loading, error,  curso)
+  console.log(categorias)
+
   useEffect(() => {
     dispatch(listCategoria());
   }, [dispatch]);
@@ -107,16 +110,16 @@ function UpdateFormCurso({cursoId,...rest}) {
       ) : (
         <Box className={classes.boxContainer}>
            <TextField
-            name="id"
-            variant="outlined"
-            label="id"
-            color="secondary"
-            fullWidth
-            value={cursoId}
-            inputProps={
-              { readOnly: true, }
-            }
-          />
+              name="cursoId"
+              variant="outlined"
+              label="Id"
+              color="secondary"
+              fullWidth
+              value={cursoId}
+              inputProps={
+                { readOnly: true, }
+              }
+            />  
           <TextField
             name="nome"
             variant="outlined"
@@ -131,7 +134,7 @@ function UpdateFormCurso({cursoId,...rest}) {
             <LoadingBox />
           ) : errorCategorias ? (
             <MessageBox type="error">{errorCategorias}</MessageBox>
-          ) : (          
+          ) : categorias && (          
             <FormControl
               color="secondary"
               variant="filled"
