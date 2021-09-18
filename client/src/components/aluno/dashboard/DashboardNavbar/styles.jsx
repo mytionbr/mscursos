@@ -7,6 +7,9 @@ export default makeStyles((theme) => ({
     color: grey[700],
     alignItems: 'center',
     padding: '10px 50px',
+    [theme.breakpoints.down('sm')]:{
+      padding: '10px 10px',
+     },
   },
   grow: {
     flexGrow: 1,
