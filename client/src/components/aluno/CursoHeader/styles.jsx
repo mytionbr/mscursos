@@ -15,6 +15,9 @@ export default makeStyles((theme) => ({
         color: '#fff',
     },
     title:{
-        fontWeight:'700'
+        fontWeight:'700',
+        [theme.breakpoints.down('xs')]:{
+            fontSize: '3rem'
+         },
     },
 }));

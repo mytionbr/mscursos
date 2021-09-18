@@ -59,10 +59,9 @@ function CursoPage(props) {
                 style={{
                   padding: "2rem 0",
                   justifyContent: "space-between",
-      
                 }}
               >
-                <Grid xs={8} item>
+                <Grid xs={12} md={8} item>
                   {loading ? (
                     <Skeleton variant="rect" width={"100%"} height={200} />
                   ) : (
@@ -78,7 +77,7 @@ function CursoPage(props) {
                     </>
                   )}
                 </Grid>
-                <Grid xs={3} item>
+                <Grid xs={12} md={3} item>
                   {loading ? (
                     <Skeleton variant="rect" width={150} height={118} />
                   ) : (
@@ -88,7 +87,7 @@ function CursoPage(props) {
                     />
                   )}
                 </Grid>
-                <Grid xs={8} item>
+                <Grid xs={12} md={8} item>
                   {loading ? (
                     <Skeleton variant="rect" width={"100%"} height={150} />
                   ) : (

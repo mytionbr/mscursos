@@ -26,7 +26,7 @@ function CursoStatistics({
         <Grid item className={classes.icon}>
           {icon}
         </Grid>
-        <Grid direction="column">
+        <Grid direction="column" className={classes.infoContainer}>
           <Typography variant="h6" align="right" className={classes.text}>
             {title}
           </Typography>
@@ -65,7 +65,7 @@ function CursoStatistics({
         <Statistic
           icon={<EventIcon />}
           title={"Atualizado em"}
-          data={moment(atualizado).format("l")}
+          data={moment(atualizado).format("L")}
         />
       )}
       {loading ? (

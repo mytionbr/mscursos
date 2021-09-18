@@ -14,8 +14,13 @@ export default makeStyles((theme) => ({
         '& > h5':{
             display: 'flex',
             alignItems: 'center',
-           
         },
+        [theme.breakpoints.down('xs')]:{
+            flexDirection: 'column',
+            "& > *":{
+                margin: '0.5rem 0'
+            }
+         },
 
     },
     icon:{
@@ -30,6 +35,15 @@ export default makeStyles((theme) => ({
     },
     text:{
         fontSize: '1rem'
+    },
+    infoContainer:{
+        display: 'flex',
+        [theme.breakpoints.down('xs')]:{
+            flexDirection: 'row',
+            "& > *":{
+                margin: '0 0.2rem'
+            }
+         },
     }
     
 }));
