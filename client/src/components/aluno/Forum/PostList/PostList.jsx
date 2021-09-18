@@ -58,7 +58,7 @@ function PostList(props) {
                 tags={post.tags}
                 totalResponses={post.total_respostas}
                 user={post.aluno}
-                dateUpdate={post.update_date}
+                dateUpdate={post.data_atualizacao}
                 postId={post.post_id}
               />
             ))

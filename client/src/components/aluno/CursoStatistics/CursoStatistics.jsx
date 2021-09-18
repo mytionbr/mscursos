@@ -65,7 +65,7 @@ function CursoStatistics({
         <Statistic
           icon={<EventIcon />}
           title={"Atualizado em"}
-          data={moment(atualizado).format("L")}
+          data={moment(atualizado).format("l")}
         />
       )}
       {loading ? (

@@ -6,6 +6,11 @@ export default makeStyles((theme) =>({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 50px',
+        [theme.breakpoints.down('xs')]:{
+           flexDirection: 'column' ,
+
+        },
+    
     },
     brand:{
         display: 'flex',
@@ -28,5 +33,6 @@ export default makeStyles((theme) =>({
         border: '2px solid black',
         fontWeight:'700',
         boxShadow:'none'
-        }
+    },
+    
 }))

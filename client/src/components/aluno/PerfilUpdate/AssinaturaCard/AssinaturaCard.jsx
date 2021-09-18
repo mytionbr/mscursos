@@ -61,14 +61,6 @@ function AssinaturaCard() {
 
     return (
         <>
-        {
-            loadingInfo ? (
-                <LoadingBox />
-            ) : errorInfo ? (
-                <MessageBox type="error">
-                    {errorInfo}
-                </MessageBox>
-            ) : (
                 <Card>
                    <AssinaturaName name={dataInfo.assinatura.plano_nome} />
                    <AssinaturaInfo 
@@ -76,8 +68,7 @@ function AssinaturaCard() {
                     price={dataInfo.assinatura.preco} 
                     status={dataInfo.assinatura.status}/>
                 </Card>
-            )
-        }
+            
         </>
     )
 }

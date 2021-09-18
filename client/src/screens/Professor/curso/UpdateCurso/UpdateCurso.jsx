@@ -5,7 +5,7 @@ import ToolbarPage from "../../../../components/professor/ToolbarPage/ToolbarPag
 import { useHistory } from 'react-router-dom'
 import UpdateFormCurso from "../../../../components/professor/FormCurso/UpdateFormCurso/UpdateFormCurso";
 
-function UpdateCurso(props) {
+function CursoUpdate(props) {
   const cursoId = props.match.params.cursoId;
   const history = useHistory()
   console.log(cursoId)
@@ -54,4 +54,4 @@ function UpdateCurso(props) {
   );
 }
 
-export default UpdateCurso;
+export default CursoUpdate;

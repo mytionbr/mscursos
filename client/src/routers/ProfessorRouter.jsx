@@ -9,7 +9,6 @@ import CreateCurso from "../screens/Professor/curso/CreateCurso/CreateCurso";
 import UpdateCurso from "../screens/Professor/curso/UpdateCurso/UpdateCurso";
 import CreateAula from "../screens/Professor/aula/CreateAula/CreateAula";
 import UpdateAula from "../screens/Professor/aula/UpdateAula/UpdateAula";
-import AulaListResult from "../components/professor/aulaList/AulaListResult/AulaListResult";
 import AulaList from "../screens/Professor/aula/AulaList/AulaList";
 import CreateNota from "../screens/Professor/aluno/CreateNota/CreateNota";
 import UpdateNota from "../screens/Professor/aluno/UpdateNota/UpdateNota";

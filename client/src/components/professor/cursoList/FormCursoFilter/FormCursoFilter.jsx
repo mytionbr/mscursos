@@ -8,7 +8,7 @@ import { listCategoria } from "../../../../actions/categoriaActions"
 import { findCursosByProfessor } from '../../../../actions/cursoActions'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-function FormCursoFilter({ onModalClose, openModal,nome, setNome, categoriasTags, setCategoriasTags }) {
+function CursoFilterForm({ onModalClose, openModal,nome, setNome, categoriasTags, setCategoriasTags }) {
   const classes = useStyles()
 
   const dispatch = useDispatch();
@@ -128,4 +128,4 @@ function FormCursoFilter({ onModalClose, openModal,nome, setNome, categoriasTags
     )
 }
 
-export default FormCursoFilter
+export default CursoFilterForm

@@ -16,9 +16,10 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import {Link} from 'react-router-dom'
 import LinkPerfil from "../../LinkPerfil/LinkPerfil";
+import 'moment/locale/pt-br'
 function MainQuestion({refToResponse}) {
   const classes = useStyles();
-
+  moment.locale('pt-br')
   const dispatch = useDispatch();
   const postInformations = useSelector((state) => state.postInformations);
   const {  data } = postInformations;
@@ -77,7 +78,7 @@ function MainQuestion({refToResponse}) {
           <User aluno={aluno} />
           <Box style={{ flexGrow: 1 }} />
           <Typography variant="body1" >
-            {moment().startOf(dataCriacao).fromNow()}
+            {moment(dataCriacao).startOf().fromNow()}
           </Typography>
         </Box>
       </Box>

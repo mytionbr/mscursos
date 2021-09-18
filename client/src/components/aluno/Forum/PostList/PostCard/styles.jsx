@@ -68,7 +68,7 @@ export default makeStyles((theme) => ({
     userContainer:{
         display: 'flex',
         flexDirection: 'column',
-
+        width: '10rem'
     },
     avatarIcon:{
         width:'4rem',
@@ -100,7 +100,8 @@ export default makeStyles((theme) => ({
    },
    
    userName:{
-       fontWeight: '600'
+       fontWeight: '600',
+       lineHeight: '1.3'
    }
     
 

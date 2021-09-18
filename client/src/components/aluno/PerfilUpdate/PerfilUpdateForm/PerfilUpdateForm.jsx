@@ -117,11 +117,6 @@ function PerfilUpdateForm() {
   
   return (
       <>
-        {loadingInfo ? (
-           <LoadingBox />
-        ) : errorInfo ? (
-            <MessageBox type="error">{errorInfo}</MessageBox>
-        ) : (
             <form  
                 onSubmit={handleSubmit}
                 autoComplete={false}
@@ -229,8 +224,6 @@ function PerfilUpdateForm() {
               </Box>
             </Card>
           </form>
-        )
-        }
         {
           successUpdate && (
             <SuccessAlert message={'Perfil atualizado com sucesso!'} />

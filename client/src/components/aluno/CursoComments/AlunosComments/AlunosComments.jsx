@@ -10,9 +10,11 @@ import moment from "moment";
 import Rating from "@material-ui/lab/Rating";
 import LinkPerfil from "../../LinkPerfil/LinkPerfil";
 import { useHistory } from "react-router";
+import 'moment/locale/pt-br'
 function AlunosComments({ comments }) {
   const history = useHistory()
-
+  moment.locale('pt-br')
+ 
   const CommentInfo = ({ alunoNome,alunoId, date }) => {
     return (
       <Grid container xs={3}>
@@ -37,7 +39,7 @@ function AlunosComments({ comments }) {
             style={{
               color: "grey"
             }}>
-           {moment().startOf(date).fromNow()}
+           {moment(date).startOf().fromNow()}
           </Typography>
           <Typography variant="body1">
             {

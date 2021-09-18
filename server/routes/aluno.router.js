@@ -17,7 +17,7 @@ router.route('/details/:alunoId')
     .get(isAuth, findDetails )
 
 router.route('/:id/informations')
-    .get(isAuth, findInformations )
+    .get(isAuth,hasAuthorization, findInformations )
 
 
 router.param('id', findById)

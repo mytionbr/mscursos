@@ -13,6 +13,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import moment from "moment";
 import {Link } from 'react-router-dom'
 import LinkPerfil from "../../../LinkPerfil/LinkPerfil";
+import 'moment/locale/pt-br'
 function PostCard({
   title,
   totalResponses,
@@ -24,7 +25,7 @@ function PostCard({
   date,
 }) {
   const classes = useStyles();
-
+  moment.locale('pt-br')
   const Title = ({ title, href }) => {
     return (
       <Link className={classes.title} to={href}>
@@ -85,9 +86,10 @@ function PostCard({
   };
 
   const Informations = ({ user, dateUpdate }) => {
+    
     return (
       <Box className={classes.informationsContainer}>
-        <Box item>
+        <Box >
           <Avatar
             className={[classes.avatarIcon, classes.icon, classes.avatarUser]}
           >
@@ -96,13 +98,13 @@ function PostCard({
         </Box>
         <Box className={classes.userContainer}>
           <Typography variant="h6" className={classes.userName}>
-           <LinkPerfil alunoId={user.aluno_id}>
-            {user.nome}
-           </LinkPerfil>
+            <LinkPerfil alunoId={user.aluno_id}>
+              {user.nome}
+            </LinkPerfil>
            
           </Typography>
           <Typography variant="body2">
-            atualizado em {moment().startOf(dateUpdate).fromNow()}
+           Atualizado {moment(dateUpdate).startOf().fromNow()}
           </Typography>
         </Box>
       </Box>
@@ -128,7 +130,7 @@ function PostCard({
             <TotalResponses total={totalResponses} />
           </Box>
           <Box>
-            <Informations user={user} dateUpdate={date} />
+            <Informations user={user} dateUpdate={dateUpdate} />
           </Box>
         </Box>
       </Box>
