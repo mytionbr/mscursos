@@ -21,7 +21,7 @@ function ListCursosDashboard(props) {
                 <Grid className={classes.grid} container spacing={1}>
                 {
                     cursos.map(curso =>(
-                        <Grid item xs={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                         <CursoCard 
                             name={curso.nome}
                             percent={curso.progresso}

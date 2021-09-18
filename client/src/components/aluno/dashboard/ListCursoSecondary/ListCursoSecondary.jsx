@@ -13,7 +13,7 @@ function ListCursoSecondary(props) {
         >
             {
                 cursos.map(curso =>(
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <CursoCard 
                            name={curso.nome}
                            percent={curso.progresso}
