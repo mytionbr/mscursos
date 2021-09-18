@@ -23,15 +23,17 @@ function AlunosComments({ comments }) {
           direction="row"
           justifyContent="flex-start"
           alignItems="flex-start"
-          xs={3}
+          xs={12}
+          md={3}
         >
           <Avatar>{alunoNome[0].toUpperCase()}</Avatar>
         </Grid>
         <Grid
-          xs={9}
+          xs={12}
+          md={9}
           container
           direction="column"
-          justifyContent="flex-start"
+          justifyContent="center"
           alignItems="flex-start"
         >
           <Typography 
@@ -65,7 +67,7 @@ function AlunosComments({ comments }) {
       direction="column"
       justifyContent="flex-start"
       alignItems="flex-start"
-      xs={9}
+      xs={7}
       >
         <Rating name="read-only" value={rating} readOnly 
         style={{
