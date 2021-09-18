@@ -28,7 +28,7 @@ export const create = async (req,res) => {
         if(conteudo){
             sanitizedConteudo = dompurify.sanitize(marked(conteudo)) 
         }
-        if(req.files || Object.keys(req.files).length > 0){
+        if(req.files &&  Object.keys(req.files).length > 0){
             video = req.files.video
             uploadPath = process.cwd() + '/server/upload/' + video.name
         
@@ -58,6 +58,7 @@ export const create = async (req,res) => {
         res.status(201).json(createdAula)
 
     } catch (err) {
+        console.log(err)
         res.status(409).json({message: err.message})
     }
 }
