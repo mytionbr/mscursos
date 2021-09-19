@@ -42,12 +42,12 @@ function CursoStatistics({
   return (
     <Box className={classes.container}>
       {loading ? (
-        <Skeleton variant="rect" width={"10rem"} height={40} />
+        <Skeleton variant="rect" style={{width: '100%'}} height={40} />
       ) : (
         <Statistic icon={<ClassIcon />} title={"Aulas"} data={aulasTotal} />
       )}
       {loading ? (
-        <Skeleton variant="rect" width={"10rem"} height={40} />
+        <Skeleton variant="rect" style={{width: '100%'}} height={40} />
       ) : (
         <Statistic
           icon={<TimelapseIcon />}
@@ -56,12 +56,12 @@ function CursoStatistics({
         />
       )}
       {loading ? (
-        <Skeleton variant="rect" width={"10rem"} height={40} />
+        <Skeleton variant="rect" style={{width: '100%'}} height={40} />
       ) : (
         <Statistic icon={<PeopleIcon />} title={"alunos"} data={alunosTotal} />
       )}
       {loading ? (
-        <Skeleton variant="rect" width={"10rem"} height={40} />
+        <Skeleton variant="rect" style={{width: '100%'}} height={40} />
       ) : (
         <Statistic
           icon={<EventIcon />}
@@ -70,7 +70,7 @@ function CursoStatistics({
         />
       )}
       {loading ? (
-        <Skeleton variant="rect" width={"10rem"} height={40} />
+        <Skeleton variant="rect" style={{width: '100%'}} height={40} />
       ) : (
         <Statistic
           icon={<ThumbUpAltIcon />}

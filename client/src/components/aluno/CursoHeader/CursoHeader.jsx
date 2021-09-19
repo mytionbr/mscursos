@@ -19,29 +19,29 @@ function CursoHeader(props) {
   return (
     <Box className={classes.box}>
       <Container className={classes.container}>
-        <Box my={1}>
+        <Box my={1} className={classes.boxWrapper}>
         {
           loading ? (
-            <Skeleton variant="rect" width={'10rem'} height={20} />
+            <Skeleton variant="rect" style={{width: '100%'}} height={20} />
           ) : (
             <Chip label={curso.categoria_nome} onClick={handleCategoriaClick} />
           )
         }
         </Box>
-        <Box my={1}>
+        <Box my={1} className={classes.boxWrapper}>
          {
           loading ? (
-            <Skeleton variant="rect" width={'30rem'} height={118} />
+            <Skeleton variant="rect" style={{width: '100%'}}  height={118} />
           ) : (
             <Typography className={classes.title} align="center" variant="h1" >
               {curso.nome}
             </Typography>
           )}
         </Box> 
-        <Box my={1}>
+        <Box my={1} className={classes.boxWrapper}>
        {
           loading ? (
-            <Skeleton variant="rect" width={'60rem'} height={50} />
+            <Skeleton variant="rect" style={{width: '100%'}} height={50} />
           ) : (
             <Typography  align="center" variant="subtitle1" >
               {curso.descricao}
@@ -52,7 +52,7 @@ function CursoHeader(props) {
           loading ? (
             ''
           ) : (
-            <Box my={1}>
+            <Box my={1} >
               <CursoActions  />
           </Box>
           )

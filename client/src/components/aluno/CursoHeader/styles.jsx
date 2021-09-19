@@ -20,4 +20,10 @@ export default makeStyles((theme) => ({
             fontSize: '3rem'
          },
     },
+    boxWrapper:{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 }));
