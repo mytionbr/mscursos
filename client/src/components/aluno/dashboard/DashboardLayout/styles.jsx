@@ -22,7 +22,9 @@ export default makeStyles((theme) =>({
     dashboardLayoutContent:{
         flex: '1 1 auto',
         height: '100%',
-        overflow: 'auto'
+        [theme.breakpoints.down('sm')]:{
+            overflow: 'auto',
+         },
     }
 
 }))

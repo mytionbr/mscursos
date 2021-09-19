@@ -31,6 +31,7 @@ export default makeStyles((theme) => ({
    informations:{
        display: 'flex',
        alignItems: 'center',
+       justifyContent: 'space-between',
        width: '100%',
        padding: '0.2rem',
        borderBottom: '0.1rem solid #aaa',
