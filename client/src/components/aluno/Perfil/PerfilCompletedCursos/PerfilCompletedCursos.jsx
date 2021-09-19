@@ -35,7 +35,7 @@ function PerfilCompletedCursos() {
           <AccordionDetails>
             <Grid className={classes.grid} container spacing={1}>
               {data.cursos_completos.map((curso) => (
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                   <CursoCard
                     name={curso.nome}
                     hasProgress={false}
