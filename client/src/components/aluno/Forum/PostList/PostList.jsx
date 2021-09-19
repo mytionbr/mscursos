@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import { findPosts } from "../../../../actions/postActions";
+import scrollTo from "../../../../utils/scrollTo";
 
 function PostList(props) {
   const classes = useStyles();
@@ -16,6 +17,7 @@ function PostList(props) {
   const { loading, error, data } = postFind;
 
   const handlePagination = (event, value) => {
+    scrollTo()
     dispatch(
       findPosts({
         titulo: data.params.titulo || "",

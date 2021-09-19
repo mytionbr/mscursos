@@ -6,7 +6,10 @@ export default makeStyles((theme) => ({
         display: 'flex',
         alignItems:'center',
         width: 400,
-        backgroundColor:'#D7D7D7'
+        backgroundColor:'#D7D7D7',
+        [theme.breakpoints.down('sm')]:{
+            width: '100%',
+         },
 
     },
     input:{

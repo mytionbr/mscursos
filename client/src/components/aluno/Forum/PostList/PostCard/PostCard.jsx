@@ -104,7 +104,7 @@ function PostCard({
            
           </Typography>
           <Typography variant="body2">
-           Atualizado {moment(dateUpdate).startOf().fromNow()}
+           Publicado {moment(dateUpdate).startOf().fromNow()}
           </Typography>
         </Box>
       </Box>

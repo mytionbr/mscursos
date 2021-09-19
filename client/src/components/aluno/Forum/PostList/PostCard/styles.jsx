@@ -3,32 +3,51 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
     card:{
         width:'100%',
-        height: '9rem',
+        minHeight: '9rem',
         padding:'1rem',
         margin: '0.5rem 0',
-        
     },
     rootContainer:{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+        [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+         },
     },
     presentationContainer:{
         display: 'flex',
-        width: '65%'
+        width: '65%',
+        [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+         },
     },
     detailsContainer:{
         display: 'flex',
         justifyContent: 'space-between',
         alignItens: 'center',
-        width: '35%'
+        width: '35%',
+        [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+            width: '100%',
+         },
     },
     descriptionContainer:{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',  
-        height: '100%'
+        height: '100%',
+        [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+            width: '100%',
+         },
     },
     title: {
         textDecoration: 'none',
@@ -36,7 +55,8 @@ export default makeStyles((theme) => ({
         "&:hover":{
             textDecoration: 'underline',
             cursor: 'pointer'
-        }
+        },
+        textAlign: 'center'
     },
     iconContainer:{
         padding: '1rem'
@@ -55,6 +75,10 @@ export default makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(0.5),
           },
+          [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+         },
     },
     informationsContainer:{
         display: 'flex',
@@ -63,12 +87,21 @@ export default makeStyles((theme) => ({
         '& > *': {
             margin: '0 1rem',
           },
+          [theme.breakpoints.down('sm')]:{
+            flexDirection: 'column' ,
+            justifyContent: 'center',
+         },
         
     },
     userContainer:{
         display: 'flex',
         flexDirection: 'column',
-        width: '10rem'
+        width: '10rem',
+        [theme.breakpoints.down('sm')]:{
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center'
+         },
     },
     avatarIcon:{
         width:'4rem',
