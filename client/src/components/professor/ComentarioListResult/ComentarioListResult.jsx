@@ -7,7 +7,7 @@ import MessageBox from '../../core/MessageBox/MessageBox';
 import PerfectScrollbar from "react-perfect-scrollbar";
 import CursoComments from '../../aluno/CursoComments/CursoComments';
 import { informationsCurso } from '../../../actions/cursoActions';
-
+import 'react-perfect-scrollbar/dist/css/styles.css'
 function ComentarioListResult({currentCurso,...rest}) {
 
   const dispatch = useDispatch();

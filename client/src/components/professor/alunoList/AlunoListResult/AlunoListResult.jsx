@@ -7,7 +7,7 @@ import MessageBox from '../../../core/MessageBox/MessageBox';
 import PerfectScrollbar from "react-perfect-scrollbar";
 import MenuButton from '../../MenuButton/MenuButton';
 import { findAlunos } from '../../../../actions/alunoActions';
-
+import 'react-perfect-scrollbar/dist/css/styles.css'
 function AlunoListResult({currentCurso,...rest}) {
    
     const history = useHistory()

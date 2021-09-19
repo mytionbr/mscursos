@@ -14,11 +14,8 @@ function ModalFilter({ onModalClose, openModal, form }) {
         onClose={onModalClose}
         open={openModal}
         variant="temporary"
-        PaperProps={{
-          style: {
-            width: 400,
-          },
-        }}
+        className={classes.paper}
+       
       >
         <div className={classes.btnBack}>
             <Avatar className={classes.avatar}>

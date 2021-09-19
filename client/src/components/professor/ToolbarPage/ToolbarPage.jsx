@@ -7,7 +7,7 @@ function ToolbarPage({btns,links,title,...rest}) {
     const classes = useStyles()
     
     return (
-        <Box {...rest}>
+        <Box  {...rest}>
             <Box>
                 <Breadcrumbs>
                 {

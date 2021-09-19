@@ -18,6 +18,12 @@ export default makeStyles((theme) =>({
      '& > *':{
       color: '#fff',
      }
+   },
+   paper:{
+    width: 400,
+    [theme.breakpoints.down("xs")]: {
+      width: '100%'
+    },
    }
 
    

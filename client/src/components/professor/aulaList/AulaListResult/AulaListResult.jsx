@@ -9,7 +9,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { deleteAula, findAulas } from '../../../../actions/aulaActions';
 import { AULA_DELETE_RESET } from '../../../../constants/aulaConstantes';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import 'react-perfect-scrollbar/dist/css/styles.css'
 function AulaListResult({currentCurso,...rest}) {
 
   const history = useHistory()
