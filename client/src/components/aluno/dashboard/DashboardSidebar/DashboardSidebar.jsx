@@ -15,12 +15,16 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
   }, []);
+
+  const alunoSignin = useSelector((state) => state.alunoSignin);
+  const {  alunoInfo } = alunoSignin;
 
   const items = [
     {
@@ -39,12 +43,12 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
       title: "Fórum",
     },
     {
-      href: "/aluno/app/perfil",
+      href: `/aluno/app/perfil/${alunoInfo.aluno_id}`,
       icon: <PeopleIcon/>,
       title: "Perfil",
     },
     {
-      href: "/professor/app/perfil/editar",
+      href: `/aluno/app/info/${alunoInfo.aluno_id}`,
       icon: <PersonIcon/>,
       title: "Editar perfil",
     },
@@ -52,7 +56,7 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
       href: "/aluno/signout",
       icon: <ExitToAppIcon/>,
       title: "Sair",
-      action: handleSignout,
+      action:handleSignout,
     },
   ];
 
@@ -67,7 +71,7 @@ function DashboardSidebar({ onMobileClose, handleSignout, openMobile }) {
       <Box style={{ padding: "1rem" }}>
         <List>
           {items.map((item) => (
-            <ListItem button component={NavLink} to={item.href} key={item.title}>
+            <ListItem button component={NavLink} to={item.href} key={item.title} onClick={item.action}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItem>

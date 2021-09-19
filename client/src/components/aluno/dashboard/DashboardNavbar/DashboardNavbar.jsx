@@ -23,7 +23,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../../../actions/alunoActions";
 import { useHistory } from "react-router-dom";
-function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
+function DashboardNavbar({ onMobileNavOpen, nav,handleSignout, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [search, setSearch] = useState("");
@@ -46,9 +46,6 @@ function DashboardNavbar({ onMobileNavOpen, nav, ...rest }) {
     setAnchorEl(null);
   };
 
-  const handleSignout = () => {
-    dispatch(signout());
-  };
 
   const handleChange = (event) => {
     const { value } = event.target;

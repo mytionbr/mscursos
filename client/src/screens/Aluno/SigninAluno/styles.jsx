@@ -6,7 +6,7 @@ export default makeStyles((theme) =>({
         height: '100vh',
     },
     illustration:{
-        width: '500px',
+        width: '100%',
         height: '500px',
         marginTop: '1rem'
     },
@@ -18,11 +18,12 @@ export default makeStyles((theme) =>({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    presentation:{
-        position: 'absolute',
-        zIndex: '5',
-        top: '90px',
-       
+    signinContainer:{
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+        alignItems: 'center',
+        flexDirection: 'column'
     }
 
     

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { signout } from '../../../../actions/alunoActions'
 import DashboardNavbar from '../DashboardNavbar/DashboardNavbar'
 import DashboardSidebar from '../DashboardSidebar/DashboardSidebar'
 import useStyles from './styles'
@@ -11,7 +12,7 @@ function DashboardLayout(props) {
     const dispatch = useDispatch()
 
     const handleSignout = () => {
-       alert('opa')
+        dispatch(signout());
     } 
 
     return (

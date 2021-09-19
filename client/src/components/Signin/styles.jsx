@@ -6,6 +6,7 @@ export default makeStyles((theme) =>({
         flexDirection: 'column',
         alignItems: 'center',
         padding:  theme.spacing(4),
+        maxWidth: '23rem'
     },
     avatar:{
         margin: theme.spacing(1),
