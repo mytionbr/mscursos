@@ -8,6 +8,7 @@ import CategoriaSelector from "../../../components/CategoriaSelector/CategoriaSe
 import LoadingBox from "../../../components/core/LoadingBox/LoadingBox";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import Cursos from "../../../components/Cursos/Cursos";
+import scrollTo from "../../../utils/scrollTo";
 
 function CursoList(props) {
   const localization = "/aluno/app";
@@ -25,6 +26,7 @@ function CursoList(props) {
     );
   }, [dispatch]);
 
+
   return (
     <>
       <Helmet>
@@ -39,10 +41,10 @@ function CursoList(props) {
       >
         <Container>
           <Grid container spacing={2} justifyContent={"space-between"}>
-            <Grid item xs={3}>
+            <Grid item xs={12} md={3} >
               <CategoriaSelector />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={8}>
               {loading ? (
                 <LoadingBox />
               ) : error ? (

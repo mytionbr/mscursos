@@ -11,5 +11,11 @@ export default makeStyles((theme) =>({
    pagination:{
        margin: 'auto',
        marginTop:'0.5rem',
+   },
+   grid:{
+    [theme.breakpoints.down('xs')]:{
+        margin: 'auto',
+     },
+      
    }
 }))

@@ -152,7 +152,10 @@ function CategoriaSelector() {
       ) : error ? (
         <MessageBox type="error">{error}</MessageBox>
       ) : (
-        <Paper>
+        <Paper style={{
+          width: '20rem',
+          margin: 'auto'
+        }}>
           <Box
             style={{
               display: "flex",
