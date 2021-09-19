@@ -20,6 +20,7 @@ function CursoStatistics({
   loading,
 }) {
   const classes = useStyles();
+  console.log(atualizado)
   const Statistic = ({ icon, title, data }) => {
     return (
       <Grid alignItems="center" justifyContent="center" container>
@@ -65,7 +66,7 @@ function CursoStatistics({
         <Statistic
           icon={<EventIcon />}
           title={"Atualizado em"}
-          data={moment(atualizado).format("L")}
+          data={moment(atualizado).format("DD/MM/YYYY")}
         />
       )}
       {loading ? (

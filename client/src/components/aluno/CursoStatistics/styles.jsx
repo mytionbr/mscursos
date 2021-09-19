@@ -39,7 +39,7 @@ export default makeStyles((theme) => ({
     infoContainer:{
         display: 'flex',
         [theme.breakpoints.down('xs')]:{
-            flexDirection: 'row',
+            
             "& > *":{
                 margin: '0 0.2rem'
             }

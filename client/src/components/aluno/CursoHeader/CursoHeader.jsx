@@ -33,7 +33,7 @@ function CursoHeader(props) {
           loading ? (
             <Skeleton variant="rect" width={'30rem'} height={118} />
           ) : (
-            <Typography className={classes.title} variant="h1" >
+            <Typography className={classes.title} align="center" variant="h1" >
               {curso.nome}
             </Typography>
           )}

@@ -5,14 +5,9 @@ export default makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        [theme.breakpoints.down('xs')]:{
-          flexDirection: 'column-reverse',
-          margin: '0.5rem 0'
-         },
+      
     },
     progressGrid:{
-        [theme.breakpoints.down('xs')]:{
-            minWidth: '100%',
-           },
+       
     }
 }));

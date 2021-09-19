@@ -12,6 +12,7 @@ import ProfessorInfo from "../../../components/aluno/ProfessorInfo/ProfessorInfo
 import Skeleton from "@material-ui/lab/Skeleton";
 import MessageBox from "../../../components/core/MessageBox/MessageBox";
 import DOMPurify from "dompurify";
+import scrollTo from "../../../utils/scrollTo";
 
 function CursoPage(props) {
   
@@ -22,10 +23,9 @@ function CursoPage(props) {
   const { loading, error, data } = cursoInfomations;
 
   useEffect(() => {
+    scrollTo()
     dispatch(informationsCurso(slug));
   }, [dispatch, slug]);
-
-
 
   return (
     <>
@@ -47,7 +47,7 @@ function CursoPage(props) {
               duracao={data && data.curso.duracao}
               alunosTotal={data && data.curso.alunos_total}
               atualizado={
-                data && moment(data.curso.data_atualizacao).format("L")
+                data && data.curso.data_atualizacao
               }
               avaliacao={data && data.curso.avaliacao_media}
               loading={loading}

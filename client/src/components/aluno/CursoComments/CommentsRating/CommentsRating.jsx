@@ -30,7 +30,7 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
         spacing={1}
         className={classes.ratingByStar}
       >
-        <Grid item xs={12} md={9} 
+        <Grid item xs={6} sm={9}
         className={classes.progressGrid}
         >
           <BorderLinearProgress
@@ -42,8 +42,8 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
         </Grid>
         <Grid
           item
-          xs={12}
-          md={2}
+          xs={5}
+          sm={2}
           style={{
             display: "flex",
             alignItems: "center",
@@ -54,8 +54,7 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
         </Grid>
         <Grid
           item
-          xs={12}
-          md={1}
+          xs={1}
           style={{
             display: "flex",
             alignItems: "center",
