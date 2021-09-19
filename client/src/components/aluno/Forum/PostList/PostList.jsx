@@ -43,6 +43,7 @@ function PostList(props) {
         style={{
           display: "flex",
           flexDirection: "column",
+          overflow: 'auto',
         }}
       >
         {loading ? (

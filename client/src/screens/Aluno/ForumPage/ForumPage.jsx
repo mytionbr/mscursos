@@ -23,6 +23,7 @@ function ForumPage() {
         style={{
           minHeight: "100%",
           padding: "2rem 0",
+          overflow: 'auto'
         }}
       >
         <Container>

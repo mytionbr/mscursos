@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
         minHeight: '9rem',
         padding:'1rem',
         margin: '0.5rem 0',
+        overflow: 'auto'
     },
     rootContainer:{
         display: 'flex',
