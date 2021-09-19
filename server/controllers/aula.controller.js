@@ -58,7 +58,6 @@ export const create = async (req,res) => {
         res.status(201).json(createdAula)
 
     } catch (err) {
-        console.log(err)
         res.status(409).json({message: err.message})
     }
 }

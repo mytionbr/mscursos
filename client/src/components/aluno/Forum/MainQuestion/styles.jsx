@@ -12,7 +12,12 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        borderBottom: '0.1rem solid #aaa'
+        borderBottom: '0.1rem solid #aaa',
+    },
+    title:{
+        [theme.breakpoints.down("xs")]: {
+            "& > *":{fontSize: '1.5rem'}
+          },
     },
     tagsContainer:{
         display: 'flex',
@@ -30,6 +35,12 @@ export default makeStyles((theme) => ({
             margin: '0.1rem'
         },
         borderRight:'0.1rem solid #aaa',
+        [theme.breakpoints.down("xs")]: {
+            borderRight:'none',
+            borderTop:'0.1rem solid #aaa',
+            borderBottom:'0.1rem solid #aaa',
+            fontSize: '1rem'
+          },
       
     },
     avatarIcon:{
@@ -54,14 +65,28 @@ export default makeStyles((theme) => ({
         padding: '1rem'
     },
     corpoContainer:{
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down("xs")]: {
+            flexDirection: 'column'
+          },
     },
     userContainer:{
         display: 'flex',
         alignItems: 'center',
         '& > *':{
             margin: '0.2rem'
-        }
+        },
+        [theme.breakpoints.down("xs")]: {
+            "& > *":{
+                fontSize: '0.7rem'
+            }
+            
+          },
+    },
+    date:{
+        [theme.breakpoints.down("xs")]: {
+                fontSize: '0.7rem'
+          },
     },
     avatarUser:{
         backgroundColor: theme.palette.secondary.main,

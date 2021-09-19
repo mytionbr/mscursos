@@ -14,7 +14,11 @@ import MessageBox from "../../../core/MessageBox/MessageBox";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
-import { findAulasInfo, finishAula, informationsAula } from "../../../../actions/aulaActions";
+import {
+  findAulasInfo,
+  finishAula,
+  informationsAula,
+} from "../../../../actions/aulaActions";
 import { AULA_FINISH_RESET } from "../../../../constants/aulaConstantes";
 function AulaNavbar({ onMobileNavOpen, ...rest }) {
   const classes = useStyles();
@@ -32,12 +36,11 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
   } = aulaFinish;
 
   const handleFinishAula = () => {
-    dispatch(finishAula(aula))
+    dispatch(finishAula(aula));
   };
 
-
   return (
-    <AppBar  elevation={0} {...rest} position="static">
+    <AppBar elevation={0} {...rest} position="static">
       <Toolbar className={classes.toolbar}>
         <Hidden mdUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
@@ -58,7 +61,9 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
           <MessageBox type="error">{error}</MessageBox>
         ) : aula ? (
           <Box className={classes.infoContainer}>
-            <Typography variant="h4" className={classes.title}>{aula.nome}</Typography>
+            <Typography variant="h4" className={classes.title}>
+              {aula.nome}
+            </Typography>
             <Box style={{ flexGrow: 1 }} />
             {loadingFinish ? (
               <LoadingBox />
@@ -70,14 +75,14 @@ function AulaNavbar({ onMobileNavOpen, ...rest }) {
                 color="secondary"
                 disabled
                 style={{
-                    backgroundColor: "#35ca42",
-                    color:"#fff"
+                  backgroundColor: "#35ca42",
+                  color: "#fff",
                 }}
               >
                 Aula concluída
               </Button>
             ) : (
-                <Button
+              <Button
                 variant="contained"
                 onClick={handleFinishAula}
                 color="secondary"

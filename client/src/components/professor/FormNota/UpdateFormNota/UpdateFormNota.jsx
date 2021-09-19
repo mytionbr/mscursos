@@ -64,8 +64,6 @@ function UpdateFormNota({ notaId, cursoId, ...rest }) {
     }
   }, [cursoId, dispatch, history, nota, notaId, successDelete, successUpdate]);
 
-  console.log(loadingDelete, errorDelete, successDelete);
-
   const [valor, setValor] = useState(0);
   const [aprovado, setAprovado] = useState(false);
 

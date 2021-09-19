@@ -43,7 +43,7 @@ function PerfilDetails(props) {
     error: errorUpdate,
     success: successUpdate,
   } = professorUpdate;
-console.log(professor)
+
   useEffect(() => {
     if (!professor || successUpdate) {
       dispatch({ type: PROFESSOR_UPDATE_PROFILE_RESET });

@@ -45,9 +45,6 @@ function UpdateFormCurso({cursoId,...rest}) {
     error: errorCategorias,
   } = categoriaList;
 
-  console.log(loading, error,  curso)
-  console.log(categorias)
-
   useEffect(() => {
     dispatch(listCategoria());
   }, [dispatch]);

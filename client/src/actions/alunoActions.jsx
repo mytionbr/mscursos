@@ -45,16 +45,16 @@ export const signin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALUNO_SIGNIN_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
 export const signout = () => (dispatch) => {
-  localStorage.removeItem('alunoInfo')
-  dispatch({type:ALUNO_SIGNOUT})
-  document.location.href = '/aluno/signin'
-}
+  localStorage.removeItem("alunoInfo");
+  dispatch({ type: ALUNO_SIGNOUT });
+  document.location.href = "/aluno/signin";
+};
 
 export const findAlunos = (params) => async (dispatch, getState) => {
   dispatch({ type: ALUNO_FIND_REQUEST });
@@ -84,7 +84,7 @@ export const findAlunos = (params) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_FIND_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -101,7 +101,7 @@ export const findAlunosById = (alunoId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_FIND_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -122,7 +122,7 @@ export const createNota =
     } catch (error) {
       dispatch({
         type: ALUNO_NOTA_CREATE_FAIL,
-        payload: error.response.data.message || error.message
+        payload: error.response.data.message || error.message,
       });
     }
   };
@@ -147,7 +147,7 @@ export const detailsNota =
     } catch (error) {
       dispatch({
         type: ALUNO_NOTA_DETAILS_FAIL,
-        payload: error.response.data.message || error.message
+        payload: error.response.data.message || error.message,
       });
     }
   };
@@ -163,7 +163,7 @@ export const updateNota = (nota) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ALUNO_NOTA_UPDATE_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -176,69 +176,77 @@ export const deleteNota = (notaId) => async (dispatch, getState) => {
   try {
     const { data } = await Api.deleteNota(notaId, professorInfo);
     dispatch({ type: ALUNO_NOTA_DELETE_SUCCESS });
-
   } catch (error) {
     dispatch({
       type: ALUNO_NOTA_DELETE_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
 export const register =
-  ( {nome, senha, data_nascimento, telefone, cpf, email }) =>
+  ({ nome, senha, data_nascimento, telefone, cpf, email }) =>
   async (dispatch) => {
-    dispatch({type: ALUNO_REGISTER_REQUEST, payload: {
-      nome, senha, data_nascimento, telefone, cpf, email
-    } })
+    dispatch({
+      type: ALUNO_REGISTER_REQUEST,
+      payload: {
+        nome,
+        senha,
+        data_nascimento,
+        telefone,
+        cpf,
+        email,
+      },
+    });
     try {
-      const { data } = await Api.registerAluno({nome, senha, data_nascimento, telefone, cpf, email})
-      dispatch({type:ALUNO_REGISTER_SUCCESS, payload: data})
-      dispatch({type:ALUNO_SIGNIN_SUCCESS, payload: data})
+      const { data } = await Api.registerAluno({
+        nome,
+        senha,
+        data_nascimento,
+        telefone,
+        cpf,
+        email,
+      });
+      dispatch({ type: ALUNO_REGISTER_SUCCESS, payload: data });
+      dispatch({ type: ALUNO_SIGNIN_SUCCESS, payload: data });
       localStorage.setItem("alunoInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: ALUNO_REGISTER_FAIL,
-        payload: error.response.data.message || error.message
-      });
-    }
-
-  };
-
-
-  export const findCursos = () => async (dispatch, getState) => {
-    dispatch({ type: ALUNO_FIND_CURSOS_REQUEST });
-    const {
-     alunoSignin: { alunoInfo },
-    } = getState();
-    try {
-      console.log('opa')
-      const { data } = await Api.findCursosByAluno(alunoInfo);
-      console.log(data)
-      dispatch({ type: ALUNO_FIND_CURSOS_SUCCESS, payload: data });
-    } catch (error) {
-      console.log(error)
-      dispatch({
-        type: ALUNO_FIND_CURSOS_FAIL,
-        payload: error.response.data.message || error.message
+        payload: error.response.data.message || error.message,
       });
     }
   };
+
+export const findCursos = () => async (dispatch, getState) => {
+  dispatch({ type: ALUNO_FIND_CURSOS_REQUEST });
+  const {
+    alunoSignin: { alunoInfo },
+  } = getState();
+  try {
+    const { data } = await Api.findCursosByAluno(alunoInfo);
+    dispatch({ type: ALUNO_FIND_CURSOS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ALUNO_FIND_CURSOS_FAIL,
+      payload: error.response.data.message || error.message,
+    });
+  }
+};
 
 export const detailsAluno = (alunoId) => async (dispatch, getState) => {
   dispatch({ type: ALUNO_DETAILS_REQUEST });
   const {
-   alunoSignin: { alunoInfo },
+    alunoSignin: { alunoInfo },
   } = getState();
   try {
-    const { data } = await Api.findAlunoDetails(alunoId,alunoInfo);
-   
+    const { data } = await Api.findAlunoDetails(alunoId, alunoInfo);
+
     dispatch({ type: ALUNO_DETAILS_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error)
     dispatch({
       type: ALUNO_DETAILS_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -246,17 +254,16 @@ export const detailsAluno = (alunoId) => async (dispatch, getState) => {
 export const informationAluno = (alunoId) => async (dispatch, getState) => {
   dispatch({ type: ALUNO_INFORMATIONS_REQUEST });
   const {
-   alunoSignin: { alunoInfo },
+    alunoSignin: { alunoInfo },
   } = getState();
   try {
-    const { data } = await Api.findAlunoInformations(alunoId,alunoInfo);
-   
+    const { data } = await Api.findAlunoInformations(alunoId, alunoInfo);
+
     dispatch({ type: ALUNO_INFORMATIONS_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error)
     dispatch({
       type: ALUNO_INFORMATIONS_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -264,19 +271,19 @@ export const informationAluno = (alunoId) => async (dispatch, getState) => {
 export const updateAluno = (aluno) => async (dispatch, getState) => {
   dispatch({ type: ALUNO_UPDATE_REQUEST });
   const {
-   alunoSignin: { alunoInfo },
+    alunoSignin: { alunoInfo },
   } = getState();
   try {
-    aluno.aluno_id = alunoInfo.aluno_id
-    const { data } = await Api.updateAluno(aluno,alunoInfo);
-   
-   localStorage.setItem('alunoInfo', JSON.stringify(data));
+    aluno.aluno_id = alunoInfo.aluno_id;
+    const { data } = await Api.updateAluno(aluno, alunoInfo);
+
+    localStorage.setItem("alunoInfo", JSON.stringify(data));
     dispatch({ type: ALUNO_SIGNIN_SUCCESS, payload: data });
     dispatch({ type: ALUNO_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: ALUNO_UPDATE_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };

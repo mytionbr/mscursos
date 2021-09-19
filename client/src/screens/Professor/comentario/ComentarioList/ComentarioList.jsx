@@ -12,7 +12,7 @@ function ComentarioList() {
 
     const [currentCurso, setCurrentCurso] = useState(null)
     const [currentSlug, setCurrentSlug] = useState(null)
-    console.log(currentSlug)
+  
     const handleChangeSlug = (newValue) => {
         if(typeof newValue === 'object'){
             setCurrentSlug(newValue.target.value);

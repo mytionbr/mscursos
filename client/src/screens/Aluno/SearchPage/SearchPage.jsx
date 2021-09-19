@@ -17,10 +17,9 @@ function SearchPage(props) {
   const dispatch = useDispatch();
   const cursoFind = useSelector((state) => state.cursoFind);
   const { loading, error, data } = cursoFind;
-  console.log(loading, error, data)
   
   useEffect(() => {
-    console.log(query)
+   
      dispatch(
         findCursos({
           nome: query,

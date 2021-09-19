@@ -8,9 +8,9 @@ import UpdateFormAula from "../../../../components/professor/FormAula/UpdateForm
 function UpdateAula(props) {
   const aulaId = props.match.params.aulaId;
   const cursoId = props.match.params.cursoId
-  console.log('curso' + cursoId, 'aula' + aulaId)
+  
   const history = useHistory()
-  console.log(aulaId, cursoId)
+  
   const links = [
     {
       name: "dashboard",

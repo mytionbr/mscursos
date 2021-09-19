@@ -77,7 +77,7 @@ function MainQuestion({refToResponse}) {
           <Tags tags={tags} />
           <User aluno={aluno} />
           <Box style={{ flexGrow: 1 }} />
-          <Typography variant="body1" >
+          <Typography variant="body1" className={classes.date} >
             {moment(dataCriacao).startOf().fromNow()}
           </Typography>
         </Box>
@@ -141,8 +141,6 @@ function MainQuestion({refToResponse}) {
     { curso_id: data.post.curso_id, nome: data.post.curso_nome },
     { categoria_id: data.post.categoria_id, nome: data.post.categoria_nome }
   );
-
-  console.log(tags);
 
   return (
     <Fade appear={true} in={true} timeout={700}>

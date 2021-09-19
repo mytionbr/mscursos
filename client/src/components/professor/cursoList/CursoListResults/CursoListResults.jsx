@@ -18,11 +18,12 @@ import {
   deleteCurso,
   findCursosByProfessor,
 } from "../../../../actions/cursoActions";
-import { CURSO_DELETE_RESET } from "../../../../constants/cursoConstants";
+import { CURSO_DELETE_RESET, CURSO_UPDATE_RESET } from "../../../../constants/cursoConstants";
 import LoadingBox from "../../../core/LoadingBox/LoadingBox";
 import MessageBox from "../../../core/MessageBox/MessageBox";
 import ModalDelete from "../../ModalDelete/ModalDelete";
 import MenuButton from "../../MenuButton/MenuButton"
+import SuccessAlert from "../../../SuccessAlert/AlertSuccess";
 
 function CursoListResults(props) {
   const history = useHistory()
@@ -60,8 +61,8 @@ const handleModalDelete = (id) => {
   setIdDelete(id)
   handleOpenModal()  
 }
-
   useEffect(() => {
+
     if (successDelete) {
       dispatch({ type: CURSO_DELETE_RESET });
       setIdDelete(null);
@@ -150,6 +151,7 @@ const handleModalDelete = (id) => {
           />
         </Card>
       )}
+
       <ModalDelete
         handleDelete={handleDelete}
         setIdDelete={setIdDelete}

@@ -20,7 +20,7 @@ function CursoStatistics({
   loading,
 }) {
   const classes = useStyles();
-  console.log(atualizado)
+  
   const Statistic = ({ icon, title, data }) => {
     return (
       <Grid alignItems="center" justifyContent="center" container>

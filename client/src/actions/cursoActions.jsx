@@ -49,10 +49,10 @@ export const listCursos = () => async (dispatch) => {
 
     dispatch({ type: CURSO_LIST_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ 
-        type: CURSO_LIST_FAIL, 
-        payload: error.response.data.message || error.message
-      })
+    dispatch({
+      type: CURSO_LIST_FAIL,
+      payload: error.response.data.message || error.message,
+    });
   }
 };
 
@@ -60,7 +60,6 @@ export const findCursos = (params) => async (dispatch) => {
   dispatch({ type: CURSO_FIND_REQUEST });
   try {
     const { nome, categorias, pagination } = params;
-    console.log('kmfkdsomf', nome)
     let queryString = "?";
 
     if (nome) {
@@ -85,8 +84,7 @@ export const findCursos = (params) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CURSO_FIND_FAIL,
-      payload: error.response.data.message || error.message
-
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -124,8 +122,7 @@ export const findCursosByProfessor = (params) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_PROFESSOR_FAIL,
-      payload: error.response.data.message || error.message
-
+      payload: error.response.data.message || error.message,
     });
   }
 };
@@ -143,12 +140,12 @@ export const createCurso = (curso) => async (dispatch, getState) => {
       type: CURSO_CREATE_SUCCESS,
       payload: data,
     });
-    dispatch(findAssignments(professorInfo.professor_id))
+    dispatch(findAssignments(professorInfo.professor_id));
   } catch (error) {
     dispatch({
       type: CURSO_CREATE_FAIL,
-      payload: error.response.data.message || error.message
-        });
+      payload: error.response.data.message || error.message,
+    });
   }
 };
 
@@ -156,90 +153,87 @@ export const informationsCurso = (slug) => async (dispatch) => {
   dispatch({ type: CURSO_INFORMATIONS_REQUEST, payload: slug });
   try {
     const { data } = await Api.findCursoBySlug(slug);
-  
+
     dispatch({ type: CURSO_INFORMATIONS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: CURSO_INFORMATIONS_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
-export const updateCurso = (curso) => async(dispatch, getState) => {
-    dispatch({type: CURSO_UPDATE_REQUEST, payload: curso})
-    const {
-        professorSignin: { professorInfo }
-    } = getState()
-    try {
-        const { data } = await Api.updateCurso(curso,professorInfo)
-        dispatch({type:CURSO_UPDATE_SUCCESS, payload: data})
-    } catch (error) {
-        dispatch({
-            type: CURSO_UPDATE_FAIL,
-            payload: error.response.data.message || error.message
-          });
-    }
-}
-
+export const updateCurso = (curso) => async (dispatch, getState) => {
+  dispatch({ type: CURSO_UPDATE_REQUEST, payload: curso });
+  const {
+    professorSignin: { professorInfo },
+  } = getState();
+  try {
+    const { data } = await Api.updateCurso(curso, professorInfo);
+    dispatch({ type: CURSO_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_UPDATE_FAIL,
+      payload: error.response.data.message || error.message,
+    });
+  }
+};
 
 export const deleteCurso = (cursoId) => async (dispatch, getState) => {
-  dispatch({type: CURSO_DELETE_REQUEST, payload: cursoId})
+  dispatch({ type: CURSO_DELETE_REQUEST, payload: cursoId });
   const {
-    professorSignin: { professorInfo }
-  } = getState()
+    professorSignin: { professorInfo },
+  } = getState();
   try {
-    const { data } = await Api.deleteCurso(cursoId, professorInfo)
-    dispatch({type: CURSO_DELETE_SUCCESS})
-    dispatch(findAssignments(professorInfo.professor_id))
+    const { data } = await Api.deleteCurso(cursoId, professorInfo);
+    dispatch({ type: CURSO_DELETE_SUCCESS });
+    dispatch(findAssignments(professorInfo.professor_id));
   } catch (error) {
     dispatch({
       type: CURSO_DELETE_FAIL,
-      payload: error.response.data.message || error.message
-    });
-  }
-}
-
-export const detailsCurso = (cursoId) => async (dispatch) => {
-  
-  try {
-    dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
-    const { data } = await Api.findCursoById(cursoId);
-    console.log(data)
-    dispatch({ type: CURSO_DETAILS_SUCCESS, payload: data });
-  } catch (error) {
-    console.log(error.message)
-    dispatch({
-      type: CURSO_DETAILS_FAIL,
-      payload: error.response && error.response.data.message
-      ? error.response.data.message
-      : error.message,
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
-export const matriculaCurso = (alunoId,cursoId) => async (dispatch) => {
-  dispatch({ type: CURSO_MATRICULA_REQUEST, payload: {alunoId,cursoId} });
+export const detailsCurso = (cursoId) => async (dispatch) => {
   try {
-    const { data } = await Api.findMatricula(alunoId,cursoId);
-  
+    dispatch({ type: CURSO_DETAILS_REQUEST, payload: cursoId });
+    const { data } = await Api.findCursoById(cursoId);
+    dispatch({ type: CURSO_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CURSO_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const matriculaCurso = (alunoId, cursoId) => async (dispatch) => {
+  dispatch({ type: CURSO_MATRICULA_REQUEST, payload: { alunoId, cursoId } });
+  try {
+    const { data } = await Api.findMatricula(alunoId, cursoId);
+
     dispatch({ type: CURSO_MATRICULA_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: CURSO_MATRICULA_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
-export const detailsAvaliacao = (cursoId) => async (dispatch,getState) => {
+export const detailsAvaliacao = (cursoId) => async (dispatch, getState) => {
   dispatch({ type: CURSO_AVALIACAO_DETAILS_REQUEST, payload: cursoId });
   const {
-    alunoSignin: { alunoInfo }
-  } = getState()
+    alunoSignin: { alunoInfo },
+  } = getState();
   try {
-    const { data } = await Api.findAvaliacao(cursoId,alunoInfo);
-    if(data){
+    const { data } = await Api.findAvaliacao(cursoId, alunoInfo);
+    if (data) {
       dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
     } else {
       dispatch({ type: CURSO_AVALIACAO_DETAILS_EMPTY, payload: cursoId });
@@ -247,50 +241,47 @@ export const detailsAvaliacao = (cursoId) => async (dispatch,getState) => {
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_DETAILS_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
-
-export const saveAvaliacao = (avaliacao) => async (dispatch,getState) => {
+export const saveAvaliacao = (avaliacao) => async (dispatch, getState) => {
   dispatch({ type: CURSO_AVALIACAO_SAVE_REQUEST, payload: avaliacao });
   const {
-    alunoSignin: { alunoInfo }
-  } = getState()
+    alunoSignin: { alunoInfo },
+  } = getState();
   try {
-    avaliacao.aluno_id = alunoInfo.aluno_id
-  
+    avaliacao.aluno_id = alunoInfo.aluno_id;
+
     const { data } = await Api.saveAvaliacao(avaliacao, alunoInfo);
-   
+
     dispatch({ type: CURSO_AVALIACAO_SAVE_SUCCESS });
     dispatch({ type: CURSO_AVALIACAO_DETAILS_SUCCESS, payload: data });
-
   } catch (error) {
     dispatch({
       type: CURSO_AVALIACAO_SAVE_FAIL,
-      payload: error.response.data.message || error.message
+      payload: error.response.data.message || error.message,
     });
   }
 };
 
+export const findCursosAsCategory =
+  (categoriaId) => async (dispatch, getState) => {
+    dispatch({ type: CURSO_AS_CATEGORY_FIND_REQUEST });
+    try {
+      const { data } = await Api.findCursosAsCategory(categoriaId);
 
-export const findCursosAsCategory = (categoriaId) => async (dispatch,getState) => {
-  dispatch({ type: CURSO_AS_CATEGORY_FIND_REQUEST });
-  try {
+      let result = {
+        categoria: categoriaId,
+        data: data,
+      };
 
-    const { data } = await Api.findCursosAsCategory(categoriaId);
-
-    let result =  {
-      categoria: categoriaId,
-      data: data
+      dispatch({ type: CURSO_AS_CATEGORY_FIND_SUCCESS, payload: result });
+    } catch (error) {
+      dispatch({
+        type: CURSO_AS_CATEGORY_FIND_FAIL,
+        payload: error.response.data.message || error.message,
+      });
     }
-
-    dispatch({ type: CURSO_AS_CATEGORY_FIND_SUCCESS, payload: result});
-  } catch (error) {
-    dispatch({
-      type: CURSO_AS_CATEGORY_FIND_FAIL,
-      payload: error.response.data.message || error.message
-    });
-  }
-};
+  };

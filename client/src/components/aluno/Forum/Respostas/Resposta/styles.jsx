@@ -37,14 +37,24 @@ export default makeStyles((theme) => ({
        borderBottom: '0.1rem solid #aaa',
        '& > *':{
            margin: '0 0.2rem'
-       }
+       },
+       [theme.breakpoints.down("xs")]: {
+        "& > *":{
+            fontSize: '0.7rem'
+        }
+      },
    },
    user:{
        display: 'flex',
        alignItems: 'center',
        '& > *':{
         margin: '0 0.2rem'
-       }
+       },
+       [theme.breakpoints.down("xs")]: {
+        "& > *":{
+            fontSize: '0.7rem'
+        } 
+      },
    },
    avatarIcon:{
        padding: '1rem',

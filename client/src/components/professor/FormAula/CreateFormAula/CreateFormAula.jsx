@@ -167,7 +167,7 @@ function CreateFormAula(props) {
       />
 
       <InputLabel style={{marginLeft:'0.8rem'}} id="video">Video</InputLabel>
-      <Input type="file" name="video" onChange={handlerChangeVideo}  />
+      <Input accept="video/mp4,video/x-m4v,video/*" type="file" name="video" onChange={handlerChangeVideo}  />
 
         <Button
           type="submit"

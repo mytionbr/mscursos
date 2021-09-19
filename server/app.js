@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import fileUpload from 'express-fileupload'
-
+import path from 'path'
 import alunoRouter from './routes/aluno.router.js'
 import professorRouter from './routes/professor.router.js'
 import cursoRouter from './routes/curso.router.js'
@@ -30,4 +30,10 @@ app.use('/api/posts', postRouter)
 app.get('/api/config/paypal',(req,res)=>{
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 })
+
+const __dirname = path.resolve()
+
+app.use(express.static(path.join(__dirname, '/client/build')))
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname, '/client/build/index.html')))
+
 export default app

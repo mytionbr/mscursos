@@ -10,12 +10,12 @@ import moment from "moment";
 import Rating from "@material-ui/lab/Rating";
 import LinkPerfil from "../../LinkPerfil/LinkPerfil";
 import { useHistory } from "react-router";
-import 'moment/locale/pt-br'
+import "moment/locale/pt-br";
 function AlunosComments({ comments }) {
-  const history = useHistory()
-  moment.locale('pt-br')
- 
-  const CommentInfo = ({ alunoNome,alunoId, date }) => {
+  const history = useHistory();
+  moment.locale("pt-br");
+
+  const CommentInfo = ({ alunoNome, alunoId, date }) => {
     return (
       <Grid container xs={3}>
         <Grid
@@ -36,25 +36,21 @@ function AlunosComments({ comments }) {
           justifyContent="center"
           alignItems="flex-start"
         >
-          <Typography 
+          <Typography
             variant="body2"
             style={{
-              color: "grey"
-            }}>
-           {moment(date).startOf().fromNow()}
+              color: "grey",
+            }}
+          >
+            {moment(date).startOf().fromNow()}
           </Typography>
           <Typography variant="body1">
-            {
-              history.location.pathname === '/professor/app/comentarios' ? (
-                alunoNome
-              ) : (
-                <LinkPerfil alunoId={alunoId}>
-                {alunoNome}
-              </LinkPerfil>
-              )
-            }
-           
-            </Typography>
+            {history.location.pathname === "/professor/app/comentarios" ? (
+              alunoNome
+            ) : (
+              <LinkPerfil alunoId={alunoId}>{alunoNome}</LinkPerfil>
+            )}
+          </Typography>
         </Grid>
       </Grid>
     );
@@ -63,41 +59,52 @@ function AlunosComments({ comments }) {
   const CommentContent = ({ rating, comment }) => {
     return (
       <Grid
-      item 
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      xs={7}
+        item
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        xs={7}
       >
-        <Rating name="read-only" value={rating} readOnly 
-        style={{
-          fontSize:'1rem'
-        }}/>
-        <Typography variant="body1" style={{ wordWrap: 'break-word', marginLeft:'2px' }} >{comment}</Typography>
+        <Rating
+          name="read-only"
+          value={rating}
+          readOnly
+          style={{
+            fontSize: "1rem",
+          }}
+        />
+        <Typography
+          variant="body1"
+          style={{ wordWrap: "break-word", marginLeft: "2px" }}
+        >
+          {comment}
+        </Typography>
       </Grid>
     );
   };
 
   return (
-    <Container style={{
-      padding: '1rem'
-    }}>
+    <Container
+      style={{
+        padding: "1rem",
+      }}
+    >
       {comments.map((comment) => (
-        <Grid container alignItens="center" 
-        style={{
-          margin:'0.5rem 0',
-          borderBottom: '1px solid #afacac',
-          padding: '0.5rem'
-        }}>
+        <Grid
+          container
+          alignItens="center"
+          style={{
+            margin: "0.5rem 0",
+            borderBottom: "1px solid #afacac",
+            padding: "0.5rem",
+          }}
+        >
           <CommentInfo
             alunoNome={comment.aluno_nome}
             date={comment.data_criacao}
             alunoId={comment.aluno_id}
           />
-          <CommentContent
-            rating={comment.valor}
-            comment={comment.comentario}
-          />
+          <CommentContent rating={comment.valor} comment={comment.comentario} />
         </Grid>
       ))}
     </Container>

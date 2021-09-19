@@ -19,10 +19,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ClassIcon from "@material-ui/icons/Class";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../../../actions/alunoActions";
 import { useHistory } from "react-router-dom";
+import logo from '../../../../assets/mscursos - logo cut.png'
 function DashboardNavbar({ onMobileNavOpen, nav,handleSignout, ...rest }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -62,10 +62,7 @@ function DashboardNavbar({ onMobileNavOpen, nav,handleSignout, ...rest }) {
       <AppBar elevation={0} position="absolute" {...rest}>
         <Toolbar className={classes.toolbar}>
           <Link to="/aluno/app" className={classes.brandLink}>
-            <MenuBookIcon className={classes.brandIcon} />
-            <Typography className={classes.brand} variant="h5" noWrap>
-              Mscursos
-            </Typography>
+            <img src={logo} alt="logo" style={{width: '100%',height: '40px'}}/>
           </Link>
           <Box style={{ flexGrow: 1 }} />
           <Hidden smDown>

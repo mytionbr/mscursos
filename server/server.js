@@ -16,6 +16,6 @@ pool
         console.log(`Error: ${err.message}`)
     })
 
-app.get('/', (req,res)=>{
-    res.send('APP OK')
-})
+// app.get('/', (req,res)=>{
+//     res.send('APP OK')
+// })

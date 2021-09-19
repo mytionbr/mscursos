@@ -10,15 +10,15 @@ const findPosts = (query, alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
-const findAlunoDetails = (alunoId,alunoInfo) =>
+const findAlunoDetails = (alunoId, alunoInfo) =>
   axios.get(`/api/alunos/details/${alunoId}`, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
-const findAlunoInformations = (alunoId,alunoInfo) =>
-axios.get(`/api/alunos/${alunoId}/informations`, {
-  headers: { Authorization: `Bearer ${alunoInfo?.token}` },
-});
+const findAlunoInformations = (alunoId, alunoInfo) =>
+  axios.get(`/api/alunos/${alunoId}/informations`, {
+    headers: { Authorization: `Bearer ${alunoInfo?.token}` },
+  });
 
 const findCursosAsCategory = (categoriaId) =>
   axios.get(`/api/cursos/asCategorias/${categoriaId}`);
@@ -122,8 +122,8 @@ const deleteMatricula = (matricula, alunoInfo) =>
     }
   );
 
-const updateAluno = (aluno, alunoInfo)=>
-  axios.put(`/api/alunos/${aluno.aluno_id}`,aluno,{
+const updateAluno = (aluno, alunoInfo) =>
+  axios.put(`/api/alunos/${aluno.aluno_id}`, aluno, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
@@ -133,10 +133,16 @@ const updateCurso = (curso, professorInfo) =>
   });
 
 const updateAula = (formData, professorInfo) =>
-  axios.put(`/api/cursos/${formData.get('curso_id')}/aulas/${formData.get('aula_id')}`, formData, {
-    headers: { Authorization: `Bearer ${professorInfo?.token}`,
-    "Content-Type": "multipart/form-data", },
-  });
+  axios.put(
+    `/api/cursos/${formData.get("curso_id")}/aulas/${formData.get("aula_id")}`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${professorInfo?.token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 
 const updateNota = (nota, professorInfo) =>
   axios.put(`/api/notas/${nota.nota_id}/`, nota, {
@@ -222,7 +228,7 @@ const finishAula = (aula, alunoInfo) =>
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
 
-const markSolution = (resposta,alunoInfo) =>
+const markSolution = (resposta, alunoInfo) =>
   axios.patch(`/api/posts/solucao`, resposta, {
     headers: { Authorization: `Bearer ${alunoInfo?.token}` },
   });
@@ -279,7 +285,7 @@ const Api = {
   markSolution,
   findAlunoDetails,
   findAlunoInformations,
-  updateAluno
+  updateAluno,
 };
 
 export default Api;

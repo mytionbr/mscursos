@@ -12,15 +12,15 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       flexDirection: "column",
       alignItems: "flex-end",
-      textAlign: 'right',
-      '& > *':{
-          margin: '0.2rem 0'
-      }
+      textAlign: "right",
+      "& > *": {
+        margin: "0.2rem 0",
+      },
     },
   },
-  title:{
+  title: {
     [theme.breakpoints.down("xs")]: {
-        fontSize: '1rem'
-      },
-  }
+      fontSize: "1rem",
+    },
+  },
 }));

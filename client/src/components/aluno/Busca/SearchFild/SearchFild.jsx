@@ -4,15 +4,15 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { findCursos } from "../../../../actions/alunoActions";
 import useStyles from "./styles";
-function SearchFild({query}) {
-  const history = useHistory()
+function SearchFild({ query }) {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [nome, setNome] = useState("");
 
   useEffect(() => {
-    if(query){
-        setNome(query)
+    if (query) {
+      setNome(query);
     }
   }, [dispatch, query]);
 
@@ -21,10 +21,10 @@ function SearchFild({query}) {
     setNome(value);
   };
 
-  const handleSubmit = (event)=>{
-      event.preventDefault()
-      history.push(`/aluno/app/busca/query?nome=${nome}`)
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/aluno/app/busca/query?nome=${nome}`);
+  };
 
   return (
     <form className={classes.rootContainer} onSubmit={handleSubmit}>
@@ -37,7 +37,12 @@ function SearchFild({query}) {
         variant="outlined"
         color="secondary"
       />
-      <Button className={classes.btn} type="submit" color="secondary" variant="contained">
+      <Button
+        className={classes.btn}
+        type="submit"
+        color="secondary"
+        variant="contained"
+      >
         Buscar
       </Button>
     </form>

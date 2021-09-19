@@ -20,7 +20,6 @@ export default makeStyles((theme) =>({
     brandIcon:{
         marginRight:'5px',
         color:'#506198',
-        fontSize:'2.2rem'
     },
     navbarLink:{
         marginRight:'10px',

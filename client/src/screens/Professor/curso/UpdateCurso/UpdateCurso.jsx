@@ -8,7 +8,7 @@ import UpdateFormCurso from "../../../../components/professor/FormCurso/UpdateFo
 function CursoUpdate(props) {
   const cursoId = props.match.params.cursoId;
   const history = useHistory()
-  console.log(cursoId)
+ 
   const links = [
     {
       name: "dashboard",

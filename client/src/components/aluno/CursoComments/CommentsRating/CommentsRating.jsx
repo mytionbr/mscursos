@@ -3,15 +3,14 @@ import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import useStyles from './styles'
+import useStyles from "./styles";
 function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
-  const classes = useStyles()
+  const classes = useStyles();
   const BorderLinearProgress = withStyles((theme) => ({
     root: {
       height: "1rem",
       borderRadius: "0.5rem",
       flexGrow: 1,
-      
     },
     colorPrimary: {
       backgroundColor: "#bbbcbd",
@@ -20,19 +19,12 @@ function CommentsRating({ ratingAverage, totalRating, ratingStars }) {
       borderRadius: "0.5rem",
       backgroundColor: "#757b81",
     },
-  
   }))(LinearProgress);
 
   const RatingByStar = ({ starValue, percent }) => {
     return (
-      <Grid
-        container
-        spacing={1}
-        className={classes.ratingByStar}
-      >
-        <Grid item xs={6} sm={9}
-        className={classes.progressGrid}
-        >
+      <Grid container spacing={1} className={classes.ratingByStar}>
+        <Grid item xs={6} sm={9} className={classes.progressGrid}>
           <BorderLinearProgress
             thickness={4}
             variant="determinate"

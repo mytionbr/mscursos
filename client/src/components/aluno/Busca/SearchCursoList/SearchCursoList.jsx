@@ -12,22 +12,19 @@ function SearchCursoList() {
 
   return (
     <Grid container spacing={2} direction="column">
-
-      {data.cursos.length > 0 ? 
+      {data.cursos.length > 0 ? (
         data.cursos.map((curso) => (
-        <Grid item>
-          <SearchCursoCard
-            name={curso.nome}
-            categoriaId={curso.categoria_id}
-            slug={curso.slug}
-            description={curso.descricao}
-          />
-        </Grid>
-      ))
-      : (
-        <MessageBox type="info">
-          Nenhum curso encontrado
-        </MessageBox>
+          <Grid item>
+            <SearchCursoCard
+              name={curso.nome}
+              categoriaId={curso.categoria_id}
+              slug={curso.slug}
+              description={curso.descricao}
+            />
+          </Grid>
+        ))
+      ) : (
+        <MessageBox type="info">Nenhum curso encontrado</MessageBox>
       )}
     </Grid>
   );
