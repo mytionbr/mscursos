@@ -173,7 +173,7 @@ function CreateFormAula(props) {
           type="submit"
           className={classes.button}
           variant="contained"
-          color="primary"
+          color="secondary"
           size="large"
           onClick={handlerSubmit}
           fullWidth
