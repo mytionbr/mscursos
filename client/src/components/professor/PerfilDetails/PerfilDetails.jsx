@@ -21,6 +21,15 @@ import moment from "moment";
 import SuccessAlert from "../../SuccessAlert/AlertSuccess";
 function PerfilDetails(props) {
   const dispatch = useDispatch();
+  
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [dataNascimento, setDataNascimento] = useState(
+    moment(new Date()).format("yyyy-MM-dd")
+  );
+  const [senha, setSenha] = useState("");
+  const [descricao, setDescricao] = useState("");
+  
   const professorDetails = useSelector((state) => state.professorDetails);
   const {
     loading: loadingProfile,
@@ -34,7 +43,7 @@ function PerfilDetails(props) {
     error: errorUpdate,
     success: successUpdate,
   } = professorUpdate;
-
+console.log(professor)
   useEffect(() => {
     if (!professor || successUpdate) {
       dispatch({ type: PROFESSOR_UPDATE_PROFILE_RESET });
@@ -48,11 +57,7 @@ function PerfilDetails(props) {
     }
   }, [dispatch, professor]);
 
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [dataNascimento, setDataNascimento] = useState(null);
-  const [senha, setSenha] = useState("");
-  const [descricao, setDescricao] = useState("");
+ 
 
   const handleChangeNome = (event) => {
     const { value } = event.target;
@@ -94,16 +99,8 @@ function PerfilDetails(props) {
     );
   };
 
-  const DateParse = (date) => {
-    let dateString = String(date);
-    let parts = dateString.split("-");
-    parts.forEach((i) => {
-      if (Number(i) < 10) {
-        i = "0" + i;
-      }
-    });
-
-    return moment(new Date(...parts)).format("YYYY-MM-DD");
+  const DateParse = (value) => {
+    return moment(value).format('YYYY-MM-DD')
   };
 
   return (
