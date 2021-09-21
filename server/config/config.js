@@ -10,10 +10,12 @@ const dbDetails ={
                     port: process.env.DATABASE_PORT,
 }
 console.log(dbDetails)
+console.log(process.env.DATABASE_URL)
 const config = {
     PORT: process.env.PORT,
     dbDetails: dbDetails,
-    JWT_SECRET: process.env.JWT_SECRET
+    JWT_SECRET: process.env.JWT_SECRET,
+    DATABASE_URL: process.env.DATABASE_URL
 }
 
 
