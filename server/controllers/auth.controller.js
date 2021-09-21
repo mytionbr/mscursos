@@ -1,9 +1,10 @@
 import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import { generateToken } from "../utils/generateToken.js";
-import { usuarioResponseSuccess } from "../custom/responses/usuario.response.js";
 import jwt from 'jsonwebtoken'
 import config from "../config/config.js";
+import { professorResponseSuccess } from "../custom/responses/professor.response.js";
+import { alunoResponseSuccess } from "../custom/responses/aluno.response.js";
 
 export const signinProfessor = async (req, res) =>{
     try {
@@ -20,7 +21,11 @@ export const signinProfessor = async (req, res) =>{
                         nome: professor.nome,
                         email: professor.email
                     })
-                    usuarioResponseSuccess(res,professor)
+                    
+                    professor.data_nascimento = undefined
+                    professor.descricao = undefined
+
+                    professorResponseSuccess(res,professor)
                     return
                 }
             }   
@@ -67,8 +72,13 @@ export const signinAluno = async (req,res) =>{
                     nome: aluno.nome,
                     email: aluno.email
                 })
-
-                usuarioResponseSuccess(res,aluno)
+                aluno.cpf = undefined
+                aluno.telefone = undefined
+                aluno.data_nascimento = undefined
+                aluno.data_criacao = undefined
+                aluno.data_update = undefined
+            
+                alunoResponseSuccess(res,aluno)
                 return
             }
         }

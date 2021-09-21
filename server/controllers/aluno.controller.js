@@ -1,10 +1,10 @@
 import pool from '../database/pool.js'
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
-import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 import { isValidCPF } from '../utils/isValidCPF.js'
 import moment from 'moment'
 import { generateToken } from '../utils/generateToken.js'
+import { alunoResponseSuccess } from '../custom/responses/aluno.response.js'
 
 export const register = async (req,res) => {
     
@@ -45,14 +45,8 @@ export const register = async (req,res) => {
             nome: createdAluno.nome,
             email: createdAluno.email
         })
-        
-        createdAluno.cpf = undefined
-        createdAluno.telefone = undefined
-        createdAluno.data_nascimento = undefined
-        createdAluno.data_criacao = undefined
-        createdAluno.data_update = undefined
 
-        usuarioResponseSuccess(res,createdAluno)
+        alunoResponseSuccess(res,createdAluno)
         
     } catch (err){
             res.status(400).json({message: err.error})
@@ -97,7 +91,7 @@ export const findById = async (req,res, next, id) => {
 
 export const read =  async (req, res) => {
         const aluno = req.profile
-        usuarioResponseSuccess(res,aluno)  
+        alunoResponseSuccess(res,aluno)  
 }
 
 export const update = async (req, res) => {
@@ -132,7 +126,7 @@ export const update = async (req, res) => {
         updatedAluno.data_criacao = undefined
         updatedAluno.data_update = undefined
 
-        usuarioResponseSuccess(res,updatedAluno)
+        alunoResponseSuccess(res,updatedAluno)
     } catch (err) {
         res.status(400).json({
             message: err.message
@@ -148,7 +142,7 @@ export const remove = async (req, res) =>{
             [aluno.aluno_id])
         
         aluno = rows[0]
-        usuarioResponseSuccess(res,aluno)
+        alunoResponseSuccess(res,aluno)
 
     } catch (err) {
         res.status(400).json({

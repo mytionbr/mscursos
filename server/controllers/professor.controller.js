@@ -1,8 +1,8 @@
 import pool from "../database/pool.js";
 import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
-import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 import { generateToken } from "../utils/generateToken.js";
+import { professorResponseSuccess } from "../custom/responses/professor.response.js";
 
 
 export const register = async (req,res) =>{
@@ -20,7 +20,7 @@ export const register = async (req,res) =>{
         professorCreated.data_nascimento = undefined
         professorCreated.descricao = undefined
 
-        usuarioResponseSuccess(res,professorCreated)
+        professorResponseSuccess(res,professorCreated)
 
         } catch (err) {
             res.status(409).json({message: err.message})
@@ -63,7 +63,7 @@ export const findById = async (req,res, next, id) =>{
 export const read = async (req,res) => {
     
     let professor = req.profile
-    usuarioResponseSuccess(res,professor)
+    professorResponseSuccess(res,professor)
 }
 
 
@@ -94,7 +94,7 @@ export const update = async (req,res) => {
         updatedProfessor.data_nascimento = undefined
         updatedProfessor.descricao = undefined
 
-        usuarioResponseSuccess(res,updatedProfessor)
+        professorResponseSuccess(res,updatedProfessor)
         
     } catch (err) {
         res.status(400).json({message: err.message})
@@ -111,7 +111,7 @@ export const remove = async (req, res) => {
         )
 
         professor = rows[0]
-        usuarioResponseSuccess(res,professor)
+        professorResponseSuccess(res,professor)
     } catch (err) {
         res.status(400).json({
             message: err.message
