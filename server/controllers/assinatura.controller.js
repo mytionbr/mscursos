@@ -32,7 +32,7 @@ export const create = async (req,res) =>{
 
         if(pagamento){
             const pagamentoRows = await pool.query(`
-                INSERT INTO PAGAMENTO (payment_result_id,status, update_time, email)
+                INSERT INTO PAGAMENTO (payment_response_id,status, update_time, email)
                 VALUES($1,$2,$3,$4) RETURNING * ;`,
                 [pagamento.pagamento_id, pagamento.status, pagamento.update_time, pagamento.email])
             if(pagamentoRows){
@@ -51,6 +51,7 @@ export const create = async (req,res) =>{
 
         res.status(201).json(assinaturaCreated)
     } catch (err) {
+        console.log(err)
         res.status(400).json({message: err.error})
     }
 }

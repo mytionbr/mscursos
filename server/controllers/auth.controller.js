@@ -28,6 +28,7 @@ export const signinProfessor = async (req, res) =>{
             res.status(401).json({message:'Email ou senha inválidos'})
         
     } catch (err) {
+        console.log(err)
         return res.status(401).json({
             message: 'Não foi possível realizar o login'
         })

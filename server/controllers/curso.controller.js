@@ -619,7 +619,6 @@ export const findCursoInfo = async (req, res) => {
     cursoInfo.stars = starsPercent 
 
     res.status(200).json(cursoInfo)
-
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -710,7 +709,7 @@ export const findCursosByAluno = async (req, res) => {
 
     const { rows } = await pool.query(
       `SELECT CURSO.CURSO_ID,CURSO.NOME, CURSO.CATEGORIA_ID, CURSO.SLUG, 
-      (SELECT COUNT(VISUALIZACAO.VISUALIZACAO_ID) FROM VISUALIZACAO 
+      (SELECT COUNT(*) FROM VISUALIZACAO 
          WHERE VISUALIZACAO.CURSO_ID = CURSO.CURSO_ID AND VISUALIZACAO.ALUNO_ID = ALUNO.ALUNO_ID)
         as aulas_vistas,
       (SELECT COUNT(AULA.AULA_ID) FROM AULA WHERE AULA.CURSO_ID = CURSO.CURSO_ID) as aulas_total
@@ -726,7 +725,6 @@ export const findCursosByAluno = async (req, res) => {
       item.progresso =  result > 0 && isFinite(result) && !isNaN(result) ? Number(result).toFixed(0) : 0 
     })
     res.status(200).json(matriculas)
-
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

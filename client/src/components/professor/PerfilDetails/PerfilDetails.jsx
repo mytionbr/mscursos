@@ -93,7 +93,7 @@ function PerfilDetails(props) {
         nome,
         email,
         senha,
-        dataNascimento,
+        data_nascimento:dataNascimento,
         descricao: descricao
       })
     );

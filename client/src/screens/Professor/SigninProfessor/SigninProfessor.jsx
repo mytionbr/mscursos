@@ -37,7 +37,7 @@ function SigninProfessor(props) {
         <title> Login | mscursos </title>
       </Helmet>
 
-      <Container className={classes.container} component="main" maxWidth="xs">
+      <Container className={classes.container} component="main">
         {loading && <LoadingBox />}
         {error && <MessageBox type="error">{error}</MessageBox>}
         <Signin

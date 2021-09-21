@@ -160,7 +160,7 @@ function CreateFormAula(props) {
           helperText="O valor está em minutos"
           type='number'
         />
-        <InputLabel id="cursos">Conteudo da aula</InputLabel>
+        <InputLabel id="cursos">Conteúdo da aula</InputLabel>
         <MDEditor
           value={conteudo}
           onChange={setConteudo}

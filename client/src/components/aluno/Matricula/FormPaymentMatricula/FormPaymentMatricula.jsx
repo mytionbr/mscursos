@@ -19,7 +19,7 @@ function FormPaymentMatricula({handleNext,handleBack, plan}) {
         assinatura
     } = assinaturaCreate
 
-  
+    console.log(error)
 
     const dispatch = useDispatch()
 
@@ -74,7 +74,7 @@ function FormPaymentMatricula({handleNext,handleBack, plan}) {
                 }
             </CardContent>
             {loading && <LoadingBox />}
-            {error && <MessageBox>{error}</MessageBox>}
+            {error && <MessageBox type="error">{error}</MessageBox>}
           </Card>  
         </div>
     )

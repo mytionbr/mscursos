@@ -49,6 +49,7 @@ function SigninAluno(props) {
           
         >
           <Grid item xs={12} md={4} className={classes.signinContainer}>
+          <Box style={{ maxWidth: '23rem'}}>
             {loading && <LoadingBox />}
             {error && <MessageBox type="error">{error}</MessageBox>}
             <Signin
@@ -56,6 +57,7 @@ function SigninAluno(props) {
               setPassword={setPassword}
               handleSubmit={handleSubmit}
             />
+            </Box>
           </Grid>
           <Grid item xs={12} md={7}>
             <div className={classes.presentationContainer}>

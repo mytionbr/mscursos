@@ -17,12 +17,7 @@ function Perfil() {
       },
     ];
 
-    const btns = [
-        {
-          name: "Voltar",
-          action: ()=> history.push('/professor/app/cursos')
-        },
-      ];
+    const btns = [];
   
   return (
     <>

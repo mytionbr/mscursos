@@ -35,7 +35,7 @@ export const register = async (req,res) => {
 
         const{ rows } = await pool.query(
             'INSERT INTO aluno(nome, email, data_nascimento, senha, telefone, cpf,data_criacao, data_update) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING aluno_id,nome, email;',
-            [nome, email, data_nascimento, senhaHash, telefone, cpf, dataCriacao, dataUpdate]
+            [nome, email, data_nascimento, senhaHash, telefone, cpfFormatado, dataCriacao, dataUpdate]
         )   
 
         let createdAluno = rows[0]
@@ -46,6 +46,12 @@ export const register = async (req,res) => {
             email: createdAluno.email
         })
         
+        createdAluno.cpf = undefined
+        createdAluno.telefone = undefined
+        createdAluno.data_nascimento = undefined
+        createdAluno.data_criacao = undefined
+        createdAluno.data_update = undefined
+
         usuarioResponseSuccess(res,createdAluno)
         
     } catch (err){
@@ -102,7 +108,7 @@ export const update = async (req, res) => {
         aluno = extend(aluno, req.body)
 
         if(req.body.senha && req.body.senha !== ''){
-            aluno.senha = bcrypt.hashSync(aluno.senha,8)
+            aluno.senha = bcrypt.hashSync(req.body.senha,8)
         } else {
             aluno.senha = senha
         }
@@ -119,6 +125,12 @@ export const update = async (req, res) => {
             nome: updatedAluno.nome,
             email: updatedAluno.email
         })
+
+        updatedAluno.cpf = undefined
+        updatedAluno.telefone = undefined
+        updatedAluno.data_nascimento = undefined
+        updatedAluno.data_criacao = undefined
+        updatedAluno.data_update = undefined
 
         usuarioResponseSuccess(res,updatedAluno)
     } catch (err) {

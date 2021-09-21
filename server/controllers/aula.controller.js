@@ -182,13 +182,15 @@ export const update = async (req,res) => {
 
         if(uploadPath){
             data.video = uploadPath
+        }else {
+            data.video = aulasRows[0].video
         }
-    
+
         let aula = extend(aulasRows[0], req.body)
         
         const { rows } = await pool.query(
-            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4, slug = $5, conteudo = $6 WHERE aula_id = $7 RETURNING *;',
-            [aula.nome, aula.descricao, aula.curso_id,aula.duracao,aula.slug, aula.conteudo, aula.aula_id])
+            'UPDATE aula SET nome = $1, descricao = $2, curso_id = $3, duracao = $4, slug = $5, conteudo = $6, video = $7 WHERE aula_id = $8 RETURNING *;',
+            [aula.nome, aula.descricao, aula.curso_id,aula.duracao,aula.slug, aula.conteudo,aula.video, aula.aula_id])
         const updatedAula = rows[0]
 
         res.status(200).json(updatedAula)

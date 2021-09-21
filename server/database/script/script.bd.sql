@@ -1,5 +1,5 @@
 /*
-    CREATE DATABASE dbadminschool WITH ENCODING 'UTF8';
+    CREATE DATABASE dbmscursos WITH ENCODING 'UTF8';
 */
 CREATE TABLE IF NOT EXISTS aluno(
     aluno_id serial PRIMARY KEY,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS curso (
     professor_id INT,
     categoria_id INT,
     data_atualizacao DATE NOT NULL,
-    data_criacao DATA NOT NULL,
+    data_criacao DATE NOT NULL,
     resumo TEXT,
     slug VARCHAR(255) not null,
     CONSTRAINT nome_curso UNIQUE (nome),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS aula (
     curso_id INT NOT NULL,
     duracao INT NOT NULL,
     slug VARCHAR (255) NOT NULL,
-    video_id VARCHAR(255),
+    video VARCHAR(255),
     CONTEUDO TEXT
 );
 
@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS matricula  (
 	aluno_id INT NOT NULL,
 	curso_id INT NOT NULL,
 	data_criacao timestamp NOT NULL
-) 
+);
+
 CREATE TABLE IF NOT EXISTS nota (
     nota_id serial PRIMARY KEY,
     valor FLOAT NOT NULL,
@@ -81,8 +82,9 @@ CREATE TABLE IF NOT EXISTS pagamento(
 	pagamento_id serial PRIMARY KEY,
 	status VARCHAR(255) NOT NULL,
 	update_time date not NULL,
-	email VARCHAR(255) NOT NULL
-),
+	email VARCHAR(255) NOT NULL,
+    payment_response_id VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS assinatura(
 	assinatura_id serial PRIMARY KEY,
@@ -91,8 +93,7 @@ CREATE TABLE IF NOT EXISTS assinatura(
 	preco FLOAT NOT NULL,
 	plano_id INT NOT NULL,
 	aluno_id INT NOT NULL,
-    payment_result_id VARCHAR(255) NOT NULL,
-    pagamento_id INT,
+    pagamento_id INT
 );
 
 CREATE TABLE IF NOT EXISTS avaliacao(
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS visualizacao(
 	visualizacao_id serial PRIMARY KEY,
 	aluno_id INT NOT NULL,
 	aula_id INT NOT NULL,
-	data_criacao INT NOT NULL,
+	data_criacao DATE NOT NULL,
     CURSO_ID INT NOT NULL
 );
 
@@ -134,13 +135,6 @@ CREATE TABLE IF NOT EXISTS resposta (
 	post_id int not null,
 	aluno_id int,
 	professor_id int
-);
-
-CREATE TABLE IF NOT EXISTS resposta_avaliacao (
-    resposta_avaliacao_id serial PRIMARY KEY,
-	avaliacao BOOLEAN NOT NULL,
-	aluno_id int not null,
-	resposta_id int not null
 );
 
 ALTER TABLE assinatura ADD CONSTRAINT assinatura_plano_id_fkey
@@ -176,19 +170,19 @@ ALTER TABLE aula ADD CONSTRAINT aula_curso_id_fkey
     FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_aluno_id_fkey
-	FOREIGN KEY (aluno_id) REFERENCES aluno ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE avaliacao ADD CONSTRAINT avaliacao_curso_id_fkey
-	FOREIGN KEY (curso_id) REFERENCES curso ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aluno_id_fkey
-	FOREIGN KEY (aluno_id) REFERENCES aluno ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aula_id_fkey
-	FOREIGN KEY (aula_id) REFERENCES aula ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (aula_id) REFERENCES aula (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_curso_id_fkey
-	FOREIGN KEY (curso_id) REFERENCES curso ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE categoria ADD CONSTRAINT categoria_plano_id_fkey 
     FOREIGN KEY (plano_id) REFERENCES plano (plano_id) ON UPDATE CASCADE ON DELETE CASCADE;
@@ -211,17 +205,18 @@ ALTER TABLE resposta ADD CONSTRAINT resposta_aluno_id_fkey
 ALTER TABLE resposta ADD CONSTRAINT resposta_professor_id_fkey 
     FOREIGN KEY (professor_id) REFERENCES professor (professor_id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-ALTER TABLE resposta_avaliacao ADD CONSTRAINT resposta_id_aluno_id_fkey 
-    FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE resposta_avaliacao ADD CONSTRAINT resposta_id_resposta_id_fkey 
-    FOREIGN KEY (resposta_id) REFERENCES resposta (resposta_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-INSERT INTO aluno(nome, email, data_nascimento, senha) 
-	VALUES ('joao', 'joao@examplo.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+INSERT INTO professor(nome, email, data_nascimento, senha) 
+	VALUES ('Joao', 'joao@example.com', '2000-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
 
 INSERT INTO professor(nome, email, data_nascimento, senha) 
-	VALUES ('pedro', 'pedro@examplo.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+	VALUES ('Pedro', 'pedro@example.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+
+INSERT INTO professor(nome, email, data_nascimento, senha) 
+	VALUES ('Rogerio', 'rogerio@example.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+
+INSERT INTO professor(nome, email, data_nascimento, senha) 
+	VALUES ('Bruna', 'bruna@example.com', '1990-01-01', '$2b$08$dNZfELgSics8HdTuZfpqfefsUiDJLhFQvMBZmIFQZ7Gggqbn2D5Yu');
+
 
 INSERT INTO plano (plano_id,nome)
 	values (1,'Básico'),

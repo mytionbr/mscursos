@@ -33,13 +33,13 @@ function AulaPage(props) {
                     </MessageBox>
                 ) : (
                     <Box style={{minWidth: '100%', minHeigth: '100%',padding:"1rem 2rem"}}>
-                        <Container>
+                        <Container style={{maxWidth: '728px'}}>
                             {aula ? (
                                 <>
                                 {
                                     aula.video && (
                                         <div style={{height:"400px", width:'100%'}}>
-                                            <video id="videoPlayer" width="100%" height="100%" controls >
+                                            <video id="videoPlayer" width="100%" height="100%" controls  controlsList="nodownload" >
                                                 <source src={`/api/aulas/${aula.aula_id}/video`} type="video/mp4" />
                                             </video>
                                       </div>

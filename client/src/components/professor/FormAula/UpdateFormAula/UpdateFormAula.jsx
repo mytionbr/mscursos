@@ -208,7 +208,7 @@ function UpdateFormAula({aulaId,cursoId,...rest}) {
            <InputLabel style={{marginLeft:'0.8rem'}} id="video">Video</InputLabel>
            {videoName ? <Typography variant="body1"> Aula: {videoName} </Typography> : '' }
          
-          <Input type="file" name="video" onChange={handlerChangeVideo}  />
+          <Input accept="video/mp4,video/x-m4v,video/*" type="file" name="video" onChange={handlerChangeVideo}  />
           <Button
             type="submit"
             className={classes.button}

@@ -20,10 +20,14 @@ export default makeStyles((theme) =>({
      }
    },
    paper:{
-    width: 400,
-    [theme.breakpoints.down("xs")]: {
-      width: '100%'
+    '& .MuiDrawer-paper': {
+      width: '400px',
+      boxSizing: 'border-box',
+      [theme.breakpoints.down("xs")]: {
+        width: '100%'
+      },
     },
+   
    }
 
    

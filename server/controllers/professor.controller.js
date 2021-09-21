@@ -17,6 +17,9 @@ export const register = async (req,res) =>{
  
         let professorCreated = rows[0]
         
+        professorCreated.data_nascimento = undefined
+        professorCreated.descricao = undefined
+
         usuarioResponseSuccess(res,professorCreated)
 
         } catch (err) {
@@ -87,6 +90,9 @@ export const update = async (req,res) => {
             nome: professor.nome,
             email: professor.email
         })
+
+        updatedProfessor.data_nascimento = undefined
+        updatedProfessor.descricao = undefined
 
         usuarioResponseSuccess(res,updatedProfessor)
         
