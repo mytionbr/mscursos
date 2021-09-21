@@ -4,7 +4,7 @@ import pool from './database/pool.js'
 
 
 pool
-    .connect(config.DATABASE_URL)
+    .connect(config.dbDetails)
     .then(()=> {
         console.log('Postgress connected')
 
