@@ -9,7 +9,7 @@ const dbDetails ={
                     password: process.env.PASSWORD,
                     port: process.env.DATABASE_PORT,
 }
-
+console.log(dbDetails)
 const config = {
     PORT: process.env.PORT,
     dbDetails: dbDetails,
