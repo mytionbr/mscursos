@@ -179,7 +179,7 @@ ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aluno_id_fkey
 	FOREIGN KEY (aluno_id) REFERENCES aluno (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_aula_id_fkey
-	FOREIGN KEY (aula_id) REFERENCES aula (aluno_id) ON UPDATE CASCADE ON DELETE CASCADE;
+	FOREIGN KEY (aula_id) REFERENCES aula (aula_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE visualizacao ADD CONSTRAINT visualizacao_curso_id_fkey
 	FOREIGN KEY (curso_id) REFERENCES curso (curso_id) ON UPDATE CASCADE ON DELETE CASCADE;

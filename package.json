@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch server --exec node --experimental-modules server/server.js",
+    "nodemon": "nodemon --watch server --exec node --experimental-modules server/server.js",
+    "start": "node server/server.js",
     "migrate": "node-pg-migrate -m server/database/migrations/"
   },
   "keywords": [],
