@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import extend from 'lodash/extend.js'
 import { generateToken } from "../utils/generateToken.js";
 import { professorResponseSuccess } from "../custom/responses/professor.response.js";
+import { usuarioResponseSuccess } from "../custom/responses/usuario.response.js";
 
 
 export const register = async (req,res) =>{
@@ -16,9 +17,6 @@ export const register = async (req,res) =>{
             [nome, email, data_nascimento, senhaDefault,descricao])
  
         let professorCreated = rows[0]
-        
-        professorCreated.data_nascimento = undefined
-        professorCreated.descricao = undefined
 
         professorResponseSuccess(res,professorCreated)
 
@@ -63,7 +61,7 @@ export const findById = async (req,res, next, id) =>{
 export const read = async (req,res) => {
     
     let professor = req.profile
-    professorResponseSuccess(res,professor)
+    usuarioResponseSuccess(res,professor)
 }
 
 
@@ -90,9 +88,6 @@ export const update = async (req,res) => {
             nome: professor.nome,
             email: professor.email
         })
-
-        updatedProfessor.data_nascimento = undefined
-        updatedProfessor.descricao = undefined
 
         professorResponseSuccess(res,updatedProfessor)
         

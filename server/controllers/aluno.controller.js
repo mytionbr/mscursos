@@ -5,6 +5,7 @@ import { isValidCPF } from '../utils/isValidCPF.js'
 import moment from 'moment'
 import { generateToken } from '../utils/generateToken.js'
 import { alunoResponseSuccess } from '../custom/responses/aluno.response.js'
+import { usuarioResponseSuccess } from '../custom/responses/usuario.response.js'
 
 export const register = async (req,res) => {
     
@@ -91,7 +92,7 @@ export const findById = async (req,res, next, id) => {
 
 export const read =  async (req, res) => {
         const aluno = req.profile
-        alunoResponseSuccess(res,aluno)  
+        usuarioResponseSuccess(res,aluno)  
 }
 
 export const update = async (req, res) => {
