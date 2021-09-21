@@ -12,8 +12,7 @@ const dbDetails ={
                         rejectUnauthorized: false
                       }
 }
-console.log(dbDetails)
-console.log(process.env.DATABASE_URL)
+
 const config = {
     PORT: process.env.PORT,
     dbDetails: dbDetails,
