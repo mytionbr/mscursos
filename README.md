@@ -11,6 +11,10 @@
   Toda a plataforma foi desenvolvida utilizando a Stack PERN (PostgreSQL, ExpressJs, React Js, NodeJs)
 </div>
 
+<br/>
+<br/>
+
+
 ## Fluxos
 
 A aplicação apresenta dois fluxos principais, o dos professores e dos alunos.
