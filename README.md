@@ -6,7 +6,7 @@
 
   # MSCURSOS
 
-  MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar e desenvolver cursos e aulas em um formato de CMS, e os alunos podem acessar os seus conteúdos e participar de suas comunidades. 
+ MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar e desenvolver cursos e aulas em um formato de CMS, e os alunos podem acessar os conteúdos e participar das comunidades.  
   
   Toda a plataforma foi desenvolvida utilizando a Stack PERN (PostgreSQL, ExpressJs, React Js, NodeJs)
 </div>
