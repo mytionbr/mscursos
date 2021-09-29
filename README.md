@@ -84,7 +84,7 @@ PORT:your_port
 DATABASE_URL:your_database_url
 ```
 
- - Se o seu banco de dados não dá suporte ou não tem configurado o SSL, então navegue até o arquivo config.js
+ - Se o seu banco de dados não dá suporte ou não tem configurado o SSL, então navegue até o arquivo `config.js`
 
   `cd mscursos/server/config`
 
@@ -106,13 +106,18 @@ yarn start // or npm start
 
 ### 4. Run Client
 
-- Caso você deseje alterar o frontend, então rode o `client` de maneira separada
+- Caso você deseje alterar o frontend, então rode o `client` de maneira separada.
 
 ```
 cd scomics
 cd client
 yarn install // or npm install
 yarn start // or npm start
+```
+-  Para colocar o projeto em produção rode 
+```
+cd scomics/client
+yarn build // or npm build
 ```
 
 ## Screenshots
