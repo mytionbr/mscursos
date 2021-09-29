@@ -5,7 +5,11 @@
 <div align="center">
 
   # MSCURSOS
+  
 
+![post screen](https://github.com/mytionbr/images-videos/blob/master/ms-inicial-gif.gif)
+
+  
  MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar e desenvolver cursos e aulas em um formato de CMS, e os alunos podem acessar os conteúdos e participar das comunidades.  
   
   Toda a plataforma foi desenvolvida utilizando a Stack PERN (PostgreSQL, ExpressJs, React Js, NodeJs)
@@ -121,6 +125,40 @@ yarn build // or npm build
 ```
 
 ## Screenshots
+
+<div style="display:block"> Aluno Dashboard</div>
+  
+![home screen](https://github.com/mytionbr/images-videos/blob/master/ms-gif-dashboard-aluno.gif)
+
+<div style="display:block">Cursos</div>
+
+![cursos screen](https://github.com/mytionbr/images-videos/blob/master/ms-cursos-gif.gif)
+
+<div style="display:block">Forúm</div>
+
+![forum screen](https://github.com/mytionbr/images-videos/blob/master/ms-forum-gif.gif)
+
+<div style="display:block">Post</div>
+
+![post screen](https://github.com/mytionbr/images-videos/blob/master/ms-post-gif.gif)
+
+<div style="display:block">Aula</div>
+
+![aula screen](https://github.com/mytionbr/images-videos/blob/master/ms-aula-gif.gif)
+
+<div style="display:block">Professor dashboard</div>
+
+![professor dashboard screen](https://github.com/mytionbr/images-videos/blob/master/ms-dashboard-professor-gif.gif)
+
+Form
+![form screen](https://github.com/mytionbr/images-videos/blob/master/mscurso-form-cadastro.PNG)
+
+Aluno login
+![aluno login screen](https://github.com/mytionbr/images-videos/blob/master/mscurso-login-aluno.PNG)
+
+Professor login
+![professor login screen](https://github.com/mytionbr/images-videos/blob/master/mscurso-login-professor.PNG)
+
 
 ## Demo
 
