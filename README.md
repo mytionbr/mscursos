@@ -102,11 +102,11 @@ yarn start // or npm start
 # Para desenvolvimento: yarn nodemon // or  npm run nodemon
 ```
 
-- De modo padrão, o server entrega o frontend de maneira estática, logo se você acessar a porta [http://localhost:5000/](http://localhost:5000/) o frontend já estará funcionando.
+- De modo padrão, o server entrega o frontend de maneira estática, logo se você acessar a porta [http://localhost:5000/](http://localhost:5000/) no seu navegador o frontend já estará funcionando.
 
 ### 4. Run Client
 
-- Caso você deseje alterar o frontend, então rode o `client` de maneira separada.
+- Caso você deseje alterar o frontend, então rode o `client` de maneira separada e acesse a porta [http://localhost:3000/](http://localhost:3000/) no seu navegador.
 
 ```
 cd scomics
