@@ -15,10 +15,7 @@
 
 A aplicação apresenta dois fluxos principais, o dos professores e dos alunos.
 
-- Professores
-
-Os professores podem: 
-
+- Os professores podem:
   - Criar, editar, consultar e excluir cursos.
   - Criar, editar, consultar e excluir aulas.
   - Avaliar os alunos dos seus respectivos cursos.
@@ -26,10 +23,7 @@ Os professores podem:
   - Realizar upload de suas aulas no formato de vídeo;
   - Escrever os conteúdos de suas aulas utilizando as linguagens de Markdown e HTML;
   
-- Alunos
-
-Os alunos podem:
-
+- Os alunos podem:
   - Escolher entre três opções de planos: Básico, Intermediário e Avançado. 
   - Realizar o cadastro na plataforma;
   - Realizar o pagamento utilizando uma conta do paypal ou um cartão de crédito;
@@ -68,14 +62,14 @@ $ cd mscursos
 
 ### 2. Setup 
 
-- Instale o postgresSQL em sua máquina (https://www.postgresql.org/)
-- Crie um banco de dados e nomeie-o de dbmscursos
+- Instale o [postgresSQL](https://www.postgresql.org/) em sua máquina 
+- Crie um banco de dados e nomeie-o de `dbmscursos`
 - Na pasta do projeto, navegue até o arquivo chamado `script.bd.sql`
 
-`cd mscursos/server/database/script`
+  `cd mscursos/server/database/script`
 
-- Copie o script,  cole no terminal do bd e rode o script
-- Navegue até a pasta raiz do projeto e crie um arquivo .env
+- Copie o script,  cole no terminal do BD e rode o script
+- Navegue até a pasta raiz do projeto e crie um arquivo `.env`
 - Crie as seguintes variáveis locais e substitua com as suas informações: 
 
 ```
@@ -88,12 +82,11 @@ JWT_SECRET=your_jwt_secret
 PAYPAL_CLIENT_ID=your_paypal_client_id
 PORT:your_port 
 DATABASE_URL:your_database_url
-
 ```
 
  - Se o seu banco de dados não dá suporte ou não tem configurado o SSL, então navegue até o arquivo config.js
 
-`cd mscursos/server/config`
+  `cd mscursos/server/config`
 
 E comente a seguinte parte 
 
@@ -112,12 +105,14 @@ yarn start // or npm start
 - De modo padrão, o server entrega o frontend de maneira estática, logo se você acessar a porta [http://localhost:5000/](http://localhost:5000/) o frontend já estará funcionando.
 
 ### 4. Run Client
+
+- Caso você deseje alterar o frontend, então rode o `client` de maneira separada
+
 ```
 cd scomics
 cd client
 yarn install // or npm install
 yarn start // or npm start
-# Para desenvolvimento: yarn mongoose // or npm mongoose
 ```
 
 ## Screenshots
