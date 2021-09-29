@@ -6,14 +6,12 @@
 
   # MSCURSOS
     
- MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar e desenvolver cursos e aulas em um formato de CMS, e os alunos podem acessar os conteúdos e participar das comunidades.  
+ MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar cursos e aulas, e os alunos podem acessar os conteúdos e participar das comunidades.  
   
   Toda a plataforma foi desenvolvida utilizando a Stack PERN (PostgreSQL, ExpressJs, React Js, NodeJs)
 </div>
 
 <br/>
-<br/>
-
 
 ## Fluxos
 
@@ -46,8 +44,8 @@ A aplicação apresenta dois fluxos principais, o dos professores e dos alunos.
   
   - O backend é fornecido através de uma aplicação NodeJs;
   - As requisições, respostas e rotas são tratadas por meio do middleware do Express;
-  - Os dados são armazenados em um banco de dados relacional PostgresSQL;
-  - A conexão com o banco de dados é realizada através de uma biblioteca de cliente PostgresSQL não bloqueante (pg node);
+  - Os dados são armazenados em um banco de dados relacional PostgreSQL;
+  - A conexão com o banco de dados é realizada através de uma biblioteca de cliente PostgreSQL não bloqueante (pg node);
   - Os componente de IU são construídos e exibidos através da biblioteca ReactJs;
   - A estilização dos componentes é realizado utilizando o Formato JSS por meio da biblioteca Material UI;
   - O estado dos componentes do frontend são gerenciados por meio da biblioteca Redux;
@@ -169,7 +167,7 @@ A aplicação está implementada no Heroku. Confira [aqui](https://mscursos.hero
 - [NodeJs](https://nodejs.org/en/)
 - [ReactJs](https://pt-br.reactjs.org/)
 - [ExpressJs](https://expressjs.com/pt-br/)
-- [PostgresSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [ReduxJs](https://redux.js.org/)
 - [Material UI](https://material-ui.com/)
 - [API do Paypal](https://developer.paypal.com/home)
