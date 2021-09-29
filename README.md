@@ -99,7 +99,7 @@ E comente a seguinte parte
 cd scomics
 yarn install // or npm install
 yarn start // or npm start
-# Para desenvolvimento: yarn mongoose // or  npm run mongoose
+# Para desenvolvimento: yarn nodemon // or  npm run nodemon
 ```
 
 - De modo padrão, o server entrega o frontend de maneira estática, logo se você acessar a porta [http://localhost:5000/](http://localhost:5000/) o frontend já estará funcionando.
