@@ -5,11 +5,7 @@
 <div align="center">
 
   # MSCURSOS
-  
-
-![post screen](https://github.com/mytionbr/images-videos/blob/master/ms-inicial-gif.gif)
-
-  
+    
  MScursos é uma plataforma de cursos online focada em pessoas que desejam aprimorar os seus conhecimentos em tecnologias e negócios digitais. A plataforma oferece um Web App onde os professores podem criar e desenvolver cursos e aulas em um formato de CMS, e os alunos podem acessar os conteúdos e participar das comunidades.  
   
   Toda a plataforma foi desenvolvida utilizando a Stack PERN (PostgreSQL, ExpressJs, React Js, NodeJs)
@@ -128,7 +124,7 @@ yarn build // or npm build
 
 <div style="display:block"> Aluno Dashboard</div>
   
-![home screen](https://github.com/mytionbr/images-videos/blob/master/ms-gif-dashboard-aluno.gif)
+![home screen](https://github.com/mytionbr/images-videos/blob/master/ms-inicial-gif.gif)
 
 <div style="display:block">Cursos</div>
 
